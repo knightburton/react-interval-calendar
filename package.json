@@ -1,0 +1,51 @@
+{
+  "name": "react-interval-calendar",
+  "version": "0.1.0",
+  "description": "Infinite scrolling based calendar for interval dates built with React.",
+  "author": "knightburton",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knightburton/react-interval-calendar.git"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "npm run clean:dist && npm run prepare:build",
+    "clean:dist": "rm -rf dist",
+    "prepare:build": "BABEL_ENV=production babel src -d dist --extensions '.js, .jsx' --ignore '**/*.spec.js,**/*.spec.jsx'",
+    "jest": "jest",
+    "lint": "eslint sample/ src/ test/ --ext .jsx,.js",
+    "test": "npm run lint && npm run jest"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.13",
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  }
+}
