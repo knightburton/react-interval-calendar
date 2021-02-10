@@ -51,7 +51,7 @@ Provide the following information by filling in the [bug report template][2].
   * **Did the problem start happening recently** or was this always a problem?
   * **Can you reliably reproduce the issue?** If not, provide details about how often the problem happens and under which conditions it normally happens.
 
-[2]: https://github.com/knightburton/react-interval-calendar/blob/master/.github/ISSUE_TEMPLATE/bug_report.md
+[2]: https://github.com/knightburton/react-interval-calendar/blob/main/.github/ISSUE_TEMPLATE/bug_report.md
 
 ### Suggesting Enhancements
 
@@ -69,7 +69,7 @@ Create an issue in repository and provide the following information by filling i
 * **Describe the solution you'd like** a clear and concise description of what you want to happen.
 * **Describe alternatives you've considered** if the original idea is not possible for some reason.
 
-[5]: https://github.com/knightburton/react-interval-calendar/blob/master/.github/ISSUE_TEMPLATE/feature_request.md
+[5]: https://github.com/knightburton/react-interval-calendar/blob/main/.github/ISSUE_TEMPLATE/feature_request.md
 
 ### Styleguides
 
