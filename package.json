@@ -9,8 +9,8 @@
     "type": "git",
     "url": "https://github.com/knightburton/react-interval-calendar.git"
   },
-  "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "main": "dist/index.min.js",
+  "module": "dist/index.es.js",
   "source": "src/index.js",
   "files": [
     "dist",
@@ -20,9 +20,10 @@
     "node": ">=10"
   },
   "scripts": {
+    "start": "rollup -c -w",
     "build": "npm run clean:dist && npm run prepare:build",
     "clean:dist": "rm -rf dist",
-    "prepare:build": "BABEL_ENV=production babel src -d dist --extensions '.js, .jsx' --ignore '**/*.spec.js,**/*.spec.jsx'",
+    "prepare:build": "rollup -c",
     "jest": "jest",
     "lint": "eslint sample/ src/ test/ --ext .jsx,.js",
     "test": "npm run lint && npm run jest"
@@ -31,7 +32,6 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.13",
     "@babel/core": "^7.12.13",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
@@ -43,7 +43,16 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-scripts": "^4.0.2",
+    "rollup": "^2.38.5",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-url": "^3.0.1"
   },
   "eslintConfig": {
     "extends": "react-app"

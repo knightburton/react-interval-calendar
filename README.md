@@ -1,6 +1,18 @@
 # react-interval-calendar
 Infinite scrolling based calendar for interval dates built with React.
 
+### Development
+Local development is broken into two parts (ideally using two terminal tabs).
+
+First, run rollup to watch your `src/` module and automatically recompile it into `dist/` whenever you make changes.
+```bash
+$ npm start
+```
+The second part will be running the `example/` create-react-app that's linked to the local version of your module.
+```bash
+$ cd example
+$ npm start
+```
 
 ### Contributing
 
