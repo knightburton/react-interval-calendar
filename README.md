@@ -10,4 +10,4 @@ Before any action, please visit the [Code of Conduct](https://github.com/knightb
 
 ### License
 
-Series Rush is Open Source software under the MIT license. Complete license and copyright information can be found within the [license](https://github.com/knightburton/react-interval-calendar/blob/main/LICENSE).
+React Interval Calendar is Open Source software under the MIT license. Complete license and copyright information can be found within the [license](https://github.com/knightburton/react-interval-calendar/blob/main/LICENSE).
