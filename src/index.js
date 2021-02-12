@@ -1,3 +1,3 @@
-import Calendar from './components/Calendar';
+import IntervalCalendar from './components/IntervalCalendar';
 
-export default Calendar;
+export default IntervalCalendar;
