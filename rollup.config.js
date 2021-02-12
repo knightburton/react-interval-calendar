@@ -37,7 +37,14 @@ export default {
   plugins: [
     external(),
     postcss({
+      minimize: true,
       modules: true,
+      use: {
+        sass: null,
+        stylus: null,
+        less: { javascriptEnabled: true },
+      },
+      extract: true,
     }),
     url(),
     babel({
