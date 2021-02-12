@@ -1,8 +1,11 @@
 import IntervalCalendar from 'react-interval-calendar';
+import 'react-interval-calendar/dist/index.css';
 
 const App = () => (
   <div>
-    <IntervalCalendar />
+    <IntervalCalendar
+      weekStartsOn={1}
+    />
   </div>
 );
 

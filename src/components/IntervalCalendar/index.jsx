@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
 
 import Context from '../../context';
-import { WEEKDAYS } from '../../constants';
+import { WEEKDAY_KEYS } from '../../constants';
 
 const IntervalCalendar = ({ weekStartsOn }) => {
   // use memo hooks
@@ -25,7 +25,7 @@ const IntervalCalendar = ({ weekStartsOn }) => {
 };
 
 IntervalCalendar.propTypes = {
-  weekStartsOn: PropTypes.oneOf(WEEKDAYS),
+  weekStartsOn: PropTypes.oneOf(WEEKDAY_KEYS),
 };
 
 IntervalCalendar.defaultProps = {
