@@ -1,29 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
-import {
-  WEEKDAY_KEYS,
-  WEEKDAYS,
-} from '../../constants';
+import Context from '../../context';
+
+import { WEEKDAYS } from '../../constants';
 
 import styles from './styles.less';
 
-const IntervalCalendarHeader = ({ weekStartsOn }) => (
-  <div className={styles.header}>
-    {[...WEEKDAYS.slice(weekStartsOn, 7), ...WEEKDAYS.slice(0, weekStartsOn)].map(day => (
-      <div key={day.key} className={styles.header__day}>
-        {day.short}
-      </div>
-    ))}
-  </div>
-);
+const IntervalCalendarHeader = () => {
+  const { showWeekdays, weekStartsOn } = useContext(Context);
 
-IntervalCalendarHeader.propTypes = {
-  weekStartsOn: PropTypes.oneOf(WEEKDAY_KEYS),
-};
-
-IntervalCalendarHeader.defaultProps = {
-  weekStartsOn: 0,
+  return (
+    <div className={styles.header}>
+      {showWeekdays && [...WEEKDAYS.slice(weekStartsOn, 7), ...WEEKDAYS.slice(0, weekStartsOn)].map(day => (
+        <div key={day.key} className={styles.header__day}>
+          {day.short}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default IntervalCalendarHeader;

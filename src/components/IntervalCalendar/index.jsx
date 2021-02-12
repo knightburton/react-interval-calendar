@@ -6,18 +6,17 @@ import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import Context from '../../context';
 import { WEEKDAY_KEYS } from '../../constants';
 
-const IntervalCalendar = ({ weekStartsOn }) => {
+const IntervalCalendar = ({ showHeader, showWeekdays, weekStartsOn }) => {
   // use memo hooks
   const contextValue = useMemo(() => ({
+    showWeekdays,
     weekStartsOn,
-  }), [weekStartsOn]);
+  }), [showWeekdays, weekStartsOn]);
 
   return (
     <Context.Provider value={contextValue}>
       <div>
-        <IntervalCalendarHeader
-          weekStartsOn={weekStartsOn}
-        />
+        {showHeader && <IntervalCalendarHeader />}
         <p>Calendar</p>
       </div>
     </Context.Provider>
@@ -25,10 +24,14 @@ const IntervalCalendar = ({ weekStartsOn }) => {
 };
 
 IntervalCalendar.propTypes = {
+  showHeader: PropTypes.bool,
+  showWeekdays: PropTypes.bool,
   weekStartsOn: PropTypes.oneOf(WEEKDAY_KEYS),
 };
 
 IntervalCalendar.defaultProps = {
+  showHeader: true,
+  showWeekdays: true,
   weekStartsOn: 0,
 };
 
