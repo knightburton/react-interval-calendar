@@ -1,0 +1,17 @@
+// Default theme mixins and variables
+
+#spacing(@times) {
+  @result: @times * 8px;
+}
+
+// Main palette colors comes from
+// https://colorhunt.co/palette/201686
+#palette() {
+  primary: #d6e0f0;
+  secondary: #f1f3f8;
+
+  .text() {
+    primary: #393b44;
+    secondary: #8d93ab;
+  }
+}
