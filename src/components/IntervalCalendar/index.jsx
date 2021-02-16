@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
+import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
 
 import Context from '../../context';
 import {
@@ -44,6 +45,7 @@ const IntervalCalendar = ({
     <Context.Provider value={contextValue}>
       <div>
         {showHeader && <IntervalCalendarHeader />}
+        <IntervalCalendarWeeks />
       </div>
     </Context.Provider>
   );
