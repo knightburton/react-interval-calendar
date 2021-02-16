@@ -76,6 +76,12 @@ export const getWeekStart = (date, weekStartsOn = 0) => {
   return new Date(year, month, dayOfMonth - dayDiff, 0, 0, 0, 0);
 };
 
+/**
+ * Gets the end of the week from date.
+ *
+ * @param {Date} date Date to get the week end from.
+ * @param {number} weekStartsOn Index of the first day of the week.
+ */
 export const getWeekEnd = (date, weekStartsOn = 0) => {
   const year = getYear(date);
   const month = getMonth(date);
@@ -88,4 +94,19 @@ export const getWeekEnd = (date, weekStartsOn = 0) => {
   // Create a new date with the date's year and month
   // on the day of month plus the adjusted day difference based on the week start at 23:59.
   return new Date(year, month, dayOfMonth + dayDiff, 23, 59, 59, 999);
+};
+
+/**
+ * Gets the difference in calendar weeks between two dates.
+ *
+ * @param {Date} left Left date to get the difference from.
+ * @param {Date} right Right date to get the difference from.
+ * @param {number} weekStartsOn Index of the first day of the week.
+ */
+export const getDifferenceInCalendarWeeks = (left, right, weekStartsOn) => {
+  const leftWeekStart = getWeekStart(left, weekStartsOn);
+  const rightWeekStart = getWeekStart(right, weekStartsOn);
+  const oneWeek = 60 * 60 * 24 * 7 * 1000;
+  // Calculate the difference in miliseconds then get back the weeks.
+  return Math.round(Math.abs(leftWeekStart.getTime() - rightWeekStart.getTime()) / oneWeek);
 };
