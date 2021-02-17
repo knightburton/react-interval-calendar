@@ -136,11 +136,11 @@ export const getDifferenceInCalendarWeeks = (left, right, weekStartsOn) => {
 };
 
 /**
- * Gets the given date's month parity.
+ * Is the given date's month even?
  *
  * @param {Date} date Date to get the month parity from.
  */
-export const getMonthEven = date => {
+export const isMonthEven = date => {
   const month = getMonth(date);
   // Use the actual human format to calculate the even months,
   // starts counting from 1 insted of 0.
