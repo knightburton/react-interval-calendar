@@ -7,6 +7,7 @@ import Context from '../../context';
 import {
   addDays,
   addWeeks,
+  getMonthEven,
   formatDate,
 } from '../../utils/date';
 import styles from './styles.less';
@@ -24,6 +25,7 @@ const IntervalCalendarWeek = ({ numberOfWeek }) => {
         key: `${numberOfWeek}-${day}`,
         date,
         display: formatDate(date),
+        monthEven: getMonthEven(date),
       };
     }),
     [numberOfWeek, startDate],
