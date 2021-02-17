@@ -136,7 +136,7 @@ export const getDifferenceInCalendarWeeks = (left, right, weekStartsOn) => {
 };
 
 /**
- * Is the given date's month even?
+ * Is the given date month even?
  *
  * @param {Date} date Date to get the month parity from.
  */
@@ -145,6 +145,27 @@ export const isMonthEven = date => {
   // Use the actual human format to calculate the even months,
   // starts counting from 1 insted of 0.
   return (month + 1) % 2 === 0;
+};
+
+/**
+ * Is the given date the first day of the month?
+ *
+ * @param {Date} date Date to get the day of the month from.
+ */
+export const isFirstDayOfMonth = date => getDate(date) === 1;
+
+/**
+ * Is the given date the lsat day of the month?
+ *
+ * @param {Date} date Date to get the day of the month from.
+ */
+export const isLastDayOfMonth = date => {
+  const year = getYear(date);
+  const month = getMonth(date);
+  const dayOfMonth = getDate(date);
+  const endOfDay = new Date(year, month, dayOfMonth, 0, 0, 0, 0).getTime();
+  const endOfMonth = getMonthEnd(date).getTime();
+  return endOfDay === endOfMonth;
 };
 
 /**
