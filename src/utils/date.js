@@ -30,6 +30,30 @@ export const getMonth = date => {
 };
 
 /**
+ * Gets the day of the month.
+ *
+ * @param {Date} date Date to get the day of month from.
+ */
+export const getDate = date => {
+  // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
+  if (date instanceof Date) return date.getDate();
+
+  return null;
+};
+
+/**
+ * Gets the day of the week.
+ *
+ * @param {Date} date Date to get the day of the week from.
+ */
+export const getDay = date => {
+  // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
+  if (date instanceof Date) return date.getDay();
+
+  return null;
+};
+
+/**
  * Gets the start of the month from date.
  *
  * @param {Date} date Date to get the start of the mont from.
@@ -65,8 +89,8 @@ export const getMonthEnd = date => {
 export const getWeekStart = (date, weekStartsOn = 0) => {
   const year = getYear(date);
   const month = getMonth(date);
-  const dayOfMonth = date.getDate();
-  const dayOfWeek = date.getDay();
+  const dayOfMonth = getDate(date);
+  const dayOfWeek = getDay(date);
   const dayOffset = dayOfWeek < weekStartsOn
     ? 7
     : 0;
