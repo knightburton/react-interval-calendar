@@ -134,3 +134,24 @@ export const getDifferenceInCalendarWeeks = (left, right, weekStartsOn) => {
   // Calculate the difference in miliseconds then get back the weeks.
   return Math.round(Math.abs(leftWeekStart.getTime() - rightWeekStart.getTime()) / oneWeek);
 };
+
+/**
+ * Adds the number of days to the given date.
+ *
+ * @param {Date} date Date to add the number of days to.
+ * @param {number} numberOfDays Number of weeks to be added.
+ */
+export const addDays = (date, numberOfDays) => {
+  const year = getYear(date);
+  const month = getMonth(date);
+  const dayOfMonth = getDate(date);
+  return new Date(year, month, dayOfMonth + numberOfDays, 0, 0, 0, 0);
+};
+
+/**
+ * Adds the number of weeks to the given date.
+ *
+ * @param {Date} date Date to add the number of weeks to.
+ * @param {number} numberOfWeeks Number of weeks to be added.
+ */
+export const addWeeks = (date, numberOfWeeks) => addDays(date, numberOfWeeks * 7);
