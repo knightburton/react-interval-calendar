@@ -1,6 +1,7 @@
 @import '../../theme.less';
 
 .day {
+  position: relative;
   display: inline-block;
   width: (1 / 7) * 100%;
   height: #spacing(8)[];
@@ -10,5 +11,39 @@
 
   &__month__even {
     background-color: #palette[primary];
+  }
+
+  &__first__of__month {
+    border-top-left-radius: #spacing(4)[];
+    &::before {
+      content: '';
+      position: absolute;
+      min-width: #spacing(8)[];
+      height: inherit;
+      top: 0;
+      left: 0;
+      background-color: #palette[primary];
+      z-index: -1;
+    }
+    &__even::before {
+      background-color: #palette[secondary];
+    }
+  }
+
+  &__last__of__month {
+    border-bottom-right-radius: #spacing(4)[];
+    &::before {
+      content: '';
+      position: absolute;
+      min-width: #spacing(8)[];
+      height: inherit;
+      top: 0;
+      right: 0;
+      background-color: #palette[primary];
+      z-index: -1;
+    }
+    &__even::before {
+      background-color: #palette[secondary];
+    }
   }
 }

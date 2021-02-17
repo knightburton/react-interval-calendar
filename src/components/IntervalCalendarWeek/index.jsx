@@ -8,6 +8,8 @@ import {
   addDays,
   addWeeks,
   isMonthEven,
+  isFirstDayOfMonth,
+  isLastDayOfMonth,
   formatDate,
 } from '../../utils/date';
 import styles from './styles.less';
@@ -25,7 +27,9 @@ const IntervalCalendarWeek = ({ numberOfWeek }) => {
         key: `${numberOfWeek}-${day}`,
         date,
         display: formatDate(date),
-        monthEven: isMonthEven(date),
+        isMonthEven: isMonthEven(date),
+        isFirstDayOfMonth: isFirstDayOfMonth(date),
+        isLastDayOfMonth: isLastDayOfMonth(date),
       };
     }),
     [numberOfWeek, startDate],

@@ -7,17 +7,21 @@ import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }) => {
   // prop destruction
-  const { display, monthEven } = day;
+  const { display, isMonthEven, isFirstDayOfMonth, isLastDayOfMonth } = day;
 
   // useMemo hooks
   const className = useMemo(
     () => classnames(
       styles.day,
       {
-        [styles.day__month__even]: monthEven,
+        [styles.day__month__even]: isMonthEven,
+        [styles.day__first__of__month]: isFirstDayOfMonth,
+        [styles.day__first__of__month__even]: isFirstDayOfMonth && isMonthEven,
+        [styles.day__last__of__month]: isLastDayOfMonth,
+        [styles.day__last__of__month__even]: isLastDayOfMonth && isMonthEven,
       },
     ),
-    [monthEven],
+    [isMonthEven, isFirstDayOfMonth, isLastDayOfMonth],
   );
 
   return (
@@ -32,7 +36,9 @@ IntervalCalendarDay.propTypes = {
     key: PropTypes.string,
     date: PropTypes.instanceOf(Date),
     display: PropTypes.string,
-    monthEven: PropTypes.bool,
+    isMonthEven: PropTypes.bool,
+    isFirstDayOfMonth: PropTypes.bool,
+    isLastDayOfMonth: PropTypes.bool,
   }),
 };
 
