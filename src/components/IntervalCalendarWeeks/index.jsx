@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 
+import IntervalCalendarWeek from '../IntervalCalendarWeek';
+
 import Context from '../../context';
 
 const IntervalCalendarWeeks = () => {
@@ -8,9 +10,10 @@ const IntervalCalendarWeeks = () => {
   return (
     <div>
       {[...Array(numberOfWeeks + 1).keys()].map(numberOfWeek => (
-        <p key={numberOfWeek}>
-          {`${numberOfWeek}. week`}
-        </p>
+        <IntervalCalendarWeek
+          key={numberOfWeek}
+          numberOfWeek={numberOfWeek}
+        />
       ))}
     </div>
   );
