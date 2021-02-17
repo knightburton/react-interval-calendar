@@ -18,7 +18,7 @@ IntervalCalendarDay.propTypes = {
   day: PropTypes.shape({
     key: PropTypes.string,
     date: PropTypes.instanceOf(Date),
-    display: PropTypes.number,
+    display: PropTypes.string,
   }),
 };
 

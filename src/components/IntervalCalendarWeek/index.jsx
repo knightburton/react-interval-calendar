@@ -5,9 +5,9 @@ import IntervalCalendarDay from '../IntervalCalendarDay';
 
 import Context from '../../context';
 import {
-  getDate,
   addDays,
   addWeeks,
+  formatDate,
 } from '../../utils/date';
 import styles from './styles.less';
 
@@ -23,7 +23,7 @@ const IntervalCalendarWeek = ({ numberOfWeek }) => {
       return {
         key: `${numberOfWeek}-${day}`,
         date,
-        display: getDate(date),
+        display: formatDate(date),
       };
     }),
     [numberOfWeek, startDate],
