@@ -1,12 +1,15 @@
 import React, { useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import IntervalCalendarDay from '../IntervalCalendarDay';
+
 import Context from '../../context';
 import {
   getDate,
   addDays,
   addWeeks,
 } from '../../utils/date';
+import styles from './styles.less';
 
 const IntervalCalendarWeek = ({ numberOfWeek }) => {
   // useContext hooks
@@ -27,13 +30,14 @@ const IntervalCalendarWeek = ({ numberOfWeek }) => {
   );
 
   return (
-    <div key={numberOfWeek}>
+    <ul key={numberOfWeek} className={styles.week}>
       {data.map(day => (
-        <span key={day.key}>
-          {`::${day.display}::`}
-        </span>
+        <IntervalCalendarDay
+          key={day.key}
+          day={day}
+        />
       ))}
-    </div>
+    </ul>
   );
 };
 
