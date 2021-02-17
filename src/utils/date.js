@@ -155,3 +155,16 @@ export const addDays = (date, numberOfDays) => {
  * @param {number} numberOfWeeks Number of weeks to be added.
  */
 export const addWeeks = (date, numberOfWeeks) => addDays(date, numberOfWeeks * 7);
+
+/**
+ * Returns the formatted date for Day component.
+ *
+ * @param {Date} date Date to format.
+ */
+export const formatDate = date => {
+  const dayOfMonth = getDate(date);
+  return dayOfMonth.toLocaleString('en-GB', {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+};
