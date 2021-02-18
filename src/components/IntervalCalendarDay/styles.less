@@ -9,6 +9,22 @@
   text-align: center;
   background-color: #palette[secondary];
 
+  &__today::after {
+    content: '';
+    position: absolute;
+    width: #spacing(7.5)[];
+    height: #spacing(7.5)[];
+    // The diff between the height of this content, the cell height and the border width.
+    top: calc(#spacing(0.25)[] - 2px);
+    // The diff between the half of theis content width, half of the cell width and the border with.
+    left: calc(50% - #spacing(3.75)[] - 2px);
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #palette.text[primary];
+    z-index: +1;
+  }
+
   &__month__even {
     background-color: #palette[primary];
   }
