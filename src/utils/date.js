@@ -138,7 +138,7 @@ export const getDifferenceInCalendarWeeks = (left, right, weekStartsOn) => {
 /**
  * Is the given date month even?
  *
- * @param {Date} date Date to get the month parity from.
+ * @param {Date} date Date to check.
  */
 export const isMonthEven = date => {
   const month = getMonth(date);
@@ -150,14 +150,14 @@ export const isMonthEven = date => {
 /**
  * Is the given date the first day of the month?
  *
- * @param {Date} date Date to get the day of the month from.
+ * @param {Date} date Date to check.
  */
 export const isFirstDayOfMonth = date => getDate(date) === 1;
 
 /**
  * Is the given date the lsat day of the month?
  *
- * @param {Date} date Date to get the day of the month from.
+ * @param {Date} date Date to check.
  */
 export const isLastDayOfMonth = date => {
   const year = getYear(date);
@@ -167,6 +167,20 @@ export const isLastDayOfMonth = date => {
   const endOfMonth = getMonthEnd(date).getTime();
   return endOfDay === endOfMonth;
 };
+
+/**
+ * Is the given date day of month on weekend?
+ *
+ * @param {Date} date Date to check.
+ */
+export const isWeekend = date => getDate(date) % 6 === 0;
+
+/**
+ * Is the given date today?
+ *
+ * @param {Date} date Date to check.
+ */
+export const isToday = date => date.getTime() === new Date(new Date().setHours(0, 0, 0, 0)).getTime();
 
 /**
  * Adds the number of days to the given date.
