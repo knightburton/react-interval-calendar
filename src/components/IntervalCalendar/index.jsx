@@ -22,7 +22,7 @@ const IntervalCalendar = ({
   weekStartsOn,
 }) => {
   // use memo hooks
-  const [, , numberOfWeeks] = useMemo(() => {
+  const [startDate, , numberOfWeeks] = useMemo(() => {
     if (start && end && weekStartsOn) {
       const monthStart = getMonthStart(start);
       const monthEnd = getMonthEnd(end);
@@ -36,10 +36,11 @@ const IntervalCalendar = ({
   }, [start, end, weekStartsOn]);
 
   const contextValue = useMemo(() => ({
+    startDate,
     numberOfWeeks,
     showWeekdays,
     weekStartsOn,
-  }), [numberOfWeeks, showWeekdays, weekStartsOn]);
+  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn]);
 
   return (
     <Context.Provider value={contextValue}>
