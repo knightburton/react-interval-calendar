@@ -169,11 +169,11 @@ export const isLastDayOfMonth = date => {
 };
 
 /**
- * Is the given date day of month on weekend?
+ * Is the given date on weekend?
  *
  * @param {Date} date Date to check.
  */
-export const isWeekend = date => getDate(date) % 6 === 0;
+export const isWeekend = date => getDay(date) % 6 === 0;
 
 /**
  * Is the given date today?
