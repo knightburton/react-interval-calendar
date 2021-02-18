@@ -1,28 +1,58 @@
 @import '../../theme.less';
 
+// local mixins
+.highlightCircle(@borderWidth) {
+  content: '';
+  position: absolute;
+  width: #spacing(7.5)[];
+  height: #spacing(7.5)[];
+  // The diff between the height of this content, the cell height and the border width.
+  top: calc(#spacing(0.25)[] - @borderWidth);
+  // The diff between the half of theis content width, half of the cell width and the border with.
+  left: calc(50% - #spacing(3.75)[] - @borderWidth);
+  border-radius: 50%;
+  border-width: @borderWidth;
+  border-style: solid;
+  border-color: #palette.text[primary];
+  z-index: +1;
+}
+
+.monthEdge(@place) {
+  border-top-left-radius: if(@place = first, #spacing(4)[], 0);
+  border-bottom-right-radius: if(@place = last, #spacing(4)[], 0);
+  &::before {
+    content: '';
+    position: absolute;
+    min-width: #spacing(8)[];
+    height: inherit;
+    top: 0;
+    left: if(@place = first, 0, unset);
+    right: if(@place = last, 0, unset);
+    background-color: #palette[primary];
+    z-index: -1;
+  }
+  &__even::before {
+    background-color: #palette[secondary];
+  }
+}
+
 .day {
   position: relative;
   display: inline-block;
   width: (1 / 7) * 100%;
+  min-width: #spacing(8)[];
   height: #spacing(8)[];
   line-height: #spacing(8)[];
   text-align: center;
   background-color: #palette[secondary];
+  cursor: pointer;
+
+  &:hover::after {
+    .highlightCircle(1px);
+  }
 
   &__today::after {
-    content: '';
-    position: absolute;
-    width: #spacing(7.5)[];
-    height: #spacing(7.5)[];
-    // The diff between the height of this content, the cell height and the border width.
-    top: calc(#spacing(0.25)[] - 2px);
-    // The diff between the half of theis content width, half of the cell width and the border with.
-    left: calc(50% - #spacing(3.75)[] - 2px);
-    border-radius: 50%;
-    border-width: 2px;
-    border-style: solid;
-    border-color: #palette.text[primary];
-    z-index: +1;
+    .highlightCircle(2px);
   }
 
   &__month__even {
@@ -30,36 +60,10 @@
   }
 
   &__first__of__month {
-    border-top-left-radius: #spacing(4)[];
-    &::before {
-      content: '';
-      position: absolute;
-      min-width: #spacing(8)[];
-      height: inherit;
-      top: 0;
-      left: 0;
-      background-color: #palette[primary];
-      z-index: -1;
-    }
-    &__even::before {
-      background-color: #palette[secondary];
-    }
+    .monthEdge(first);
   }
 
   &__last__of__month {
-    border-bottom-right-radius: #spacing(4)[];
-    &::before {
-      content: '';
-      position: absolute;
-      min-width: #spacing(8)[];
-      height: inherit;
-      top: 0;
-      right: 0;
-      background-color: #palette[primary];
-      z-index: -1;
-    }
-    &__even::before {
-      background-color: #palette[secondary];
-    }
+    .monthEdge(last);
   }
 }
