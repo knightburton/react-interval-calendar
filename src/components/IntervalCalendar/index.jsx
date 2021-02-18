@@ -20,6 +20,7 @@ const IntervalCalendar = ({
   showHeader,
   showWeekdays,
   weekStartsOn,
+  fadeWeekends,
 }) => {
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo(() => {
@@ -40,7 +41,8 @@ const IntervalCalendar = ({
     numberOfWeeks,
     showWeekdays,
     weekStartsOn,
-  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn]);
+    fadeWeekends,
+  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends]);
 
   return (
     <Context.Provider value={contextValue}>
@@ -58,6 +60,7 @@ IntervalCalendar.propTypes = {
   showHeader: PropTypes.bool,
   showWeekdays: PropTypes.bool,
   weekStartsOn: PropTypes.oneOf(WEEKDAY_KEYS),
+  fadeWeekends: PropTypes.bool,
 };
 
 IntervalCalendar.defaultProps = {
@@ -66,6 +69,7 @@ IntervalCalendar.defaultProps = {
   showHeader: true,
   showWeekdays: true,
   weekStartsOn: 0,
+  fadeWeekends: false,
 };
 
 export default IntervalCalendar;

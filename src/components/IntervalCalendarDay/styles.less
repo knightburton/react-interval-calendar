@@ -44,6 +44,7 @@
   height: #spacing(8)[];
   line-height: #spacing(8)[];
   text-align: center;
+  color: #palette.text[primary];
   background-color: #palette[secondary];
   cursor: pointer;
 
@@ -53,6 +54,10 @@
 
   &__today::after {
     .highlightCircle(2px);
+  }
+
+  &__weekend {
+    color: #palette.text[secondary];
   }
 
   &__month__even {

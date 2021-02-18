@@ -1,5 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
+
+import Context from '../../context';
 
 import classnames from '../../utils/classnames';
 
@@ -7,7 +9,10 @@ import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }) => {
   // prop destruction
-  const { display, isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday } = day;
+  const { display, isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday, isWeekend } = day;
+
+  // useContext hooks
+  const { fadeWeekends } = useContext(Context);
 
   // useMemo hooks
   const className = useMemo(
@@ -20,14 +25,15 @@ const IntervalCalendarDay = ({ day }) => {
         [styles.day__last__of__month]: isLastDayOfMonth,
         [styles.day__last__of__month__even]: isLastDayOfMonth && isMonthEven,
         [styles.day__today]: isToday,
+        [styles.day__weekend]: isWeekend && fadeWeekends,
       },
     ),
-    [isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday],
+    [isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday, isWeekend, fadeWeekends],
   );
 
   return (
     <li className={className}>
-      <span>{display}</span>
+      {display}
     </li>
   );
 };
@@ -40,8 +46,8 @@ IntervalCalendarDay.propTypes = {
     isMonthEven: PropTypes.bool,
     isFirstDayOfMonth: PropTypes.bool,
     isLastDayOfMonth: PropTypes.bool,
-    isWeekend: PropTypes.bool,
     isToday: PropTypes.bool,
+    isWeekend: PropTypes.bool,
   }),
 };
 

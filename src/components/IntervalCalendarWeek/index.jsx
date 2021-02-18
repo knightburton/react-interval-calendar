@@ -10,8 +10,8 @@ import {
   isMonthEven,
   isFirstDayOfMonth,
   isLastDayOfMonth,
-  isWeekend,
   isToday,
+  isWeekend,
   formatDate,
 } from '../../utils/date';
 import styles from './styles.less';
@@ -32,8 +32,8 @@ const IntervalCalendarWeek = ({ numberOfWeek }) => {
         isMonthEven: isMonthEven(date),
         isFirstDayOfMonth: isFirstDayOfMonth(date),
         isLastDayOfMonth: isLastDayOfMonth(date),
-        isWeekend: isWeekend(date),
         isToday: isToday(date),
+        isWeekend: isWeekend(date),
       };
     }),
     [numberOfWeek, startDate],
