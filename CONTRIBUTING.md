@@ -79,7 +79,7 @@ Create an issue in repository and provide the following information by filling i
 * Reference issues and pull requests liberally at the end of the first line.
 * Describe the commit changes in details if the title is not enough.
 
-#### JavaScript
-All JavaScript must adhere to [AirBnB Styleguide][6] with some own modification.
+#### TypeScript
+All TypeScript must adhere to [AirBnB Styleguide][6] with some own modification.
 
 [6]: https://github.com/airbnb/javascript
