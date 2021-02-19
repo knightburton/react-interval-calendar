@@ -6,35 +6,21 @@ import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
 import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
 
 import Context from '../../context';
-import {
-  getMonthStart,
-  getMonthEnd,
-  getWeekStart,
-  getWeekEnd,
-  getDifferenceInCalendarWeeks,
-} from '../../utils/date';
+import { generateCalendarBaseAttributes } from '../../helpers';
 
 const IntervalCalendar = ({
-  start = null,
-  end = null,
+  start,
+  end,
   showHeader = true,
   showWeekdays = true,
   weekStartsOn = 0,
   fadeWeekends = false,
 }: IntervalCalendarProps) => {
   // use memo hooks
-  const [startDate, , numberOfWeeks] = useMemo(() => {
-    if (start && end && weekStartsOn) {
-      const monthStart = getMonthStart(start);
-      const monthEnd = getMonthEnd(end);
-      const alfa = getWeekStart(monthStart, weekStartsOn);
-      const omega = getWeekEnd(monthEnd, weekStartsOn);
-      const weeks = getDifferenceInCalendarWeeks(omega, alfa, weekStartsOn);
-
-      return [alfa, omega, weeks];
-    }
-    return [null, null, 0];
-  }, [start, end, weekStartsOn]);
+  const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(
+    () => generateCalendarBaseAttributes(start, end, weekStartsOn),
+    [start, end, weekStartsOn],
+  );
 
   const contextValue = useMemo<ContextType>(() => ({
     startDate,
