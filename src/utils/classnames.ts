@@ -1,7 +1,7 @@
 /**
  * Gets concatenated classnames from given arguments.
  *
- * @param {(string|string[]|Object|Object[])} args Arguments to get classname string from.
+ * @param args Arguments to get classname string from.
  */
 const classnames = (...args: (string | string[] | Object | Object[])[]): string => args.reduce((classes: string, arg) => {
   if (typeof arg === 'string' && /^[^\s]*$/.test(arg)) return `${classes} ${arg}`;
