@@ -7,7 +7,7 @@ import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   // prop destruction
-  const { display, isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday, isWeekend } = day;
+  const { yearLabel, monthLabel, dayLabel, isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday, isWeekend } = day;
 
   // useContext hooks
   const { fadeWeekends } = useContext(Context);
@@ -31,7 +31,17 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
 
   return (
     <li className={className}>
-      {display}
+      {isFirstDayOfMonth && (
+        <span className={styles.day__detail}>
+          {monthLabel}
+        </span>
+      )}
+      {dayLabel}
+      {isFirstDayOfMonth && (
+        <span className={styles.day__detail}>
+          {yearLabel}
+        </span>
+      )}
     </li>
   );
 };

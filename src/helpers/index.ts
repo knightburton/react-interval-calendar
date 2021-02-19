@@ -4,6 +4,7 @@ import {
   getWeekStart,
   getWeekEnd,
   getDifferenceInCalendarWeeks,
+  getYear,
   addDays,
   addWeeks,
   isMonthEven,
@@ -12,6 +13,7 @@ import {
   isToday,
   isWeekend,
   formatDate,
+  formatMonth,
 } from '../utils/date';
 import { Day } from '../interfaces/IntervalCalendarDay.interface';
 
@@ -28,7 +30,9 @@ export const generateDayAttributes = (startDate: Date, numberOfWeek: number, num
   return {
     key: `${numberOfWeek}-${numberOfDay}`,
     date,
-    display: formatDate(date),
+    yearLabel: getYear(date),
+    monthLabel: formatMonth(date),
+    dayLabel: formatDate(date),
     isMonthEven: isMonthEven(date),
     isFirstDayOfMonth: isFirstDayOfMonth(date),
     isLastDayOfMonth: isLastDayOfMonth(date),

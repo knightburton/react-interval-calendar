@@ -38,12 +38,13 @@
 
 .day {
   position: relative;
-  display: inline-block;
-  width: (1 / 7) * 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-width: #spacing(8)[];
   height: #spacing(8)[];
-  line-height: #spacing(8)[];
-  text-align: center;
   color: #palette.text[primary];
   background-color: #palette[secondary];
   cursor: pointer;
@@ -65,10 +66,17 @@
   }
 
   &__first__of__month {
+    font-weight: bold;
     .monthEdge(first);
   }
 
   &__last__of__month {
     .monthEdge(last);
+  }
+
+  &__detail {
+    color: inherit;
+    font-size: small;
+    font-weight: normal;
   }
 }
