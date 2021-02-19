@@ -1,5 +1,4 @@
 import React, { useMemo, useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import Context from '../../context';
 
@@ -7,7 +6,22 @@ import classnames from '../../utils/classnames';
 
 import styles from './styles.less';
 
-const IntervalCalendarDay = ({ day }) => {
+interface Day {
+  key: string,
+  date: Date,
+  display: string,
+  isMonthEven: boolean,
+  isFirstDayOfMonth: boolean,
+  isLastDayOfMonth: boolean,
+  isToday: boolean,
+  isWeekend: boolean,
+}
+
+interface IntervalCalendarDayProps {
+  day: Day,
+}
+
+const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   // prop destruction
   const { display, isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday, isWeekend } = day;
 
@@ -36,23 +50,6 @@ const IntervalCalendarDay = ({ day }) => {
       {display}
     </li>
   );
-};
-
-IntervalCalendarDay.propTypes = {
-  day: PropTypes.shape({
-    key: PropTypes.string,
-    date: PropTypes.instanceOf(Date),
-    display: PropTypes.string,
-    isMonthEven: PropTypes.bool,
-    isFirstDayOfMonth: PropTypes.bool,
-    isLastDayOfMonth: PropTypes.bool,
-    isToday: PropTypes.bool,
-    isWeekend: PropTypes.bool,
-  }),
-};
-
-IntervalCalendarDay.defaultProps = {
-  day: {},
 };
 
 export default IntervalCalendarDay;

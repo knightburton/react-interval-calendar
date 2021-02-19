@@ -1,8 +1,10 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "extends": [
-    "airbnb",
-    "airbnb/hooks"
+    "airbnb-typescript",
+    "airbnb/hooks",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
   ],
   "env": {
     "node": true,
@@ -15,11 +17,10 @@
   },
   "parserOptions": {
     "ecmaVersion": 2020,
+    "sourceType": "module",
     "ecmaFeatures": {
-      "legacyDecorators": true,
       "jsx": true
-    },
-    "sourceType": "module"
+    }
   },
   "plugins": [
     "react"
@@ -34,8 +35,6 @@
     "comma-dangle": ["error", "always-multiline"],
     "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
     "max-len": ["error", { "code": 170, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
-    "react/prop-types": ["error", { "ignore": ["classes"] }],
-    "react/forbid-prop-types": ["error", { "forbid": ["any", "array"] }],
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 5 }]
   }
 }

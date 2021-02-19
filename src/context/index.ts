@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const Context = createContext({
+const Context = createContext<ContextType>({
   startDate: null,
   numberOfWeeks: 0,
   showWeekdays: true,

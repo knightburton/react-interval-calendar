@@ -3,7 +3,7 @@
  *
  * @param {Date|number|string} date Date to get year from.
  */
-export const getYear = date => {
+export const getYear = (date: Date | number | string): number => {
   // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
   if (date instanceof Date) return date.getFullYear();
 
@@ -14,7 +14,7 @@ export const getYear = date => {
   const year = parseInt(date, 10);
   if (typeof date === 'string' && !Number.isNaN(year)) return year;
 
-  return null;
+  throw new Error(`${date} cannot be used to get the year from.`);
 };
 
 /**
@@ -22,11 +22,11 @@ export const getYear = date => {
  *
  * @param {Date} date Date to get month from.
  */
-export const getMonth = date => {
+export const getMonth = (date: Date): number => {
   // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
   if (date instanceof Date) return date.getMonth();
 
-  return null;
+  throw new Error(`${date} cannot be used to get the month from.`);
 };
 
 /**
@@ -34,11 +34,11 @@ export const getMonth = date => {
  *
  * @param {Date} date Date to get the day of month from.
  */
-export const getDate = date => {
+export const getDate = (date: Date): number => {
   // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
   if (date instanceof Date) return date.getDate();
 
-  return null;
+  throw new Error(`${date} cannot be used to get the day of the month from.`);
 };
 
 /**
@@ -46,11 +46,11 @@ export const getDate = date => {
  *
  * @param {Date} date Date to get the day of the week from.
  */
-export const getDay = date => {
+export const getDay = (date: Date): number => {
   // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
   if (date instanceof Date) return date.getDay();
 
-  return null;
+  throw new Error(`${date} cannot be used to get the day of the week from.`);
 };
 
 /**
@@ -58,7 +58,7 @@ export const getDay = date => {
  *
  * @param {Date} date Date to get the start of the mont from.
  */
-export const getMonthStart = date => {
+export const getMonthStart = (date: Date): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   // Create a new date with the date's year and month
@@ -71,7 +71,7 @@ export const getMonthStart = date => {
  *
  * @param {Date} date Date to get the end of the mont from.
  */
-export const getMonthEnd = date => {
+export const getMonthEnd = (date: Date): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   // Create a new date with the date's year and the next month
@@ -86,7 +86,7 @@ export const getMonthEnd = date => {
  * @param {Date} date Date to get the week start from.
  * @param {number} weekStartsOn Index of the first day of the week.
  */
-export const getWeekStart = (date, weekStartsOn = 0) => {
+export const getWeekStart = (date: Date, weekStartsOn: number = 0): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = getDate(date);
@@ -106,7 +106,7 @@ export const getWeekStart = (date, weekStartsOn = 0) => {
  * @param {Date} date Date to get the week end from.
  * @param {number} weekStartsOn Index of the first day of the week.
  */
-export const getWeekEnd = (date, weekStartsOn = 0) => {
+export const getWeekEnd = (date: Date, weekStartsOn: number = 0): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = date.getDate();
@@ -127,7 +127,7 @@ export const getWeekEnd = (date, weekStartsOn = 0) => {
  * @param {Date} right Right date to get the difference from.
  * @param {number} weekStartsOn Index of the first day of the week.
  */
-export const getDifferenceInCalendarWeeks = (left, right, weekStartsOn) => {
+export const getDifferenceInCalendarWeeks = (left: Date, right: Date, weekStartsOn: number = 0): number => {
   const leftWeekStart = getWeekStart(left, weekStartsOn);
   const rightWeekStart = getWeekStart(right, weekStartsOn);
   const oneWeek = 60 * 60 * 24 * 7 * 1000;
@@ -140,7 +140,7 @@ export const getDifferenceInCalendarWeeks = (left, right, weekStartsOn) => {
  *
  * @param {Date} date Date to check.
  */
-export const isMonthEven = date => {
+export const isMonthEven = (date: Date): boolean => {
   const month = getMonth(date);
   // Use the actual human format to calculate the even months,
   // starts counting from 1 insted of 0.
@@ -152,14 +152,14 @@ export const isMonthEven = date => {
  *
  * @param {Date} date Date to check.
  */
-export const isFirstDayOfMonth = date => getDate(date) === 1;
+export const isFirstDayOfMonth = (date: Date): boolean => getDate(date) === 1;
 
 /**
  * Is the given date the lsat day of the month?
  *
  * @param {Date} date Date to check.
  */
-export const isLastDayOfMonth = date => {
+export const isLastDayOfMonth = (date: Date): boolean => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = getDate(date);
@@ -173,14 +173,14 @@ export const isLastDayOfMonth = date => {
  *
  * @param {Date} date Date to check.
  */
-export const isWeekend = date => getDay(date) % 6 === 0;
+export const isWeekend = (date: Date): boolean => getDay(date) % 6 === 0;
 
 /**
  * Is the given date today?
  *
  * @param {Date} date Date to check.
  */
-export const isToday = date => date.getTime() === new Date(new Date().setHours(0, 0, 0, 0)).getTime();
+export const isToday = (date: Date): boolean => date.getTime() === new Date(new Date().setHours(0, 0, 0, 0)).getTime();
 
 /**
  * Adds the number of days to the given date.
@@ -188,7 +188,7 @@ export const isToday = date => date.getTime() === new Date(new Date().setHours(0
  * @param {Date} date Date to add the number of days to.
  * @param {number} numberOfDays Number of weeks to be added.
  */
-export const addDays = (date, numberOfDays) => {
+export const addDays = (date: Date, numberOfDays: number): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = getDate(date);
@@ -201,14 +201,14 @@ export const addDays = (date, numberOfDays) => {
  * @param {Date} date Date to add the number of weeks to.
  * @param {number} numberOfWeeks Number of weeks to be added.
  */
-export const addWeeks = (date, numberOfWeeks) => addDays(date, numberOfWeeks * 7);
+export const addWeeks = (date: Date, numberOfWeeks: number): Date => addDays(date, numberOfWeeks * 7);
 
 /**
  * Returns the formatted date for Day component.
  *
  * @param {Date} date Date to format.
  */
-export const formatDate = date => {
+export const formatDate = (date: Date): string => {
   const dayOfMonth = getDate(date);
   return dayOfMonth.toLocaleString('en-GB', {
     minimumIntegerDigits: 2,

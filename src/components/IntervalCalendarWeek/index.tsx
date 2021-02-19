@@ -1,5 +1,4 @@
 import React, { useMemo, useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import IntervalCalendarDay from '../IntervalCalendarDay';
 
@@ -16,13 +15,17 @@ import {
 } from '../../utils/date';
 import styles from './styles.less';
 
-const IntervalCalendarWeek = ({ numberOfWeek }) => {
+interface IntervalCalendarWeekProps {
+  numberOfWeek: number,
+}
+
+const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
   // useContext hooks
   const { startDate } = useContext(Context);
 
   // useMemo hooks
-  const data = useMemo(
-    () => [...Array(7).keys()].map(day => {
+  const data = useMemo(() => startDate ? (
+    Array.from({ length: 7 }, (_, i) => i).map(day => {
       const date = addWeeks(addDays(startDate, day), numberOfWeek);
 
       return {
@@ -35,9 +38,10 @@ const IntervalCalendarWeek = ({ numberOfWeek }) => {
         isToday: isToday(date),
         isWeekend: isWeekend(date),
       };
-    }),
-    [numberOfWeek, startDate],
-  );
+    })
+  ) : (
+    []
+  ), [numberOfWeek, startDate]);
 
   return (
     <ul key={numberOfWeek} className={styles.week}>
@@ -49,10 +53,6 @@ const IntervalCalendarWeek = ({ numberOfWeek }) => {
       ))}
     </ul>
   );
-};
-
-IntervalCalendarWeek.propTypes = {
-  numberOfWeek: PropTypes.number.isRequired,
 };
 
 export default IntervalCalendarWeek;

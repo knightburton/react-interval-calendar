@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
@@ -12,16 +11,24 @@ import {
   getWeekEnd,
   getDifferenceInCalendarWeeks,
 } from '../../utils/date';
-import { WEEKDAY_KEYS } from '../../constants';
+
+interface IntervalCalendarProps {
+  start?: Date | null,
+  end?: Date | null,
+  showHeader?: boolean,
+  showWeekdays?: boolean,
+  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
+  fadeWeekends?: boolean,
+}
 
 const IntervalCalendar = ({
-  start,
-  end,
-  showHeader,
-  showWeekdays,
-  weekStartsOn,
-  fadeWeekends,
-}) => {
+  start = null,
+  end = null,
+  showHeader = true,
+  showWeekdays = true,
+  weekStartsOn = 0,
+  fadeWeekends = false,
+}: IntervalCalendarProps) => {
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo(() => {
     if (start && end && weekStartsOn) {
@@ -33,10 +40,10 @@ const IntervalCalendar = ({
 
       return [alfa, omega, weeks];
     }
-    return [null, null, null];
+    return [null, null, 0];
   }, [start, end, weekStartsOn]);
 
-  const contextValue = useMemo(() => ({
+  const contextValue = useMemo<ContextType>(() => ({
     startDate,
     numberOfWeeks,
     showWeekdays,
@@ -52,24 +59,6 @@ const IntervalCalendar = ({
       </div>
     </Context.Provider>
   );
-};
-
-IntervalCalendar.propTypes = {
-  start: PropTypes.instanceOf(Date),
-  end: PropTypes.instanceOf(Date),
-  showHeader: PropTypes.bool,
-  showWeekdays: PropTypes.bool,
-  weekStartsOn: PropTypes.oneOf(WEEKDAY_KEYS),
-  fadeWeekends: PropTypes.bool,
-};
-
-IntervalCalendar.defaultProps = {
-  start: null,
-  end: null,
-  showHeader: true,
-  showWeekdays: true,
-  weekStartsOn: 0,
-  fadeWeekends: false,
 };
 
 export default IntervalCalendar;

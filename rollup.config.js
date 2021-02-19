@@ -1,4 +1,4 @@
-import babel from 'rollup-plugin-babel';
+import typescript from 'rollup-plugin-typescript2';
 import commonjs from 'rollup-plugin-commonjs';
 import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
@@ -8,10 +8,10 @@ import { terser } from 'rollup-plugin-terser';
 
 import pkg from './package.json';
 
-const extensions = ['.js', '.jsx'];
+const extensions = ['.ts', '.tsx'];
 
 export default {
-  input: 'src/index.js',
+  input: 'src/index.tsx',
   output: [
     {
       file: pkg.main,
@@ -47,14 +47,13 @@ export default {
       extract: true,
     }),
     url(),
-    babel({
-      extensions,
-      include: ['src/**/*'],
-      exclude: 'node_modules/**',
-    }),
     resolve({
       mainFields: ['module', 'main', 'jsnext:main', 'browser'],
       extensions,
+    }),
+    typescript({
+      rollupCommonJSResolveHack: true,
+      clean: true,
     }),
     commonjs(),
   ],
