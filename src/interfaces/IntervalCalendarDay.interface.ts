@@ -1,4 +1,4 @@
-export interface SingleDay {
+export interface Day {
   key: string,
   date: Date,
   display: string,
@@ -10,5 +10,5 @@ export interface SingleDay {
 }
 
 export interface IntervalCalendarDayProps {
-  day: SingleDay,
+  day: Day,
 }

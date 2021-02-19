@@ -4,16 +4,7 @@ import IntervalCalendarDay from '../IntervalCalendarDay';
 
 import { IntervalCalendarWeekProps } from '../../interfaces/IntervalCalendarWeek.interface';
 import Context from '../../context';
-import {
-  addDays,
-  addWeeks,
-  isMonthEven,
-  isFirstDayOfMonth,
-  isLastDayOfMonth,
-  isToday,
-  isWeekend,
-  formatDate,
-} from '../../utils/date';
+import { generateDayAttributes } from '../../helpers';
 import styles from './styles.less';
 
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
@@ -21,24 +12,13 @@ const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
   const { startDate } = useContext(Context);
 
   // useMemo hooks
-  const data = useMemo(() => startDate ? (
-    Array.from({ length: 7 }, (_, i) => i).map(day => {
-      const date = addWeeks(addDays(startDate, day), numberOfWeek);
-
-      return {
-        key: `${numberOfWeek}-${day}`,
-        date,
-        display: formatDate(date),
-        isMonthEven: isMonthEven(date),
-        isFirstDayOfMonth: isFirstDayOfMonth(date),
-        isLastDayOfMonth: isLastDayOfMonth(date),
-        isToday: isToday(date),
-        isWeekend: isWeekend(date),
-      };
-    })
-  ) : (
-    []
-  ), [numberOfWeek, startDate]);
+  const data = useMemo(
+    () => (startDate
+      ? Array.from({ length: 7 }, (_, i) => i).map(day => generateDayAttributes(startDate, numberOfWeek, day))
+      : []
+    ),
+    [numberOfWeek, startDate],
+  );
 
   return (
     <ul key={numberOfWeek} className={styles.week}>
