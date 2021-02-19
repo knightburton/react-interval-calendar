@@ -204,14 +204,21 @@ export const addDays = (date: Date, numberOfDays: number): Date => {
 export const addWeeks = (date: Date, numberOfWeeks: number): Date => addDays(date, numberOfWeeks * 7);
 
 /**
- * Returns the formatted date for Day component.
+ * Returns the local formatted month name.
  *
  * @param date Date to format.
  */
-export const formatDate = (date: Date): string => {
-  const dayOfMonth = getDate(date);
-  return dayOfMonth.toLocaleString('en-GB', {
-    minimumIntegerDigits: 2,
-    useGrouping: false,
-  });
-};
+export const formatMonth = (date: Date): string => date.toLocaleString('default', {
+  month: 'short',
+});
+
+
+/**
+ * Returns the local formatted day with two digits.
+ *
+ * @param date Date to format.
+ */
+export const formatDate = (date: Date): string => getDate(date).toLocaleString('default', {
+  minimumIntegerDigits: 2,
+  useGrouping: false,
+});
