@@ -14,7 +14,7 @@ const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
   // useMemo hooks
   const data = useMemo(
     () => startDate
-      ? Array.from({ length: 7 }, (_, i) => i).map(day => generateDayAttributes(startDate, numberOfWeek, day))
+      ? Array.from(Array(7).keys()).map(day => generateDayAttributes(startDate, numberOfWeek, day))
       : [],
     [numberOfWeek, startDate],
   );

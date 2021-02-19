@@ -9,7 +9,7 @@ const IntervalCalendarWeeks = () => {
 
   return (
     <div>
-      {Array.from({ length: numberOfWeeks + 1 }, (_, i) => i).map(numberOfWeek => (
+      {Array.from(Array(numberOfWeeks + 1).keys()).map(numberOfWeek => (
         <IntervalCalendarWeek
           key={numberOfWeek}
           numberOfWeek={numberOfWeek}
