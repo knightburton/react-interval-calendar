@@ -1,25 +1,9 @@
 import React, { useMemo, useContext } from 'react';
 
+import { IntervalCalendarDayProps } from '../../interfaces/IntervalCalendarDay.interface';
 import Context from '../../context';
-
 import classnames from '../../utils/classnames';
-
 import styles from './styles.less';
-
-interface Day {
-  key: string,
-  date: Date,
-  display: string,
-  isMonthEven: boolean,
-  isFirstDayOfMonth: boolean,
-  isLastDayOfMonth: boolean,
-  isToday: boolean,
-  isWeekend: boolean,
-}
-
-interface IntervalCalendarDayProps {
-  day: Day,
-}
 
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   // prop destruction

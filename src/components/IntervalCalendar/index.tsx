@@ -3,6 +3,8 @@ import React, { useMemo } from 'react';
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
 
+import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
+
 import Context from '../../context';
 import {
   getMonthStart,
@@ -11,15 +13,6 @@ import {
   getWeekEnd,
   getDifferenceInCalendarWeeks,
 } from '../../utils/date';
-
-interface IntervalCalendarProps {
-  start?: Date | null,
-  end?: Date | null,
-  showHeader?: boolean,
-  showWeekdays?: boolean,
-  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
-  fadeWeekends?: boolean,
-}
 
 const IntervalCalendar = ({
   start = null,

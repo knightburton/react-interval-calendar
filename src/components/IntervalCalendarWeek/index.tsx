@@ -2,6 +2,7 @@ import React, { useMemo, useContext } from 'react';
 
 import IntervalCalendarDay from '../IntervalCalendarDay';
 
+import { IntervalCalendarWeekProps } from '../../interfaces/IntervalCalendarWeek.interface';
 import Context from '../../context';
 import {
   addDays,
@@ -14,10 +15,6 @@ import {
   formatDate,
 } from '../../utils/date';
 import styles from './styles.less';
-
-interface IntervalCalendarWeekProps {
-  numberOfWeek: number,
-}
 
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
   // useContext hooks
