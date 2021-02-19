@@ -6,4 +6,9 @@ type ContextType = {
   fadeWeekends: boolean,
 };
 
-type CalendarTuple = [Date?, Date?, number]
+type CalendarTuple = [Date?, Date?, number];
+
+type HeaderWeekday = {
+  key: number,
+  label: string,
+}

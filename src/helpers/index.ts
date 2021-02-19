@@ -12,8 +12,9 @@ import {
   isLastDayOfMonth,
   isToday,
   isWeekend,
-  formatDate,
   formatMonth,
+  formatDate,
+  formatWeekday,
 } from '../utils/date';
 import { Day } from '../interfaces/IntervalCalendarDay.interface';
 
@@ -58,4 +59,12 @@ export const generateCalendarBaseAttributes = (startDate?: Date, endDate?: Date,
   const weeks = getDifferenceInCalendarWeeks(omega, alfa, weekStartsOn);
 
   return [alfa, omega, weeks];
+};
+
+export const generateHeaderWeekdays = (weekStartsOn: number = 0): HeaderWeekday[] => {
+  const start = getWeekStart(new Date(), weekStartsOn);
+  return Array.from(Array(7).keys()).map(day => ({
+    key: day,
+    label: formatWeekday(addDays(start, day))
+  }));
 };

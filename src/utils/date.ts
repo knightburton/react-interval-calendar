@@ -214,7 +214,7 @@ export const formatMonth = (date: Date): string => date.toLocaleString('default'
 
 
 /**
- * Returns the local formatted day with two digits.
+ * Returns the local formatted day with two digits from given date.
  *
  * @param date Date to format.
  */
@@ -222,3 +222,12 @@ export const formatDate = (date: Date): string => getDate(date).toLocaleString('
   minimumIntegerDigits: 2,
   useGrouping: false,
 });
+
+/**
+ * Returns the local formatted day name from given date.
+ *
+ * @param date Date to format.
+ */
+export const formatWeekday = (date: Date): string => date.toLocaleString('default', {
+  weekday: 'short'
+})
