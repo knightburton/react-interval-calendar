@@ -1,12 +1,13 @@
 import IntervalCalendar from 'react-interval-calendar';
-import 'react-interval-calendar/dist/index.css';
+import './App.css';
 
 const App = () => (
-  <div>
+  <div className="wrapper">
+    <p>Interval Calendar Example</p>
     <IntervalCalendar
       weekStartsOn={1}
       start={new Date(2021, 1, 1)}
-      end={new Date(2021, 2, 31)}
+      end={new Date(2021, 6, 31)}
       fadeWeekends
     />
   </div>
