@@ -10,12 +10,16 @@ import {
   getCalendarBaseAttributes,
   getWeeksHeight,
 } from '../../helpers';
+import classnames from '../../utils/classnames';
+import styles from './styles.less';
 
 const IntervalCalendar = ({
   start,
   end,
   showHeader = true,
   showWeekdays = true,
+  showBorder = false,
+  showBorderRadius = false,
   weekStartsOn = 0,
   fadeWeekends = false,
   height = 500,
@@ -40,9 +44,17 @@ const IntervalCalendar = ({
     weeksHeight,
   }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, weeksHeight]);
 
+  const classNames = useMemo<string>(
+    () => classnames({
+      [styles.calendar__border]: showBorder,
+      [styles.calendar__border__radius]: showBorder && showBorderRadius,
+    }),
+    [showBorder, showBorderRadius],
+  );
+
   return (
     <Context.Provider value={contextValue}>
-      <div>
+      <div className={classNames}>
         {showHeader && <IntervalCalendarHeader />}
         <IntervalCalendarWeeks />
       </div>
