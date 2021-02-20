@@ -54,6 +54,18 @@ export const getDay = (date: Date): number => {
 };
 
 /**
+ * Gets the timestamp of the given date.
+ *
+ * @param date Date to get the timestamp form.
+ */
+export const getTimestamp = (date: Date): number => {
+  // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
+  if (date instanceof Date) return date.getTime();
+
+  throw new Error(`${date} cannot be used to get the timestamp from.`);
+};
+
+/**
  * Gets the start of the month from date.
  *
  * @param date Date to get the start of the mont from.
