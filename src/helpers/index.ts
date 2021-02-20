@@ -61,6 +61,11 @@ export const generateCalendarBaseAttributes = (startDate?: Date, endDate?: Date,
   return [alfa, omega, weeks];
 };
 
+/**
+ * Generates the header weekdays dates and format those based on locale.
+ *
+ * @param weekStartsOn Index of the first day of the week.
+ */
 export const generateHeaderWeekdays = (weekStartsOn: number = 0): HeaderWeekday[] => {
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => ({
