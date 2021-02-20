@@ -6,9 +6,6 @@ import classnames from '../../utils/classnames';
 import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
-  // prop destruction
-  const { yearLabel, monthLabel, dayLabel, isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday, isWeekend } = day;
-
   // useContext hooks
   const { fadeWeekends } = useContext(Context);
 
@@ -17,29 +14,29 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
     () => classnames(
       styles.day,
       {
-        [styles.day__month__even]: isMonthEven,
-        [styles.day__first__of__month]: isFirstDayOfMonth,
-        [styles.day__first__of__month__even]: isFirstDayOfMonth && isMonthEven,
-        [styles.day__last__of__month]: isLastDayOfMonth,
-        [styles.day__last__of__month__even]: isLastDayOfMonth && isMonthEven,
-        [styles.day__today]: isToday,
-        [styles.day__weekend]: isWeekend && fadeWeekends,
+        [styles.day__month__even]: day?.isMonthEven,
+        [styles.day__first__of__month]: day?.isFirstDayOfMonth,
+        [styles.day__first__of__month__even]: day?.isFirstDayOfMonth && day?.isMonthEven,
+        [styles.day__last__of__month]: day?.isLastDayOfMonth,
+        [styles.day__last__of__month__even]: day?.isLastDayOfMonth && day?.isMonthEven,
+        [styles.day__today]: day?.isToday,
+        [styles.day__weekend]: day?.isWeekend && fadeWeekends,
       },
     ),
-    [isMonthEven, isFirstDayOfMonth, isLastDayOfMonth, isToday, isWeekend, fadeWeekends],
+    [day],
   );
 
   return (
     <li className={className}>
-      {isFirstDayOfMonth && (
+      {day?.isFirstDayOfMonth && (
         <span className={styles.day__detail}>
-          {monthLabel}
+          {day.monthLabel}
         </span>
       )}
-      {dayLabel}
-      {isFirstDayOfMonth && (
+      {day.dayLabel}
+      {day?.isFirstDayOfMonth && (
         <span className={styles.day__detail}>
-          {yearLabel}
+          {day.yearLabel}
         </span>
       )}
     </li>
