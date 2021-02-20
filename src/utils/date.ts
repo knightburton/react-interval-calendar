@@ -133,6 +133,30 @@ export const getWeekEnd = (date: Date, weekStartsOn: number = 0): Date => {
 };
 
 /**
+ * Gets the start of the day from given date.
+ *
+ * @param date Date to get the start of the day from.
+ */
+export const getDayStart = (date: Date): Date => {
+  const year = getYear(date);
+  const month = getMonth(date);
+  const dayOfMonth = getDate(date);
+  return new Date(year, month, dayOfMonth, 0, 0, 0, 0);
+};
+
+/**
+ * Gets the end of the day from given date.
+ *
+ * @param date Date to get the end of the dat from.
+ */
+export const getDayEnd = (date: Date): Date => {
+  const year = getYear(date);
+  const month = getMonth(date);
+  const dayOfMonth = getDate(date);
+  return new Date(year, month, dayOfMonth, 23, 59, 59, 999);
+};
+
+/**
  * Gets the difference in calendar weeks between two dates.
  *
  * @param left Left date to get the difference from.
