@@ -23,14 +23,21 @@ const IntervalCalendar = ({
     [start, end, weekStartsOn],
   );
 
+  const weeksheight = useMemo(
+    () => showHeader && showWeekdays && typeof height === 'number'
+      ? height - 5 * 8
+      : height,
+    [showHeader, showWeekdays, height],
+  );
+
   const contextValue = useMemo<ContextType>(() => ({
     startDate,
     numberOfWeeks,
     showWeekdays,
     weekStartsOn,
     fadeWeekends,
-    height,
-  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, height]);
+    weeksheight,
+  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, weeksheight]);
 
   return (
     <Context.Provider value={contextValue}>
