@@ -15,6 +15,7 @@ const IntervalCalendar = ({
   showWeekdays = true,
   weekStartsOn = 0,
   fadeWeekends = false,
+  height = 500,
 }: IntervalCalendarProps) => {
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(
@@ -28,7 +29,8 @@ const IntervalCalendar = ({
     showWeekdays,
     weekStartsOn,
     fadeWeekends,
-  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends]);
+    height,
+  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, height]);
 
   return (
     <Context.Provider value={contextValue}>
