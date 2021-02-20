@@ -219,6 +219,34 @@ export const isWeekend = (date: Date): boolean => getDay(date) % 6 === 0;
 export const isToday = (date: Date): boolean => date.getTime() === new Date(new Date().setHours(0, 0, 0, 0)).getTime();
 
 /**
+ * Is the given date between the given start and end date?
+ *
+ * @param date Date to check.
+ * @param start Interval start date to check.
+ * @param end Interval end date to check.
+ */
+export const isWithinInterval = (date: Date, start: Date, end: Date): boolean => {
+  const timestamp = getTimestamp(date);
+  const startTimestamp = getTimestamp(start);
+  const endTimestamp = getTimestamp(end);
+
+  if (endTimestamp <= startTimestamp) throw new Error(`Start date (${start}) must be before end date (${end}).`);
+  return startTimestamp <= timestamp && timestamp <= endTimestamp;
+};
+
+/**
+ * Is given date on same day as compare date?
+ *
+ * @param date Date to check.
+ * @param dateToCompare Date to compare to.
+ */
+export const isSameDay = (date: Date, dateToCompare: Date): boolean => {
+  const timestamp = getTimestamp(getDayStart(date));
+  const timestampToCompare = getTimestamp(getDayStart(dateToCompare));
+  return timestamp === timestampToCompare;
+};
+
+/**
  * Adds the number of days to the given date.
  *
  * @param date Date to add the number of days to.
