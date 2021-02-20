@@ -13,7 +13,7 @@
   border-radius: 50%;
   border-width: @borderWidth;
   border-style: solid;
-  border-color: #palette.text[primary];
+  border-color: #palette.border[primary];
   z-index: +1;
 }
 
@@ -28,7 +28,7 @@
     top: 0;
     left: if(@place = first, 0, unset);
     right: if(@place = last, 0, unset);
-    background-color: #palette[primary];
+    background-color: #palette.main[primary];
     z-index: -1;
   }
   &__even::before {
@@ -62,7 +62,7 @@
   }
 
   &__month__even {
-    background-color: #palette[primary];
+    background-color: #palette.main[primary];
   }
 
   &__first__of__month {
