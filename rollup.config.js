@@ -44,7 +44,8 @@ export default {
         stylus: null,
         less: { javascriptEnabled: true },
       },
-      extract: true,
+      extensions: ['.less'],
+      extract: false,
     }),
     url(),
     resolve({
