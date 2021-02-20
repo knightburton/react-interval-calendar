@@ -23,6 +23,7 @@ const IntervalCalendar = ({
   weekStartsOn = 0,
   fadeWeekends = false,
   height = 500,
+  highlighted = [],
 }: IntervalCalendarProps) => {
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(
@@ -42,7 +43,8 @@ const IntervalCalendar = ({
     weekStartsOn,
     fadeWeekends,
     weeksHeight,
-  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, weeksHeight]);
+    highlighted,
+  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, weeksHeight, highlighted]);
 
   const classNames = useMemo<string>(
     () => classnames({

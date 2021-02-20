@@ -9,6 +9,9 @@ export interface Day {
   isLastDayOfMonth: boolean,
   isToday: boolean,
   isWeekend: boolean,
+  isHighlighted: boolean,
+  isFirstOfHighlighted: boolean,
+  isLastOfHighlighted: boolean,
 }
 
 export interface IntervalCalendarDayProps {

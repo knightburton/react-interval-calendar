@@ -12,6 +12,8 @@ import {
   isLastDayOfMonth,
   isToday,
   isWeekend,
+  isWithinInterval,
+  isSameDay,
   formatMonth,
   formatDate,
   formatWeekday,
@@ -24,9 +26,11 @@ import { Day } from '../interfaces/IntervalCalendarDay.interface';
  * @param startDate Date to calculate the actual date from.
  * @param numberOfWeek Week different between start and desired date.
  * @param numberOfDay Day different between the week start and desired date.
+ * @param highlighted List of highlighted intervals.
  */
-export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number): Day => {
+export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, highlighted: HighlightedItem[]): Day => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
+  const highlightedData = highlighted.find(item => isWithinInterval(date, item.start, item.end));
 
   return {
     key: `${numberOfWeek}-${numberOfDay}`,
@@ -39,6 +43,9 @@ export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOf
     isLastDayOfMonth: isLastDayOfMonth(date),
     isToday: isToday(date),
     isWeekend: isWeekend(date),
+    isHighlighted: !!highlightedData,
+    isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
+    isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
   };
 };
 

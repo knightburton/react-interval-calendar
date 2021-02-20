@@ -7,6 +7,7 @@ const Context = createContext<ContextType>({
   weekStartsOn: 0,
   fadeWeekends: false,
   weeksHeight: 500,
+  highlighted: [],
 });
 
 export default Context;

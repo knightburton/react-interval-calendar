@@ -9,12 +9,12 @@ import styles from './styles.less';
 
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
   // useContext hooks
-  const { startDate } = useContext(Context);
+  const { startDate, highlighted } = useContext(Context);
 
   // useMemo hooks
   const data = useMemo(
     () => startDate
-      ? Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day))
+      ? Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day, highlighted))
       : [],
     [numberOfWeek, startDate],
   );
