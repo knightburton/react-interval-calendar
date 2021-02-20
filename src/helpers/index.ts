@@ -19,13 +19,13 @@ import {
 import { Day } from '../interfaces/IntervalCalendarDay.interface';
 
 /**
- * Generates the desired date attributes based on the passed weeks and days.
+ * Returns the desired date attributes based on the passed weeks and days.
  *
  * @param startDate Date to calculate the actual date from.
  * @param numberOfWeek Week different between start and desired date.
  * @param numberOfDay Day different between the week start and desired date.
  */
-export const generateDayAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number): Day => {
+export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number): Day => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
 
   return {
@@ -43,14 +43,14 @@ export const generateDayAttributes = (startDate: Date, numberOfWeek: number, num
 };
 
 /**
- * Generates the base attributes of the calendar.
+ * Returns the base attributes of the calendar.
  * Whcih are the full week start and end dates with the number of weeks between.
  *
  * @param startDate Start date of the selected interval.
  * @param endDate End date of the seleccted interval.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const generateCalendarBaseAttributes = (startDate?: Date, endDate?: Date, weekStartsOn: number = 0): CalendarTuple => {
+export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, weekStartsOn: number = 0): CalendarTuple => {
   if (!startDate || !endDate) return [undefined, undefined, 0];
   const monthStart = getMonthStart(startDate);
   const monthEnd = getMonthEnd(endDate);
@@ -62,11 +62,11 @@ export const generateCalendarBaseAttributes = (startDate?: Date, endDate?: Date,
 };
 
 /**
- * Generates the header weekdays dates and format those based on locale.
+ * Returns the header weekdays dates and format those based on locale.
  *
  * @param weekStartsOn Index of the first day of the week.
  */
-export const generateHeaderWeekdays = (weekStartsOn: number = 0): HeaderWeekday[] => {
+export const getHeaderWeekdays = (weekStartsOn: number = 0): HeaderWeekday[] => {
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => ({
     key: day,

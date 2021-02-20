@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 
 import Context from '../../context';
-import { generateHeaderWeekdays } from '../../helpers';
+import { getHeaderWeekdays } from '../../helpers';
 import styles from './styles.less';
 
 const IntervalCalendarHeader = () => {
@@ -11,7 +11,7 @@ const IntervalCalendarHeader = () => {
   // useMemo hooks
   const weekdays = useMemo<HeaderWeekday[]>(
     () => showWeekdays
-      ? generateHeaderWeekdays(weekStartsOn)
+      ? getHeaderWeekdays(weekStartsOn)
       : [],
     [weekStartsOn, showWeekdays],
   );

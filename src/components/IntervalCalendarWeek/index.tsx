@@ -4,7 +4,7 @@ import IntervalCalendarDay from '../IntervalCalendarDay';
 
 import { IntervalCalendarWeekProps } from '../../interfaces/IntervalCalendarWeek.interface';
 import Context from '../../context';
-import { generateDayAttributes } from '../../helpers';
+import { getDayAttributes } from '../../helpers';
 import styles from './styles.less';
 
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
@@ -14,7 +14,7 @@ const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps) => {
   // useMemo hooks
   const data = useMemo(
     () => startDate
-      ? Array.from(Array(7).keys()).map(day => generateDayAttributes(startDate, numberOfWeek, day))
+      ? Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day))
       : [],
     [numberOfWeek, startDate],
   );

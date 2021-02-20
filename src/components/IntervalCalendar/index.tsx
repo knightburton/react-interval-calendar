@@ -7,7 +7,7 @@ import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interfa
 
 import Context from '../../context';
 import {
-  generateCalendarBaseAttributes,
+  getCalendarBaseAttributes,
   getWeeksHeight,
 } from '../../helpers';
 
@@ -22,7 +22,7 @@ const IntervalCalendar = ({
 }: IntervalCalendarProps) => {
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(
-    () => generateCalendarBaseAttributes(start, end, weekStartsOn),
+    () => getCalendarBaseAttributes(start, end, weekStartsOn),
     [start, end, weekStartsOn],
   );
 
