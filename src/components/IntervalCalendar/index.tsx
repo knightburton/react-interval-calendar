@@ -6,7 +6,10 @@ import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
 import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
 
 import Context from '../../context';
-import { generateCalendarBaseAttributes } from '../../helpers';
+import {
+  generateCalendarBaseAttributes,
+  getWeeksHeight,
+} from '../../helpers';
 
 const IntervalCalendar = ({
   start,
@@ -23,10 +26,8 @@ const IntervalCalendar = ({
     [start, end, weekStartsOn],
   );
 
-  const weeksheight = useMemo(
-    () => showHeader && showWeekdays && typeof height === 'number'
-      ? height - 5 * 8
-      : height,
+  const weeksHeight = useMemo<WeeksHeight>(
+    () => getWeeksHeight(showHeader, showWeekdays, height),
     [showHeader, showWeekdays, height],
   );
 
@@ -36,8 +37,8 @@ const IntervalCalendar = ({
     showWeekdays,
     weekStartsOn,
     fadeWeekends,
-    weeksheight,
-  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, weeksheight]);
+    weeksHeight,
+  }), [startDate, numberOfWeeks, showWeekdays, weekStartsOn, fadeWeekends, weeksHeight]);
 
   return (
     <Context.Provider value={contextValue}>
