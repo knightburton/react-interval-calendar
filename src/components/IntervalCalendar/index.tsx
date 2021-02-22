@@ -19,6 +19,7 @@ const IntervalCalendar = ({
   showHeader = true,
   showWeekdays = true,
   showMonths = false,
+  showYears = false,
   showBorder = false,
   showBorderRadius = false,
   weekStartsOn = 0,
@@ -42,11 +43,12 @@ const IntervalCalendar = ({
     numberOfWeeks,
     showWeekdays,
     showMonths,
+    showYears,
     weekStartsOn,
     fadeWeekends,
     weeksHeight,
     highlighted,
-  }), [startDate, numberOfWeeks, showWeekdays, showMonths, weekStartsOn, fadeWeekends, weeksHeight, highlighted]);
+  }), [startDate, numberOfWeeks, showWeekdays, showMonths, showYears, weekStartsOn, fadeWeekends, weeksHeight, highlighted]);
 
   const classNames = useMemo<string>(
     () => classnames({

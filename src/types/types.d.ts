@@ -13,6 +13,7 @@ type ContextType = {
   numberOfWeeks: number,
   showWeekdays: boolean,
   showMonths: boolean,
+  showYears: boolean,
   weekStartsOn: number,
   fadeWeekends: boolean,
   weeksHeight: WeeksHeight,

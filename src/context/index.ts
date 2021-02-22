@@ -5,6 +5,7 @@ const Context = createContext<ContextType>({
   numberOfWeeks: 0,
   showWeekdays: true,
   showMonths: false,
+  showYears: false,
   weekStartsOn: 0,
   fadeWeekends: false,
   weeksHeight: 500,
