@@ -7,7 +7,7 @@ import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   // useContext hooks
-  const { fadeWeekends } = useContext<ContextType>(Context);
+  const { showMonths, fadeWeekends } = useContext<ContextType>(Context);
 
   // useMemo hooks
   const className = useMemo<string>(
@@ -47,7 +47,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
           }}
         />
       )}
-      {day?.isFirstDayOfMonth && (
+      {showMonths && day?.isFirstDayOfMonth && (
         <span className={styles.day__text__detail}>
           {day.monthLabel}
         </span>

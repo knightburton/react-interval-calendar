@@ -3,6 +3,7 @@ export interface IntervalCalendarProps {
   end?: Date,
   showHeader?: boolean,
   showWeekdays?: boolean,
+  showMonths?: boolean,
   showBorder?: boolean,
   showBorderRadius?: boolean,
   weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6,
