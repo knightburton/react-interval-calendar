@@ -18,6 +18,7 @@ import {
   formatDate,
   formatWeekday,
 } from '../utils/date';
+import { convertHexToRgba } from '../utils/color';
 import { Day } from '../interfaces/IntervalCalendarDay.interface';
 
 /**
@@ -46,6 +47,9 @@ export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOf
     isHighlighted: !!highlightedData,
     isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
     isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
+    highlightColor: !!highlightedData
+      ? convertHexToRgba(highlightedData?.color || '#393b44') // fallback to #spacing.border[primary] color
+      : undefined
   };
 };
 
