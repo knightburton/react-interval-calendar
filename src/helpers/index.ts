@@ -89,9 +89,9 @@ export const getHeaderWeekdays = (weekStartsOn: number = 0): HeaderWeekday[] => 
  * @param height Overall height to calculate the weeks height from.
  */
 export const getWeeksHeight = (header: boolean, weekdays: boolean, height: WeeksHeight): WeeksHeight => {
-  // If the header is not shown then there is no point to reduce the weeks height.
+  // If the header is not visible then there is no point to reduce the weeks height.
   if (!header) return height;
-  // If the header weekdays are shown then substract the height of it from the given height.
+  // If the header weekdays are visible then substract the height of it from the given height.
   // Given height - size * global spacing value.
   if (weekdays && typeof height === 'number') return height - 5 * 8;
   return height;
