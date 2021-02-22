@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useCallback } from 'react';
 
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
@@ -27,6 +27,15 @@ const IntervalCalendar = ({
   height = 500,
   highlighted = [],
 }: IntervalCalendarProps) => {
+  // useRef hooks
+  const previousResetFunction = useRef<Function>();
+
+  // useCallback hooks
+  const handleSelect = useCallback<any>((resetFunction: Function) => {
+    if (previousResetFunction.current) previousResetFunction.current();
+    previousResetFunction.current = resetFunction;
+  }, [previousResetFunction]);
+
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(
     () => getCalendarBaseAttributes(start, end, weekStartsOn),
@@ -48,7 +57,8 @@ const IntervalCalendar = ({
     fadeWeekends,
     weeksHeight,
     highlighted,
-  }), [startDate, numberOfWeeks, showWeekdays, showMonths, showYears, weekStartsOn, fadeWeekends, weeksHeight, highlighted]);
+    handleSelect,
+  }), [startDate, numberOfWeeks, showWeekdays, showMonths, showYears, weekStartsOn, fadeWeekends, weeksHeight, highlighted, handleSelect]);
 
   const classNames = useMemo<string>(
     () => classnames({

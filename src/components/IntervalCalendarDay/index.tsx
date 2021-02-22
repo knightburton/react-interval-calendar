@@ -1,4 +1,4 @@
-import React, { useMemo, useContext } from 'react';
+import React, { useMemo, useContext, useState, useCallback } from 'react';
 
 import { IntervalCalendarDayProps } from '../../interfaces/IntervalCalendarDay.interface';
 import Context from '../../context';
@@ -7,7 +7,21 @@ import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   // useContext hooks
-  const { showMonths, showYears, fadeWeekends } = useContext<ContextType>(Context);
+  const {
+    showMonths,
+    showYears,
+    fadeWeekends,
+    handleSelect: contextSelect,
+  } = useContext<ContextType>(Context);
+
+  // useState hooks
+  const [selected, setSelected] = useState(false);
+
+  // useCallback hooks
+  const handleSelect = useCallback(() => {
+    setSelected(true)
+    contextSelect(() => setSelected(false));
+  }, [contextSelect]);
 
   // useMemo hooks
   const className = useMemo<string>(
@@ -21,9 +35,10 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
         [styles.day__last__of__month__even]: day.isLastDayOfMonth && day.isMonthEven,
         [styles.day__today]: day.isToday,
         [styles.day__weekend]: day.isWeekend && fadeWeekends,
+        [styles.day__selected]: selected,
       },
     ),
-    [day],
+    [day, selected],
   );
 
   const highlightedClassName = useMemo<string>(
@@ -38,7 +53,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   );
 
   return (
-    <li className={className}>
+    <li className={className} onClick={handleSelect}>
       {day?.isHighlighted && (
         <div
           className={highlightedClassName}

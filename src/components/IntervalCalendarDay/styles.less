@@ -1,7 +1,7 @@
 @import '../../theme.less';
 
 // local mixins
-.highlightCircle(@borderWidth) {
+.highlightCircle(@borderWidth; @borderColor) {
   content: '';
   position: absolute;
   width: #spacing(7.5)[];
@@ -13,7 +13,7 @@
   border-radius: 50%;
   border-width: @borderWidth;
   border-style: solid;
-  border-color: #palette.border[primary];
+  border-color: @borderColor;
   z-index: +1;
 }
 
@@ -50,11 +50,13 @@
   cursor: pointer;
 
   &:hover::after {
-    .highlightCircle(1px);
+    @borderColor: #palette.border[primary];
+    .highlightCircle(1px, @borderColor);
   }
 
   &__today::after {
-    .highlightCircle(2px);
+    @borderColor: #palette.border[primary];
+    .highlightCircle(2px, @borderColor);
   }
 
   &__weekend {
@@ -101,5 +103,10 @@
       border-top-right-radius: #spacing(4)[];
       border-bottom-right-radius: #spacing(4)[];
     }
+  }
+
+  &__selected::after {
+    @borderColor: #palette.border[primary];
+    .highlightCircle(1px, @borderColor);
   }
 }
