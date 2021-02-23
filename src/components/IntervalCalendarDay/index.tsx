@@ -19,8 +19,10 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
 
   // useCallback hooks
   const handleSelect = useCallback(() => {
-    setSelected(true)
-    contextSelect(day, () => setSelected(false));
+    if (contextSelect) {
+      setSelected(true)
+      contextSelect(day, () => setSelected(false));
+    }
   }, [contextSelect, day]);
 
   // useMemo hooks
@@ -35,10 +37,11 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
         [styles.day__last__of__month__even]: day.isLastDayOfMonth && day.isMonthEven,
         [styles.day__today]: day.isToday,
         [styles.day__weekend]: day.isWeekend && fadeWeekends,
+        [styles.day__selectable]: !!contextSelect,
         [styles.day__selected]: selected,
       },
     ),
-    [day, selected],
+    [day, selected, contextSelect],
   );
 
   const highlightedClassName = useMemo<string>(

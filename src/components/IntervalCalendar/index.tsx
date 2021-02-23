@@ -62,7 +62,7 @@ const IntervalCalendar = ({
     weeksHeight,
     highlighted,
     locale,
-    handleSelect,
+    handleSelect: (onSelect && handleSelect) || undefined,
   }), [
     startDate,
     numberOfWeeks,
@@ -75,6 +75,7 @@ const IntervalCalendar = ({
     highlighted,
     locale,
     handleSelect,
+    onSelect,
   ]);
 
   const classNames = useMemo<string>(

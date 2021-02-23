@@ -11,7 +11,7 @@ const Context = createContext<ContextType>({
   weeksHeight: 500,
   highlighted: [],
   locale: 'default',
-  handleSelect: () => {},
+  handleSelect: undefined,
 });
 
 export default Context;

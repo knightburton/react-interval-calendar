@@ -19,7 +19,7 @@ type ContextType = {
   weeksHeight: WeeksHeight,
   highlighted: HighlightedItem[],
   locale: string,
-  handleSelect: (day: Day, resetFunction: () => void) => void,
+  handleSelect?: (day: Day, resetFunction: () => void) => void,
 };
 
 type CalendarTuple = [Date?, Date?, number];

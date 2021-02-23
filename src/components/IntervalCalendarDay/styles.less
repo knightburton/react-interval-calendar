@@ -47,11 +47,13 @@
   height: #spacing(8)[];
   color: #palette.text[primary];
   background-color: #palette.main[secondary];
-  cursor: pointer;
 
-  &:hover::after {
-    @borderColor: #palette.border[primary];
-    .highlightCircle(1px, @borderColor);
+  &__selectable {
+    cursor: pointer;
+    &:hover::after {
+      @borderColor: #palette.border[primary];
+      .highlightCircle(1px, @borderColor);
+    }
   }
 
   &__today::after {
