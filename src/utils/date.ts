@@ -271,8 +271,9 @@ export const addWeeks = (date: Date, numberOfWeeks: number): Date => addDays(dat
  * Returns the local formatted month name.
  *
  * @param date Date to format.
+ * @param locale Language whose formatting conventions should be used.
  */
-export const formatMonth = (date: Date): string => date.toLocaleString('default', {
+export const formatMonth = (date: Date, locale: string = 'default'): string => date.toLocaleString(locale, {
   month: 'short',
 });
 
@@ -281,8 +282,9 @@ export const formatMonth = (date: Date): string => date.toLocaleString('default'
  * Returns the local formatted day with two digits from given date.
  *
  * @param date Date to format.
+ * @param locale Language whose formatting conventions should be used.
  */
-export const formatDate = (date: Date): string => getDate(date).toLocaleString('default', {
+export const formatDate = (date: Date, locale: string = 'default'): string => getDate(date).toLocaleString(locale, {
   minimumIntegerDigits: 2,
   useGrouping: false,
 });
@@ -291,7 +293,8 @@ export const formatDate = (date: Date): string => getDate(date).toLocaleString('
  * Returns the local formatted day name from given date.
  *
  * @param date Date to format.
+ * @param locale Language whose formatting conventions should be used.
  */
-export const formatWeekday = (date: Date): string => date.toLocaleString('default', {
+export const formatWeekday = (date: Date, locale: string = 'default'): string => date.toLocaleString(locale, {
   weekday: 'short'
 })
