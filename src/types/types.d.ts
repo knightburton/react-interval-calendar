@@ -18,7 +18,7 @@ type ContextType = {
   fadeWeekends: boolean,
   weeksHeight: WeeksHeight,
   highlighted: HighlightedItem[],
-  handleSelect: (Function) => void,
+  handleSelect: (day: Day, resetFunction: () => void) => void,
 };
 
 type CalendarTuple = [Date?, Date?, number];

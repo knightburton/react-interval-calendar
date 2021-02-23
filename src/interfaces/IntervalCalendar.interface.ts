@@ -1,3 +1,4 @@
+import { Day } from './IntervalCalendarDay.interface';
 export interface IntervalCalendarProps {
   start?: Date,
   end?: Date,
@@ -11,4 +12,5 @@ export interface IntervalCalendarProps {
   fadeWeekends?: boolean,
   height?: number | '100%' | 'auto',
   highlighted?: HighlightedItem[],
+  onSelect?: (day: Day) => void,
 }

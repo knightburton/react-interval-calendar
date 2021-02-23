@@ -4,6 +4,7 @@ import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
 
 import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
+import { Day } from '../../interfaces/IntervalCalendarDay.interface';
 
 import Context from '../../context';
 import {
@@ -26,15 +27,17 @@ const IntervalCalendar = ({
   fadeWeekends = false,
   height = 500,
   highlighted = [],
+  onSelect,
 }: IntervalCalendarProps) => {
   // useRef hooks
   const previousResetFunction = useRef<Function>();
 
   // useCallback hooks
-  const handleSelect = useCallback<any>((resetFunction: Function) => {
+  const handleSelect = useCallback<any>((day: Day, resetFunction: Function) => {
+    if (onSelect) onSelect(day);
     if (previousResetFunction.current) previousResetFunction.current();
     previousResetFunction.current = resetFunction;
-  }, [previousResetFunction]);
+  }, [previousResetFunction, onSelect]);
 
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(
