@@ -4,6 +4,7 @@ export interface IntervalCalendarProps {
   end?: Date,
   showHeader?: boolean,
   showWeekdays?: boolean,
+  showToday?: boolean,
   showMonths?: boolean,
   showYears?: boolean,
   showBorder?: boolean,

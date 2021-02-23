@@ -8,6 +8,7 @@ import styles from './styles.less';
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   // useContext hooks
   const {
+    showToday,
     showMonths,
     showYears,
     fadeWeekends,
@@ -35,13 +36,13 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
         [styles.day__first__of__month__even]: day.isFirstDayOfMonth && day.isMonthEven,
         [styles.day__last__of__month]: day.isLastDayOfMonth,
         [styles.day__last__of__month__even]: day.isLastDayOfMonth && day.isMonthEven,
-        [styles.day__today]: day.isToday,
+        [styles.day__today]: showToday && day.isToday,
         [styles.day__weekend]: day.isWeekend && fadeWeekends,
         [styles.day__selectable]: !!contextSelect,
         [styles.day__selected]: selected,
       },
     ),
-    [day, selected, contextSelect],
+    [day, selected, contextSelect, showToday],
   );
 
   const highlightedClassName = useMemo<string>(

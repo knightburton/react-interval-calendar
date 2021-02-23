@@ -3,6 +3,7 @@ import { createContext } from 'react';
 const Context = createContext<ContextType>({
   startDate: undefined,
   numberOfWeeks: 0,
+  showToday: true,
   showWeekdays: true,
   showMonths: false,
   showYears: false,
