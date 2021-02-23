@@ -27,6 +27,7 @@ const IntervalCalendar = ({
   fadeWeekends = false,
   height = 500,
   highlighted = [],
+  locale = 'default',
   onSelect,
 }: IntervalCalendarProps) => {
   // useRef hooks
@@ -60,8 +61,21 @@ const IntervalCalendar = ({
     fadeWeekends,
     weeksHeight,
     highlighted,
+    locale,
     handleSelect,
-  }), [startDate, numberOfWeeks, showWeekdays, showMonths, showYears, weekStartsOn, fadeWeekends, weeksHeight, highlighted, handleSelect]);
+  }), [
+    startDate,
+    numberOfWeeks,
+    showWeekdays,
+    showMonths,
+    showYears,
+    weekStartsOn,
+    fadeWeekends,
+    weeksHeight,
+    highlighted,
+    locale,
+    handleSelect,
+  ]);
 
   const classNames = useMemo<string>(
     () => classnames({

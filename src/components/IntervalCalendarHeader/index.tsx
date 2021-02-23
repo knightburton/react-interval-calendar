@@ -6,12 +6,12 @@ import styles from './styles.less';
 
 const IntervalCalendarHeader = () => {
   // useContext hooks
-  const { showWeekdays, weekStartsOn } = useContext(Context);
+  const { showWeekdays, weekStartsOn, locale } = useContext(Context);
 
   // useMemo hooks
   const weekdays = useMemo<HeaderWeekday[]>(
     () => showWeekdays
-      ? getHeaderWeekdays(weekStartsOn)
+      ? getHeaderWeekdays(weekStartsOn, locale)
       : [],
     [weekStartsOn, showWeekdays],
   );

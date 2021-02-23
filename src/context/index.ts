@@ -10,6 +10,7 @@ const Context = createContext<ContextType>({
   fadeWeekends: false,
   weeksHeight: 500,
   highlighted: [],
+  locale: 'default',
   handleSelect: () => {},
 });
 

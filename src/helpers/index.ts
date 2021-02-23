@@ -29,7 +29,13 @@ import { Day } from '../interfaces/IntervalCalendarDay.interface';
  * @param numberOfDay Day different between the week start and desired date.
  * @param highlighted List of highlighted intervals.
  */
-export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, highlighted: HighlightedItem[]): Day => {
+export const getDayAttributes = (
+  startDate: Date,
+  numberOfWeek: number,
+  numberOfDay: number,
+  highlighted: HighlightedItem[],
+  locale?: string,
+): Day => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
   const highlightedData = highlighted.find(item => isWithinInterval(date, item.start, item.end));
 
@@ -37,8 +43,8 @@ export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOf
     key: `${numberOfWeek}-${numberOfDay}`,
     date,
     yearLabel: getYear(date),
-    monthLabel: formatMonth(date),
-    dayLabel: formatDate(date),
+    monthLabel: formatMonth(date, locale),
+    dayLabel: formatDate(date, locale),
     isMonthEven: isMonthEven(date),
     isFirstDayOfMonth: isFirstDayOfMonth(date),
     isLastDayOfMonth: isLastDayOfMonth(date),
@@ -77,11 +83,11 @@ export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, week
  *
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getHeaderWeekdays = (weekStartsOn: number = 0): HeaderWeekday[] => {
+export const getHeaderWeekdays = (weekStartsOn: number = 0, locale?: string): HeaderWeekday[] => {
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => ({
     key: day,
-    label: formatWeekday(addDays(start, day))
+    label: formatWeekday(addDays(start, day), locale)
   }));
 };
 
