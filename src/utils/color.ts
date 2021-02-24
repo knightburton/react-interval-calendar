@@ -1,4 +1,4 @@
-const HEX_COLOR_REGEX = /^#([\da-f]{2})([\da-f]{2})([\da-f]{2})$/;
+const HEX_COLOR_REGEX = /^(#|0x)([\da-f]{2})([\da-f]{2})([\da-f]{2})$/;
 
 /**
  * Converts the given hex color to rgba format.
@@ -11,9 +11,9 @@ export const convertHexToRgba = (hex: string, alpha = 0.2): string => {
   if (alpha < 0 || alpha > 1) throw new Error(`${alpha} is not from 0 to 1 range for rgba.`);
   const groups = HEX_COLOR_REGEX.exec(hex);
 
-  const red = (groups?.[1] && parseInt(groups[1], 16)) || 0;
-  const green = (groups?.[2] && parseInt(groups[2], 16)) || 0;
-  const blue = (groups?.[3] && parseInt(groups[3], 16)) || 0;
+  const red = (groups?.[2] && parseInt(groups[1], 16)) || 0;
+  const green = (groups?.[3] && parseInt(groups[2], 16)) || 0;
+  const blue = (groups?.[4] && parseInt(groups[3], 16)) || 0;
 
   return `rgba(${red},${green},${blue},${alpha})`;
 };
