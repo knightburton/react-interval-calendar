@@ -98,14 +98,12 @@ export const getMonthEnd = (date: Date): Date => {
  * @param date Date to get the week start from.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getWeekStart = (date: Date, weekStartsOn: number = 0): Date => {
+export const getWeekStart = (date: Date, weekStartsOn = 0): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = getDate(date);
   const dayOfWeek = getDay(date);
-  const dayOffset = dayOfWeek < weekStartsOn
-    ? 7
-    : 0;
+  const dayOffset = dayOfWeek < weekStartsOn ? 7 : 0;
   const dayDiff = dayOfWeek + dayOffset - weekStartsOn;
   // Create a new date with the date's year and month
   // on the day of month minus the adjusted day difference based on the week start at 00:00.
@@ -118,14 +116,12 @@ export const getWeekStart = (date: Date, weekStartsOn: number = 0): Date => {
  * @param date Date to get the week end from.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getWeekEnd = (date: Date, weekStartsOn: number = 0): Date => {
+export const getWeekEnd = (date: Date, weekStartsOn = 0): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = date.getDate();
   const dayOfWeek = date.getDay();
-  const dayOffset = dayOfWeek < weekStartsOn
-    ? -7
-    : 0;
+  const dayOffset = dayOfWeek < weekStartsOn ? -7 : 0;
   const dayDiff = 6 + dayOffset - (dayOfWeek - weekStartsOn);
   // Create a new date with the date's year and month
   // on the day of month plus the adjusted day difference based on the week start at 23:59.
@@ -163,7 +159,7 @@ export const getDayEnd = (date: Date): Date => {
  * @param right Right date to get the difference from.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getDifferenceInCalendarWeeks = (left: Date, right: Date, weekStartsOn: number = 0): number => {
+export const getDifferenceInCalendarWeeks = (left: Date, right: Date, weekStartsOn = 0): number => {
   const leftWeekStart = getWeekStart(left, weekStartsOn);
   const rightWeekStart = getWeekStart(right, weekStartsOn);
   const oneWeek = 60 * 60 * 24 * 7 * 1000;
@@ -273,10 +269,10 @@ export const addWeeks = (date: Date, numberOfWeeks: number): Date => addDays(dat
  * @param date Date to format.
  * @param locale Language whose formatting conventions should be used.
  */
-export const formatMonth = (date: Date, locale: string = 'default'): string => date.toLocaleString(locale, {
-  month: 'short',
-});
-
+export const formatMonth = (date: Date, locale = 'default'): string =>
+  date.toLocaleString(locale, {
+    month: 'short',
+  });
 
 /**
  * Returns the local formatted day with two digits from given date.
@@ -284,10 +280,11 @@ export const formatMonth = (date: Date, locale: string = 'default'): string => d
  * @param date Date to format.
  * @param locale Language whose formatting conventions should be used.
  */
-export const formatDate = (date: Date, locale: string = 'default'): string => getDate(date).toLocaleString(locale, {
-  minimumIntegerDigits: 2,
-  useGrouping: false,
-});
+export const formatDate = (date: Date, locale = 'default'): string =>
+  getDate(date).toLocaleString(locale, {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
 
 /**
  * Returns the local formatted day name from given date.
@@ -295,6 +292,7 @@ export const formatDate = (date: Date, locale: string = 'default'): string => ge
  * @param date Date to format.
  * @param locale Language whose formatting conventions should be used.
  */
-export const formatWeekday = (date: Date, locale: string = 'default'): string => date.toLocaleString(locale, {
-  weekday: 'short'
-})
+export const formatWeekday = (date: Date, locale = 'default'): string =>
+  date.toLocaleString(locale, {
+    weekday: 'short',
+  });

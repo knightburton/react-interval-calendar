@@ -5,16 +5,13 @@ import IntervalCalendarWeek from '../IntervalCalendarWeek';
 import Context from '../../context';
 import styles from './styles.less';
 
-const IntervalCalendarWeeks = () => {
+const IntervalCalendarWeeks = (): JSX.Element => {
   const { numberOfWeeks, weeksHeight } = useContext(Context);
 
   return (
     <div className={styles.weeks} style={{ height: weeksHeight }}>
       {Array.from(Array(numberOfWeeks + 1).keys()).map(numberOfWeek => (
-        <IntervalCalendarWeek
-          key={numberOfWeek}
-          numberOfWeek={numberOfWeek}
-        />
+        <IntervalCalendarWeek key={numberOfWeek} numberOfWeek={numberOfWeek} />
       ))}
     </div>
   );

@@ -1,3 +1,3 @@
 export interface IntervalCalendarWeekProps {
-  numberOfWeek: number,
+  numberOfWeek: number;
 }

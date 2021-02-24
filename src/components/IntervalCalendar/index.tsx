@@ -7,10 +7,7 @@ import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interfa
 import { Day } from '../../interfaces/IntervalCalendarDay.interface';
 
 import Context from '../../context';
-import {
-  getCalendarBaseAttributes,
-  getWeeksHeight,
-} from '../../helpers';
+import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
 import classnames from '../../utils/classnames';
 import styles from './styles.less';
 
@@ -30,62 +27,49 @@ const IntervalCalendar = ({
   highlighted = [],
   locale = 'default',
   onSelect,
-}: IntervalCalendarProps) => {
+}: IntervalCalendarProps): JSX.Element => {
   // useRef hooks
-  const previousResetFunction = useRef<Function>();
+  const previousResetFunction = useRef<() => void | undefined>();
 
   // useCallback hooks
-  const handleSelect = useCallback<any>((day: Day, resetFunction: Function) => {
-    if (onSelect) onSelect(day);
-    if (previousResetFunction.current) previousResetFunction.current();
-    previousResetFunction.current = resetFunction;
-  }, [previousResetFunction, onSelect]);
+  const handleSelect = useCallback<(day: Day, resetFunction: () => void) => void>(
+    (day: Day, resetFunction: () => void) => {
+      if (onSelect) onSelect(day);
+      if (previousResetFunction.current) previousResetFunction.current();
+      previousResetFunction.current = resetFunction;
+    },
+    [previousResetFunction, onSelect],
+  );
 
   // use memo hooks
-  const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(
-    () => getCalendarBaseAttributes(start, end, weekStartsOn),
-    [start, end, weekStartsOn],
-  );
+  const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
-  const weeksHeight = useMemo<WeeksHeight>(
-    () => getWeeksHeight(showHeader, showWeekdays, height),
-    [showHeader, showWeekdays, height],
-  );
+  const weeksHeight = useMemo<WeeksHeight>(() => getWeeksHeight(showHeader, showWeekdays, height), [showHeader, showWeekdays, height]);
 
-  const contextValue = useMemo<ContextType>(() => ({
-    startDate,
-    numberOfWeeks,
-    showWeekdays,
-    showToday,
-    showMonths,
-    showYears,
-    weekStartsOn,
-    fadeWeekends,
-    weeksHeight,
-    highlighted,
-    locale,
-    handleSelect: (onSelect && handleSelect) || undefined,
-  }), [
-    startDate,
-    numberOfWeeks,
-    showWeekdays,
-    showToday,
-    showMonths,
-    showYears,
-    weekStartsOn,
-    fadeWeekends,
-    weeksHeight,
-    highlighted,
-    locale,
-    handleSelect,
-    onSelect,
-  ]);
+  const contextValue = useMemo<ContextType>(
+    () => ({
+      startDate,
+      numberOfWeeks,
+      showWeekdays,
+      showToday,
+      showMonths,
+      showYears,
+      weekStartsOn,
+      fadeWeekends,
+      weeksHeight,
+      highlighted,
+      locale,
+      handleSelect: (onSelect && handleSelect) || undefined,
+    }),
+    [startDate, numberOfWeeks, showWeekdays, showToday, showMonths, showYears, weekStartsOn, fadeWeekends, weeksHeight, highlighted, locale, handleSelect, onSelect],
+  );
 
   const classNames = useMemo<string>(
-    () => classnames({
-      [styles.calendar__border]: showBorder,
-      [styles.calendar__border__radius]: showBorder && showBorderRadius,
-    }),
+    () =>
+      classnames({
+        [styles.calendar__border]: showBorder,
+        [styles.calendar__border__radius]: showBorder && showBorderRadius,
+      }),
     [showBorder, showBorderRadius],
   );
 

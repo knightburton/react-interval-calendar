@@ -29,13 +29,7 @@ import { Day } from '../interfaces/IntervalCalendarDay.interface';
  * @param numberOfDay Day different between the week start and desired date.
  * @param highlighted List of highlighted intervals.
  */
-export const getDayAttributes = (
-  startDate: Date,
-  numberOfWeek: number,
-  numberOfDay: number,
-  highlighted: HighlightedItem[],
-  locale?: string,
-): Day => {
+export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, highlighted: HighlightedItem[], locale?: string): Day => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
   const highlightedData = highlighted.find(item => isWithinInterval(date, item.start, item.end));
 
@@ -53,9 +47,9 @@ export const getDayAttributes = (
     isHighlighted: !!highlightedData,
     isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
     isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
-    highlightColor: !!highlightedData
+    highlightColor: highlightedData
       ? convertHexToRgba(highlightedData?.color || '#393b44') // fallback to #spacing.border[primary] color
-      : undefined
+      : undefined,
   };
 };
 
@@ -67,7 +61,7 @@ export const getDayAttributes = (
  * @param endDate End date of the seleccted interval.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, weekStartsOn: number = 0): CalendarTuple => {
+export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, weekStartsOn = 0): CalendarTuple => {
   if (!startDate || !endDate) return [undefined, undefined, 0];
   const monthStart = getMonthStart(startDate);
   const monthEnd = getMonthEnd(endDate);
@@ -83,11 +77,11 @@ export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, week
  *
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getHeaderWeekdays = (weekStartsOn: number = 0, locale?: string): HeaderWeekday[] => {
+export const getHeaderWeekdays = (weekStartsOn = 0, locale?: string): HeaderWeekday[] => {
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => ({
     key: day,
-    label: formatWeekday(addDays(start, day), locale)
+    label: formatWeekday(addDays(start, day), locale),
   }));
 };
 

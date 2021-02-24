@@ -5,15 +5,9 @@ import Context from '../../context';
 import classnames from '../../utils/classnames';
 import styles from './styles.less';
 
-const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
+const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => {
   // useContext hooks
-  const {
-    showToday,
-    showMonths,
-    showYears,
-    fadeWeekends,
-    handleSelect: contextSelect,
-  } = useContext<ContextType>(Context);
+  const { showToday, showMonths, showYears, fadeWeekends, handleSelect: contextSelect } = useContext<ContextType>(Context);
 
   // useState hooks
   const [selected, setSelected] = useState(false);
@@ -21,16 +15,15 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
   // useCallback hooks
   const handleSelect = useCallback(() => {
     if (contextSelect) {
-      setSelected(true)
+      setSelected(true);
       contextSelect(day, () => setSelected(false));
     }
   }, [contextSelect, day]);
 
   // useMemo hooks
   const className = useMemo<string>(
-    () => classnames(
-      styles.day,
-      {
+    () =>
+      classnames(styles.day, {
         [styles.day__month__even]: day.isMonthEven,
         [styles.day__first__of__month]: day.isFirstDayOfMonth,
         [styles.day__first__of__month__even]: day.isFirstDayOfMonth && day.isMonthEven,
@@ -40,45 +33,32 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps) => {
         [styles.day__weekend]: day.isWeekend && fadeWeekends,
         [styles.day__selectable]: !!contextSelect,
         [styles.day__selected]: selected,
-      },
-    ),
-    [day, selected, contextSelect, showToday],
+      }),
+    [day.isMonthEven, day.isFirstDayOfMonth, day.isLastDayOfMonth, day.isToday, day.isWeekend, showToday, fadeWeekends, contextSelect, selected],
   );
 
   const highlightedClassName = useMemo<string>(
-    () => classnames(
-      styles.day__highlighted,
-      {
+    () =>
+      classnames(styles.day__highlighted, {
         [styles.day__highlighted__first]: day?.isFirstOfHighlighted,
         [styles.day__highlighted__last]: day?.isLastOfHighlighted,
-      },
-    ),
+      }),
     [day],
   );
 
   return (
-    <li className={className} onClick={handleSelect}>
+    <li className={className} onClick={handleSelect} aria-hidden="true">
       {day?.isHighlighted && (
         <div
           className={highlightedClassName}
           style={{
-            backgroundColor: day.highlightColor
+            backgroundColor: day.highlightColor,
           }}
         />
       )}
-      {showMonths && day?.isFirstDayOfMonth && (
-        <span className={styles.day__text__detail}>
-          {day.monthLabel}
-        </span>
-      )}
-      <span className={styles.day__text}>
-        {day.dayLabel}
-      </span>
-      {showYears && day?.isFirstDayOfMonth && (
-        <span className={styles.day__text__detail}>
-          {day.yearLabel}
-        </span>
-      )}
+      {showMonths && day?.isFirstDayOfMonth && <span className={styles.day__text__detail}>{day.monthLabel}</span>}
+      <span className={styles.day__text}>{day.dayLabel}</span>
+      {showYears && day?.isFirstDayOfMonth && <span className={styles.day__text__detail}>{day.yearLabel}</span>}
     </li>
   );
 };
