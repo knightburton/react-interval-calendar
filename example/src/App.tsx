@@ -10,9 +10,12 @@ const App = () => (
       end={new Date(2021, 6, 31)}
       highlighted={[
         { key: 'holiday', start: new Date(2021, 1, 16), end: new Date(2021, 1, 20) },
-        { key: 'cleaning', start: new Date(2021, 2, 24), end: new Date(2021, 3, 9), color: '#00ff00' },
+        { key: 'cleaning', start: new Date(2021, 2, 24), end: new Date(2021, 3, 9), color: 'rgba(0, 255, 0, 0.4)' },
       ]}
       height={700}
+      showToday={false}
+      showMonths
+      showYears
       showBorder
       showBorderRadius
       fadeWeekends
