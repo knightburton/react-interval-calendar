@@ -3,10 +3,21 @@
   "extends": [
     "airbnb-typescript",
     "airbnb/hooks",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "import",
+    "jest",
+    "jsx-a11y",
+    "react",
+    "react-hooks",
+    "@typescript-eslint"
   ],
   "env": {
+    "browser": true,
     "node": true,
     "es6": true,
     "jest": true
@@ -20,10 +31,13 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "project": [
+      "./tsconfig.json"
+    ]
   },
-  "plugins": [
-    "react"
+  "ignorePatterns": [
+    "rollup.config.js"
   ],
   "settings": {
     "react": {
@@ -33,8 +47,8 @@
   "rules": {
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "always-multiline"],
-    "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
+    "function-call-argument-newline": ["error", "consistent"],
     "max-len": ["error", { "code": 170, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
-    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 5 }]
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }]
   }
 }
