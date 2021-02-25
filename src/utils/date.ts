@@ -7,7 +7,7 @@ export const getYear = (date: Date | number | string): number => {
   // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
   if (date instanceof Date) return date.getFullYear();
 
-  // example: 1612992784743
+  // example: 2021
   if (typeof date === 'number') return date;
 
   // example: '2021-12-02'
@@ -89,7 +89,7 @@ export const getMonthEnd = (date: Date): Date => {
   // Create a new date with the date's year and the next month
   // on the last day of the previous month at 00:00.
   // The day 0 means the last day of previous month.
-  return new Date(year, month + 1, 0, 0, 0, 0, 0);
+  return new Date(year, month + 1, 0, 23, 59, 59, 999);
 };
 
 /**
