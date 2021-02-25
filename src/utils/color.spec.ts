@@ -30,6 +30,7 @@ const mockColor = {
     rgbaMax: 'rgba(255, 255, 255, 1)',
     rgbaInvalid: 'rgba(256, 1, 0, 10)',
     rgbaInvalidArgs: 'rgba(1, 1, 1, 1, 45)',
+    rgbaInvalidShort: 'rgba(33, 76)',
     rgbaMissingAlpha: 'rgba(45, 45, 45)',
     rgb: 'rgb(45, 45, 45)',
     rgbMin: 'rgb(0, 0, 0)',
@@ -40,6 +41,7 @@ const mockColor = {
     hexMin: '#000000',
     hexMax: '#ffffff',
     hexInvalid: '#gg1122',
+    hexInvalidShort: '#fff',
     alpha: {
       color: 'rgb(34, 45, 56)',
       value: 0.6,
@@ -68,6 +70,7 @@ const mockColor = {
     rgbaMax: 'rgba(255, 255, 255, 1)',
     rgbaInvalid: mockFormatError('rgba(256, 1, 0, 10)'),
     rgbaInvalidArgs: mockFormatError('rgba(1, 1, 1, 1, 45)'),
+    rgbaInvalidShort: mockFormatError('rgba(33, 76)'),
     rgbaMissingAlpha: 'rgba(45, 45, 45, 0.2)',
     rgb: 'rgba(45, 45, 45, 0.2)',
     rgbMin: 'rgba(0, 0, 0, 0.2)',
@@ -78,6 +81,7 @@ const mockColor = {
     hexMin: 'rgba(0, 0, 0, 0.2)',
     hexMax: 'rgba(255, 255, 255, 0.2)',
     hexInvalid: mockFormatError('#gg1122'),
+    hexInvalidShort: mockFormatError('#fff'),
     alpha: 'rgba(34, 45, 56, 0.6)',
     alphaMin: 'rgba(123, 234, 65, 0)',
     alphaMax: 'rgba(175, 189, 51, 1)',
@@ -141,6 +145,10 @@ describe('convertColorToRgba', () => {
     expect(() => convertColorToRgba(mockColor.raw.rgbaInvalidArgs)).toThrow(mockColor.result.rgbaInvalidArgs);
   });
 
+  test('thrown - rgba invalid short', () => {
+    expect(() => convertColorToRgba(mockColor.raw.rgbaInvalidShort)).toThrow(mockColor.result.rgbaInvalidShort);
+  });
+
   test('valid - rgba missing alpha', () => {
     expect(convertColorToRgba(mockColor.raw.rgbaMissingAlpha)).toEqual(mockColor.result.rgbaMissingAlpha);
   });
@@ -179,6 +187,10 @@ describe('convertColorToRgba', () => {
 
   test('thrown - hex invalid', () => {
     expect(() => convertColorToRgba(mockColor.raw.hexInvalid)).toThrow(mockColor.result.hexInvalid);
+  });
+
+  test('thrown - hex invalid short', () => {
+    expect(() => convertColorToRgba(mockColor.raw.hexInvalidShort)).toThrow(mockColor.result.hexInvalidShort);
   });
 
   test('valid - alpha', () => {
