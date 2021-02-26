@@ -1,4 +1,4 @@
-import { convertHexToInteger, convertColorToRgba } from './color';
+import { convertHexToInteger, convertColorToRgba } from '../../utils/color';
 
 const mockHex = {
   raw: {
@@ -91,125 +91,125 @@ const mockColor = {
 };
 
 describe('convertHexToInteger', () => {
-  test('valid - null', () => {
+  it('returns valid integer from null', () => {
     expect(convertHexToInteger(null)).toEqual(mockHex.result.defaultValue);
   });
 
-  test('valid - undefined', () => {
+  it('returns valid integer from undefined', () => {
     expect(convertHexToInteger(undefined)).toEqual(mockHex.result.defaultValue);
   });
 
-  test('valid - normal hex', () => {
+  it('returns valid integer from normal hex', () => {
     expect(convertHexToInteger(mockHex.raw.valid)).toEqual(mockHex.result.valid);
   });
 
-  test('valid - all zero hex', () => {
+  it('returns valid integer from all zero hex', () => {
     expect(convertHexToInteger(mockHex.raw.validAllZero)).toEqual(mockHex.result.validAllZero);
   });
 
-  test('valid - all F hex', () => {
+  it('returns valid integer from all F hex', () => {
     expect(convertHexToInteger(mockHex.raw.validAllF)).toEqual(mockHex.result.validAllF);
   });
 
-  test('valid - invalid hex value fallback', () => {
+  it('returns valid integer from invalid hex value and default fallback', () => {
     expect(convertHexToInteger(mockHex.raw.invalid)).toEqual(mockHex.result.invalid);
   });
 
-  test('valid - new default value', () => {
+  it('returns valid integer from an invalid text and given default value', () => {
     expect(convertHexToInteger(mockHex.raw.newDefaultValue.hex, mockHex.raw.newDefaultValue.value)).toEqual(mockHex.result.newDefaultValue);
   });
 });
 
 describe('convertColorToRgba', () => {
-  test('valid - rgba', () => {
+  it('returns valid rgba from rgba', () => {
     expect(convertColorToRgba(mockColor.raw.rgba)).toEqual(mockColor.result.rgba);
   });
 
-  test('valid - rgba space', () => {
+  it('returns valid rgba from rgba space', () => {
     expect(convertColorToRgba(mockColor.raw.rgbaSpace)).toEqual(mockColor.result.rgbaSpace);
   });
 
-  test('valid - rgba minimum values', () => {
+  it('returns valid rgba from rgba format with minimum values', () => {
     expect(convertColorToRgba(mockColor.raw.rgbaMin)).toEqual(mockColor.result.rgbaMin);
   });
 
-  test('valid - rgba maximum values', () => {
+  it('returns valid rgba from rgba format with maximum values', () => {
     expect(convertColorToRgba(mockColor.raw.rgbaMax)).toEqual(mockColor.result.rgbaMax);
   });
 
-  test('thrown - rgba invalid values', () => {
+  it('throws error because of invalid rgba values', () => {
     expect(() => convertColorToRgba(mockColor.raw.rgbaInvalid)).toThrow(mockColor.result.rgbaInvalid);
   });
 
-  test('thrown - rgba invalid args', () => {
+  it('throws error because of invalid args', () => {
     expect(() => convertColorToRgba(mockColor.raw.rgbaInvalidArgs)).toThrow(mockColor.result.rgbaInvalidArgs);
   });
 
-  test('thrown - rgba invalid short', () => {
+  it('throws error because of invalid number of args', () => {
     expect(() => convertColorToRgba(mockColor.raw.rgbaInvalidShort)).toThrow(mockColor.result.rgbaInvalidShort);
   });
 
-  test('valid - rgba missing alpha', () => {
+  it('returns valid rgba from rgba missing alpha', () => {
     expect(convertColorToRgba(mockColor.raw.rgbaMissingAlpha)).toEqual(mockColor.result.rgbaMissingAlpha);
   });
 
-  test('valid - rgb', () => {
+  it('returns valid rgba from rgb format', () => {
     expect(convertColorToRgba(mockColor.raw.rgb)).toEqual(mockColor.result.rgb);
   });
 
-  test('valid - rgb minimum values', () => {
+  it('returns valid rgba from rgb format with minimum values', () => {
     expect(convertColorToRgba(mockColor.raw.rgbMin)).toEqual(mockColor.result.rgbMin);
   });
 
-  test('valid - rgb maximum values', () => {
+  it('returns valid rgba from rgb format with maximum values', () => {
     expect(convertColorToRgba(mockColor.raw.rgbMax)).toEqual(mockColor.result.rgbMax);
   });
 
-  test('thrown - rgb invalid values', () => {
+  it('throws error because of invalid rgb values', () => {
     expect(() => convertColorToRgba(mockColor.raw.rgbInvalid)).toThrow(mockColor.result.rgbInvalid);
   });
 
-  test('valid - hex', () => {
+  it('returns valid rgba from hex format', () => {
     expect(convertColorToRgba(mockColor.raw.hex)).toEqual(mockColor.result.hex);
   });
 
-  test('valid - hex0x', () => {
+  it('returns valid rgba from hex0x format', () => {
     expect(convertColorToRgba(mockColor.raw.hex0x)).toEqual(mockColor.result.hex0x);
   });
 
-  test('valid - hex minimum values', () => {
+  it('returns valid rgba from hex format minimum values', () => {
     expect(convertColorToRgba(mockColor.raw.hexMin)).toEqual(mockColor.result.hexMin);
   });
 
-  test('valid - hex maximum values', () => {
+  it('returns valid rgba from hex format maximum values', () => {
     expect(convertColorToRgba(mockColor.raw.hexMax)).toEqual(mockColor.result.hexMax);
   });
 
-  test('thrown - hex invalid', () => {
+  it('throws error because of invalid hex format', () => {
     expect(() => convertColorToRgba(mockColor.raw.hexInvalid)).toThrow(mockColor.result.hexInvalid);
   });
 
-  test('thrown - hex invalid short', () => {
+  it('throws error because of invalid shorthand hex format', () => {
     expect(() => convertColorToRgba(mockColor.raw.hexInvalidShort)).toThrow(mockColor.result.hexInvalidShort);
   });
 
-  test('valid - alpha', () => {
+  it('returns valid rgba with new alpha value', () => {
     expect(convertColorToRgba(mockColor.raw.alpha.color, mockColor.raw.alpha.value)).toEqual(mockColor.result.alpha);
   });
 
-  test('valid - alpha minimum value', () => {
+  it('returns valid rgba with alpha on minimum value', () => {
     expect(convertColorToRgba(mockColor.raw.alphaMin.color, mockColor.raw.alphaMin.value)).toEqual(mockColor.result.alphaMin);
   });
 
-  test('valid - alpha maximum value', () => {
+  it('returns valid rgba with alpha on maximum value', () => {
     expect(convertColorToRgba(mockColor.raw.alphaMax.color, mockColor.raw.alphaMax.value)).toEqual(mockColor.result.alphaMax);
   });
 
-  test('thrown - alpha invalid high', () => {
+  it('throws error because of high alpha value', () => {
     expect(() => convertColorToRgba(mockColor.raw.alphaInvalidHigh.color, mockColor.raw.alphaInvalidHigh.value)).toThrow(mockColor.result.alphaInvalidHigh);
   });
 
-  test('thrown - alpha invalid low', () => {
+  it('throws error because of low alpha value', () => {
     expect(() => convertColorToRgba(mockColor.raw.alphaInvalidLow.color, mockColor.raw.alphaInvalidLow.value)).toThrow(mockColor.result.alphaInvalidLow);
   });
 });

@@ -1,4 +1,4 @@
-import classnames from './classnames';
+import classnames from '../../utils/classnames';
 
 const mock = {
   raw: {
@@ -53,71 +53,71 @@ const mock = {
 };
 
 describe('classnames', () => {
-  test('valid - undefined argument', () => {
+  it('returns valid classname from undefined argument', () => {
     expect(classnames(undefined)).toEqual(mock.result.empty);
   });
 
-  test('valid - null argument', () => {
+  it('returns valid classname from null argument', () => {
     expect(classnames(null)).toEqual(mock.result.empty);
   });
 
-  test('valid - empty argument', () => {
+  it('returns valid classname from empty argument', () => {
     expect(classnames()).toEqual(mock.result.empty);
   });
 
-  test('valid - empty array argument', () => {
+  it('returns valid classname from empty array argument', () => {
     expect(classnames(mock.raw.emptyArray)).toEqual(mock.result.empty);
   });
 
-  test('valid - empty object argument', () => {
+  it('returns valid classname from empty object argument', () => {
     expect(classnames(mock.raw.emptyObject)).toEqual(mock.result.empty);
   });
 
-  test('valid - number argument', () => {
+  it('returns valid classname from number argument', () => {
     expect(classnames(mock.raw.number)).toEqual(mock.result.empty);
   });
 
-  test('valid - boolean argument', () => {
+  it('returns valid classname from boolean argument', () => {
     expect(classnames(mock.raw.boolean)).toEqual(mock.result.empty);
   });
 
-  test('valid - string argument', () => {
+  it('returns valid classname from string argument', () => {
     expect(classnames(mock.raw.string)).toEqual(mock.result.string);
   });
 
-  test('valid - multiple string arguments', () => {
+  it('returns valid classname from multiple string arguments', () => {
     expect(classnames(...mock.raw.stringMultiple)).toEqual(mock.result.stringMultiple);
   });
 
-  test('valid - string array argument', () => {
+  it('returns valid classname from string array argument', () => {
     expect(classnames(mock.raw.array)).toEqual(mock.result.array);
   });
 
-  test('valid - multiple string array argument', () => {
+  it('returns valid classname from multiple string array argument', () => {
     expect(classnames(mock.raw.arrayMultiple)).toEqual(mock.result.arrayMultiple);
   });
 
-  test('valid - object argument', () => {
+  it('returns valid classname from object argument', () => {
     expect(classnames(mock.raw.object)).toEqual(mock.result.object);
   });
 
-  test('valid - object with all argument', () => {
+  it('returns valid classname from object with all argument', () => {
     expect(classnames(mock.raw.objectMultipleAll)).toEqual(mock.result.objectMultipleAll);
   });
 
-  test('valid - object with no argument', () => {
+  it('returns valid classname from object with no argument', () => {
     expect(classnames(mock.raw.objectMultipleNone)).toEqual(mock.result.objectMultipleNone);
   });
 
-  test('valid - object with some argument', () => {
+  it('returns valid classname from object with some argument', () => {
     expect(classnames(mock.raw.objectMultipleSome)).toEqual(mock.result.objectMultipleSome);
   });
 
-  test('valid - diverse arguments', () => {
+  it('returns valid classname from diverse arguments', () => {
     expect(classnames(...mock.raw.diverseSimple)).toEqual(mock.result.diverseSimple);
   });
 
-  test('valid - diverse nested arguments', () => {
+  it('returns valid classname from diverse nested arguments', () => {
     expect(classnames(...mock.raw.diverseNested)).toEqual(mock.result.diverseNested);
   });
 });
