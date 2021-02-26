@@ -61,7 +61,7 @@ export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOf
  * @param endDate End date of the seleccted interval.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, weekStartsOn = 0): CalendarTuple => {
+export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, weekStartsOn: WeekdayIndex = 0): CalendarTuple => {
   if (!startDate || !endDate) return [undefined, undefined, 0];
   const monthStart = getMonthStart(startDate);
   const monthEnd = getMonthEnd(endDate);
@@ -77,7 +77,7 @@ export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, week
  *
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getHeaderWeekdays = (weekStartsOn = 0, locale?: string): HeaderWeekday[] => {
+export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: string): HeaderWeekday[] => {
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => ({
     key: day,

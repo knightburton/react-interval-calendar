@@ -1,5 +1,7 @@
 type WeeksHeight = number | '100%' | 'auto';
 
+type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
 type HighlightedItem = {
   is?: number | string;
   key?: nnumber | string;
@@ -15,7 +17,7 @@ type ContextType = {
   showToday: boolean;
   showMonths: boolean;
   showYears: boolean;
-  weekStartsOn: number;
+  weekStartsOn: WeekdayIndex;
   fadeWeekends: boolean;
   weeksHeight: WeeksHeight;
   highlighted: HighlightedItem[];

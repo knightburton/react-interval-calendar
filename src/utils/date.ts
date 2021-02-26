@@ -98,7 +98,7 @@ export const getMonthEnd = (date: Date): Date => {
  * @param date Date to get the week start from.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getWeekStart = (date: Date, weekStartsOn = 0): Date => {
+export const getWeekStart = (date: Date, weekStartsOn: WeekdayIndex = 0): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = getDate(date);
@@ -116,7 +116,7 @@ export const getWeekStart = (date: Date, weekStartsOn = 0): Date => {
  * @param date Date to get the week end from.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getWeekEnd = (date: Date, weekStartsOn = 0): Date => {
+export const getWeekEnd = (date: Date, weekStartsOn: WeekdayIndex = 0): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = date.getDate();
@@ -159,7 +159,7 @@ export const getDayEnd = (date: Date): Date => {
  * @param right Right date to get the difference from.
  * @param weekStartsOn Index of the first day of the week.
  */
-export const getDifferenceInCalendarWeeks = (left: Date, right: Date, weekStartsOn = 0): number => {
+export const getDifferenceInCalendarWeeks = (left: Date, right: Date, weekStartsOn: WeekdayIndex = 0): number => {
   const leftWeekStart = getWeekStart(left, weekStartsOn);
   const rightWeekStart = getWeekStart(right, weekStartsOn);
   const oneWeek = 60 * 60 * 24 * 7 * 1000;

@@ -10,7 +10,7 @@ export interface IntervalCalendarProps {
   showYears?: boolean;
   showBorder?: boolean;
   showBorderRadius?: boolean;
-  weekStartsOn?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+  weekStartsOn?: WeekdayIndex;
   fadeWeekends?: boolean;
   height?: number | '100%' | 'auto';
   highlighted?: HighlightedItem[];
