@@ -252,7 +252,7 @@ export const addDays = (date: Date, numberOfDays: number): Date => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = getDate(date);
-  return new Date(year, month, dayOfMonth + numberOfDays, 0, 0, 0, 0);
+  return new Date(new Date(year, month, dayOfMonth).setDate(dayOfMonth + numberOfDays));
 };
 
 /**
@@ -281,9 +281,8 @@ export const formatMonth = (date: Date, locale = 'default'): string =>
  * @param locale Language whose formatting conventions should be used.
  */
 export const formatDate = (date: Date, locale = 'default'): string =>
-  getDate(date).toLocaleString(locale, {
-    minimumIntegerDigits: 2,
-    useGrouping: false,
+  date.toLocaleString(locale, {
+    day: '2-digit',
   });
 
 /**
