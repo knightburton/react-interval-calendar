@@ -197,3 +197,158 @@ describe('getDifferenceInCalendarWeeks', () => {
     expect(() => utils.getDifferenceInCalendarWeeks(<Date>{}, <Date>{})).toThrow(Error);
   });
 });
+
+describe('isMonthEven', () => {
+  it('returns false from proper date', () => {
+    expect(utils.isMonthEven(new Date(2021, 0, 11))).toEqual(false);
+  });
+
+  it('returns true from proper date', () => {
+    expect(utils.isMonthEven(new Date(2021, 1, 11))).toEqual(true);
+  });
+
+  it('throws error because of object as Date arg', () => {
+    expect(() => utils.isMonthEven(<Date>{})).toThrow(Error);
+  });
+});
+
+describe('isFirstDayOfMonth', () => {
+  it('returns false from proper date', () => {
+    expect(utils.isFirstDayOfMonth(new Date(2021, 0, 11))).toEqual(false);
+  });
+
+  it('returns true from proper date', () => {
+    expect(utils.isFirstDayOfMonth(new Date(2021, 0, 1))).toEqual(true);
+  });
+
+  it('throws error because of object as Date arg', () => {
+    expect(() => utils.isFirstDayOfMonth(<Date>{})).toThrow(Error);
+  });
+});
+
+describe('isLastDayOfMonth', () => {
+  it('returns false from proper date', () => {
+    expect(utils.isLastDayOfMonth(new Date(2021, 0, 11))).toEqual(false);
+  });
+
+  it('returns true from proper date', () => {
+    expect(utils.isLastDayOfMonth(new Date(2021, 0, 31))).toEqual(true);
+  });
+
+  it('throws error because of object as Date arg', () => {
+    expect(() => utils.isLastDayOfMonth(<Date>{})).toThrow(Error);
+  });
+});
+
+describe('isWeekend', () => {
+  it('returns false from proper date', () => {
+    expect(utils.isWeekend(new Date(2021, 0, 11))).toEqual(false);
+  });
+
+  it('returns true from proper date (saturday)', () => {
+    expect(utils.isWeekend(new Date(2021, 0, 23))).toEqual(true);
+  });
+
+  it('returns true from proper date (sunday)', () => {
+    expect(utils.isWeekend(new Date(2021, 0, 24))).toEqual(true);
+  });
+
+  it('throws error because of object as Date arg', () => {
+    expect(() => utils.isWeekend(<Date>{})).toThrow(Error);
+  });
+});
+
+describe('isToday', () => {
+  beforeAll(() => {
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(new Date(2021, 0, 11));
+  });
+
+  it('returns false from proper date', () => {
+    expect(utils.isToday(new Date(2021, 0, 22))).toEqual(false);
+  });
+
+  it('returns true from proper date', () => {
+    expect(utils.isToday(new Date(2021, 0, 11))).toEqual(true);
+  });
+
+  it('throws error because of object as Date arg', () => {
+    expect(() => utils.isToday(<Date>{})).toThrow(Error);
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+});
+
+describe('isWithinInterval', () => {
+  it('returns false from proper dates', () => {
+    expect(utils.isWithinInterval(new Date(2021, 0, 11), new Date(2021, 1, 11), new Date(2021, 2, 11))).toEqual(false);
+  });
+
+  it('returns true from proper dates (on start)', () => {
+    expect(utils.isWithinInterval(new Date(2021, 0, 11), new Date(2021, 0, 11), new Date(2021, 0, 13))).toEqual(true);
+  });
+
+  it('returns true from proper dates (on end)', () => {
+    expect(utils.isWithinInterval(new Date(2021, 0, 13), new Date(2021, 0, 11), new Date(2021, 0, 13))).toEqual(true);
+  });
+
+  it('returns true from proper dates (middle)', () => {
+    expect(utils.isWithinInterval(new Date(2021, 0, 12), new Date(2021, 0, 11), new Date(2021, 0, 13))).toEqual(true);
+  });
+
+  it('returns true from proper dates (one day interval)', () => {
+    expect(utils.isWithinInterval(new Date(2021, 0, 11), new Date(2021, 0, 11), new Date(2021, 0, 11, 22, 22, 22, 22))).toEqual(true);
+  });
+
+  it('throws error because of start date after end date', () => {
+    expect(() => utils.isWithinInterval(new Date(2021, 0, 11), new Date(2021, 0, 12), new Date(2021, 0, 11))).toThrow(RangeError);
+  });
+
+  it('throws error because of start date equal end date', () => {
+    expect(() => utils.isWithinInterval(new Date(2021, 0, 11), new Date(2021, 0, 12), new Date(2021, 0, 11))).toThrow(RangeError);
+  });
+
+  it('throws error because of object as Date first arg', () => {
+    expect(() => utils.isWithinInterval(<Date>{}, new Date(2021, 0, 11), new Date(2021, 0, 13))).toThrow(Error);
+  });
+
+  it('throws error because of object as Date second arg', () => {
+    expect(() => utils.isWithinInterval(new Date(2021, 0, 11), <Date>{}, new Date(2021, 0, 13))).toThrow(Error);
+  });
+
+  it('throws error because of object as Date third arg', () => {
+    expect(() => utils.isWithinInterval(new Date(2021, 0, 11), new Date(2021, 0, 11), <Date>{})).toThrow(Error);
+  });
+
+  it('throws error because of object as Date arg', () => {
+    expect(() => utils.isWithinInterval(<Date>{}, <Date>{}, <Date>{})).toThrow(Error);
+  });
+});
+
+describe('isSameDay', () => {
+  it('returns false from proper date', () => {
+    expect(utils.isSameDay(new Date(2021, 0, 11), new Date(2021, 0, 12))).toEqual(false);
+  });
+
+  it('returns true from proper date', () => {
+    expect(utils.isSameDay(new Date(2021, 0, 11), new Date(2021, 0, 11))).toEqual(true);
+  });
+
+  it('returns true from proper date (milisecundum precision)', () => {
+    expect(utils.isSameDay(new Date(2021, 0, 11, 0, 0, 0, 123), new Date(2021, 0, 11, 0, 0, 0, 124))).toEqual(true);
+  });
+
+  it('throws error because of object as Date first arg', () => {
+    expect(() => utils.isSameDay(<Date>{}, new Date(2021, 0, 11))).toThrow(Error);
+  });
+
+  it('throws error because of object as Date second arg', () => {
+    expect(() => utils.isSameDay(new Date(2021, 0, 11), <Date>{})).toThrow(Error);
+  });
+
+  it('throws error because of object as Date args', () => {
+    expect(() => utils.isSameDay(<Date>{}, <Date>{})).toThrow(Error);
+  });
+});
