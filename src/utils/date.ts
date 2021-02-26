@@ -195,7 +195,7 @@ export const isLastDayOfMonth = (date: Date): boolean => {
   const year = getYear(date);
   const month = getMonth(date);
   const dayOfMonth = getDate(date);
-  const endOfDay = new Date(year, month, dayOfMonth, 0, 0, 0, 0).getTime();
+  const endOfDay = new Date(year, month, dayOfMonth, 23, 59, 59, 999).getTime();
   const endOfMonth = getMonthEnd(date).getTime();
   return endOfDay === endOfMonth;
 };
@@ -212,7 +212,7 @@ export const isWeekend = (date: Date): boolean => getDay(date) % 6 === 0;
  *
  * @param date Date to check.
  */
-export const isToday = (date: Date): boolean => date.getTime() === new Date(new Date().setHours(0, 0, 0, 0)).getTime();
+export const isToday = (date: Date): boolean => getDayStart(date).getTime() === new Date(new Date().setHours(0, 0, 0, 0)).getTime();
 
 /**
  * Is the given date between the given start and end date?
@@ -226,7 +226,7 @@ export const isWithinInterval = (date: Date, start: Date, end: Date): boolean =>
   const startTimestamp = getTimestamp(start);
   const endTimestamp = getTimestamp(end);
 
-  if (endTimestamp <= startTimestamp) throw new Error(`Start date (${start}) must be before end date (${end}).`);
+  if (endTimestamp <= startTimestamp) throw new RangeError(`Start date (${start}) must be before end date (${end}).`);
   return startTimestamp <= timestamp && timestamp <= endTimestamp;
 };
 
