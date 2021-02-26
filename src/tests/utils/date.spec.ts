@@ -352,3 +352,111 @@ describe('isSameDay', () => {
     expect(() => utils.isSameDay(<Date>{}, <Date>{})).toThrow(Error);
   });
 });
+
+describe('addDays', () => {
+  it('returns a new date that greater by 1 day', () => {
+    expect(utils.addDays(new Date(2021, 0, 11), 1)).toEqual(new Date(2021, 0, 12));
+  });
+
+  it('returns a new date that greater by 25 day', () => {
+    expect(utils.addDays(new Date(2021, 0, 11), 25)).toEqual(new Date(2021, 1, 5));
+  });
+
+  it('returns a new date that less by 6 day', () => {
+    expect(utils.addDays(new Date(2021, 0, 11), -6)).toEqual(new Date(2021, 0, 5));
+  });
+
+  it('throws error because of object as Date args', () => {
+    expect(() => utils.addDays(<Date>{}, 8)).toThrow(Error);
+  });
+});
+
+describe('addWeeks', () => {
+  it('returns a new date that greater by 1 week', () => {
+    expect(utils.addWeeks(new Date(2021, 0, 11), 1)).toEqual(new Date(2021, 0, 18));
+  });
+
+  it('returns a new date that greater by 25 week', () => {
+    expect(utils.addWeeks(new Date(2021, 0, 11), 6)).toEqual(new Date(2021, 1, 22));
+  });
+
+  it('returns a new date that less by 6 week', () => {
+    expect(utils.addWeeks(new Date(2021, 0, 11), -6)).toEqual(new Date(2020, 10, 30));
+  });
+
+  it('throws error because of object as Date args', () => {
+    expect(() => utils.addWeeks(<Date>{}, 2)).toThrow(Error);
+  });
+});
+
+describe('formatMonth', () => {
+  const date = new Date(2021, 2, 22);
+  const toLocalStringSpy = jest.spyOn(date, 'toLocaleString');
+
+  it('returns a locale formatted month name in default', () => {
+    utils.formatMonth(date);
+    expect(toLocalStringSpy).toHaveBeenCalledWith('default', { month: 'short' });
+  });
+
+  it('returns a locale formatted month name in en-US', () => {
+    utils.formatMonth(date, 'en-US');
+    expect(toLocalStringSpy).toHaveBeenCalledWith('en-US', { month: 'short' });
+  });
+
+  it('returns a locale formatted month name in hu-HU', () => {
+    utils.formatMonth(date, 'hu-HU');
+    expect(toLocalStringSpy).toHaveBeenCalledWith('hu-HU', { month: 'short' });
+  });
+
+  afterAll(() => {
+    toLocalStringSpy.mockClear();
+  });
+});
+
+describe('formatDate', () => {
+  const date = new Date(2021, 2, 22);
+  const toLocalStringSpy = jest.spyOn(date, 'toLocaleString');
+
+  it('returns a locale formatted date name in default', () => {
+    utils.formatDate(date);
+    expect(toLocalStringSpy).toHaveBeenCalledWith('default', { day: '2-digit' });
+  });
+
+  it('returns a locale formatted date name in en-US', () => {
+    utils.formatDate(date, 'en-US');
+    expect(toLocalStringSpy).toHaveBeenCalledWith('en-US', { day: '2-digit' });
+  });
+
+  it('returns a locale formatted date name in hu-HU', () => {
+    utils.formatDate(date, 'hu-HU');
+    expect(toLocalStringSpy).toHaveBeenCalledWith('hu-HU', { day: '2-digit' });
+  });
+
+  afterAll(() => {
+    toLocalStringSpy.mockClear();
+  });
+});
+
+describe('formatWeekday', () => {
+  const date = new Date(2021, 2, 22);
+  const toLocalStringSpy = jest.spyOn(date, 'toLocaleString');
+
+  it('returns a locale formatted weekday name in default', () => {
+    utils.formatWeekday(date);
+    expect(toLocalStringSpy).toHaveBeenCalledWith('default', { weekday: 'short' });
+  });
+
+  it('returns a locale formatted weekday name in en-US', () => {
+    utils.formatWeekday(date, 'en-US');
+    expect(toLocalStringSpy).toHaveBeenCalledWith('en-US', { weekday: 'short' });
+  });
+
+  it('returns a locale formatted weekday name in hu-HU', () => {
+    utils.formatWeekday(date, 'hu-HU');
+    expect(toLocalStringSpy).toHaveBeenCalledWith('hu-HU', { weekday: 'short' });
+  });
+
+  afterAll(() => {
+    toLocalStringSpy.mockClear();
+  });
+});
