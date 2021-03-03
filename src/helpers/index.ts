@@ -98,5 +98,8 @@ export const getWeeksHeight = (header: boolean, weekdays: boolean, height: Weeks
   // If the header weekdays are visible then substract the height of it from the given height.
   // Given height - size * global spacing value.
   if (weekdays && typeof height === 'number') return height - 5 * 8;
+  // If the hright is not a number but we have the weekdays enabled let the css do the work with calc funtion.
+  if (weekdays) return `calc(${height} - ${5 * 8}px)`;
+  // Otherwise just pass the height.
   return height;
 };
