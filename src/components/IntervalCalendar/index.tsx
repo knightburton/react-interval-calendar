@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useCallback } from 'react';
 
+import IntervalCalendarEmpty from '../IntervalCalendarEmpty';
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
 
@@ -26,6 +27,7 @@ const IntervalCalendar = ({
   height = 500,
   highlighted = [],
   locale = 'default',
+  emptyLabel = '',
   onSelect,
 }: IntervalCalendarProps): JSX.Element => {
   // useRef hooks
@@ -59,14 +61,30 @@ const IntervalCalendar = ({
       weeksHeight,
       highlighted,
       locale,
+      emptyLabel,
       handleSelect: (onSelect && handleSelect) || undefined,
     }),
-    [startDate, numberOfWeeks, showWeekdays, showToday, showMonths, showYears, weekStartsOn, fadeWeekends, weeksHeight, highlighted, locale, handleSelect, onSelect],
+    [
+      startDate,
+      numberOfWeeks,
+      showWeekdays,
+      showToday,
+      showMonths,
+      showYears,
+      weekStartsOn,
+      fadeWeekends,
+      weeksHeight,
+      highlighted,
+      locale,
+      emptyLabel,
+      handleSelect,
+      onSelect,
+    ],
   );
 
   const classNames = useMemo<string>(
     () =>
-      classnames({
+      classnames(styles.calendar, {
         [styles.calendar__border]: showBorder,
         [styles.calendar__border__radius]: showBorder && showBorderRadius,
       }),
@@ -75,9 +93,14 @@ const IntervalCalendar = ({
 
   return (
     <Context.Provider value={contextValue}>
-      <div className={classNames}>
+      <div
+        className={classNames}
+        style={{
+          height,
+        }}
+      >
         {showHeader && <IntervalCalendarHeader />}
-        <IntervalCalendarWeeks />
+        {numberOfWeeks && startDate ? <IntervalCalendarWeeks /> : <IntervalCalendarEmpty />}
       </div>
     </Context.Provider>
   );

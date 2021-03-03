@@ -15,5 +15,6 @@ export interface IntervalCalendarProps {
   height?: number | '100%' | 'auto';
   highlighted?: HighlightedItem[];
   locale?: string;
+  emptyLabel?: string;
   onSelect?: (day: Day) => void;
 }

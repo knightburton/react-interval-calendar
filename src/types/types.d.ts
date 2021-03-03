@@ -1,4 +1,4 @@
-type WeeksHeight = number | '100%' | 'auto';
+type WeeksHeight = number | '100%' | 'auto' | string;
 
 type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -22,6 +22,7 @@ type ContextType = {
   weeksHeight: WeeksHeight;
   highlighted: HighlightedItem[];
   locale: string;
+  emptyLabel?: string;
   handleSelect?: (day: Day, resetFunction: () => void) => void;
 };
 

@@ -12,6 +12,7 @@ const Context = createContext<ContextType>({
   weeksHeight: 500,
   highlighted: [],
   locale: 'default',
+  emptyLabel: '',
   handleSelect: undefined,
 });
 
