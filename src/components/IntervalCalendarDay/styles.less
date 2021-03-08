@@ -2,14 +2,12 @@
 
 // local mixins
 .highlightCircle(@borderWidth; @borderColor) {
+  @diameter: #spacing(7.5)[] - (@borderWidth * 2);
+
   content: '';
   position: absolute;
-  width: #spacing(7.5)[];
-  height: #spacing(7.5)[];
-  // The diff between the height of this content, the cell height and the border width.
-  top: calc(#spacing(0.25)[] - @borderWidth);
-  // The diff between the half of theis content width, half of the cell width and the border with.
-  left: calc(50% - #spacing(3.75)[] - @borderWidth);
+  width: @diameter;
+  height: @diameter;
   border-radius: 50%;
   border-width: @borderWidth;
   border-style: solid;
