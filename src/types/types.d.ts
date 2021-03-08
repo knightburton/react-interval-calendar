@@ -17,6 +17,7 @@ type ContextType = {
   showToday: boolean;
   showMonths: boolean;
   showYears: boolean;
+  showGutterBetweenHighlighted: boolean;
   weekStartsOn: WeekdayIndex;
   fadeWeekends: boolean;
   weeksHeight: WeeksHeight;

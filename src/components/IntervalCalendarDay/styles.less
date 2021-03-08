@@ -106,6 +106,21 @@
       border-top-right-radius: #spacing(4)[];
       border-bottom-right-radius: #spacing(4)[];
     }
+
+    &__gutter {
+      height: #spacing(7.5)[];
+      top: #spacing(0.25)[];
+    }
+
+    &__gutter&__first {
+      left: #spacing(0.25)[];
+      width: calc(100% - #spacing(0.25)[]);
+    }
+
+    &__gutter&__last {
+      right: #spacing(0.25)[];
+      width: calc(100% - #spacing(0.25)[]);
+    }
   }
 
   &__selected::after {

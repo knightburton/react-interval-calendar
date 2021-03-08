@@ -7,7 +7,7 @@ import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => {
   // useContext hooks
-  const { showToday, showMonths, showYears, fadeWeekends, handleSelect: contextSelect } = useContext<ContextType>(Context);
+  const { showToday, showMonths, showYears, showGutterBetweenHighlighted, fadeWeekends, handleSelect: contextSelect } = useContext<ContextType>(Context);
 
   // useState hooks
   const [selected, setSelected] = useState(false);
@@ -34,7 +34,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
         [styles.day__selectable]: !!contextSelect,
         [styles.day__selected]: selected,
       }),
-    [day.isMonthEven, day.isFirstDayOfMonth, day.isLastDayOfMonth, day.isToday, day.isWeekend, showToday, fadeWeekends, contextSelect, selected],
+    [day, showToday, fadeWeekends, contextSelect, selected],
   );
 
   const highlightedClassName = useMemo<string>(
@@ -42,8 +42,9 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
       classnames(styles.day__highlighted, {
         [styles.day__highlighted__first]: day?.isFirstOfHighlighted,
         [styles.day__highlighted__last]: day?.isLastOfHighlighted,
+        [styles.day__highlighted__gutter]: showGutterBetweenHighlighted,
       }),
-    [day],
+    [day, showGutterBetweenHighlighted],
   );
 
   return (
