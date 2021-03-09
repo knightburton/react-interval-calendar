@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useRef, useState, useEffect } from 'react';
+import React, { useContext, useMemo, useRef, useEffect } from 'react';
 
 import Context from '../../context';
 import { getDayAttributes } from '../../helpers';
@@ -7,21 +7,27 @@ import { IntervalCalendarWeekProps } from '../../interfaces/IntervalCalendarWeek
 import IntervalCalendarDay from '../IntervalCalendarDay';
 import styles from './styles.less';
 
-const DEFAULT_RENDER_TRESHOLD = 8;
+const NUMBER_OF_PRE_RENDER_WEEKS = 5;
 
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.Element => {
   // Hooks
-  const { startDate, highlighted, locale } = useContext(Context);
+  const { startDate, highlighted, locale, visibilityMatrix, updateVisibilityMatrix } = useContext(Context);
   const ref = useRef(null);
   const isVisible = useOnScreen(ref);
-  const [rendered, setRendered] = useState(numberOfWeek <= DEFAULT_RENDER_TRESHOLD);
+  const shouldRender = useMemo(
+    () =>
+      Array(NUMBER_OF_PRE_RENDER_WEEKS)
+        .fill(null)
+        .some((_, idx) => visibilityMatrix[numberOfWeek - idx]),
+    [visibilityMatrix, numberOfWeek],
+  );
   const data = useMemo(() => {
-    if (!startDate || !rendered) return [];
+    if (!startDate || !shouldRender) return [];
     return Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day, highlighted, locale));
-  }, [rendered, startDate, numberOfWeek, highlighted, locale]);
+  }, [startDate, numberOfWeek, highlighted, locale, shouldRender]);
   useEffect(() => {
-    if (isVisible && !rendered) setRendered(true);
-  }, [isVisible, rendered]);
+    if (isVisible && !shouldRender) updateVisibilityMatrix(numberOfWeek);
+  }, [isVisible, shouldRender, updateVisibilityMatrix, numberOfWeek]);
 
   return (
     <ul ref={ref} key={numberOfWeek} className={styles.week}>

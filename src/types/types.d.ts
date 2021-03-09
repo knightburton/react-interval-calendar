@@ -10,6 +10,10 @@ type HighlightedItem = {
   color: string;
 };
 
+type VisibilityMatrix = {
+  [week: number]: boolean;
+};
+
 type ContextType = {
   startDate?: Date;
   numberOfWeeks: number;
@@ -25,6 +29,8 @@ type ContextType = {
   locale: string;
   emptyLabel?: string;
   handleSelect?: (day: Day, resetFunction: () => void) => void;
+  visibilityMatrix: VisibilityMatrix;
+  updateVisibilityMatrix: (week: number) => void;
 };
 
 type CalendarTuple = [Date?, Date?, number];

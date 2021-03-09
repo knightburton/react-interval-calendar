@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useCallback } from 'react';
+import React, { useMemo, useRef, useCallback, useState } from 'react';
 
 import IntervalCalendarEmpty from '../IntervalCalendarEmpty';
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
@@ -11,6 +11,8 @@ import Context from '../../context';
 import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
 import classnames from '../../utils/classnames';
 import styles from './styles.less';
+
+const NUMBER_OF_DEFAULT_WEEKS = 8;
 
 const IntervalCalendar = ({
   start,
@@ -31,6 +33,13 @@ const IntervalCalendar = ({
   emptyLabel = '',
   onSelect,
 }: IntervalCalendarProps): JSX.Element => {
+  // useState hooks
+  const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
+    Array(NUMBER_OF_DEFAULT_WEEKS)
+      .fill(null)
+      .reduce((acc: VisibilityMatrix, _, week) => ({ ...acc, [week]: true }), {}),
+  );
+
   // useRef hooks
   const previousResetFunction = useRef<() => void | undefined>();
 
@@ -42,6 +51,15 @@ const IntervalCalendar = ({
       previousResetFunction.current = resetFunction;
     },
     [previousResetFunction, onSelect],
+  );
+  const handleVisibilityMatrixChange = useCallback(
+    (week: number) => {
+      setVisibilityMatrix(prevState => ({
+        ...prevState,
+        [week]: true,
+      }));
+    },
+    [setVisibilityMatrix],
   );
 
   // use memo hooks
@@ -65,6 +83,8 @@ const IntervalCalendar = ({
       locale,
       emptyLabel,
       handleSelect: (onSelect && handleSelect) || undefined,
+      visibilityMatrix,
+      updateVisibilityMatrix: handleVisibilityMatrixChange,
     }),
     [
       startDate,
@@ -82,6 +102,8 @@ const IntervalCalendar = ({
       emptyLabel,
       handleSelect,
       onSelect,
+      visibilityMatrix,
+      handleVisibilityMatrixChange,
     ],
   );
 

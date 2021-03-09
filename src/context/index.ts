@@ -15,6 +15,8 @@ const Context = createContext<ContextType>({
   locale: 'default',
   emptyLabel: '',
   handleSelect: undefined,
+  visibilityMatrix: {},
+  updateVisibilityMatrix: () => {},
 });
 
 export default Context;
