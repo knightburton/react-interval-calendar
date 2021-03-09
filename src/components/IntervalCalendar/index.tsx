@@ -1,18 +1,15 @@
-import React, { useMemo, useRef, useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
+import { NUMBER_OF_WEEK_FIRST_RENDER, NUMBER_OF_WEEK_PRE_RENDER } from '../../constants/default-props';
+import Context from '../../context';
+import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
+import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
+import { Day } from '../../interfaces/IntervalCalendarDay.interface';
+import classnames from '../../utils/classnames';
 import IntervalCalendarEmpty from '../IntervalCalendarEmpty';
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
-
-import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
-import { Day } from '../../interfaces/IntervalCalendarDay.interface';
-
-import Context from '../../context';
-import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
-import classnames from '../../utils/classnames';
 import styles from './styles.less';
-
-const NUMBER_OF_DEFAULT_WEEKS = 8;
 
 const IntervalCalendar = ({
   start,
@@ -32,10 +29,12 @@ const IntervalCalendar = ({
   locale = 'default',
   emptyLabel = '',
   onSelect,
+  numberOfWeekFirstRender = NUMBER_OF_WEEK_FIRST_RENDER,
+  numberOfWeekPreRender = NUMBER_OF_WEEK_PRE_RENDER,
 }: IntervalCalendarProps): JSX.Element => {
   // useState hooks
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
-    Array(NUMBER_OF_DEFAULT_WEEKS)
+    Array(numberOfWeekFirstRender)
       .fill(null)
       .reduce((acc: VisibilityMatrix, _, week) => ({ ...acc, [week]: true }), {}),
   );
@@ -85,6 +84,7 @@ const IntervalCalendar = ({
       handleSelect: (onSelect && handleSelect) || undefined,
       visibilityMatrix,
       updateVisibilityMatrix: handleVisibilityMatrixChange,
+      numberOfWeekPreRender,
     }),
     [
       startDate,
@@ -104,6 +104,7 @@ const IntervalCalendar = ({
       onSelect,
       visibilityMatrix,
       handleVisibilityMatrixChange,
+      numberOfWeekPreRender,
     ],
   );
 

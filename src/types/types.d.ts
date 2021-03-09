@@ -31,6 +31,7 @@ type ContextType = {
   handleSelect?: (day: Day, resetFunction: () => void) => void;
   visibilityMatrix: VisibilityMatrix;
   updateVisibilityMatrix: (week: number) => void;
+  numberOfWeekPreRender: number;
 };
 
 type CalendarTuple = [Date?, Date?, number];

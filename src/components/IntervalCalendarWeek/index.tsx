@@ -7,19 +7,17 @@ import { IntervalCalendarWeekProps } from '../../interfaces/IntervalCalendarWeek
 import IntervalCalendarDay from '../IntervalCalendarDay';
 import styles from './styles.less';
 
-const NUMBER_OF_PRE_RENDER_WEEKS = 5;
-
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.Element => {
   // Hooks
-  const { startDate, highlighted, locale, visibilityMatrix, updateVisibilityMatrix } = useContext(Context);
+  const { startDate, highlighted, locale, visibilityMatrix, updateVisibilityMatrix, numberOfWeekPreRender } = useContext(Context);
   const ref = useRef(null);
   const isVisible = useOnScreen(ref);
   const shouldRender = useMemo(
     () =>
-      Array(NUMBER_OF_PRE_RENDER_WEEKS)
+      Array(numberOfWeekPreRender)
         .fill(null)
         .some((_, idx) => visibilityMatrix[numberOfWeek - idx]),
-    [visibilityMatrix, numberOfWeek],
+    [visibilityMatrix, numberOfWeek, numberOfWeekPreRender],
   );
   const data = useMemo(() => {
     if (!startDate || !shouldRender) return [];
