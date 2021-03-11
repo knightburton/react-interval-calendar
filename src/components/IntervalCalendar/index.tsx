@@ -1,15 +1,14 @@
-import React, { useMemo, useRef, useCallback } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 
+import { NUMBER_OF_WEEK_FIRST_RENDER, NUMBER_OF_WEEK_PRE_RENDER } from '../../constants/default-props';
+import Context from '../../context';
+import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
+import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
+import { Day } from '../../interfaces/IntervalCalendarDay.interface';
+import classnames from '../../utils/classnames';
 import IntervalCalendarEmpty from '../IntervalCalendarEmpty';
 import IntervalCalendarHeader from '../IntervalCalendarHeader';
 import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
-
-import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
-import { Day } from '../../interfaces/IntervalCalendarDay.interface';
-
-import Context from '../../context';
-import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
-import classnames from '../../utils/classnames';
 import styles from './styles.less';
 
 const IntervalCalendar = ({
@@ -30,7 +29,16 @@ const IntervalCalendar = ({
   locale = 'default',
   emptyLabel = '',
   onSelect,
+  numberOfWeekFirstRender = NUMBER_OF_WEEK_FIRST_RENDER,
+  numberOfWeekPreRender = NUMBER_OF_WEEK_PRE_RENDER,
 }: IntervalCalendarProps): JSX.Element => {
+  // useState hooks
+  const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
+    Array(numberOfWeekFirstRender)
+      .fill(null)
+      .reduce((acc: VisibilityMatrix, _, week) => ({ ...acc, [week]: true }), {}),
+  );
+
   // useRef hooks
   const previousResetFunction = useRef<() => void | undefined>();
 
@@ -42,6 +50,15 @@ const IntervalCalendar = ({
       previousResetFunction.current = resetFunction;
     },
     [previousResetFunction, onSelect],
+  );
+  const handleVisibilityMatrixChange = useCallback(
+    (week: number) => {
+      setVisibilityMatrix(prevState => ({
+        ...prevState,
+        [week]: true,
+      }));
+    },
+    [setVisibilityMatrix],
   );
 
   // use memo hooks
@@ -65,6 +82,9 @@ const IntervalCalendar = ({
       locale,
       emptyLabel,
       handleSelect: (onSelect && handleSelect) || undefined,
+      visibilityMatrix,
+      updateVisibilityMatrix: handleVisibilityMatrixChange,
+      numberOfWeekPreRender,
     }),
     [
       startDate,
@@ -82,6 +102,9 @@ const IntervalCalendar = ({
       emptyLabel,
       handleSelect,
       onSelect,
+      visibilityMatrix,
+      handleVisibilityMatrixChange,
+      numberOfWeekPreRender,
     ],
   );
 

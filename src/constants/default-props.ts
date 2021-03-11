@@ -1,0 +1,7 @@
+export const NUMBER_OF_WEEK_FIRST_RENDER = 8;
+export const NUMBER_OF_WEEK_PRE_RENDER = 3;
+
+export default {
+  NUMBER_OF_WEEK_FIRST_RENDER,
+  NUMBER_OF_WEEK_PRE_RENDER,
+};

@@ -18,4 +18,6 @@ export interface IntervalCalendarProps {
   locale?: string;
   emptyLabel?: string;
   onSelect?: (day: Day) => void;
+  numberOfWeekFirstRender?: number;
+  numberOfWeekPreRender?: number;
 }
