@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
-import { NUMBER_OF_WEEK_FIRST_RENDER, NUMBER_OF_WEEK_PRE_RENDER } from '../../constants/default-props';
+import * as DEFAULT_PROPS from '../../constants/default-props';
 import Context from '../../context';
 import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
 import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
@@ -14,24 +14,24 @@ import styles from './styles.less';
 const IntervalCalendar = ({
   start,
   end,
-  showHeader = true,
-  showWeekdays = true,
-  showToday = true,
-  showMonths = false,
-  showYears = false,
-  showBorder = false,
-  showBorderRadius = false,
-  showGutterBetweenHighlighted = false,
-  showMonthStripes = false,
-  weekStartsOn = 0,
-  fadeWeekends = false,
-  height = 500,
-  highlighted = [],
-  locale = 'default',
-  emptyLabel = '',
-  onSelect,
-  numberOfWeekFirstRender = NUMBER_OF_WEEK_FIRST_RENDER,
-  numberOfWeekPreRender = NUMBER_OF_WEEK_PRE_RENDER,
+  showHeader = DEFAULT_PROPS.SHOW_HEADER,
+  showWeekdays = DEFAULT_PROPS.SHOW_WEEKDAYS,
+  showToday = DEFAULT_PROPS.SHOW_TODAY,
+  showMonths = DEFAULT_PROPS.SHOW_MONTHS,
+  showYears = DEFAULT_PROPS.SHOW_YEARS,
+  showBorder = DEFAULT_PROPS.SHOW_BORDER,
+  showBorderRadius = DEFAULT_PROPS.SHOW_BORDER_RADIUS,
+  showGutterBetweenHighlighted = DEFAULT_PROPS.SHOW_GUTTER_BETWEEN_HIGHLIGHTED,
+  showMonthStripes = DEFAULT_PROPS.SHOW_MONTH_STRIPES,
+  weekStartsOn = DEFAULT_PROPS.WEEK_STARTS_ON,
+  fadeWeekends = DEFAULT_PROPS.FADE_WEEKENDS,
+  height = DEFAULT_PROPS.HEIGHT,
+  highlighted = DEFAULT_PROPS.HIGHLIGHTED,
+  locale = DEFAULT_PROPS.LOCALE,
+  emptyLabel = DEFAULT_PROPS.EMPTY_LABEL,
+  onSelect = DEFAULT_PROPS.ON_SELECT,
+  numberOfWeekFirstRender = DEFAULT_PROPS.NUMBER_OF_WEEK_FIRST_RENDER,
+  numberOfWeekPreRender = DEFAULT_PROPS.NUMBER_OF_WEEK_PRE_RENDER,
 }: IntervalCalendarProps): JSX.Element => {
   // useState hooks
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(

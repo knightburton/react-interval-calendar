@@ -1,26 +1,26 @@
 import { createContext } from 'react';
 
-import { NUMBER_OF_WEEK_PRE_RENDER } from '../constants/default-props';
+import * as DEFAULT_PROPS from '../constants/default-props';
 
 const Context = createContext<ContextType>({
   startDate: undefined,
   numberOfWeeks: 0,
-  showToday: true,
-  showWeekdays: true,
-  showMonths: false,
-  showYears: false,
-  showGutterBetweenHighlighted: false,
-  showMonthStripes: true,
-  weekStartsOn: 0,
-  fadeWeekends: false,
-  weeksHeight: 500,
-  highlighted: [],
-  locale: 'default',
-  emptyLabel: '',
+  showToday: DEFAULT_PROPS.SHOW_TODAY,
+  showWeekdays: DEFAULT_PROPS.SHOW_WEEKDAYS,
+  showMonths: DEFAULT_PROPS.SHOW_MONTHS,
+  showYears: DEFAULT_PROPS.SHOW_YEARS,
+  showGutterBetweenHighlighted: DEFAULT_PROPS.SHOW_GUTTER_BETWEEN_HIGHLIGHTED,
+  showMonthStripes: DEFAULT_PROPS.SHOW_MONTH_STRIPES,
+  weekStartsOn: DEFAULT_PROPS.WEEK_STARTS_ON,
+  fadeWeekends: DEFAULT_PROPS.FADE_WEEKENDS,
+  weeksHeight: DEFAULT_PROPS.HEIGHT,
+  highlighted: DEFAULT_PROPS.HIGHLIGHTED,
+  locale: DEFAULT_PROPS.LOCALE,
+  emptyLabel: DEFAULT_PROPS.EMPTY_LABEL,
   handleSelect: undefined,
   visibilityMatrix: {},
   updateVisibilityMatrix: () => {},
-  numberOfWeekPreRender: NUMBER_OF_WEEK_PRE_RENDER,
+  numberOfWeekPreRender: DEFAULT_PROPS.NUMBER_OF_WEEK_PRE_RENDER,
 });
 
 export default Context;
