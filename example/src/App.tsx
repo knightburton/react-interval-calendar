@@ -13,12 +13,12 @@ const App = () => (
         { key: 'cleaning', start: new Date(2021, 2, 24), end: new Date(2021, 3, 9), color: 'rgba(0, 255, 0, 0.4)' },
       ]}
       height={700}
-      showToday={false}
       showMonths
       showYears
       showBorder
       showBorderRadius
       fadeWeekends
+      onSelect={() => {}}
     />
   </div>
 );

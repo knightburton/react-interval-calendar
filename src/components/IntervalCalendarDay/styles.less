@@ -55,7 +55,7 @@
   }
 
   &__today::after {
-    @borderColor: #palette.border[primary];
+    @borderColor: #palette.highlight[secondary];
     .highlightCircle(2px, @borderColor);
   }
 
@@ -69,10 +69,10 @@
 
   &__first__of__month {
     .monthEdge(first);
-  }
 
-  &__first__of__month__text {
-    font-weight: bold;
+    &__text {
+      font-weight: bold;
+    }
   }
 
   &__last__of__month {
