@@ -10,6 +10,7 @@ const Context = createContext<ContextType>({
   showMonths: false,
   showYears: false,
   showGutterBetweenHighlighted: false,
+  showMonthStripes: true,
   weekStartsOn: 0,
   fadeWeekends: false,
   weeksHeight: 500,

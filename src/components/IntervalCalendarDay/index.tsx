@@ -7,7 +7,9 @@ import styles from './styles.less';
 
 const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => {
   // useContext hooks
-  const { showToday, showMonths, showYears, showGutterBetweenHighlighted, fadeWeekends, handleSelect: contextSelect } = useContext<ContextType>(Context);
+  const { showToday, showMonths, showYears, showGutterBetweenHighlighted, showMonthStripes, fadeWeekends, handleSelect: contextSelect } = useContext<ContextType>(
+    Context,
+  );
 
   // useState hooks
   const [selected, setSelected] = useState(false);
@@ -24,17 +26,18 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
   const className = useMemo<string>(
     () =>
       classnames(styles.day, {
-        [styles.day__month__even]: day.isMonthEven,
-        [styles.day__first__of__month]: day.isFirstDayOfMonth,
-        [styles.day__first__of__month__even]: day.isFirstDayOfMonth && day.isMonthEven,
-        [styles.day__last__of__month]: day.isLastDayOfMonth,
-        [styles.day__last__of__month__even]: day.isLastDayOfMonth && day.isMonthEven,
+        [styles.day__month__even]: showMonthStripes && day.isMonthEven,
+        [styles.day__first__of__month__text]: day.isFirstDayOfMonth,
+        [styles.day__first__of__month]: showMonthStripes && day.isFirstDayOfMonth,
+        [styles.day__first__of__month__even]: showMonthStripes && day.isFirstDayOfMonth && day.isMonthEven,
+        [styles.day__last__of__month]: showMonthStripes && day.isLastDayOfMonth,
+        [styles.day__last__of__month__even]: showMonthStripes && day.isLastDayOfMonth && day.isMonthEven,
         [styles.day__today]: showToday && day.isToday,
         [styles.day__weekend]: day.isWeekend && fadeWeekends,
         [styles.day__selectable]: !!contextSelect,
         [styles.day__selected]: selected,
       }),
-    [day, showToday, fadeWeekends, contextSelect, selected],
+    [day, showToday, showMonthStripes, fadeWeekends, contextSelect, selected],
   );
 
   const highlightedClassName = useMemo<string>(

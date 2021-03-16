@@ -11,6 +11,7 @@ export interface IntervalCalendarProps {
   showBorder?: boolean;
   showBorderRadius?: boolean;
   showGutterBetweenHighlighted?: boolean;
+  showMonthStripes?: boolean;
   weekStartsOn?: WeekdayIndex;
   fadeWeekends?: boolean;
   height?: number | '100%' | 'auto';

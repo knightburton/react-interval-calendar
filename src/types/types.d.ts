@@ -22,6 +22,7 @@ type ContextType = {
   showMonths: boolean;
   showYears: boolean;
   showGutterBetweenHighlighted: boolean;
+  showMonthStripes: boolean;
   weekStartsOn: WeekdayIndex;
   fadeWeekends: boolean;
   weeksHeight: WeeksHeight;
