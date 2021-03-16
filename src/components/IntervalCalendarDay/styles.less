@@ -1,7 +1,7 @@
 @import '../../theme.less';
 
 // local mixins
-.highlightCircle(@borderWidth; @borderColor) {
+.highlightCircle(@borderWidth; @borderColor; @borderStyle: solid) {
   @diameter: #spacing(7.5)[] - (@borderWidth * 2);
 
   content: '';
@@ -10,7 +10,7 @@
   height: @diameter;
   border-radius: 50%;
   border-width: @borderWidth;
-  border-style: solid;
+  border-style: @borderStyle;
   border-color: @borderColor;
   z-index: +1;
 }
@@ -50,7 +50,7 @@
     cursor: pointer;
     &:hover::after {
       @borderColor: #palette.border[primary];
-      .highlightCircle(1px, @borderColor);
+      .highlightCircle(1px, @borderColor, dotted);
     }
   }
 
