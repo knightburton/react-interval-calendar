@@ -16,11 +16,11 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
 
   // useCallback hooks
   const handleSelect = useCallback(() => {
-    if (contextSelect) {
+    if (contextSelect && !selected) {
       setSelected(true);
       contextSelect(day, () => setSelected(false));
     }
-  }, [contextSelect, day]);
+  }, [contextSelect, selected, day]);
 
   // useMemo hooks
   const className = useMemo<string>(
