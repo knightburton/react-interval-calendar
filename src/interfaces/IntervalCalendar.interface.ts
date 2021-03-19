@@ -3,6 +3,7 @@ import { Day } from './IntervalCalendarDay.interface';
 export interface IntervalCalendarProps {
   start?: Date;
   end?: Date;
+  theme?: ThemeOption;
   showHeader?: boolean;
   showWeekdays?: boolean;
   showToday?: boolean;

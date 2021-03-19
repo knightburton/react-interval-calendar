@@ -14,9 +14,12 @@ type VisibilityMatrix = {
   [week: number]: boolean;
 };
 
+type ThemeOption = 'light' | 'dark';
+
 type ContextType = {
   startDate?: Date;
   numberOfWeeks: number;
+  theme: ThemeOption;
   showWeekdays: boolean;
   showToday: boolean;
   showMonths: boolean;

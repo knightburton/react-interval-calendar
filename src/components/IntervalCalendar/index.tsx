@@ -14,6 +14,7 @@ import styles from './styles.less';
 const IntervalCalendar = ({
   start,
   end,
+  theme = 'light',
   showHeader = DEFAULT_PROPS.SHOW_HEADER,
   showWeekdays = DEFAULT_PROPS.SHOW_WEEKDAYS,
   showToday = DEFAULT_PROPS.SHOW_TODAY,
@@ -71,6 +72,7 @@ const IntervalCalendar = ({
     () => ({
       startDate,
       numberOfWeeks,
+      theme,
       showWeekdays,
       showToday,
       showMonths,
@@ -91,6 +93,7 @@ const IntervalCalendar = ({
     [
       startDate,
       numberOfWeeks,
+      theme,
       showWeekdays,
       showToday,
       showMonths,
@@ -123,6 +126,7 @@ const IntervalCalendar = ({
   return (
     <Context.Provider value={contextValue}>
       <div
+        data-theme={theme}
         className={classNames}
         style={{
           height,

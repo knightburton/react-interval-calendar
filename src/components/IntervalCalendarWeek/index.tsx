@@ -9,7 +9,7 @@ import styles from './styles.less';
 
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.Element => {
   // General hooks
-  const { startDate, highlighted, locale, visibilityMatrix, updateVisibilityMatrix, numberOfWeekPreRender } = useContext(Context);
+  const { startDate, highlighted, locale, visibilityMatrix, updateVisibilityMatrix, numberOfWeekPreRender, theme } = useContext(Context);
   const ref = useRef(null);
   const isVisible = useOnScreen(ref);
 
@@ -24,8 +24,8 @@ const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.
 
   const data = useMemo(() => {
     if (!startDate || !shouldRender) return [];
-    return Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day, highlighted, locale));
-  }, [startDate, numberOfWeek, highlighted, locale, shouldRender]);
+    return Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day, highlighted, theme, locale));
+  }, [startDate, numberOfWeek, highlighted, locale, shouldRender, theme]);
 
   // useEffect hooks
   useEffect(() => {

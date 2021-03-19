@@ -5,6 +5,7 @@ import * as DEFAULT_PROPS from '../constants/default-props';
 const Context = createContext<ContextType>({
   startDate: undefined,
   numberOfWeeks: 0,
+  theme: DEFAULT_PROPS.THEME,
   showToday: DEFAULT_PROPS.SHOW_TODAY,
   showWeekdays: DEFAULT_PROPS.SHOW_WEEKDAYS,
   showMonths: DEFAULT_PROPS.SHOW_MONTHS,

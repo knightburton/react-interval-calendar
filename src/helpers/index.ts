@@ -20,6 +20,7 @@ import {
 } from '../utils/date';
 import { convertColorToRgba } from '../utils/color';
 import { Day } from '../interfaces/IntervalCalendarDay.interface';
+import { HIGHLIGHT_COLORS } from '../constants/default-colors';
 
 /**
  * Returns the desired date attributes based on the passed weeks and days.
@@ -29,7 +30,14 @@ import { Day } from '../interfaces/IntervalCalendarDay.interface';
  * @param numberOfDay Day different between the week start and desired date.
  * @param highlighted List of highlighted intervals.
  */
-export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, highlighted: HighlightedItem[], locale?: string): Day => {
+export const getDayAttributes = (
+  startDate: Date,
+  numberOfWeek: number,
+  numberOfDay: number,
+  highlighted: HighlightedItem[],
+  theme: ThemeOption,
+  locale?: string,
+): Day => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
   const highlightedData = highlighted.find(item => isWithinInterval(date, item.start, item.end));
 
@@ -47,9 +55,7 @@ export const getDayAttributes = (startDate: Date, numberOfWeek: number, numberOf
     isHighlighted: !!highlightedData,
     isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
     isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
-    highlightColor: highlightedData
-      ? convertColorToRgba(highlightedData?.color || 'rgba(57, 59, 68, 0.2)') // fallback to #spacing.border[primary] color in rgba
-      : undefined,
+    highlightColor: highlightedData ? convertColorToRgba(highlightedData?.color || HIGHLIGHT_COLORS[theme.toUpperCase()]) : undefined,
   };
 };
 

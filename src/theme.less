@@ -1,29 +1,59 @@
 // Default theme mixins and variables
 
+// Light palette colors comes from
+// https://colorhunt.co/palette/201686
+.calendar {
+  --primaryColor: #d6e0f0;
+  --secondaryColor: #f1f3f8;
+
+  --primaryBorderColor: #393b44;
+  --secondaryBorderColor: #d5d7dc;
+
+  --primaryHighlightColor: #ffffff;
+  --secondaryHighlightColor: #263646;
+
+  --primaryTextColor: #393b44;
+  --secondaryTextColor: #8d93ab;
+}
+
+// Dark palette colors comes from
+// https://colorhunt.co/palette/2763
+.calendar[data-theme="dark"] {
+  --primaryColor: #393e46;
+  --secondaryColor: #222831;
+
+  --primaryBorderColor: #00adb5;
+  --secondaryBorderColor: #5c6470;
+
+  --primaryHighlightColor: #ffffff;
+  --secondaryHighlightColor: #00adb5;
+
+  --primaryTextColor: #eeeeee;
+  --secondaryTextColor: #a6a6a6;
+}
+
 #spacing(@times) {
   @result: @times * 8px;
 }
 
-// Main palette colors comes from
-// https://colorhunt.co/palette/201686
 #palette() {
   .main() {
-    primary: #d6e0f0;
-    secondary: #f1f3f8;
+    primary: var(--primaryColor);
+    secondary: var(--secondaryColor);
   }
 
   .border() {
-    primary: #393b44;
-    secondary: #d5d7dc;
+    primary: var(--primaryBorderColor);
+    secondary: var(--secondaryBorderColor);
   }
 
   .highlight() {
-    primary: #ffffff;
-    secondary: #263646;
+    primary: var(--primaryHighlightColor);
+    secondary: var(--secondaryHighlightColor);
   }
 
   .text() {
-    primary: #393b44;
-    secondary: #8d93ab;
+    primary: var(--primaryTextColor);
+    secondary: var(--secondaryTextColor);
   }
 }
