@@ -16,6 +16,35 @@ type VisibilityMatrix = {
 
 type ThemeOption = 'light' | 'dark';
 
+type CalendarTuple = [Date?, Date?, number];
+
+type HeaderWeekday = {
+  key: number;
+  label: string;
+};
+
+type ClassNamesObject = {
+  [string]: boolean;
+};
+
+type ClassNames = string | string[] | ClassNamesObject | ClassNamesObject[] | null | undefined;
+
+type CustomClassNames = {
+  calendar?: ClassNames;
+  calendarEmpty?: ClassNames;
+  header?: ClassNames;
+  headerDay?: ClassNames;
+  weeks?: ClassNames;
+  week?: ClassNames;
+  day?: ClassNames;
+  dayText?: ClassNames;
+  dayMonthText?: ClassNames;
+  datYearText?: ClassNames;
+  dayHighlighted?: ClassNames;
+  daySelected?: ClassNames;
+  dayToday?: ClassNames;
+};
+
 type ContextType = {
   startDate?: Date;
   numberOfWeeks: number;
@@ -36,17 +65,5 @@ type ContextType = {
   visibilityMatrix: VisibilityMatrix;
   updateVisibilityMatrix: (week: number) => void;
   numberOfWeekPreRender: number;
+  customClassNames: CustomClassNames;
 };
-
-type CalendarTuple = [Date?, Date?, number];
-
-type HeaderWeekday = {
-  key: number;
-  label: string;
-};
-
-type ClassNamesObject = {
-  [string]: boolean;
-};
-
-type ClassNames = string | string[] | ClassNamesObject | ClassNamesObject[] | null | undefined;

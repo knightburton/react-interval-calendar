@@ -22,4 +22,5 @@ export interface IntervalCalendarProps {
   onSelect?: (day: Day) => void;
   numberOfWeekFirstRender?: number;
   numberOfWeekPreRender?: number;
+  customClassNames?: CustomClassNames;
 }

@@ -22,6 +22,7 @@ const Context = createContext<ContextType>({
   visibilityMatrix: {},
   updateVisibilityMatrix: () => {},
   numberOfWeekPreRender: DEFAULT_PROPS.NUMBER_OF_WEEK_PRE_RENDER,
+  customClassNames: DEFAULT_PROPS.CUSTOM_CLASS_NAMES,
 });
 
 export default Context;
