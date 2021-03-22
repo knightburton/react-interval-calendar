@@ -57,6 +57,7 @@ export const getDayAttributes = (
     isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
     isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
     highlightColor: highlightedData ? convertColorToRgba(highlightedData?.color || HIGHLIGHT_COLORS[theme.toUpperCase()], highlightedColorAlpha) : undefined,
+    highlightId: highlightedData?.id || highlightedData?.key,
   };
 };
 

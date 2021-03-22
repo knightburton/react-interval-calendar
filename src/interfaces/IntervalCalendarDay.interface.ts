@@ -13,6 +13,7 @@ export interface Day {
   isFirstOfHighlighted: boolean;
   isLastOfHighlighted: boolean;
   highlightColor?: string;
+  highlightId?: number | string;
 }
 
 export interface IntervalCalendarDayProps {
