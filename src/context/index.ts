@@ -7,7 +7,7 @@ const Context = createContext<ContextType>({
   numberOfWeeks: 0,
   theme: DEFAULT_PROPS.THEME,
   showToday: DEFAULT_PROPS.SHOW_TODAY,
-  showWeekdays: DEFAULT_PROPS.SHOW_WEEKDAYS,
+  showHeaderWeekdays: DEFAULT_PROPS.SHOW_HEADER_WEEKDAYS,
   showMonths: DEFAULT_PROPS.SHOW_MONTHS,
   showYears: DEFAULT_PROPS.SHOW_YEARS,
   showGutterBetweenHighlighted: DEFAULT_PROPS.SHOW_GUTTER_BETWEEN_HIGHLIGHTED,

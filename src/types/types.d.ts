@@ -49,7 +49,7 @@ type ContextType = {
   startDate?: Date;
   numberOfWeeks: number;
   theme: ThemeOption;
-  showWeekdays: boolean;
+  showHeaderWeekdays: boolean;
   showToday: boolean;
   showMonths: boolean;
   showYears: boolean;

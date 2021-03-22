@@ -5,7 +5,7 @@ export interface IntervalCalendarProps {
   end?: Date;
   theme?: ThemeOption;
   showHeader?: boolean;
-  showWeekdays?: boolean;
+  showHeaderWeekdays?: boolean;
   showToday?: boolean;
   showMonths?: boolean;
   showYears?: boolean;

@@ -16,7 +16,7 @@ const IntervalCalendar = ({
   end = DEFAULT_PROPS.END,
   theme = DEFAULT_PROPS.THEME,
   showHeader = DEFAULT_PROPS.SHOW_HEADER,
-  showWeekdays = DEFAULT_PROPS.SHOW_WEEKDAYS,
+  showHeaderWeekdays = DEFAULT_PROPS.SHOW_HEADER_WEEKDAYS,
   showToday = DEFAULT_PROPS.SHOW_TODAY,
   showMonths = DEFAULT_PROPS.SHOW_MONTHS,
   showYears = DEFAULT_PROPS.SHOW_YEARS,
@@ -68,14 +68,14 @@ const IntervalCalendar = ({
   // use memo hooks
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
-  const weeksHeight = useMemo<WeeksHeight>(() => getWeeksHeight(showHeader, showWeekdays, height), [showHeader, showWeekdays, height]);
+  const weeksHeight = useMemo<WeeksHeight>(() => getWeeksHeight(showHeader, showHeaderWeekdays, height), [showHeader, showHeaderWeekdays, height]);
 
   const contextValue = useMemo<ContextType>(
     () => ({
       startDate,
       numberOfWeeks,
       theme,
-      showWeekdays,
+      showHeaderWeekdays,
       showToday,
       showMonths,
       showYears,
@@ -97,7 +97,7 @@ const IntervalCalendar = ({
       startDate,
       numberOfWeeks,
       theme,
-      showWeekdays,
+      showHeaderWeekdays,
       showToday,
       showMonths,
       showYears,
