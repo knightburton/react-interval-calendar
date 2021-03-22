@@ -3,7 +3,7 @@ type WeeksHeight = number | '100%' | 'auto' | string;
 type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 type HighlightedItem = {
-  is?: number | string;
+  id?: number | string;
   key?: nnumber | string;
   start: Date;
   end: Date;
