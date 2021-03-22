@@ -62,6 +62,7 @@ For more detailed example check the [example](./example) directory.
 | fadeWeekends | Whether the weekends shall be faded or not. | `false` | `fadeWeekends` |
 | height | Height of the calendar. Can be a number in pixels, `100%`, `auto` or a `string` that can be evaluated in css. | `500` | `height={750}` |
 | highlighted | Array of the intervals that should be highlighted between the start and end date. More details see [Highlighted Props](#highlighted-props). | `[]` | `highlighted={[{ id: 'audit', start: new Date(2021, 4, 1), end: new Date(2021, 4, 5), color: '#ffff00` }]}` |
+| highlightedColorAlpha | Alpha level of the highlighted colors. Can be between `0.0` and `1.0`. | `0.2` | `highlightedColorAlpha={0.5}` |
 | locale | Locale that should be used to format and display the days and months. Can be an IETF language tag. | `default` | `locale={hu_HU}` |
 | numberOfWeekFirstRender | Number of weeks to render below the visible weeks on the first render. | `8` | `numberOfWeekFirstRender={10}` |
 | numberOfWeekPreRender | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. | `4` | `numberOfWeekPreRender={8}` |
@@ -104,7 +105,7 @@ The `highlighted` prop is an array and each item is an `object` and should look 
 | key | Identifies the item inside the array. | Optional |
 | start | Start date of the highlighted interval. | Required |
 | end | End date of the highlighted interval. | Required |
-| color | Highilight color of the interval. The color can be in `hex`, `rgb` or `rgba` format. The calendar will convert the color into an `rgba` format where the `alpha` value will be `0.2` by default if that is not provided as part of the color. | Optional |
+| color | Highilight color of the interval. The color can be in `hex`, `rgb` or `rgba` format. The calendar will convert the color into an `rgba` format where the `alpha` value will be equal to `highlightedColorAlpha` prop by default if that is not provided as part of the color. | Optional |
 
 ### Development
 Local development is broken into two parts (ideally using two terminal tabs).

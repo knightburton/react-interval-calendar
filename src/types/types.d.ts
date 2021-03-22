@@ -61,6 +61,7 @@ type ContextType = {
   fadeWeekends: boolean;
   weeksHeight: WeeksHeight;
   highlighted: HighlightedItem[];
+  highlightedColorAlpha: number;
   locale: string;
   emptyLabel?: string;
   handleSelect?: (day: Day, resetFunction: () => void) => void;

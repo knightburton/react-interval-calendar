@@ -17,6 +17,7 @@ export interface IntervalCalendarProps {
   fadeWeekends?: boolean;
   height?: number | '100%' | 'auto';
   highlighted?: HighlightedItem[];
+  highlightedColorAlpha?: number;
   locale?: string;
   emptyLabel?: string;
   onSelect?: (day: Day) => void;

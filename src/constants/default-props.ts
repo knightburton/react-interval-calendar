@@ -14,6 +14,7 @@ export const WEEK_STARTS_ON = 0;
 export const FADE_WEEKENDS = false;
 export const HEIGHT = 500;
 export const HIGHLIGHTED = [];
+export const HIGHLIGHTED_COLOR_ALPHA = 0.2;
 export const LOCALE = 'default';
 export const EMPTY_LABEL = '';
 export const ON_SELECT = undefined;

@@ -16,6 +16,7 @@ const Context = createContext<ContextType>({
   fadeWeekends: DEFAULT_PROPS.FADE_WEEKENDS,
   weeksHeight: DEFAULT_PROPS.HEIGHT,
   highlighted: DEFAULT_PROPS.HIGHLIGHTED,
+  highlightedColorAlpha: DEFAULT_PROPS.HIGHLIGHTED_COLOR_ALPHA,
   locale: DEFAULT_PROPS.LOCALE,
   emptyLabel: DEFAULT_PROPS.EMPTY_LABEL,
   handleSelect: undefined,

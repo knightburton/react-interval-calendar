@@ -35,6 +35,7 @@ export const getDayAttributes = (
   numberOfWeek: number,
   numberOfDay: number,
   highlighted: HighlightedItem[],
+  highlightedColorAlpha: number,
   theme: ThemeOption,
   locale?: string,
 ): Day => {
@@ -55,7 +56,7 @@ export const getDayAttributes = (
     isHighlighted: !!highlightedData,
     isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
     isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
-    highlightColor: highlightedData ? convertColorToRgba(highlightedData?.color || HIGHLIGHT_COLORS[theme.toUpperCase()]) : undefined,
+    highlightColor: highlightedData ? convertColorToRgba(highlightedData?.color || HIGHLIGHT_COLORS[theme.toUpperCase()], highlightedColorAlpha) : undefined,
   };
 };
 
