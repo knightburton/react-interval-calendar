@@ -61,12 +61,12 @@ For more detailed example check the [example](./example) directory.
 | emptyLabel | Content of a label rendered in case of no or invalid start-end interval. | `There is no date range to display` | `emptyLabel="Hey! I'm empty!"` |
 | fadeWeekends | Whether the weekends shall be faded or not. | `false` | `fadeWeekends` |
 | height | Height of the calendar. Can be a number in pixels, `100%`, `auto` or a `string` that can be evaluated in css. | `500` | `height={750}` |
-| highlighted | Array of the intervals that should be highlighted between the start and end date. More details see [Highlighted Props](#highlighted-props). | `[]` | `highlighted={[{ id: 'audit', start: new Date(2021, 4, 1), end: new Date(2021, 4, 5), color: '#ffff00` }]}` |
+| highlighted | Array of the intervals that should be highlighted between the start and end date. The highlighted interval cannot intersect with each other yet. More details see [Highlighted Props](#highlighted-props). | `[]` | `highlighted={[{ id: 'audit', start: new Date(2021, 4, 1), end: new Date(2021, 4, 5), color: '#ffff00' }]}` |
 | highlightedColorAlpha | Alpha level of the highlighted colors. Can be between `0.0` and `1.0`. | `0.2` | `highlightedColorAlpha={0.5}` |
 | locale | Locale that should be used to format and display the days and months. Can be an IETF language tag. | `default` | `locale={hu_HU}` |
 | numberOfWeekFirstRender | Number of weeks to render below the visible weeks on the first render. | `8` | `numberOfWeekFirstRender={10}` |
 | numberOfWeekPreRender | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. | `4` | `numberOfWeekPreRender={8}` |
-| onSelect | Function called when the user clicks a day. It returns all available data about the selected day. | `undefined` | `onSelect={day => console.log(day)}` |
+| onSelect | Function called when the user clicks a day. It returns a [Day object](#day-object). | `undefined` | `onSelect={day => console.log(day)}` |
 | showBorder | Whether the calendar component border shall be rendered or not. | `false` | `showBorder` |
 | showBorderRadius | Whether the calendar component border shall be rounded or not. Only takes effect when the `showBorder` prop set to `true`. | `false` | `showBorderRadius` |
 | showGutterBetweenHighlighted | Whether a small gutter shall be shown on the highlighted intervals to be more separated or not. | `false` | `showGutterBetweenHighlighted` |
@@ -77,7 +77,7 @@ For more detailed example check the [example](./example) directory.
 | showToday | Whether the current day shall be highlighted or not. | `true` | `showToday={false}` |
 | showYears | Whether the year number shall be shown on the first day of a month or not. | `false` | `showYears` |
 | theme | The color theme of the calendar. Can be `light` or `dark`. | `light` | `theme="dark"` |
-| weekStartsOn | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`, | `0` | `weekStartsOn={1}` |
+| weekStartsOn | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`. | `0` | `weekStartsOn={1}` |
 
 #### Custom Class Names Props
 The `customClassNames` prop can consume the following props where each prop can be a `string` or an `array of string`:
@@ -106,6 +106,26 @@ The `highlighted` prop is an array and each item is an `object` and should look 
 | start | Start date of the highlighted interval. | Required |
 | end | End date of the highlighted interval. | Required |
 | color | Highilight color of the interval. The color can be in `hex`, `rgb` or `rgba` format. The calendar will convert the color into an `rgba` format where the `alpha` value will be equal to `highlightedColorAlpha` prop by default if that is not provided as part of the color. | Optional |
+
+#### Day Object
+The `onSelect` function will return a `Day object` with the following props:
+| Prop name | Description |
+| --- | --- |
+| key | Day identifier that created from the number of week and day of the week. |
+| date | Actual Date object of the day. |
+| yearLabel | Year label from the actual date. |
+| monthLabel | Month label from the actual date formatted with the provided `locale` prop. |
+| dayLabel | Day of the month label that is displayed in the calendar. |
+| isMonthEven | Describes whether the month of the actual date is even or not. |
+| isFirstDayOfMonth | Describes whether the actual date is the first day of the month or not. |
+| isLastDayOfMonth | Describes whether the actual date is the last day of the month or not. |
+| isToday | Describes whether the actual date is the same date as today or not. |
+| isWeekend | Describes whether the actual date is on weekend or not. |
+| isHighlighted | Describes whether the actual date is highlighted or not. |
+| isFirstOfHighlighted | Describes whether the actual date is the first date of the highlighted interval or not. |
+| isLastOfHighlighted | Describes whether the actual date is the last date of the highlighted interval or not. |
+| highlightColor | The color of the highlight in `rgba` format. |
+| highlightId | The highlight `id` or `key` if the actual date is highlighted. |
 
 ### Development
 Local development is broken into two parts (ideally using two terminal tabs).
