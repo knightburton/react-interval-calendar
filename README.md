@@ -32,7 +32,11 @@ const App = () => (
     start={new Date(2021, 1, 1)}
     end={new Date(2021, 6, 31)}
     highlighted={[
-      { key: 'audit', start: new Date(2021, 1, 16), end: new Date(2021, 1, 20) },
+      {
+        key: 'audit',
+        start: new Date(2021, 1, 16),
+        end: new Date(2021, 1, 20),
+      },
     ]}
     height={700}
     showToday={false}
@@ -51,13 +55,13 @@ For more detailed example check the [example](./example) directory.
 ### Prop-Types
 | Prop name | Description | Default value | Example |
 | --- | --- | --- | --- |
-| start | The beginning of the calendar that should displayed. The calendar will display the whole week of the start date. | `undefined` | `start={new Date(2021, 2, 21)}` |
+| start | The beginning of the calendar that should displayed. The calendar will display the whole week of the start date. | `undefined` | `start={new Date(2021, 2, 3)}` |
 | end | The end of the calendar that should displayed. The calendar will display the whole week of the end date. | `undefined` | `end={new Date(2021, 11, 1)}` |
-| customClassNames | Class name(s) that will be applied to a given calendar item. | `{}` | `customClassNames={{ dayText: 'my-custom-class-name' }}` |
+| customClassNames | Class name(s) that will be applied to a given calendar item. More details see [Custom Class Names props](#custom-class-names-props). | `{}` | `customClassNames={{ dayText: 'classname' }}` |
 | emptyLabel | Content of a label rendered in case of no or invalid start-end interval. | `There is no date range to display` | `emptyLabel="Hey! I'm empty!"` |
 | fadeWeekends | Whether the weekends shall be faded or not. | `false` | `fadeWeekends` |
 | height | Height of the calendar. Can be a number in pixels, `100%`, `auto` or a `string` that can be evaluated in css. | `500` | `height={750}` |
-| highlighted | Array of the intervals that should be highlighted between the start and end date. | `[]` | `highlighted={[{ id: 'audit', start: new Date(2021, 4, 1), end: new Date(2021, 4, 5), color: '#ffff00` }]}` |
+| highlighted | Array of the intervals that should be highlighted between the start and end date. More details see [Highlighted Props](#highlighted-props). | `[]` | `highlighted={[{ id: 'audit', start: new Date(2021, 4, 1), end: new Date(2021, 4, 5), color: '#ffff00` }]}` |
 | locale | Locale that should be used to format and display the days and months. Can be an IETF language tag. | `default` | `locale={hu_HU}` |
 | numberOfWeekFirstRender | Number of weeks to render below the visible weeks on the first render. | `8` | `numberOfWeekFirstRender={10}` |
 | numberOfWeekPreRender | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. | `4` | `numberOfWeekPreRender={8}` |
@@ -73,6 +77,34 @@ For more detailed example check the [example](./example) directory.
 | showYears | Whether the year number shall be shown on the first day of a month or not. | `false` | `showYears` |
 | theme | The color theme of the calendar. Can be `light` or `dark`. | `light` | `theme="dark"` |
 | weekStartsOn | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`, | `0` | `weekStartsOn={1}` |
+
+#### Custom Class Names Props
+The `customClassNames` prop can consume the following props where each prop can be a `string` or an `array of string`:
+| Prop name | Description | Applied to |
+| --- | --- | --- |
+| calendar | Classname(s) that will be applied to the calendar container element. | `div` |
+| calendarEmpty | Classname(s) that will be applied to calendar empty state container element. | `div` |
+| header | Classname(s) that will be applied to header element. | `div` |
+| headerDay | Classname(s) that will be applied to each day cell element inside the header. | `div` |
+| weeks | Classname(s) that will be applied to the weeks container element. | `div` |
+| week | Classname(s) that will be applied to week container element. | `ul` |
+| day | Classname(s) that will be applied to the day container element. | `li` |
+| dayText | Classname(s) that will be applied to the main day text element inside the day container. | `span` |
+| dayMonthText | Classname(s) that will be applied to the month text element inside the day container. | `span` |
+| dayYearText | Classname(s) that will be applied to the year text element inside the day container. | `span` |
+| dayHighlighted | Classname(s) that will be applied to the highlighted day element inside the day container. | `div` |
+| daySelected | Classname(s) that will be applied to the user selected day element inside the day container. | `day` |
+| dayToday | Classname(s) that will be applied to the current day element inside the day container. | `day` |
+
+#### Highlighted Props
+The `highlighted` prop is an array and each item is an `object` and should look like the following:
+| Prop name | Description | Required/Optional |
+| --- | --- | --- |
+| id | Identifies the item inside the array. | Optional |
+| key | Identifies the item inside the array. | Optional |
+| start | Start date of the highlighted interval. | Required |
+| end | End date of the highlighted interval. | Required |
+| color | Highilight color of the interval. The color can be in `hex`, `rgb` or `rgba` format. The calendar will convert the color into an `rgba` format where the `alpha` value will be `0.2` by default if that is not provided as part of the color. | Optional |
 
 ### Development
 Local development is broken into two parts (ideally using two terminal tabs).
