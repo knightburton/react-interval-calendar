@@ -68,7 +68,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
   );
   const monthClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames?.dayMonthText), [customClassNames.dayMonthText]);
   const dayClassName = useMemo<string>(() => classnames(styles.day__text, customClassNames?.dayText), [customClassNames.dayText]);
-  const yearClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames?.datYearText), [customClassNames.datYearText]);
+  const yearClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames?.dayYearText), [customClassNames.dayYearText]);
 
   return (
     <li className={className} onClick={handleSelect} aria-hidden="true">

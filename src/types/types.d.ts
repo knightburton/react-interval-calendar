@@ -29,20 +29,22 @@ type ClassNamesObject = {
 
 type ClassNames = string | string[] | ClassNamesObject | ClassNamesObject[] | null | undefined;
 
+type ClassNamesProp = string | string[];
+
 type CustomClassNames = {
-  calendar?: ClassNames;
-  calendarEmpty?: ClassNames;
-  header?: ClassNames;
-  headerDay?: ClassNames;
-  weeks?: ClassNames;
-  week?: ClassNames;
-  day?: ClassNames;
-  dayText?: ClassNames;
-  dayMonthText?: ClassNames;
-  datYearText?: ClassNames;
-  dayHighlighted?: ClassNames;
-  daySelected?: ClassNames;
-  dayToday?: ClassNames;
+  calendar?: ClassNamesProp;
+  calendarEmpty?: ClassNamesProp;
+  header?: ClassNamesProp;
+  headerDay?: ClassNamesProp;
+  weeks?: ClassNamesProp;
+  week?: ClassNamesProp;
+  day?: ClassNamesProp;
+  dayText?: ClassNamesProp;
+  dayMonthText?: ClassNamesProp;
+  dayYearText?: ClassNamesProp;
+  dayHighlighted?: ClassNamesProp;
+  daySelected?: ClassNamesProp;
+  dayToday?: ClassNamesProp;
 };
 
 type ContextType = {
