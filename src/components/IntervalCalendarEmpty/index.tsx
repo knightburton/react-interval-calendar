@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
-
+import React, { useContext, useMemo } from 'react';
 import Context from '../../context';
+import classnames from '../../utils/classnames';
 import styles from './styles.less';
 
 const IntervalCalendarEmpty = (): JSX.Element => {
-  const { weeksHeight, emptyLabel } = useContext(Context);
+  const { weeksHeight, emptyLabel, customClassNames } = useContext<ContextType>(Context);
+  const className = useMemo(() => classnames(styles.empty, customClassNames?.calendarEmpty), [customClassNames.calendarEmpty]);
 
   return (
     <div
-      className={styles.empty}
+      className={className}
       style={{
         height: weeksHeight,
       }}

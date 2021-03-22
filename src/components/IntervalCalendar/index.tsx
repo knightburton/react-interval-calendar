@@ -14,7 +14,7 @@ import styles from './styles.less';
 const IntervalCalendar = ({
   start,
   end,
-  theme = 'light',
+  theme = DEFAULT_PROPS.THEME,
   showHeader = DEFAULT_PROPS.SHOW_HEADER,
   showWeekdays = DEFAULT_PROPS.SHOW_WEEKDAYS,
   showToday = DEFAULT_PROPS.SHOW_TODAY,
@@ -33,6 +33,7 @@ const IntervalCalendar = ({
   onSelect = DEFAULT_PROPS.ON_SELECT,
   numberOfWeekFirstRender = DEFAULT_PROPS.NUMBER_OF_WEEK_FIRST_RENDER,
   numberOfWeekPreRender = DEFAULT_PROPS.NUMBER_OF_WEEK_PRE_RENDER,
+  customClassNames = DEFAULT_PROPS.CUSTOM_CLASS_NAMES,
 }: IntervalCalendarProps): JSX.Element => {
   // useState hooks
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
@@ -53,6 +54,7 @@ const IntervalCalendar = ({
     },
     [previousResetFunction, onSelect],
   );
+
   const handleVisibilityMatrixChange = useCallback(
     (week: number) => {
       setVisibilityMatrix(prevState => ({
@@ -89,6 +91,7 @@ const IntervalCalendar = ({
       visibilityMatrix,
       updateVisibilityMatrix: handleVisibilityMatrixChange,
       numberOfWeekPreRender,
+      customClassNames,
     }),
     [
       startDate,
@@ -111,23 +114,28 @@ const IntervalCalendar = ({
       visibilityMatrix,
       handleVisibilityMatrixChange,
       numberOfWeekPreRender,
+      customClassNames,
     ],
   );
 
-  const classNames = useMemo<string>(
+  const className = useMemo<string>(
     () =>
-      classnames(styles.calendar, {
-        [styles.calendar__border]: showBorder,
-        [styles.calendar__border__radius]: showBorder && showBorderRadius,
-      }),
-    [showBorder, showBorderRadius],
+      classnames(
+        styles.calendar,
+        {
+          [styles.calendar__border]: showBorder,
+          [styles.calendar__border__radius]: showBorder && showBorderRadius,
+        },
+        customClassNames?.calendar,
+      ),
+    [showBorder, showBorderRadius, customClassNames.calendar],
   );
 
   return (
     <Context.Provider value={contextValue}>
       <div
         data-theme={theme}
-        className={classNames}
+        className={className}
         style={{
           height,
         }}

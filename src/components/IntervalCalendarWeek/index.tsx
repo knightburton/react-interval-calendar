@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useRef, useEffect } from 'react';
 
+import classnames from '../../utils/classnames';
 import Context from '../../context';
 import { getDayAttributes } from '../../helpers';
 import useOnScreen from '../../hooks/useOnScreen';
@@ -9,7 +10,7 @@ import styles from './styles.less';
 
 const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.Element => {
   // General hooks
-  const { startDate, highlighted, locale, visibilityMatrix, updateVisibilityMatrix, numberOfWeekPreRender, theme } = useContext(Context);
+  const { startDate, highlighted, locale, visibilityMatrix, updateVisibilityMatrix, numberOfWeekPreRender, customClassNames, theme } = useContext<ContextType>(Context);
   const ref = useRef(null);
   const isVisible = useOnScreen(ref);
 
@@ -27,13 +28,15 @@ const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.
     return Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day, highlighted, theme, locale));
   }, [startDate, numberOfWeek, highlighted, locale, shouldRender, theme]);
 
+  const className = useMemo(() => classnames(styles.week, customClassNames?.week), [customClassNames.week]);
+
   // useEffect hooks
   useEffect(() => {
     if (isVisible && !shouldRender) updateVisibilityMatrix(numberOfWeek);
   }, [isVisible, shouldRender, updateVisibilityMatrix, numberOfWeek]);
 
   return (
-    <ul ref={ref} key={numberOfWeek} className={styles.week}>
+    <ul ref={ref} key={numberOfWeek} className={className}>
       {data.map(day => (
         <IntervalCalendarDay key={day.key} day={day} />
       ))}

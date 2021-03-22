@@ -17,3 +17,4 @@ export const EMPTY_LABEL = '';
 export const ON_SELECT = undefined;
 export const NUMBER_OF_WEEK_FIRST_RENDER = 8;
 export const NUMBER_OF_WEEK_PRE_RENDER = 3;
+export const CUSTOM_CLASS_NAMES = {};
