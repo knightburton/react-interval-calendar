@@ -1,3 +1,5 @@
+export const START = undefined;
+export const END = undefined;
 export const THEME = 'light';
 export const SHOW_HEADER = true;
 export const SHOW_WEEKDAYS = true;

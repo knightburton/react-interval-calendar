@@ -12,8 +12,8 @@ import IntervalCalendarWeeks from '../IntervalCalendarWeeks';
 import styles from './styles.less';
 
 const IntervalCalendar = ({
-  start,
-  end,
+  start = DEFAULT_PROPS.START,
+  end = DEFAULT_PROPS.END,
   theme = DEFAULT_PROPS.THEME,
   showHeader = DEFAULT_PROPS.SHOW_HEADER,
   showWeekdays = DEFAULT_PROPS.SHOW_WEEKDAYS,
