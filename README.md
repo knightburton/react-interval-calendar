@@ -1,4 +1,7 @@
 # react-interval-calendar
+
+[![Build Workflow](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml/badge.svg)](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml)
+
 Infinite scrolling based calendar for interval dates built with React.
 
 - no additional dependencies
