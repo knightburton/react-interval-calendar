@@ -29,6 +29,9 @@ import { HIGHLIGHT_COLORS } from '../constants/default-colors';
  * @param numberOfWeek Week different between start and desired date.
  * @param numberOfDay Day different between the week start and desired date.
  * @param highlighted List of highlighted intervals.
+ * @param highlightedColorAlpha Number of alpha level in rgba color.
+ * @param theme Theme sof the calendar to adjust highlight colors.
+ * @param locale Locale to format the month and day labels.
  */
 export const getDayAttributes = (
   startDate: Date,
@@ -56,7 +59,7 @@ export const getDayAttributes = (
     isHighlighted: !!highlightedData,
     isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
     isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
-    highlightColor: highlightedData ? convertColorToRgba(highlightedData?.color || HIGHLIGHT_COLORS[theme.toUpperCase()], highlightedColorAlpha) : undefined,
+    highlightColor: highlightedData ? convertColorToRgba(highlightedData.color || HIGHLIGHT_COLORS[theme.toUpperCase()], highlightedColorAlpha) : undefined,
     highlightId: highlightedData?.id || highlightedData?.key,
   };
 };
@@ -84,6 +87,7 @@ export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, week
  * Returns the header weekdays dates and format those based on locale.
  *
  * @param weekStartsOn Index of the first day of the week.
+ * @param locale Locale to format the day labels.
  */
 export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: string): HeaderWeekday[] => {
   const start = getWeekStart(new Date(), weekStartsOn);

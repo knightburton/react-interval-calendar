@@ -7,7 +7,7 @@ type HighlightedItem = {
   key?: nnumber | string;
   start: Date;
   end: Date;
-  color: string;
+  color?: string;
 };
 
 type VisibilityMatrix = {
