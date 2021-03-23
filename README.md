@@ -2,8 +2,10 @@
 
 [![Build Workflow](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml/badge.svg)](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml)
 
-<img width="300" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201819-ef794680-8c10-11eb-80b0-efa8f12e8759.png">
-<img width="300" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201977-264f5c80-8c11-11eb-8aa1-f0c70649404c.png">
+<div align="left">
+  <img width="260" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201819-ef794680-8c10-11eb-80b0-efa8f12e8759.png">
+  <img width="260" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201977-264f5c80-8c11-11eb-8aa1-f0c70649404c.png">
+</div>
 
 Infinite scrolling based calendar for interval dates built with React.
 
@@ -30,6 +32,7 @@ yarn add react-interval-calendar
 ### Usage
 Here's an example of basic usage:
 ```jsx
+import React from 'react';
 import IntervalCalendar from 'react-interval-calendar';
 
 const App = () => (
@@ -61,8 +64,8 @@ For more detailed example check the [example](./example) directory.
 ### Prop-Types
 | Prop name | Description | Default value | Example |
 | --- | --- | --- | --- |
-| start | The beginning of the calendar that should displayed. The calendar will display the whole week of the start date. | `undefined` | `start={new Date(2021, 2, 3)}` |
-| end | The end of the calendar that should displayed. The calendar will display the whole week of the end date. | `undefined` | `end={new Date(2021, 11, 1)}` |
+| start | The beginning of the calendar that should displayed. The calendar will display the whole month of the start date. | `undefined` | `start={new Date(2021, 2, 3)}` |
+| end | The end of the calendar that should displayed. The calendar will display the whole month of the end date. | `undefined` | `end={new Date(2021, 11, 1)}` |
 | customClassNames | Class name(s) that will be applied to a given calendar item. More details see [Custom Class Names props](#custom-class-names-props). | `{}` | `customClassNames={{ dayText: 'classname' }}` |
 | emptyLabel | Content of a label rendered in case of no or invalid start-end interval. | `There is no date range to display` | `emptyLabel="Hey! I'm empty!"` |
 | fadeWeekends | Whether the weekends shall be faded or not. | `false` | `fadeWeekends` |
