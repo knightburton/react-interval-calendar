@@ -28,7 +28,7 @@ describe('getYear', () => {
   });
 
   it('returns valid year from new Date with timestamp arg', () => {
-    expect(utils.getYear(new Date(1609455600000))).toEqual(2021);
+    expect(utils.getYear(new Date(1616520867059))).toEqual(2021);
   });
 
   it('returns valid year from number', () => {
@@ -84,7 +84,7 @@ describe('getDay', () => {
 
 describe('getTimestamp', () => {
   it('returns valid timestamp from proper date', () => {
-    expect(utils.getTimestamp(new Date(2021, 0, 1))).toEqual(1609455600000);
+    expect(utils.getTimestamp(new Date(1609455600000))).toEqual(1609455600000);
   });
 
   it('throws error because of object as Date arg', () => {
