@@ -5,7 +5,7 @@ import styles from './styles.less';
 
 const IntervalCalendarEmpty = (): JSX.Element => {
   const { weeksHeight, emptyLabel, customClassNames } = useContext<ContextType>(Context);
-  const className = useMemo(() => classnames(styles.empty, customClassNames?.calendarEmpty), [customClassNames.calendarEmpty]);
+  const className = useMemo(() => classnames(styles.empty, customClassNames.calendarEmpty), [customClassNames.calendarEmpty]);
 
   return (
     <div

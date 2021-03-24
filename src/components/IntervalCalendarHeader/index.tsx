@@ -11,8 +11,8 @@ const IntervalCalendarHeader = (): JSX.Element => {
 
   // useMemo hooks
   const weekdays = useMemo<HeaderWeekday[]>(() => (showHeaderWeekdays ? getHeaderWeekdays(weekStartsOn, locale) : []), [showHeaderWeekdays, weekStartsOn, locale]);
-  const headerClassName = useMemo<string>(() => classnames(styles.header, customClassNames?.header), [customClassNames.header]);
-  const headerDayClassName = useMemo<string>(() => classnames(styles.header__day, customClassNames?.headerDay), [customClassNames.headerDay]);
+  const headerClassName = useMemo<string>(() => classnames(styles.header, customClassNames.header), [customClassNames.header]);
+  const headerDayClassName = useMemo<string>(() => classnames(styles.header__day, customClassNames.headerDay), [customClassNames.headerDay]);
 
   return (
     <div className={headerClassName}>

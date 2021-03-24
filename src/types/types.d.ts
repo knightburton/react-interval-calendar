@@ -65,7 +65,7 @@ type ContextType = {
   showYears: boolean;
   startDate?: Date;
   theme: ThemeOption;
-  updateVisibilityMatrix: (week: number) => void;
+  updateVisibilityMatrix?: (week: number) => void;
   visibilityMatrix: VisibilityMatrix;
   weekStartsOn: WeekdayIndex;
   weeksHeight: WeeksHeight;

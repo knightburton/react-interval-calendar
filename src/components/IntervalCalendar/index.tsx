@@ -129,7 +129,7 @@ const IntervalCalendar = ({
           [styles.calendar__border]: showBorder,
           [styles.calendar__border__radius]: showBorder && showBorderRadius,
         },
-        customClassNames?.calendar,
+        customClassNames.calendar,
       ),
     [showBorder, showBorderRadius, customClassNames.calendar],
   );

@@ -38,11 +38,11 @@ const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.
     return Array.from(Array(7).keys()).map(day => getDayAttributes(startDate, numberOfWeek, day, highlighted, highlightedColorAlpha, theme, locale));
   }, [startDate, numberOfWeek, highlighted, highlightedColorAlpha, locale, shouldRender, theme]);
 
-  const className = useMemo(() => classnames(styles.week, customClassNames?.week), [customClassNames.week]);
+  const className = useMemo(() => classnames(styles.week, customClassNames.week), [customClassNames.week]);
 
   // useEffect hooks
   useEffect(() => {
-    if (isVisible && !shouldRender) updateVisibilityMatrix(numberOfWeek);
+    if (isVisible && !shouldRender && updateVisibilityMatrix) updateVisibilityMatrix(numberOfWeek);
   }, [isVisible, shouldRender, updateVisibilityMatrix, numberOfWeek]);
 
   return (

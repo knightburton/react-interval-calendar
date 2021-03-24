@@ -7,16 +7,14 @@ import styles from './styles.less';
 
 const IntervalCalendarWeeks = (): JSX.Element => {
   // useContext hooks
-  const { numberOfWeeks, weeksHeight, customClassNames } = useContext<ContextType>(Context);
+  const { startDate, numberOfWeeks, weeksHeight, customClassNames } = useContext<ContextType>(Context);
 
   // useMemo hooks
-  const className = useMemo(() => classnames(styles.weeks, customClassNames?.weeks), [customClassNames.weeks]);
+  const className = useMemo(() => classnames(styles.weeks, customClassNames.weeks), [customClassNames.weeks]);
 
   return (
     <div className={className} style={{ height: weeksHeight }}>
-      {Array.from(Array(numberOfWeeks + 1).keys()).map(numberOfWeek => (
-        <IntervalCalendarWeek key={numberOfWeek} numberOfWeek={numberOfWeek} />
-      ))}
+      {!!startDate && Array.from(Array(numberOfWeeks + 1).keys()).map(numberOfWeek => <IntervalCalendarWeek key={numberOfWeek} numberOfWeek={numberOfWeek} />)}
     </div>
   );
 };

@@ -46,10 +46,10 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
           [styles.day__selectable]: !!contextSelect,
           [styles.day__selected]: selected,
           // custom ones
-          [`${customClassNames?.dayToday || ''}`]: showToday && day.isToday,
-          [`${customClassNames?.daySelected || ''}`]: selected,
+          [`${customClassNames.dayToday || ''}`]: showToday && day.isToday,
+          [`${customClassNames.daySelected || ''}`]: selected,
         },
-        customClassNames?.day,
+        customClassNames.day,
       ),
     [day, showToday, showMonthStripes, fadeWeekends, contextSelect, selected, customClassNames.day, customClassNames.dayToday, customClassNames.daySelected],
   );
@@ -62,13 +62,13 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
           [styles.day__highlighted__last]: day?.isLastOfHighlighted,
           [styles.day__highlighted__gutter]: showGutterBetweenHighlighted,
         },
-        customClassNames?.dayHighlighted,
+        customClassNames.dayHighlighted,
       ),
     [day, showGutterBetweenHighlighted, customClassNames.dayHighlighted],
   );
-  const monthClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames?.dayMonthText), [customClassNames.dayMonthText]);
-  const dayClassName = useMemo<string>(() => classnames(styles.day__text, customClassNames?.dayText), [customClassNames.dayText]);
-  const yearClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames?.dayYearText), [customClassNames.dayYearText]);
+  const monthClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames.dayMonthText), [customClassNames.dayMonthText]);
+  const dayClassName = useMemo<string>(() => classnames(styles.day__text, customClassNames.dayText), [customClassNames.dayText]);
+  const yearClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames.dayYearText), [customClassNames.dayYearText]);
 
   return (
     <li className={className} onClick={handleSelect} aria-hidden="true">
