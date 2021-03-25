@@ -16,7 +16,7 @@ Infinite scrolling based calendar for interval dates built with React.
 
 ### Getting started
 #### Compatibility
-Your project needs to use [React.js](https://reactjs.org/) 16.0 or later.
+Your project needs to use [React.js](https://reactjs.org/) 16.8 or later.
 
 React-Interval-Calendar uses modern web technologies. It's only supports [modern web browser with internationalization API](https://caniuse.com/internationalization). In legacy browsers you have to use additional polyfill for internationalization to be able to use this library.
 
@@ -141,11 +141,15 @@ Local development is broken into two parts (ideally using two terminal tabs).
 
 First, run rollup to watch your `src/` module and automatically recompile it into `dist/` whenever you make changes.
 ```bash
+# Assume that you are in the project main folder
+$ npm i
 $ npm start
 ```
 The second part will be running the `example/` create-react-app that's linked to the local version of your module.
 ```bash
+# Assume that you are in the project main folder
 $ cd example
+$ npm i
 $ npm start
 ```
 
