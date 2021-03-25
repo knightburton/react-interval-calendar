@@ -5,12 +5,17 @@
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
+    "plugin:jest-dom/recommended",
+    "plugin:testing-library/recommended",
+    "plugin:testing-library/react",
     "plugin:prettier/recommended",
     "prettier"
   ],
   "plugins": [
     "import",
     "jest",
+    "jest-dom",
+    "testing-library",
     "jsx-a11y",
     "react",
     "react-hooks",
@@ -49,6 +54,7 @@
     "comma-dangle": ["error", "always-multiline"],
     "function-call-argument-newline": ["error", "consistent"],
     "max-len": ["error", { "code": 170, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
-    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }]
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
+    "import/no-extraneous-dependencies": ["off"]
   }
 }
