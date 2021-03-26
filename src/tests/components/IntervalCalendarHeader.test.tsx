@@ -4,7 +4,7 @@ import Context from '../../context';
 import IntervalCalendarHeader from '../../components/IntervalCalendarHeader';
 import DEFAULT_CONTEXT from '../../constants/default-context';
 
-describe('IntervalCalendarHeader', () => {
+describe('IntervalCalendarEmpty', () => {
   afterEach(cleanup);
 
   test('shows a header with weekdays start on Sunday (default context)', () => {
