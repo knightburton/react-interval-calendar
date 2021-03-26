@@ -35,7 +35,8 @@ type CustomClassNames = {
   calendar?: ClassNamesProp;
   calendarEmpty?: ClassNamesProp;
   header?: ClassNamesProp;
-  headerDay?: ClassNamesProp;
+  headerWeekdays?: ClassNamesProp;
+  headerWeekday?: ClassNamesProp;
   weeks?: ClassNamesProp;
   week?: ClassNamesProp;
   day?: ClassNamesProp;

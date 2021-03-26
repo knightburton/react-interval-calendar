@@ -95,7 +95,8 @@ The `customClassNames` prop can consume the following props where each prop can 
 | calendar | Classname(s) that will be applied to the calendar container element. |
 | calendarEmpty | Classname(s) that will be applied to calendar empty state container element. |
 | header | Classname(s) that will be applied to header element. |
-| headerDay | Classname(s) that will be applied to each day cell element inside the header. |
+| headerWeekdays | Classname(s) that will be applied to weekdays list wrapper element inside the header. |
+| headerWeekday | Classname(s) that will be applied to each day list item element inside the header weekdays list. |
 | weeks | Classname(s) that will be applied to the weeks container element. |
 | week | Classname(s) that will be applied to week container element. |
 | day | Classname(s) that will be applied to the day container element. |

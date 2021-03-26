@@ -12,16 +12,20 @@ const IntervalCalendarHeader = (): JSX.Element => {
   // useMemo hooks
   const weekdays = useMemo<HeaderWeekday[]>(() => (showHeaderWeekdays ? getHeaderWeekdays(weekStartsOn, locale) : []), [showHeaderWeekdays, weekStartsOn, locale]);
   const headerClassName = useMemo<string>(() => classnames(styles.header, customClassNames.header), [customClassNames.header]);
-  const headerDayClassName = useMemo<string>(() => classnames(styles.header__day, customClassNames.headerDay), [customClassNames.headerDay]);
+  const headerWeekdaysClassName = useMemo<string>(() => classnames(styles.header__weekdays, customClassNames.headerWeekdays), [customClassNames.headerWeekdays]);
+  const headerWeekdayClassName = useMemo<string>(() => classnames(styles.header__weekday, customClassNames.headerWeekday), [customClassNames.headerWeekday]);
 
   return (
     <div className={headerClassName}>
-      {showHeaderWeekdays &&
-        weekdays.map(weekday => (
-          <div key={weekday.key} className={headerDayClassName}>
-            {weekday.label}
-          </div>
-        ))}
+      {showHeaderWeekdays && (
+        <ul className={headerWeekdaysClassName}>
+          {weekdays.map(weekday => (
+            <li key={weekday.key} className={headerWeekdayClassName}>
+              {weekday.label}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
