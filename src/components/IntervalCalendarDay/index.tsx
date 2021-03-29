@@ -71,7 +71,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
   const yearClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames.dayYearText), [customClassNames.dayYearText]);
 
   return (
-    <li className={className} onClick={handleSelect} aria-hidden="true">
+    <li className={className} onClick={handleSelect} role="presentation">
       {day?.isHighlighted && (
         <div
           className={highlightedClassName}
