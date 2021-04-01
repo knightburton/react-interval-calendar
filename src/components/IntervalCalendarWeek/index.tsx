@@ -27,6 +27,7 @@ const IntervalCalendarWeek = ({ numberOfWeek }: IntervalCalendarWeekProps): JSX.
   // useMemo hooks
   const shouldRender = useMemo(
     () =>
+      visibilityMatrix?.[numberOfWeek] ||
       Array(numberOfWeekPreRender)
         .fill(null)
         .some((_, idx) => visibilityMatrix[numberOfWeek - idx]),
