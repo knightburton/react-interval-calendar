@@ -1,16 +1,14 @@
 import * as React from 'react';
-import { cleanup, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Context from '../../context';
 import IntervalCalendarEmpty from '../../components/IntervalCalendarEmpty';
 import DEFAULT_CONTEXT from '../../constants/default-context';
 
 describe('IntervalCalendarHeader', () => {
-  afterEach(cleanup);
-
   test('shows the default empty label', () => {
-    const { asFragment, getByText } = render(<IntervalCalendarEmpty />);
+    const { asFragment } = render(<IntervalCalendarEmpty />);
     const fragmentElement = asFragment().firstChild;
-    const text = getByText('There is no date range to display');
+    const text = screen.getByText('There is no date range to display');
 
     expect(fragmentElement).toHaveClass('empty');
     expect(fragmentElement).toHaveStyle({ height: '500px' });
@@ -18,7 +16,7 @@ describe('IntervalCalendarHeader', () => {
   });
 
   test('shows the custom empty label', () => {
-    const { getByText } = render(
+    render(
       <Context.Provider
         value={{
           ...DEFAULT_CONTEXT,
@@ -28,7 +26,7 @@ describe('IntervalCalendarHeader', () => {
         <IntervalCalendarEmpty />
       </Context.Provider>,
     );
-    const text = getByText('Hey! Get over here!');
+    const text = screen.getByText('Hey! Get over here!');
 
     expect(text).toBeTruthy();
   });

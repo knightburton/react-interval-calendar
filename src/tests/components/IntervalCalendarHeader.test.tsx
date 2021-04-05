@@ -1,17 +1,15 @@
 import * as React from 'react';
-import { cleanup, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Context from '../../context';
 import IntervalCalendarHeader from '../../components/IntervalCalendarHeader';
 import DEFAULT_CONTEXT from '../../constants/default-context';
 
 describe('IntervalCalendarEmpty', () => {
-  afterEach(cleanup);
-
   test('shows a header with weekdays start on Sunday (default context)', () => {
-    const { getByRole, getAllByRole, asFragment } = render(<IntervalCalendarHeader />);
+    const { asFragment } = render(<IntervalCalendarHeader />);
     const fragmentElement = asFragment().firstChild;
-    const list = getByRole('list');
-    const listItems = getAllByRole('listitem');
+    const list = screen.getByRole('list');
+    const listItems = screen.getAllByRole('listitem');
 
     expect(fragmentElement).toHaveClass('header');
     expect(list).toBeVisible();
@@ -24,7 +22,7 @@ describe('IntervalCalendarEmpty', () => {
   });
 
   test('shows a header with weekdays start on Monday', () => {
-    const { getByRole, getAllByRole } = render(
+    render(
       <Context.Provider
         value={{
           ...DEFAULT_CONTEXT,
@@ -34,8 +32,8 @@ describe('IntervalCalendarEmpty', () => {
         <IntervalCalendarHeader />
       </Context.Provider>,
     );
-    const list = getByRole('list');
-    const listItems = getAllByRole('listitem');
+    const list = screen.getByRole('list');
+    const listItems = screen.getAllByRole('listitem');
 
     expect(list).toBeVisible();
     expect(list).toHaveClass('header__weekdays');
@@ -48,7 +46,7 @@ describe('IntervalCalendarEmpty', () => {
   });
 
   test('shows a header without weekdays list', () => {
-    const { queryByRole, queryAllByRole } = render(
+    render(
       <Context.Provider
         value={{
           ...DEFAULT_CONTEXT,
@@ -58,15 +56,15 @@ describe('IntervalCalendarEmpty', () => {
         <IntervalCalendarHeader />
       </Context.Provider>,
     );
-    const list = queryByRole('list');
-    const listItems = queryAllByRole('listitem');
+    const list = screen.queryByRole('list');
+    const listItems = screen.queryAllByRole('listitem');
 
     expect(list).toEqual(null);
     expect(listItems.length).toEqual(0);
   });
 
   test('shows a header with weekdays list and custom classnames', () => {
-    const { queryByRole, queryAllByRole, asFragment } = render(
+    const { asFragment } = render(
       <Context.Provider
         value={{
           ...DEFAULT_CONTEXT,
@@ -81,8 +79,8 @@ describe('IntervalCalendarEmpty', () => {
       </Context.Provider>,
     );
     const fragmentElement = asFragment().firstChild;
-    const list = queryByRole('list');
-    const listItems = queryAllByRole('listitem');
+    const list = screen.queryByRole('list');
+    const listItems = screen.queryAllByRole('listitem');
 
     expect(fragmentElement).toHaveClass('header test=header-classname');
     expect(list).toBeVisible();

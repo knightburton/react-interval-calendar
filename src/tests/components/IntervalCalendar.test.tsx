@@ -1,5 +1,5 @@
 import React from 'react';
-import { cleanup, render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { mockAllIsIntersecting } from '../test-utils';
 import IntervalCalendar from '../../components/IntervalCalendar';
 
@@ -25,8 +25,6 @@ const eleventhDay = {
 };
 
 describe('IntervalCalendar', () => {
-  afterEach(cleanup);
-
   afterAll(() => {
     jest.restoreAllMocks();
   });

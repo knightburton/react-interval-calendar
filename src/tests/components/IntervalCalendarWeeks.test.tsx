@@ -1,20 +1,18 @@
 import * as React from 'react';
-import { cleanup, render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { mockAllIsIntersecting } from '../test-utils';
 import Context from '../../context';
 import IntervalCalendarWeeks from '../../components/IntervalCalendarWeeks';
 import DEFAULT_CONTEXT from '../../constants/default-context';
 
-jest.mock('../../hooks/useOnScreen', () => jest.fn());
-
 describe('IntervalCalendarWeeks', () => {
-  afterEach(cleanup);
-
   afterAll(() => {
     jest.restoreAllMocks();
   });
 
   test('shows empty weeks container', () => {
     const { asFragment } = render(<IntervalCalendarWeeks />);
+    mockAllIsIntersecting(false);
     const fragmentElement = asFragment().firstChild;
 
     expect(fragmentElement).toHaveClass('weeks');
@@ -22,7 +20,7 @@ describe('IntervalCalendarWeeks', () => {
   });
 
   test('shows eight weeks container based on updated context', () => {
-    const { asFragment, getAllByRole } = render(
+    const { asFragment } = render(
       <Context.Provider
         value={{
           ...DEFAULT_CONTEXT,
@@ -37,8 +35,9 @@ describe('IntervalCalendarWeeks', () => {
         <IntervalCalendarWeeks />
       </Context.Provider>,
     );
+    mockAllIsIntersecting(true);
     const fragmentElement = asFragment().firstChild;
-    const lists = getAllByRole('list');
+    const lists = screen.getAllByRole('list');
 
     expect(fragmentElement).toHaveClass('weeks test-weeks-classname');
     expect(fragmentElement).toHaveStyle({ height: '700px' });
