@@ -1,28 +1,6 @@
 import * as helpers from '../../helpers';
+import { mockDayAttributes } from '../test-utils';
 import { HIGHLIGHTED, HIGHLIGHTED_COLOR_ALPHA, THEME, LOCALE } from '../../constants/default-props';
-
-type OverridesType = {
-  [key: string]: number | string | boolean | Date | undefined;
-};
-
-const getDayAttributesMock = (overrides: OverridesType) => ({
-  key: '2-3',
-  date: new Date(2021, 0, 18),
-  yearLabel: 2021,
-  monthLabel: 'Jan',
-  dayLabel: '18',
-  isMonthEven: false,
-  isFirstDayOfMonth: false,
-  isLastDayOfMonth: false,
-  isToday: false,
-  isWeekend: false,
-  isHighlighted: false,
-  isFirstOfHighlighted: false,
-  isLastOfHighlighted: false,
-  highlightColor: undefined,
-  highlightId: undefined,
-  ...overrides,
-});
 
 describe('getDayAttributes', () => {
   it('returns all attributes for a normal day with default values', () => {
@@ -37,7 +15,7 @@ describe('getDayAttributes', () => {
         LOCALE, // locale
       ),
     ).toEqual(
-      getDayAttributesMock({
+      mockDayAttributes({
         key: '2-3',
         date: new Date(2021, 0, 18),
         yearLabel: 2021,
@@ -59,7 +37,7 @@ describe('getDayAttributes', () => {
         LOCALE, // locale
       ),
     ).toEqual(
-      getDayAttributesMock({
+      mockDayAttributes({
         key: '0-0',
         date: new Date(2021, 0, 1),
         yearLabel: 2021,
@@ -82,7 +60,7 @@ describe('getDayAttributes', () => {
         LOCALE, // locale
       ),
     ).toEqual(
-      getDayAttributesMock({
+      mockDayAttributes({
         key: '4-2',
         date: new Date(2021, 0, 31),
         yearLabel: 2021,
@@ -106,7 +84,7 @@ describe('getDayAttributes', () => {
         LOCALE, // locale
       ),
     ).toEqual(
-      getDayAttributesMock({
+      mockDayAttributes({
         key: '1-1',
         date: new Date(2021, 1, 9),
         yearLabel: 2021,
@@ -132,7 +110,7 @@ describe('getDayAttributes', () => {
         LOCALE, // locale
       ),
     ).toEqual(
-      getDayAttributesMock({
+      mockDayAttributes({
         key: '1-1',
         date: new Date(2021, 1, 9),
         yearLabel: 2021,

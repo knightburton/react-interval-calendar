@@ -1,4 +1,5 @@
 import { act } from '@testing-library/react';
+import { Day } from '../interfaces/IntervalCalendarDay.interface';
 
 type Item = {
   callback: IntersectionObserverCallback;
@@ -7,6 +8,10 @@ type Item = {
 };
 
 const observers = new Map<IntersectionObserver, Item>();
+
+type OverridesType = {
+  [key: string]: number | string | boolean | Date | undefined;
+};
 
 beforeEach(() => {
   global.IntersectionObserver = jest.fn((callback, options = {}) => {
@@ -73,3 +78,22 @@ export const mockAllIsIntersecting = (isIntersecting: boolean | number): void =>
 
 export const mockIntersectionInstance = (element: Element): IntersectionObserver | undefined =>
   Array.from(observers)?.find(observer => observer[1].elements.find(e => e === element))?.[0];
+
+export const mockDayAttributes = (overrides: OverridesType = {}): Day => ({
+  key: '2-3',
+  date: new Date(2021, 0, 18),
+  yearLabel: 2021,
+  monthLabel: 'Jan',
+  dayLabel: '18',
+  isMonthEven: false,
+  isFirstDayOfMonth: false,
+  isLastDayOfMonth: false,
+  isToday: false,
+  isWeekend: false,
+  isHighlighted: false,
+  isFirstOfHighlighted: false,
+  isLastOfHighlighted: false,
+  highlightColor: undefined,
+  highlightId: undefined,
+  ...overrides,
+});
