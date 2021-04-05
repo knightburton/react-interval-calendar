@@ -59,8 +59,8 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
       classnames(
         styles.day__highlighted,
         {
-          [styles.day__highlighted__first]: day?.isFirstOfHighlighted,
-          [styles.day__highlighted__last]: day?.isLastOfHighlighted,
+          [styles.day__highlighted__first]: day.isFirstOfHighlighted,
+          [styles.day__highlighted__last]: day.isLastOfHighlighted,
           [styles.day__highlighted__gutter]: showGutterBetweenHighlighted,
         },
         customClassNames.dayHighlighted,
@@ -73,7 +73,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
 
   return (
     <li className={className} onClick={(enableSelect && handleClick) || undefined} role="presentation">
-      {day?.isHighlighted && (
+      {day.isHighlighted && (
         <div
           className={highlightedClassName}
           style={{
@@ -81,9 +81,9 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
           }}
         />
       )}
-      {showMonths && day?.isFirstDayOfMonth && <span className={monthClassName}>{day.monthLabel}</span>}
+      {showMonths && day.isFirstDayOfMonth && <span className={monthClassName}>{day.monthLabel}</span>}
       <span className={dayClassName}>{day.dayLabel}</span>
-      {showYears && day?.isFirstDayOfMonth && <span className={yearClassName}>{day.yearLabel}</span>}
+      {showYears && day.isFirstDayOfMonth && <span className={yearClassName}>{day.yearLabel}</span>}
     </li>
   );
 };
