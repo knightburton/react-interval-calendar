@@ -50,9 +50,10 @@ type CustomClassNames = {
 
 type ContextType = {
   customClassNames: CustomClassNames;
+  enableSelect?: boolean;
   emptyLabel?: string;
   fadeWeekends: boolean;
-  handleSelect?: (day: Day, resetFunction: () => void) => void;
+  handleSelect: (day: Day, resetFunction: () => void) => void;
   highlighted: HighlightedItem[];
   highlightedColorAlpha: number;
   locale: string;

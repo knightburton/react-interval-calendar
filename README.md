@@ -67,6 +67,7 @@ For more detailed example check the [example](./example) directory.
 | start | Date | `undefined` | The beginning of the calendar that should displayed. The calendar will display the whole month of the start date. |
 | end | Date | `undefined` | The end of the calendar that should displayed. The calendar will display the whole month of the end date. |
 | customClassNames | object | `{}` | Class name(s) that will be applied to a given calendar item. More details see [Custom Class Names props](#custom-class-names-props). |
+| enableSelect | boolean | `false` | Whether the day cell selection is enabled or not |
 | emptyLabel | string | `There is no date range to display` | Content of a label rendered in case of no or invalid start-end interval. |
 | fadeWeekends | boolean | `false` | Whether the weekends shall be faded or not. |
 | height | number or string | `500` | Height of the calendar. Can be a number in pixels, `100%`, `auto` or a `string` that can be evaluated in css. |
@@ -75,7 +76,7 @@ For more detailed example check the [example](./example) directory.
 | locale | string | `default` | Locale that should be used to format and display the days and months. Can be an IETF language tag. |
 | numberOfWeekFirstRender | number | `8` | Number of weeks to render below the visible weeks on the first render. |
 | numberOfWeekPreRender | number | `4` | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. |
-| onSelect | function | `undefined` | Function called when the user clicks a day. It returns a [Day object](#day-object). |
+| onSelect | function | `undefined` | Function called when the user clicks a day. It returns a [Day object](#day-object). Only takes effect when the `enableSelect` is `true` |
 | showBorder | boolean | `false` | Whether the calendar component border shall be rendered or not. |
 | showBorderRadius | boolean | `false` | Whether the calendar component border shall be rounded or not. Only takes effect when the `showBorder` prop set to `true`. |
 | showGutterBetweenHighlighted | boolean | `false` | Whether a small gutter shall be shown on the highlighted intervals to be more separated or not. |

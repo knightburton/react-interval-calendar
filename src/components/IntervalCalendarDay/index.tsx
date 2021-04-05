@@ -14,7 +14,8 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
     showGutterBetweenHighlighted,
     showMonthStripes,
     fadeWeekends,
-    handleSelect: contextSelect,
+    enableSelect,
+    handleSelect,
     customClassNames,
   } = useContext<ContextType>(Context);
 
@@ -22,12 +23,12 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
   const [selected, setSelected] = useState(false);
 
   // useCallback hooks
-  const handleSelect = useCallback(() => {
-    if (contextSelect && !selected) {
+  const handleClick = useCallback(() => {
+    if (enableSelect && !selected) {
       setSelected(true);
-      contextSelect(day, () => setSelected(false));
+      handleSelect(day, () => setSelected(false));
     }
-  }, [contextSelect, selected, day]);
+  }, [enableSelect, handleSelect, selected, day]);
 
   // useMemo hooks
   const className = useMemo<string>(
@@ -43,7 +44,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
           [styles.day__last__of__month__even]: showMonthStripes && day.isLastDayOfMonth && day.isMonthEven,
           [styles.day__today]: showToday && day.isToday,
           [styles.day__weekend]: day.isWeekend && fadeWeekends,
-          [styles.day__selectable]: !!contextSelect,
+          [styles.day__selectable]: enableSelect,
           [styles.day__selected]: selected,
           // custom ones
           [`${customClassNames.dayToday || ''}`]: showToday && day.isToday,
@@ -51,7 +52,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
         },
         customClassNames.day,
       ),
-    [day, showToday, showMonthStripes, fadeWeekends, contextSelect, selected, customClassNames.day, customClassNames.dayToday, customClassNames.daySelected],
+    [day, showToday, showMonthStripes, fadeWeekends, enableSelect, selected, customClassNames.day, customClassNames.dayToday, customClassNames.daySelected],
   );
   const highlightedClassName = useMemo<string>(
     () =>
@@ -71,7 +72,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
   const yearClassName = useMemo<string>(() => classnames(styles.day__text__detail, customClassNames.dayYearText), [customClassNames.dayYearText]);
 
   return (
-    <li className={className} onClick={handleSelect} role="presentation">
+    <li className={className} onClick={(enableSelect && handleClick) || undefined} role="presentation">
       {day?.isHighlighted && (
         <div
           className={highlightedClassName}

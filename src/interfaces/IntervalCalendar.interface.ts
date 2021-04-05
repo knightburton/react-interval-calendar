@@ -4,6 +4,7 @@ export interface IntervalCalendarProps {
   start?: Date;
   end?: Date;
   customClassNames?: CustomClassNames;
+  enableSelect?: boolean;
   emptyLabel?: string;
   fadeWeekends?: boolean;
   height?: number | '100%' | 'auto';

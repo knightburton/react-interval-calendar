@@ -15,6 +15,7 @@ const IntervalCalendar = ({
   start = DEFAULT_PROPS.START,
   end = DEFAULT_PROPS.END,
   customClassNames = DEFAULT_PROPS.CUSTOM_CLASS_NAMES,
+  enableSelect = DEFAULT_PROPS.ENABLE_SELECT,
   emptyLabel = DEFAULT_PROPS.EMPTY_LABEL,
   fadeWeekends = DEFAULT_PROPS.FADE_WEEKENDS,
   height = DEFAULT_PROPS.HEIGHT,
@@ -49,11 +50,11 @@ const IntervalCalendar = ({
   // useCallback hooks
   const handleSelect = useCallback<(day: Day, resetFunction: () => void) => void>(
     (day: Day, resetFunction: () => void) => {
-      if (onSelect) onSelect(day);
-      if (previousResetFunction.current) previousResetFunction.current();
+      if (enableSelect && onSelect) onSelect(day);
+      if (enableSelect && previousResetFunction.current) previousResetFunction.current();
       previousResetFunction.current = resetFunction;
     },
-    [previousResetFunction, onSelect],
+    [previousResetFunction, enableSelect, onSelect],
   );
 
   const handleVisibilityMatrixChange = useCallback(
@@ -74,9 +75,10 @@ const IntervalCalendar = ({
   const contextValue = useMemo<ContextType>(
     () => ({
       customClassNames,
+      enableSelect,
       emptyLabel,
       fadeWeekends,
-      handleSelect: (onSelect && handleSelect) || undefined,
+      handleSelect,
       highlighted,
       highlightedColorAlpha,
       locale,
@@ -97,6 +99,7 @@ const IntervalCalendar = ({
     }),
     [
       customClassNames,
+      enableSelect,
       emptyLabel,
       fadeWeekends,
       handleSelect,
@@ -106,7 +109,6 @@ const IntervalCalendar = ({
       locale,
       numberOfWeekPreRender,
       numberOfWeeks,
-      onSelect,
       showGutterBetweenHighlighted,
       showHeaderWeekdays,
       showMonthStripes,

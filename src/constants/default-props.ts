@@ -1,6 +1,7 @@
 export const START = undefined;
 export const END = undefined;
 export const CUSTOM_CLASS_NAMES = {};
+export const ENABLE_SELECT = false;
 export const EMPTY_LABEL = '';
 export const FADE_WEEKENDS = false;
 export const HEIGHT = 500;

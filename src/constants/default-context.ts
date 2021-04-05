@@ -2,9 +2,10 @@ import * as DEFAULT_PROPS from './default-props';
 
 const DEFAULT_CONTEXT = <ContextType>{
   customClassNames: DEFAULT_PROPS.CUSTOM_CLASS_NAMES,
+  enableSelect: DEFAULT_PROPS.ENABLE_SELECT,
   emptyLabel: DEFAULT_PROPS.EMPTY_LABEL,
   fadeWeekends: DEFAULT_PROPS.FADE_WEEKENDS,
-  handleSelect: undefined,
+  handleSelect: () => {},
   highlighted: DEFAULT_PROPS.HIGHLIGHTED,
   highlightedColorAlpha: DEFAULT_PROPS.HIGHLIGHTED_COLOR_ALPHA,
   locale: DEFAULT_PROPS.LOCALE,
