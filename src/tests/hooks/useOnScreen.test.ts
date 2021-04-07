@@ -1,6 +1,6 @@
 import { MutableRefObject } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import { mockAllIsIntersecting } from '../test-utils';
+import { mockAllIsIntersecting } from '../testUtils';
 import useOnScreen from '../../hooks/useOnScreen';
 
 describe('useOnScreen', () => {

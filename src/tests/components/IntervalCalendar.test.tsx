@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { mockAllIsIntersecting } from '../test-utils';
+import { mockAllIsIntersecting } from '../testUtils';
 import IntervalCalendar from '../../components/IntervalCalendar';
 
 const mockStart = new Date(2020, 9, 1, 0, 0, 0, 0);

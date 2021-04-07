@@ -7,7 +7,7 @@
     "sourceMap": true,
     "allowJs": false,
     "jsx": "react",
-    "types": ["react", "jest"],
+    "types": ["react", "jest", "node"],
     "declaration": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
@@ -28,6 +28,6 @@
     "noFallthroughCasesInSwitch": true,
     "removeComments": true,
   },
-  "include": ["src", "jest.config.ts"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist", "example", "rollup.config.js"]
 }

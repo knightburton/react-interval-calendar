@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { mockDayAttributes } from '../test-utils';
+import { mockDayAttributes } from '../testUtils';
 import Context from '../../context';
 import IntervalCalendarDay from '../../components/IntervalCalendarDay';
 import DEFAULT_CONTEXT from '../../constants/default-context';

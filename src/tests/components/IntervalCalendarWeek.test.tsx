@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { mockIntersectionInstance, mockAllIsIntersecting } from '../test-utils';
+import { mockIntersectionInstance, mockAllIsIntersecting } from '../testUtils';
 import Context from '../../context';
 import IntervalCalendarWeek from '../../components/IntervalCalendarWeek';
 import DEFAULT_CONTEXT from '../../constants/default-context';

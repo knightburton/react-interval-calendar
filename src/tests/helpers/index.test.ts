@@ -1,5 +1,5 @@
 import * as helpers from '../../helpers';
-import { mockDayAttributes } from '../test-utils';
+import { mockDayAttributes } from '../testUtils';
 import { HIGHLIGHTED, HIGHLIGHTED_COLOR_ALPHA, THEME, LOCALE } from '../../constants/default-props';
 
 describe('getDayAttributes', () => {
