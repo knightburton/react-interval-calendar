@@ -1,8 +1,16 @@
 {
   "name": "react-interval-calendar",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Infinite scrolling based calendar for interval dates built with React.",
-  "author": "knightburton",
+  "author": {
+    "name": "Imre Kiss"
+  },
+  "contributors": [
+    {
+      "name": "Norbert Nemeth"
+    }
+  ],
+  "homepage": "https://github.com/knightburton/react-interval-calendar#readme",
   "license": "MIT",
   "private": false,
   "repository": {
@@ -19,6 +27,17 @@
   "engines": {
     "node": ">=10"
   },
+  "keywords": [
+    "calendar",
+    "date",
+    "dates",
+    "infinite-scroll",
+    "interval-calendar",
+    "interval-dates",
+    "react",
+    "react-hooks",
+    "scroll"
+  ],
   "scripts": {
     "start": "rollup -c -w",
     "build": "npm run clean:dist && npm run prepare:build",
