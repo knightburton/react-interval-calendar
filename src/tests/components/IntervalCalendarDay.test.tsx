@@ -140,4 +140,25 @@ describe('IntervalCalendarDay', () => {
     expect(day).toHaveClass('day__selected');
     expect(mockHandleSelect).toHaveBeenCalledTimes(1);
   });
+
+  test('shows a day with select enabled and fire click event without handleSelect', () => {
+    const mockDay = mockDayAttributes();
+    render(
+      <Context.Provider
+        value={{
+          ...DEFAULT_CONTEXT,
+          enableSelect: true,
+        }}
+      >
+        <IntervalCalendarDay day={mockDay} />
+      </Context.Provider>,
+    );
+    const day = screen.getByRole('presentation');
+
+    expect(day).toHaveClass('day day__selectable');
+    expect(day).not.toHaveClass('day__selected');
+
+    fireEvent.click(day);
+    expect(day).toHaveClass('day__selected');
+  });
 });
