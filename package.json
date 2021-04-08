@@ -110,15 +110,17 @@
       "js"
     ],
     "setupFilesAfterEnv": [
-      "<rootDir>/src/tests/setupTests.ts"
+      "<rootDir>/src/__tests__/setupTests.ts"
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
-      "<rootDir>/src/tests/testUtils.ts"
+      "<rootDir>/src/__tests__/testUtils.ts",
+      "<rootDir>/src/__tests__/setupTests.ts"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/",
-      "<rootDir>/src/tests/testUtils.ts"
+      "<rootDir>/src/__tests__/testUtils.ts",
+      "<rootDir>/src/__tests__/setupTests.ts"
     ]
   }
 }
