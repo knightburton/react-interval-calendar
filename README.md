@@ -1,6 +1,8 @@
 # react-interval-calendar
 
 [![Build Workflow](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml/badge.svg)](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml)
+![npm](https://img.shields.io/npm/v/react-interval-calendar)
+![npm](https://img.shields.io/npm/dt/react-interval-calendar)
 
 <div align="left">
   <img width="260" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201819-ef794680-8c10-11eb-80b0-efa8f12e8759.png">
