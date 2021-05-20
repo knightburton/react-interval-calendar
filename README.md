@@ -1,12 +1,12 @@
 # react-interval-calendar
 
 [![Build Workflow](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml/badge.svg)](https://github.com/knightburton/react-interval-calendar/actions/workflows/build.yml)
-![npm](https://img.shields.io/npm/v/react-interval-calendar)
-![npm](https://img.shields.io/npm/dt/react-interval-calendar)
+![npm](https://img.shields.io/npm/v/@knightburton/react-interval-calendar)
+![npm](https://img.shields.io/npm/dt/@knightburton/react-interval-calendar)
 
 <div align="left">
   <img width="260" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201819-ef794680-8c10-11eb-80b0-efa8f12e8759.png">
-  <img width="260" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201977-264f5c80-8c11-11eb-8aa1-f0c70649404c.png">
+  <img width="260" alt="react-interval-calendar-dark" src="https://user-images.githubusercontent.com/12102205/112201977-264f5c80-8c11-11eb-8aa1-f0c70649404c.png">
 </div>
 
 Infinite scrolling based calendar for interval dates built with React.
@@ -24,18 +24,18 @@ React-Interval-Calendar uses modern web technologies. It's only supports [modern
 
 #### Installation
 ```bash
-$ npm i react-interval-calendar
+$ npm i @knightburton/react-interval-calendar
 ```
 or
 ```bash
-yarn add react-interval-calendar
+yarn add @knightburton/react-interval-calendar
 ```
 
 ### Usage
 Here's an example of basic usage:
 ```jsx
 import React from 'react';
-import IntervalCalendar from 'react-interval-calendar';
+import IntervalCalendar from '@knightburton/react-interval-calendar';
 
 const App = () => (
   <IntervalCalendar
