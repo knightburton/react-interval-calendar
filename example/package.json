@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@knightburton/react-interval-calendar": "file:..",
     "@types/node": "file:../node_modules/@types/node",
     "@types/react": "file:../node_modules/@types/react",
     "@types/react-dom": "file:../node_modules/@types/react-dom",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
-    "react-interval-calendar": "file:..",
     "react-scripts": "^4.0.3",
     "typescript": "^4.2.3"
   },

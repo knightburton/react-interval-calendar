@@ -1,4 +1,4 @@
-import IntervalCalendar from 'react-interval-calendar';
+import IntervalCalendar from '@knightburton/react-interval-calendar';
 import './App.css';
 
 const App = () => (
