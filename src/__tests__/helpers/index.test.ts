@@ -127,7 +127,7 @@ describe('getDayAttributes', () => {
 
 describe('getCalendarBaseAttributes', () => {
   it('returns undefined values because of missing start date', () => {
-    expect(helpers.getCalendarBaseAttributes(undefined, new Date(2021, 11, 11))).toEqual([undefined, undefined, 0]);
+    expect(helpers.getCalendarBaseAttributes(undefined, new Date(2021, 11, 11))).toEqual([null, null, 0]);
   });
 
   it('returns proper attributes when the week starts on Sunday', () => {

@@ -5,7 +5,6 @@ const mock = {
     empty: '',
     emptyArray: [],
     emptyObject: {},
-    number: 1024,
     boolean: true,
     string: 'classnames__mock',
     stringMultiple: ['classnames__one', 'classnames__two'],
@@ -71,14 +70,6 @@ describe('classnames', () => {
 
   it('returns valid classname from empty object argument', () => {
     expect(classnames(mock.raw.emptyObject)).toEqual(mock.result.empty);
-  });
-
-  it('returns valid classname from number argument', () => {
-    expect(classnames(mock.raw.number)).toEqual(mock.result.empty);
-  });
-
-  it('returns valid classname from boolean argument', () => {
-    expect(classnames(mock.raw.boolean)).toEqual(mock.result.empty);
   });
 
   it('returns valid classname from string argument', () => {

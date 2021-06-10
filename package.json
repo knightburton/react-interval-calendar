@@ -116,11 +116,13 @@
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
       "<rootDir>/src/__tests__/testUtils.ts",
       "<rootDir>/src/__tests__/setupTests.ts"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
       "<rootDir>/src/__tests__/testUtils.ts",
       "<rootDir>/src/__tests__/setupTests.ts"
     ]
