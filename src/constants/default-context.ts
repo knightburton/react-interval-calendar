@@ -1,3 +1,4 @@
+import { ContextType } from '../types';
 import * as DEFAULT_PROPS from './default-props';
 
 const DEFAULT_CONTEXT = <ContextType>{
@@ -17,7 +18,7 @@ const DEFAULT_CONTEXT = <ContextType>{
   showMonths: DEFAULT_PROPS.SHOW_MONTHS,
   showToday: DEFAULT_PROPS.SHOW_TODAY,
   showYears: DEFAULT_PROPS.SHOW_YEARS,
-  startDate: undefined,
+  startDate: null,
   theme: DEFAULT_PROPS.THEME,
   updateVisibilityMatrix: undefined,
   visibilityMatrix: {},

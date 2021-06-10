@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-
 import * as DEFAULT_PROPS from '../../constants/default-props';
 import Context from '../../context';
 import { getCalendarBaseAttributes, getWeeksHeight } from '../../helpers';
 import { IntervalCalendarProps } from '../../interfaces/IntervalCalendar.interface';
 import { Day } from '../../interfaces/IntervalCalendarDay.interface';
+import { CalendarTuple, VisibilityMatrix, WeeksHeight, ContextType } from '../../types';
 import classnames from '../../utils/classnames';
 import IntervalCalendarEmpty from '../IntervalCalendarEmpty';
 import IntervalCalendarHeader from '../IntervalCalendarHeader';

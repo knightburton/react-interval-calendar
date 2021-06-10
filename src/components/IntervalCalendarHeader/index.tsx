@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
-
 import Context from '../../context';
 import classnames from '../../utils/classnames';
+import { ContextType, HeaderWeekday } from '../../types';
 import { getHeaderWeekdays } from '../../helpers';
 import styles from './styles.less';
 

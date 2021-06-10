@@ -1,6 +1,6 @@
 import React, { useMemo, useContext, useState, useCallback } from 'react';
-
 import { IntervalCalendarDayProps } from '../../interfaces/IntervalCalendarDay.interface';
+import { ContextType } from '../../types';
 import Context from '../../context';
 import classnames from '../../utils/classnames';
 import styles from './styles.less';
@@ -44,7 +44,7 @@ const IntervalCalendarDay = ({ day }: IntervalCalendarDayProps): JSX.Element => 
           [styles.day__last__of__month__even]: showMonthStripes && day.isLastDayOfMonth && day.isMonthEven,
           [styles.day__today]: showToday && day.isToday,
           [styles.day__weekend]: day.isWeekend && fadeWeekends,
-          [styles.day__selectable]: enableSelect,
+          [styles.day__selectable]: !!enableSelect,
           [styles.day__selected]: selected,
           // custom ones
           [`${customClassNames.dayToday || ''}`]: showToday && day.isToday,

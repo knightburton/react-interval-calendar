@@ -1,3 +1,4 @@
+import { CustomClassNames, HighlightedItem, ThemeOption, WeekdayIndex } from '../types';
 import { Day } from './IntervalCalendarDay.interface';
 
 export interface IntervalCalendarProps {

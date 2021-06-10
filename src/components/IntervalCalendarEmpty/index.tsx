@@ -1,4 +1,5 @@
 import React, { useContext, useMemo } from 'react';
+import { ContextType } from '../../types';
 import Context from '../../context';
 import classnames from '../../utils/classnames';
 import styles from './styles.less';

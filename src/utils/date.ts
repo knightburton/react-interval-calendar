@@ -1,3 +1,5 @@
+import { WeekdayIndex } from '../types';
+
 /**
  * Gets year from date.
  *

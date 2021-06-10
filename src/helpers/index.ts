@@ -21,6 +21,7 @@ import {
 import { convertColorToRgba } from '../utils/color';
 import { Day } from '../interfaces/IntervalCalendarDay.interface';
 import { HIGHLIGHT_COLORS } from '../constants/default-colors';
+import { HighlightedItem, ThemeOption, WeekdayIndex, CalendarTuple, HeaderWeekday, WeeksHeight } from '../types';
 
 /**
  * Returns the desired date attributes based on the passed weeks and days.
@@ -73,7 +74,7 @@ export const getDayAttributes = (
  * @param weekStartsOn Index of the first day of the week.
  */
 export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, weekStartsOn: WeekdayIndex = 0): CalendarTuple => {
-  if (!startDate || !endDate) return [undefined, undefined, 0];
+  if (!startDate || !endDate) return [null, null, 0];
   const monthStart = getMonthStart(startDate);
   const monthEnd = getMonthEnd(endDate);
   const alfa = getWeekStart(monthStart, weekStartsOn);

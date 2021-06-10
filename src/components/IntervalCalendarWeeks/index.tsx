@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-
+import { ContextType } from '../../types';
 import IntervalCalendarWeek from '../IntervalCalendarWeek';
 import classnames from '../../utils/classnames';
 import Context from '../../context';

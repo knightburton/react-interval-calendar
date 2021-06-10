@@ -1,9 +1,9 @@
 import React, { useContext, useMemo, useRef, useEffect } from 'react';
-
 import classnames from '../../utils/classnames';
 import Context from '../../context';
-import { getDayAttributes } from '../../helpers';
 import useOnScreen from '../../hooks/useOnScreen';
+import { getDayAttributes } from '../../helpers';
+import { ContextType } from '../../types';
 import { IntervalCalendarWeekProps } from '../../interfaces/IntervalCalendarWeek.interface';
 import IntervalCalendarDay from '../IntervalCalendarDay';
 import styles from './styles.less';

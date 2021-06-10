@@ -1,3 +1,5 @@
+import { ClassNames } from '../types';
+
 /**
  * Gets concatenated classnames from given arguments.
  *
