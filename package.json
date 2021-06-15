@@ -22,8 +22,7 @@
   "types": "dist/index.d.ts",
   "source": "src/index.js",
   "files": [
-    "dist",
-    "!**/__tests__"
+    "dist"
   ],
   "engines": {
     "node": ">=10"
