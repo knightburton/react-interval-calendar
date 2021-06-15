@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { mockDayAttributes } from '../testUtils';
-import Context from '../../context';
-import IntervalCalendarDay from '../../components/IntervalCalendarDay';
-import DEFAULT_CONTEXT from '../../constants/default-context';
+import Context from '../../src/context';
+import IntervalCalendarDay from '../../src/components/IntervalCalendarDay';
+import DEFAULT_CONTEXT from '../../src/constants/default-context';
 
 describe('IntervalCalendarDay', () => {
   afterAll(() => {

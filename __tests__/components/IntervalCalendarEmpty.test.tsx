@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import Context from '../../context';
-import IntervalCalendarEmpty from '../../components/IntervalCalendarEmpty';
-import DEFAULT_CONTEXT from '../../constants/default-context';
+import Context from '../../src/context';
+import IntervalCalendarEmpty from '../../src/components/IntervalCalendarEmpty';
+import DEFAULT_CONTEXT from '../../src/constants/default-context';
 
 describe('IntervalCalendarHeader', () => {
   test('shows the default empty label', () => {

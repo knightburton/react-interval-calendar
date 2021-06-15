@@ -1,6 +1,6 @@
-import * as helpers from '../../helpers';
+import * as helpers from '../../src/helpers';
 import { mockDayAttributes } from '../testUtils';
-import { HIGHLIGHTED, HIGHLIGHTED_COLOR_ALPHA, THEME, LOCALE } from '../../constants/default-props';
+import { HIGHLIGHTED, HIGHLIGHTED_COLOR_ALPHA, THEME, LOCALE } from '../../src/constants/default-props';
 
 describe('getDayAttributes', () => {
   it('returns all attributes for a normal day with default values', () => {

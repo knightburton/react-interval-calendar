@@ -1,7 +1,7 @@
 import { MutableRefObject } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import { mockAllIsIntersecting } from '../testUtils';
-import useOnScreen from '../../hooks/useOnScreen';
+import useOnScreen from '../../src/hooks/useOnScreen';
 
 describe('useOnScreen', () => {
   test('returns false based on default values', () => {

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import Context from '../../context';
-import IntervalCalendarHeader from '../../components/IntervalCalendarHeader';
-import DEFAULT_CONTEXT from '../../constants/default-context';
+import Context from '../../src/context';
+import IntervalCalendarHeader from '../../src/components/IntervalCalendarHeader';
+import DEFAULT_CONTEXT from '../../src/constants/default-context';
 
 describe('IntervalCalendarEmpty', () => {
   test('shows a header with weekdays start on Sunday (default context)', () => {

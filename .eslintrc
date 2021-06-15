@@ -38,7 +38,7 @@
       "jsx": true
     },
     "project": [
-      "./tsconfig.json"
+      "./tsconfig.dev.json"
     ]
   },
   "ignorePatterns": [
@@ -50,6 +50,7 @@
     }
   },
   "rules": {
+    "prettier/prettier": ["error"],
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "always-multiline"],
     "function-call-argument-newline": ["error", "consistent"],

@@ -1,5 +1,5 @@
 import { act } from '@testing-library/react';
-import { Day } from '../interfaces/IntervalCalendarDay.interface';
+import { Day } from '../src/interfaces/IntervalCalendarDay.interface';
 
 type Item = {
   callback: IntersectionObserverCallback;

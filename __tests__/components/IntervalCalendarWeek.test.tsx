@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { mockIntersectionInstance, mockAllIsIntersecting } from '../testUtils';
-import Context from '../../context';
-import IntervalCalendarWeek from '../../components/IntervalCalendarWeek';
-import DEFAULT_CONTEXT from '../../constants/default-context';
+import Context from '../../src/context';
+import IntervalCalendarWeek from '../../src/components/IntervalCalendarWeek';
+import DEFAULT_CONTEXT from '../../src/constants/default-context';
 
 describe('IntervalCalendarWeek', () => {
   test('shows empty list as week', () => {

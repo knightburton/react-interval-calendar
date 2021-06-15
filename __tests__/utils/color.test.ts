@@ -1,4 +1,4 @@
-import { convertHexToInteger, convertColorToRgba } from '../../utils/color';
+import { convertHexToInteger, convertColorToRgba } from '../../src/utils/color';
 
 const mockHex = {
   raw: {

@@ -1,4 +1,4 @@
-import * as utils from '../../utils/date';
+import * as utils from '../../src/utils/date';
 
 const mockError = (date: string, type: string) => new Error(`${date} cannot be used to get the ${type} from.`);
 
