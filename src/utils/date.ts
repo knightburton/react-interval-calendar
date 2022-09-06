@@ -60,7 +60,9 @@ export const getDay = (date: Date): number => {
  *
  * @param date Date to get the timestamp form.
  */
-export const getTimestamp = (date: Date): number => {
+export const getTimestamp = (date: Date | number): number => {
+  // example: 1635721200000
+  if (typeof date === 'number') return date;
   // example: Wed Feb 10 2021 22:26:31 GMT+0100 (Central European Standard Time)
   if (date instanceof Date) return date.getTime();
 

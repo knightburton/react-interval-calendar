@@ -87,6 +87,10 @@ describe('getTimestamp', () => {
     expect(utils.getTimestamp(new Date(1609455600000))).toEqual(1609455600000);
   });
 
+  it('returns valid timestamp from proper date that is already timestamp', () => {
+    expect(utils.getTimestamp(1609455600000)).toEqual(1609455600000);
+  });
+
   it('throws error because of object as Date arg', () => {
     expect(() => utils.getTimestamp(<Date>{})).toThrow(mockError('[object Object]', 'timestamp'));
   });
