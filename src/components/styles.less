@@ -2,28 +2,16 @@
 
 .calendar {
   position: relative;
-
-  &__border {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #palette.border[secondary];
-
-    &__radius {
-      border-radius: #spacing(0.5)[];
-      overflow-y: hidden;
-      overflow-x: scroll;
-    }
-  }
+  height: 100%;
 }
 
 .header {
   position: relative;
   display: flex;
   align-items: stretch;
-  background-color: #palette.main[secondary];
   min-width: #spacing(8)[] * 7;
 
-  &__weekdays {
+  &__row {
     position: relative;
     display: flex;
     flex: 1;
@@ -32,7 +20,7 @@
     padding: 0;
   }
 
-  &__weekday {
+  &__cell {
     position: relative;
     display: flex;
     flex: 1;
@@ -41,8 +29,6 @@
     align-items: center;
     min-width: #spacing(8)[];
     height: #spacing(5)[];
-    font-weight: bold;
-    color: #palette.text[primary];
   }
 }
 

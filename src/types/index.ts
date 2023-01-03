@@ -12,7 +12,7 @@ export type VisibilityMatrix = {
 };
 export type ThemeOption = 'light' | 'dark';
 export type CalendarTuple = [Date | null, Date | null, number];
-export type HeaderWeekday = {
+export type HeaderCell = {
   key: number;
   label: string;
 };

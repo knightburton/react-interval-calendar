@@ -21,7 +21,7 @@ import {
 import { convertColorToRgba } from '../utils/color';
 import { DayInterface } from '../components/Day';
 import { HIGHLIGHT_COLORS } from '../constants/default-colors';
-import { HighlightedItem, ThemeOption, WeekdayIndex, CalendarTuple, HeaderWeekday, WeeksHeight } from '../types';
+import { HighlightedItem, ThemeOption, WeekdayIndex, CalendarTuple, HeaderCell, WeeksHeight } from '../types';
 
 /**
  * Returns the desired date attributes based on the passed weeks and days.
@@ -90,7 +90,7 @@ export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, week
  * @param weekStartsOn Index of the first day of the week.
  * @param locale Locale to format the day labels.
  */
-export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: string): HeaderWeekday[] => {
+export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: string): HeaderCell[] => {
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => ({
     key: day,

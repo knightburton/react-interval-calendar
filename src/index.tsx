@@ -1,8 +1,11 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { getCalendarBaseAttributes, getWeeksHeight } from './helpers';
 import { CalendarTuple, VisibilityMatrix, WeeksHeight, HighlightedItem, ThemeOption, WeekdayIndex } from './types';
-import Wrapper from './components/Wrapper';
+import Container, { ContainerProps } from './components/Container';
 import Header from './components/Header';
+import HeaderContainer, { HeaderContainerProps } from './components/HeaderContainer';
+import HeaderRow, { HeaderRowProps } from './components/HeaderRow';
+import HeaderCell, { HeaderCellProps } from './components/HeaderCell';
 import Empty from './components/Empty';
 import Weeks from './components/Weeks';
 import Week from './components/Week';
@@ -21,8 +24,6 @@ interface IntervalCalendarProps {
   numberOfWeekFirstRender?: number;
   numberOfWeekPreRender?: number;
   onSelect?: (day: DayInterface) => void;
-  showBorder?: boolean;
-  showBorderRadius?: boolean;
   showGutterBetweenHighlighted?: boolean;
   showHeader?: boolean;
   showHeaderWeekdays?: boolean;
@@ -32,11 +33,11 @@ interface IntervalCalendarProps {
   showYears?: boolean;
   theme?: ThemeOption;
   weekStartsOn?: WeekdayIndex;
-  className?: string;
+  containerComponent?: React.ComponentType<ContainerProps>;
+  headerContainerComponent?: React.ComponentType<HeaderContainerProps>;
+  headerRowComponent?: React.ComponentType<HeaderRowProps>;
+  headerCellComponent?: React.FC<HeaderCellProps>;
   emptyClassName?: string;
-  headerClassName?: string;
-  headerWeekdaysClassName?: string;
-  headerWeekdayClassName?: string;
   weeksClassName?: string;
   weekClassName?: string;
   dayClassName?: string;
@@ -61,8 +62,6 @@ const IntervalCalendar = ({
   numberOfWeekFirstRender = 8,
   numberOfWeekPreRender = 4,
   onSelect = undefined,
-  showBorder = false,
-  showBorderRadius = false,
   showGutterBetweenHighlighted = false,
   showHeader = true,
   showHeaderWeekdays = true,
@@ -72,11 +71,11 @@ const IntervalCalendar = ({
   showYears = false,
   theme = 'light',
   weekStartsOn = 0,
-  className = '',
+  containerComponent: ContainerComponent = Container,
+  headerContainerComponent = HeaderContainer,
+  headerRowComponent = HeaderRow,
+  headerCellComponent = HeaderCell,
   emptyClassName = '',
-  headerClassName = '',
-  headerWeekdaysClassName = '',
-  headerWeekdayClassName = '',
   weeksClassName = '',
   weekClassName = '',
   dayClassName = '',
@@ -118,15 +117,14 @@ const IntervalCalendar = ({
   const weeksHeight = useMemo<WeeksHeight>(() => getWeeksHeight(showHeader, showHeaderWeekdays, height), [showHeader, showHeaderWeekdays, height]);
 
   return (
-    <Wrapper theme={theme} height={height} showBorder={showBorder} showBorderRadius={showBorderRadius} className={className}>
+    <ContainerComponent>
       {showHeader && (
         <Header
-          showHeaderWeekdays={showHeaderWeekdays}
           weekStartsOn={weekStartsOn}
           locale={locale}
-          className={headerClassName}
-          weekdaysClassName={headerWeekdaysClassName}
-          weekdayClassName={headerWeekdayClassName}
+          containerComponent={headerContainerComponent}
+          rowComponent={headerRowComponent}
+          cellComponent={headerCellComponent}
         />
       )}
       {numberOfWeeks && startDate ? (
@@ -175,7 +173,7 @@ const IntervalCalendar = ({
       ) : (
         <Empty weeksHeight={weeksHeight} emptyLabel={emptyLabel} className={emptyClassName} />
       )}
-    </Wrapper>
+    </ContainerComponent>
   );
 };
 

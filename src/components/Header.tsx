@@ -1,34 +1,30 @@
 import React, { memo, useMemo } from 'react';
-import { HeaderWeekday, WeekdayIndex } from '../types';
+import { HeaderCell as HeaderCellType, WeekdayIndex } from '../types';
 import { getHeaderWeekdays } from '../helpers';
-import classnames from '../utils/classnames';
-import styles from './styles.less';
+import { HeaderContainerProps } from './HeaderContainer';
+import { HeaderRowProps } from './HeaderRow';
+import { HeaderCellProps } from './HeaderCell';
 
-interface HeaderProps {
-  showHeaderWeekdays: boolean;
+export interface HeaderProps {
   weekStartsOn: WeekdayIndex;
   locale: string;
-  className?: string;
-  weekdaysClassName?: string;
-  weekdayClassName?: string;
+  containerComponent: React.ComponentType<HeaderContainerProps>;
+  rowComponent: React.ComponentType<HeaderRowProps>;
+  cellComponent: React.FC<HeaderCellProps>;
 }
 
 const Header = memo(
-  ({ showHeaderWeekdays, weekStartsOn, locale, className = '', weekdaysClassName = '', weekdayClassName = '' }: HeaderProps): JSX.Element => {
-    const weekdays = useMemo<HeaderWeekday[]>(() => (showHeaderWeekdays ? getHeaderWeekdays(weekStartsOn, locale) : []), [showHeaderWeekdays, weekStartsOn, locale]);
+  ({ weekStartsOn, locale, containerComponent: ContainerComponent, rowComponent: RowComponent, cellComponent: CellComponent }: HeaderProps): JSX.Element => {
+    const weekdays = useMemo<HeaderCellType[]>(() => getHeaderWeekdays(weekStartsOn, locale), [weekStartsOn, locale]);
 
     return (
-      <div className={classnames(styles.header, className)}>
-        {showHeaderWeekdays && (
-          <ul className={classnames(styles.header__weekdays, weekdaysClassName)}>
-            {weekdays.map(weekday => (
-              <li key={weekday.key} className={classnames(styles.header__weekday, weekdayClassName)}>
-                {weekday.label}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <ContainerComponent>
+        <RowComponent>
+          {weekdays.map(weekday => (
+            <CellComponent key={weekday.key} data={weekday} />
+          ))}
+        </RowComponent>
+      </ContainerComponent>
     );
   },
 );
