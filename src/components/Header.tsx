@@ -2,28 +2,27 @@ import React, { memo, useMemo } from 'react';
 import { HeaderCell as HeaderCellType, WeekdayIndex } from '../types';
 import { getHeaderWeekdays } from '../helpers';
 import { HeaderContainerProps } from './HeaderContainer';
-import { HeaderRowProps } from './HeaderRow';
-import { HeaderCellProps } from './HeaderCell';
+import styles from './styles.less';
 
 export interface HeaderProps {
   weekStartsOn: WeekdayIndex;
   locale: string;
   containerComponent: React.ComponentType<HeaderContainerProps>;
-  rowComponent: React.ComponentType<HeaderRowProps>;
-  cellComponent: React.FC<HeaderCellProps>;
 }
 
 const Header = memo(
-  ({ weekStartsOn, locale, containerComponent: ContainerComponent, rowComponent: RowComponent, cellComponent: CellComponent }: HeaderProps): JSX.Element => {
+  ({ weekStartsOn, locale, containerComponent: ContainerComponent }: HeaderProps): JSX.Element => {
     const weekdays = useMemo<HeaderCellType[]>(() => getHeaderWeekdays(weekStartsOn, locale), [weekStartsOn, locale]);
 
     return (
       <ContainerComponent>
-        <RowComponent>
+        <ul className={styles.header__row}>
           {weekdays.map(weekday => (
-            <CellComponent key={weekday.key} data={weekday} />
+            <li key={weekday.key} className={styles.header__cell}>
+              {weekday.label}
+            </li>
           ))}
-        </RowComponent>
+        </ul>
       </ContainerComponent>
     );
   },

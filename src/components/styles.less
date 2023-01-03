@@ -28,67 +28,24 @@
     justify-content: center;
     align-items: center;
     min-width: #spacing(8)[];
-    height: #spacing(5)[];
+    min-height: #spacing(5)[];
   }
 }
 
-.empty {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #palette.main[primary];
-  color: #palette.text[primary];
-  font-weight: bold;
-}
-
-.weeks {
+.body {
   position: relative;
   overflow-y: scroll;
   overflow-x: visible;
   height: 500px;
   min-width: #spacing(8)[] * 7;
-}
 
-.week {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  margin: 0;
-  padding: 0;
-  height: #spacing(8)[];
-}
-
-.highlightCircle(@borderWidth; @borderColor; @borderStyle: solid) {
-  @diameter: #spacing(7.5)[] - (@borderWidth * 2);
-
-  content: '';
-  position: absolute;
-  width: @diameter;
-  height: @diameter;
-  border-radius: 50%;
-  border-width: @borderWidth;
-  border-style: @borderStyle;
-  border-color: @borderColor;
-  z-index: +1;
-}
-
-.monthEdge(@place) {
-  border-top-left-radius: if(@place = first, #spacing(4)[], 0);
-  border-bottom-right-radius: if(@place = last, #spacing(4)[], 0);
-  &::before {
-    content: '';
-    position: absolute;
-    min-width: #spacing(8)[];
-    height: inherit;
-    top: 0;
-    left: if(@place = first, 0, unset);
-    right: if(@place = last, 0, unset);
-    background-color: #palette.main[primary];
-    z-index: -1;
-  }
-  &__even::before {
-    background-color: #palette.main[secondary];
+  &__row {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    min-height: #spacing(8)[];
   }
 }
 
@@ -100,90 +57,13 @@
   justify-content: center;
   align-items: center;
   min-width: #spacing(8)[];
-  height: #spacing(8)[];
-  color: #palette.text[primary];
-  background-color: #palette.main[secondary];
+  min-height: #spacing(8)[];
+}
 
-  &__selectable {
-    cursor: pointer;
-    &:hover::after {
-      @borderColor: #palette.border[primary];
-      .highlightCircle(1px, @borderColor, dotted);
-    }
-  }
-
-  &__today::after {
-    @borderColor: #palette.highlight[secondary];
-    .highlightCircle(2px, @borderColor);
-  }
-
-  &__weekend {
-    color: #palette.text[secondary];
-  }
-
-  &__month__even {
-    background-color: #palette.main[primary];
-  }
-
-  &__first__of__month {
-    .monthEdge(first);
-
-    &__text {
-      font-weight: bold;
-    }
-  }
-
-  &__last__of__month {
-    .monthEdge(last);
-  }
-
-  &__text {
-    z-index: +2;
-
-    &__detail {
-      color: inherit;
-      font-size: small;
-      font-weight: normal;
-      z-index: +2;
-    }
-  }
-
-  &__highlighted {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: +1;
-
-    &__first {
-      border-top-left-radius: #spacing(4)[];
-      border-bottom-left-radius: #spacing(4)[];
-    }
-
-    &__last {
-      border-top-right-radius: #spacing(4)[];
-      border-bottom-right-radius: #spacing(4)[];
-    }
-
-    &__gutter {
-      height: #spacing(7.5)[];
-      top: #spacing(0.25)[];
-    }
-
-    &__gutter&__first {
-      left: #spacing(0.25)[];
-      width: calc(100% - #spacing(0.25)[]);
-    }
-
-    &__gutter&__last {
-      right: #spacing(0.25)[];
-      width: calc(100% - #spacing(0.25)[]);
-    }
-  }
-
-  &__selected::after {
-    @borderColor: #palette.border[primary];
-    .highlightCircle(1px, @borderColor);
-  }
+.empty {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 }

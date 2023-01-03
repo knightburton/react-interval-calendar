@@ -4,24 +4,18 @@ import {
   getWeekStart,
   getWeekEnd,
   getDifferenceInCalendarWeeks,
-  getYear,
   addDays,
   addWeeks,
+  isFirstDayOfYear,
   isMonthEven,
   isFirstDayOfMonth,
   isLastDayOfMonth,
   isToday,
   isWeekend,
-  isWithinInterval,
-  isSameDay,
-  formatMonth,
   formatDate,
-  formatWeekday,
 } from '../utils/date';
-import { convertColorToRgba } from '../utils/color';
-import { DayInterface } from '../components/Day';
-import { HIGHLIGHT_COLORS } from '../constants/default-colors';
-import { HighlightedItem, ThemeOption, WeekdayIndex, CalendarTuple, HeaderCell, WeeksHeight } from '../types';
+import { CellInterface } from '../components/BodyCell';
+import { WeekdayIndex, CalendarTuple, HeaderCell, WeeksHeight } from '../types';
 
 /**
  * Returns the desired date attributes based on the passed weeks and days.
@@ -29,39 +23,23 @@ import { HighlightedItem, ThemeOption, WeekdayIndex, CalendarTuple, HeaderCell, 
  * @param startDate Date to calculate the actual date from.
  * @param numberOfWeek Week different between start and desired date.
  * @param numberOfDay Day different between the week start and desired date.
- * @param highlighted List of highlighted intervals.
- * @param highlightedColorAlpha Number of alpha level in rgba color.
- * @param theme Theme sof the calendar to adjust highlight colors.
  * @param locale Locale to format the month and day labels.
  */
-export const getDayAttributes = (
-  startDate: Date,
-  numberOfWeek: number,
-  numberOfDay: number,
-  highlighted: HighlightedItem[],
-  highlightedColorAlpha: number,
-  theme: ThemeOption,
-  locale?: string,
-): DayInterface => {
+export const getCellAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, locale?: string): CellInterface => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
-  const highlightedData = highlighted.find(item => isWithinInterval(date, item.start, item.end));
 
   return {
     key: `${numberOfWeek}-${numberOfDay}`,
     date,
-    yearLabel: getYear(date),
-    monthLabel: formatMonth(date, locale),
-    dayLabel: formatDate(date, locale),
+    day: formatDate(date, locale, { day: 'numeric' }),
+    month: formatDate(date, locale, { month: 'numeric' }),
+    year: formatDate(date, locale, { year: 'numeric' }),
+    isFirstDayOfYear: isFirstDayOfYear(date),
     isMonthEven: isMonthEven(date),
     isFirstDayOfMonth: isFirstDayOfMonth(date),
     isLastDayOfMonth: isLastDayOfMonth(date),
     isToday: isToday(date),
     isWeekend: isWeekend(date),
-    isHighlighted: !!highlightedData,
-    isFirstOfHighlighted: !!highlightedData && isSameDay(highlightedData.start, date),
-    isLastOfHighlighted: !!highlightedData && isSameDay(highlightedData.end, date),
-    highlightColor: highlightedData ? convertColorToRgba(highlightedData.color || HIGHLIGHT_COLORS[theme.toUpperCase()], highlightedColorAlpha) : undefined,
-    highlightId: highlightedData?.id || highlightedData?.key,
   };
 };
 
@@ -94,7 +72,7 @@ export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: strin
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => ({
     key: day,
-    label: formatWeekday(addDays(start, day), locale),
+    label: formatDate(addDays(start, day), locale, { weekday: 'short' }),
   }));
 };
 
@@ -115,4 +93,10 @@ export const getWeeksHeight = (header: boolean, weekdays: boolean, height: Weeks
   if (weekdays) return `calc(${height} - ${5 * 8}px)`;
   // Otherwise just pass the height.
   return height;
+};
+
+export const defaultBodyCellFormatter = (locale?: string) => (cell: CellInterface): string => {
+  if (cell.isFirstDayOfYear) return formatDate(cell.date, locale, { day: 'numeric', month: 'short', year: 'numeric' });
+  if (cell.isFirstDayOfMonth) return formatDate(cell.date, locale, { day: 'numeric', month: 'short' });
+  return cell.day;
 };
