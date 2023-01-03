@@ -19,7 +19,7 @@ import {
   formatWeekday,
 } from '../utils/date';
 import { convertColorToRgba } from '../utils/color';
-import { Day } from '../interfaces/IntervalCalendarDay.interface';
+import { DayInterface } from '../components/Day';
 import { HIGHLIGHT_COLORS } from '../constants/default-colors';
 import { HighlightedItem, ThemeOption, WeekdayIndex, CalendarTuple, HeaderWeekday, WeeksHeight } from '../types';
 
@@ -42,7 +42,7 @@ export const getDayAttributes = (
   highlightedColorAlpha: number,
   theme: ThemeOption,
   locale?: string,
-): Day => {
+): DayInterface => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
   const highlightedData = highlighted.find(item => isWithinInterval(date, item.start, item.end));
 

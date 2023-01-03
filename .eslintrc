@@ -11,16 +11,7 @@
     "plugin:prettier/recommended",
     "prettier"
   ],
-  "plugins": [
-    "import",
-    "jest",
-    "jest-dom",
-    "testing-library",
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-    "@typescript-eslint"
-  ],
+  "plugins": ["import", "jest", "jest-dom", "testing-library", "jsx-a11y", "react", "react-hooks", "@typescript-eslint"],
   "env": {
     "browser": true,
     "node": true,
@@ -37,13 +28,9 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": [
-      "./tsconfig.dev.json"
-    ]
+    "project": ["./tsconfig.dev.json"]
   },
-  "ignorePatterns": [
-    "rollup.config.js"
-  ],
+  "ignorePatterns": ["rollup.config.js"],
   "settings": {
     "react": {
       "version": "16"
@@ -56,6 +43,8 @@
     "function-call-argument-newline": ["error", "consistent"],
     "max-len": ["error", { "code": 170, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
-    "import/no-extraneous-dependencies": ["off"]
+    "import/no-extraneous-dependencies": ["off"],
+    "react/prop-types": ["off"],
+    "react/require-default-props": ["off"]
   }
 }

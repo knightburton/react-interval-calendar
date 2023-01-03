@@ -1,5 +1,3 @@
-import { Day } from '../interfaces/IntervalCalendarDay.interface';
-
 export type WeeksHeight = number | '100%' | 'auto' | string;
 export type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type HighlightedItem = {
@@ -40,28 +38,4 @@ export type CustomClassNames = {
   dayHighlighted?: ClassNamesProp;
   daySelected?: ClassNamesProp;
   dayToday?: ClassNamesProp;
-};
-export type ContextType = {
-  customClassNames: CustomClassNames;
-  enableSelect?: boolean;
-  emptyLabel?: string;
-  fadeWeekends: boolean;
-  handleSelect: (day: Day, resetFunction: () => void) => void;
-  highlighted: HighlightedItem[];
-  highlightedColorAlpha: number;
-  locale: string;
-  numberOfWeekPreRender: number;
-  numberOfWeeks: number;
-  showGutterBetweenHighlighted: boolean;
-  showHeaderWeekdays: boolean;
-  showMonthStripes: boolean;
-  showMonths: boolean;
-  showToday: boolean;
-  showYears: boolean;
-  startDate: Date | null;
-  theme: ThemeOption;
-  updateVisibilityMatrix?: (week: number) => void;
-  visibilityMatrix: VisibilityMatrix;
-  weekStartsOn: WeekdayIndex;
-  weeksHeight: WeeksHeight;
 };

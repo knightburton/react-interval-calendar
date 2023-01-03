@@ -1,6 +1,78 @@
-@import '../../theme.less';
+@import '../theme.less';
 
-// local mixins
+.calendar {
+  position: relative;
+
+  &__border {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #palette.border[secondary];
+
+    &__radius {
+      border-radius: #spacing(0.5)[];
+      overflow-y: hidden;
+      overflow-x: scroll;
+    }
+  }
+}
+
+.header {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  background-color: #palette.main[secondary];
+  min-width: #spacing(8)[] * 7;
+
+  &__weekdays {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__weekday {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: #spacing(8)[];
+    height: #spacing(5)[];
+    font-weight: bold;
+    color: #palette.text[primary];
+  }
+}
+
+.empty {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #palette.main[primary];
+  color: #palette.text[primary];
+  font-weight: bold;
+}
+
+.weeks {
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: visible;
+  height: 500px;
+  min-width: #spacing(8)[] * 7;
+}
+
+.week {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  margin: 0;
+  padding: 0;
+  height: #spacing(8)[];
+}
+
 .highlightCircle(@borderWidth; @borderColor; @borderStyle: solid) {
   @diameter: #spacing(7.5)[] - (@borderWidth * 2);
 

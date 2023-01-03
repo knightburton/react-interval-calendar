@@ -1,5 +1,3 @@
-import { HIGHLIGHTED_COLOR_ALPHA } from '../constants/default-props';
-
 const HEX_REGEX = /^[\da-fA-F]*$/;
 const HEX_COLOR_REGEX = /^(#|0x)([\da-fA-F]{2})([\da-fA-F]{2})([\da-fA-F]{2})$/;
 const RGBA_COLOR_REGEX = /^rgb(a)?\s*?\(\s*?(000|0?\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*?,\s*?(000|0?\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*?,\s*?(000|0?\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\s*?(,\s*?(0|0\.\d*|1|1.0*)\s*?)?\)$/;
@@ -21,7 +19,7 @@ export const convertHexToInteger = (hex?: string | null, defaultValue = 0): numb
  * @param color Color in hex, rgb or rgba format to convert.
  * @param alpha Alpha value for rgba pattern.
  */
-export const convertColorToRgba = (color: string, alpha = HIGHLIGHTED_COLOR_ALPHA): string => {
+export const convertColorToRgba = (color: string, alpha = 0.2): string => {
   const rgba = RGBA_COLOR_REGEX.exec(color);
   const hex = HEX_COLOR_REGEX.exec(color);
 
