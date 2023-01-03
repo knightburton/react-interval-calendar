@@ -157,6 +157,19 @@ export const getDayEnd = (date: Date): Date => {
 };
 
 /**
+ * Gets the difference in calendar days between two dates.
+ *
+ * @param left Left date to get the difference from.
+ * @param right Right date to get the difference from.
+ */
+export const getDifferenceInCalendarDays = (left: Date, right: Date): number => {
+  const utcLeft = Date.UTC(left.getFullYear(), left.getMonth(), left.getDate());
+  const utcRight = Date.UTC(right.getFullYear(), right.getMonth(), right.getDate());
+
+  return Math.floor((utcRight - utcLeft) / (1000 * 60 * 60 * 24));
+};
+
+/**
  * Gets the difference in calendar weeks between two dates.
  *
  * @param left Left date to get the difference from.
@@ -247,6 +260,21 @@ export const isSameDay = (date: Date, dateToCompare: Date): boolean => {
 };
 
 /**
+ * Is given date the first day of the year?
+ *
+ * @param date Date to check.
+ */
+export const isFirstDayOfYear = (date: Date): boolean => {
+  const year = getYear(date);
+  const month = getMonth(date);
+  const dayOfMonth = getDate(date);
+  const baseDate = new Date(year, month, dayOfMonth, 0, 0, 0, 0);
+  const startOfYear = new Date(year, 0, 1, 0, 0, 0, 0);
+  const diff = getDifferenceInCalendarDays(baseDate, startOfYear);
+  return diff + 1 === 1;
+};
+
+/**
  * Adds the number of days to the given date.
  *
  * @param date Date to add the number of days to.
@@ -283,11 +311,10 @@ export const formatMonth = (date: Date, locale = 'default'): string =>
  *
  * @param date Date to format.
  * @param locale Language whose formatting conventions should be used.
+ * @param options date format options.
  */
-export const formatDate = (date: Date, locale = 'default'): string =>
-  date.toLocaleString(locale, {
-    day: '2-digit',
-  });
+export const formatDate = (date: Date, locale = 'default', options: Intl.DateTimeFormatOptions | undefined = { day: '2-digit' }): string =>
+  date.toLocaleString(locale, options);
 
 /**
  * Returns the local formatted day name from given date.
