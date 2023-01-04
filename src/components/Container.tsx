@@ -1,10 +1,23 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
+import classnames from '../utils/classnames';
 import styles from './styles.less';
 
 export interface ContainerProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const Container = memo(({ children }: ContainerProps): JSX.Element => <div className={styles.calendar}>{children}</div>);
+export interface ContainerPrivateProps extends ContainerProps {
+  component?: React.ComponentType<ContainerProps>;
+}
+
+const Container = memo(
+  ({ children, component: Component, className = '' }: ContainerPrivateProps): JSX.Element => {
+    const classes = useMemo(() => classnames(styles.calendar, className), [className]);
+
+    if (Component) return <Component className={classes}>{children}</Component>;
+    return <div className={classes}>{children}</div>;
+  },
+);
 
 export default Container;
