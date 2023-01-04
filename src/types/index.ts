@@ -12,9 +12,11 @@ export type VisibilityMatrix = {
 };
 export type ThemeOption = 'light' | 'dark';
 export type CalendarTuple = [Date | null, Date | null, number];
-export type HeaderCell = {
-  key: number;
-  label: string;
+export type HeaderCellType = {
+  id: number;
+  short: string;
+  long: string;
+  narrow: string;
 };
 export type Cell = {
   key: string;

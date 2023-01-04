@@ -4,6 +4,7 @@ import { CalendarTuple, VisibilityMatrix, WeekdayIndex, Cell } from './types';
 import Container, { ContainerProps } from './components/Container';
 import Header from './components/Header';
 import HeaderContainer, { HeaderContainerProps } from './components/HeaderContainer';
+import HeaderCellContent, { HeaderCellContentProps } from './components/HeaderCellContent';
 import Body from './components/Body';
 import BodyContainer, { BodyContainerProps } from './components/BodyContainer';
 import BodyRow from './components/BodyRow';
@@ -24,6 +25,7 @@ interface IntervalCalendarProps {
   weekStartsOn?: WeekdayIndex;
   containerComponent?: React.ComponentType<ContainerProps>;
   headerContainerComponent?: React.ComponentType<HeaderContainerProps>;
+  headerCellContentComponent?: React.ComponentType<HeaderCellContentProps>;
   bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
   bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
 }
@@ -41,6 +43,7 @@ const IntervalCalendar = ({
   weekStartsOn = 0,
   containerComponent: ContainerComponent = Container,
   headerContainerComponent = HeaderContainer,
+  headerCellContentComponent: HeaderCellContentComponent = HeaderCellContent,
   bodyContainerComponent: BodyContainerComponent = BodyContainer,
   bodyCellContentComponent: BodyCellContentComponent,
 }: IntervalCalendarProps): JSX.Element => {
@@ -64,7 +67,9 @@ const IntervalCalendar = ({
 
   return (
     <ContainerComponent>
-      {showHeader && <Header weekStartsOn={weekStartsOn} locale={locale} containerComponent={headerContainerComponent} />}
+      {showHeader && (
+        <Header weekStartsOn={weekStartsOn} locale={locale} containerComponent={headerContainerComponent} cellContentComponent={HeaderCellContentComponent} />
+      )}
       {!!numberOfWeeks && !!startDate ? (
         <Body
           startDate={startDate}

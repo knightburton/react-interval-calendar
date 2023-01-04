@@ -1,6 +1,6 @@
 import React from 'react';
 import { Cell } from '../types';
-import { getBodyCellContentLabel } from '../helpers';
+import { getBodyCellContent } from '../helpers';
 
 export interface BodyCellContentProps {
   data: Cell;
@@ -11,6 +11,6 @@ export interface BodyCellContentPrivateProps {
   locale?: string;
 }
 
-const BodyCellContent = ({ data, locale }: BodyCellContentPrivateProps): JSX.Element => <span>{getBodyCellContentLabel(data, locale)}</span>;
+const BodyCellContent = ({ data, locale }: BodyCellContentPrivateProps): JSX.Element => <span>{getBodyCellContent(data, locale)}</span>;
 
 export default BodyCellContent;
