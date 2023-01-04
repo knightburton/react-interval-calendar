@@ -1,13 +1,14 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { getCalendarBaseAttributes, defaultBodyCellFormatter } from './helpers';
-import { CalendarTuple, VisibilityMatrix, WeekdayIndex } from './types';
+import { getCalendarBaseAttributes } from './helpers';
+import { CalendarTuple, VisibilityMatrix, WeekdayIndex, Cell } from './types';
 import Container, { ContainerProps } from './components/Container';
 import Header from './components/Header';
 import HeaderContainer, { HeaderContainerProps } from './components/HeaderContainer';
 import Body from './components/Body';
 import BodyContainer, { BodyContainerProps } from './components/BodyContainer';
 import BodyRow from './components/BodyRow';
-import BodyCell, { CellInterface } from './components/BodyCell';
+import BodyCell from './components/BodyCell';
+import { BodyCellContentProps } from './components/BodyCellContent';
 import Empty from './components/Empty';
 
 interface IntervalCalendarProps {
@@ -15,16 +16,16 @@ interface IntervalCalendarProps {
   end?: Date;
   emptyLabel?: string;
   bodyHeight?: number | '100%' | 'auto';
-  bodyCellFormatter?: (cell: CellInterface) => string;
   locale?: string;
   numberOfRowsFirstRender?: number;
   numberOfRowsPreRender?: number;
-  onCellClick?: (cell: CellInterface) => void;
+  onCellClick?: (cell: Cell) => void;
   showHeader?: boolean;
   weekStartsOn?: WeekdayIndex;
   containerComponent?: React.ComponentType<ContainerProps>;
   headerContainerComponent?: React.ComponentType<HeaderContainerProps>;
   bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
+  bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
 }
 
 const IntervalCalendar = ({
@@ -32,7 +33,6 @@ const IntervalCalendar = ({
   end = undefined,
   emptyLabel = '',
   bodyHeight = 500,
-  bodyCellFormatter = undefined,
   locale = 'default',
   numberOfRowsFirstRender = 8,
   numberOfRowsPreRender = 4,
@@ -42,6 +42,7 @@ const IntervalCalendar = ({
   containerComponent: ContainerComponent = Container,
   headerContainerComponent = HeaderContainer,
   bodyContainerComponent: BodyContainerComponent = BodyContainer,
+  bodyCellContentComponent: BodyCellContentComponent,
 }: IntervalCalendarProps): JSX.Element => {
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
     Array(numberOfRowsFirstRender)
@@ -78,7 +79,7 @@ const IntervalCalendar = ({
               visibilityMatrix={visibilityMatrix}
               updateVisibilityMatrix={handleVisibilityMatrixChange}
               numberOfRowsPreRender={numberOfRowsPreRender}
-              renderCell={cell => <BodyCell key={cell.key} data={cell} formatter={bodyCellFormatter || defaultBodyCellFormatter(locale)} onClick={onCellClick} />}
+              renderCell={cell => <BodyCell key={cell.key} data={cell} locale={locale} onClick={onCellClick} contentComponent={BodyCellContentComponent} />}
             />
           )}
         />

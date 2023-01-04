@@ -14,8 +14,7 @@ import {
   isWeekend,
   formatDate,
 } from '../utils/date';
-import { CellInterface } from '../components/BodyCell';
-import { WeekdayIndex, CalendarTuple, HeaderCell, WeeksHeight } from '../types';
+import { WeekdayIndex, CalendarTuple, HeaderCell, WeeksHeight, Cell } from '../types';
 
 /**
  * Returns the desired date attributes based on the passed weeks and days.
@@ -25,7 +24,7 @@ import { WeekdayIndex, CalendarTuple, HeaderCell, WeeksHeight } from '../types';
  * @param numberOfDay Day different between the week start and desired date.
  * @param locale Locale to format the month and day labels.
  */
-export const getCellAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, locale?: string): CellInterface => {
+export const getCellAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, locale?: string): Cell => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
 
   return {
@@ -95,7 +94,7 @@ export const getWeeksHeight = (header: boolean, weekdays: boolean, height: Weeks
   return height;
 };
 
-export const defaultBodyCellFormatter = (locale?: string) => (cell: CellInterface): string => {
+export const getBodyCellContentLabel = (cell: Cell, locale = 'default'): string => {
   if (cell.isFirstDayOfYear) return formatDate(cell.date, locale, { day: 'numeric', month: 'short', year: 'numeric' });
   if (cell.isFirstDayOfMonth) return formatDate(cell.date, locale, { day: 'numeric', month: 'short' });
   return cell.day;

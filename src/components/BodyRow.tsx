@@ -1,8 +1,7 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import useOnScreen from '../hooks/useOnScreen';
 import { getCellAttributes } from '../helpers';
-import { VisibilityMatrix } from '../types';
-import { CellInterface } from './BodyCell';
+import { VisibilityMatrix, Cell } from '../types';
 import styles from './styles.less';
 
 interface BodyRowProps {
@@ -12,7 +11,7 @@ interface BodyRowProps {
   startDate: Date | null;
   updateVisibilityMatrix?: (week: number) => void;
   visibilityMatrix: VisibilityMatrix;
-  renderCell: (cell: CellInterface) => JSX.Element;
+  renderCell: (cell: Cell) => JSX.Element;
 }
 
 const BodyRow = ({ numberOfWeek, startDate, locale, visibilityMatrix, updateVisibilityMatrix, numberOfRowsPreRender, renderCell }: BodyRowProps): JSX.Element => {

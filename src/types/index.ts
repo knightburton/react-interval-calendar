@@ -16,26 +16,22 @@ export type HeaderCell = {
   key: number;
   label: string;
 };
+export type Cell = {
+  key: string;
+  date: Date;
+  day: string;
+  month: string;
+  year: string;
+  isFirstDayOfYear: boolean;
+  isMonthEven: boolean;
+  isFirstDayOfMonth: boolean;
+  isLastDayOfMonth: boolean;
+  isToday: boolean;
+  isWeekend: boolean;
+};
 
 export type ClassNamesValue = string | number | boolean | undefined | null;
 export type ClassNamesObject = Record<string, unknown>;
 export type ClassNamesArray = Array<Argument>;
 export type Argument = ClassNamesValue | ClassNamesObject | ClassNamesArray;
 export type ClassNames = Argument;
-export type ClassNamesProp = string | string[];
-export type CustomClassNames = {
-  calendar?: ClassNamesProp;
-  calendarEmpty?: ClassNamesProp;
-  header?: ClassNamesProp;
-  headerWeekdays?: ClassNamesProp;
-  headerWeekday?: ClassNamesProp;
-  weeks?: ClassNamesProp;
-  week?: ClassNamesProp;
-  day?: ClassNamesProp;
-  dayText?: ClassNamesProp;
-  dayMonthText?: ClassNamesProp;
-  dayYearText?: ClassNamesProp;
-  dayHighlighted?: ClassNamesProp;
-  daySelected?: ClassNamesProp;
-  dayToday?: ClassNamesProp;
-};
