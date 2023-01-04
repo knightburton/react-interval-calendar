@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import BodyCellContent, { BodyCellContentProps } from './BodyCellContent';
-import { Cell } from '../types';
+import { BodyCellType } from '../types';
 import styles from './styles.less';
 
 interface BodyCellProps {
-  data: Cell;
+  data: BodyCellType;
   locale?: string;
-  onClick?: (cell: Cell) => void;
+  onClick?: (cell: BodyCellType) => void;
   contentComponent?: React.ComponentType<BodyCellContentProps>;
 }
 

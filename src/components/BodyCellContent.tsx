@@ -1,13 +1,13 @@
 import React from 'react';
-import { Cell } from '../types';
+import { BodyCellType } from '../types';
 import { getBodyCellContent } from '../helpers';
 
 export interface BodyCellContentProps {
-  data: Cell;
+  data: BodyCellType;
 }
 
 export interface BodyCellContentPrivateProps {
-  data: Cell;
+  data: BodyCellType;
   locale?: string;
 }
 

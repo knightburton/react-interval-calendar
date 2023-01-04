@@ -18,7 +18,7 @@ export type HeaderCellType = {
   long: string;
   narrow: string;
 };
-export type Cell = {
+export type BodyCellType = {
   key: string;
   date: Date;
   day: string;

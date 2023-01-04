@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { getCalendarBaseAttributes } from './helpers';
-import { CalendarTuple, VisibilityMatrix, WeekdayIndex, Cell } from './types';
+import { CalendarTuple, VisibilityMatrix, WeekdayIndex, BodyCellType } from './types';
 import Container, { ContainerProps } from './components/Container';
 import Header from './components/Header';
 import HeaderContainer, { HeaderContainerProps } from './components/HeaderContainer';
@@ -20,7 +20,7 @@ interface IntervalCalendarProps {
   locale?: string;
   numberOfRowsFirstRender?: number;
   numberOfRowsPreRender?: number;
-  onCellClick?: (cell: Cell) => void;
+  onCellClick?: (cell: BodyCellType) => void;
   showHeader?: boolean;
   weekStartsOn?: WeekdayIndex;
   containerComponent?: React.ComponentType<ContainerProps>;
