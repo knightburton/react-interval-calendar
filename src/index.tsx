@@ -33,6 +33,10 @@ interface IntervalCalendarProps {
   headerRowClassName?: string;
   headerCellClassName?: string;
   headerCellContentClassName?: string;
+  bodyContainerClassName?: string;
+  bodyRowClassName?: string;
+  bodyCellClassName?: string;
+  bodyCellContentClassName?: string;
 }
 
 const IntervalCalendar = ({
@@ -56,6 +60,10 @@ const IntervalCalendar = ({
   headerRowClassName = '',
   headerCellClassName = '',
   headerCellContentClassName = '',
+  bodyContainerClassName = '',
+  bodyRowClassName = '',
+  bodyCellClassName = '',
+  bodyCellContentClassName = '',
 }: IntervalCalendarProps): JSX.Element => {
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
     Array(numberOfRowsFirstRender)
@@ -93,6 +101,7 @@ const IntervalCalendar = ({
           startDate={startDate}
           numberOfWeeks={numberOfWeeks}
           containerComponent={BodyContainerComponent}
+          containerClassName={bodyContainerClassName}
           renderRow={numberOfWeek => (
             <BodyRow
               key={numberOfWeek}
@@ -102,7 +111,18 @@ const IntervalCalendar = ({
               visibilityMatrix={visibilityMatrix}
               updateVisibilityMatrix={handleVisibilityMatrixChange}
               numberOfRowsPreRender={numberOfRowsPreRender}
-              renderCell={cell => <BodyCell key={cell.key} data={cell} locale={locale} onClick={onCellClick} contentComponent={BodyCellContentComponent} />}
+              className={bodyRowClassName}
+              renderCell={cell => (
+                <BodyCell
+                  key={cell.key}
+                  data={cell}
+                  locale={locale}
+                  onClick={onCellClick}
+                  contentComponent={BodyCellContentComponent}
+                  className={bodyCellClassName}
+                  contentClassName={bodyCellContentClassName}
+                />
+              )}
             />
           )}
         />

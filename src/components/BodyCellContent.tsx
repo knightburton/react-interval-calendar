@@ -4,13 +4,17 @@ import { getBodyCellContent } from '../helpers';
 
 export interface BodyCellContentProps {
   data: BodyCellType;
+  className?: string;
 }
 
-export interface BodyCellContentPrivateProps {
-  data: BodyCellType;
+export interface BodyCellContentPrivateProps extends BodyCellContentProps {
   locale?: string;
+  component?: React.ComponentType<BodyCellContentProps>;
 }
 
-const BodyCellContent = ({ data, locale }: BodyCellContentPrivateProps): JSX.Element => <span>{getBodyCellContent(data, locale)}</span>;
+const BodyCellContent = ({ data, locale, component: Component, className }: BodyCellContentPrivateProps): JSX.Element => {
+  if (Component) return <Component className={className} data={data} />;
+  return <span className={className}>{getBodyCellContent(data, locale)}</span>;
+};
 
 export default BodyCellContent;

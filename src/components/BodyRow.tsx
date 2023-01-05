@@ -3,6 +3,7 @@ import useOnScreen from '../hooks/useOnScreen';
 import { getCellAttributes } from '../helpers';
 import { VisibilityMatrix, BodyCellType } from '../types';
 import styles from './styles.less';
+import classnames from '../utils/classnames';
 
 interface BodyRowProps {
   numberOfWeek: number;
@@ -12,9 +13,19 @@ interface BodyRowProps {
   updateVisibilityMatrix?: (week: number) => void;
   visibilityMatrix: VisibilityMatrix;
   renderCell: (cell: BodyCellType) => JSX.Element;
+  className?: string;
 }
 
-const BodyRow = ({ numberOfWeek, startDate, locale, visibilityMatrix, updateVisibilityMatrix, numberOfRowsPreRender, renderCell }: BodyRowProps): JSX.Element => {
+const BodyRow = ({
+  numberOfWeek,
+  startDate,
+  locale,
+  visibilityMatrix,
+  updateVisibilityMatrix,
+  numberOfRowsPreRender,
+  renderCell,
+  className,
+}: BodyRowProps): JSX.Element => {
   const ref = useRef(null);
   const isVisible = useOnScreen(ref);
   const shouldRender = useMemo(
@@ -29,13 +40,14 @@ const BodyRow = ({ numberOfWeek, startDate, locale, visibilityMatrix, updateVisi
     if (!startDate || !shouldRender) return [];
     return Array.from(Array(7).keys()).map(day => getCellAttributes(startDate, numberOfWeek, day, locale));
   }, [startDate, numberOfWeek, locale, shouldRender]);
+  const classes = useMemo(() => classnames(styles.body__row, className), [className]);
 
   useEffect(() => {
     if (isVisible && !shouldRender && updateVisibilityMatrix) updateVisibilityMatrix(numberOfWeek);
   }, [isVisible, shouldRender, updateVisibilityMatrix, numberOfWeek]);
 
   return (
-    <ul ref={ref} key={numberOfWeek} className={styles.body__row}>
+    <ul ref={ref} key={numberOfWeek} className={classes}>
       {data.map(cell => renderCell(cell))}
     </ul>
   );
