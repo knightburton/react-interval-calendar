@@ -3,8 +3,18 @@ import { HeaderCellType } from '../types';
 
 export interface HeaderCellContentProps {
   data: HeaderCellType;
+  className?: string;
 }
 
-const HeaderCellContent = memo(({ data }: HeaderCellContentProps): JSX.Element => <span>{data.short}</span>);
+export interface HeaderCellContentPrivateProps extends HeaderCellContentProps {
+  component?: React.ComponentType<HeaderCellContentProps>;
+}
+
+const HeaderCellContent = memo(
+  ({ data, component: Component, className = '' }: HeaderCellContentPrivateProps): JSX.Element => {
+    if (Component) return <Component data={data} className={className} />;
+    return <span>{data.short}</span>;
+  },
+);
 
 export default HeaderCellContent;

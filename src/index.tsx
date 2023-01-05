@@ -3,8 +3,8 @@ import { getCalendarBaseAttributes } from './helpers';
 import { CalendarTuple, VisibilityMatrix, WeekdayIndex, BodyCellType } from './types';
 import Container, { ContainerProps } from './components/Container';
 import Header from './components/Header';
-import HeaderContainer, { HeaderContainerProps } from './components/HeaderContainer';
-import HeaderCellContent, { HeaderCellContentProps } from './components/HeaderCellContent';
+import { HeaderContainerProps } from './components/HeaderContainer';
+import { HeaderCellContentProps } from './components/HeaderCellContent';
 import Body from './components/Body';
 import BodyContainer, { BodyContainerProps } from './components/BodyContainer';
 import BodyRow from './components/BodyRow';
@@ -29,6 +29,10 @@ interface IntervalCalendarProps {
   bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
   bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
   containerClassName?: string;
+  headerContainerClassName?: string;
+  headerRowClassName?: string;
+  headerCellClassName?: string;
+  headerCellContentClassName?: string;
 }
 
 const IntervalCalendar = ({
@@ -43,11 +47,15 @@ const IntervalCalendar = ({
   showHeader = true,
   weekStartsOn = 0,
   containerComponent: ContainerComponent,
-  headerContainerComponent = HeaderContainer,
-  headerCellContentComponent: HeaderCellContentComponent = HeaderCellContent,
+  headerContainerComponent: HeaderContainerComponent,
+  headerCellContentComponent: HeaderCellContentComponent,
   bodyContainerComponent: BodyContainerComponent = BodyContainer,
   bodyCellContentComponent: BodyCellContentComponent,
   containerClassName = '',
+  headerContainerClassName = '',
+  headerRowClassName = '',
+  headerCellClassName = '',
+  headerCellContentClassName = '',
 }: IntervalCalendarProps): JSX.Element => {
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
     Array(numberOfRowsFirstRender)
@@ -69,9 +77,17 @@ const IntervalCalendar = ({
 
   return (
     <Container component={ContainerComponent} className={containerClassName}>
-      {showHeader && (
-        <Header weekStartsOn={weekStartsOn} locale={locale} containerComponent={headerContainerComponent} cellContentComponent={HeaderCellContentComponent} />
-      )}
+      <Header
+        weekStartsOn={weekStartsOn}
+        locale={locale}
+        enabled={showHeader}
+        containerComponent={HeaderContainerComponent}
+        cellContentComponent={HeaderCellContentComponent}
+        containerClassName={headerContainerClassName}
+        rowClassName={headerRowClassName}
+        cellClassName={headerCellClassName}
+        cellContentClassName={headerCellContentClassName}
+      />
       {!!numberOfWeeks && !!startDate ? (
         <Body
           startDate={startDate}
