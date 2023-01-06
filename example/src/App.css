@@ -1,3 +1,48 @@
 .wrapper {
   padding: 24px;
 }
+
+.container {
+  border: solid 1px #efefef;
+}
+
+.headerContainer {
+  border-bottom: solid 1px #efefef;
+}
+
+.headerCell {
+  padding-right: 5px;
+}
+
+.headerCellContent {
+  text-align: right;
+}
+
+.bodyRow:not(:last-of-type) {
+  border-bottom: solid 1px #efefef;
+}
+
+.bodyCell:not(:last-of-type) {
+  border-right: solid 1px #efefef;
+}
+
+.bodyCell {
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.evenMonth::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: lightgray;
+  z-index: -1;
+}
+
+.today {
+  color: #ff0000;
+  font-weight: bold;
+}

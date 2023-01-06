@@ -9,8 +9,14 @@ const App = () => (
       end={new Date(2023, 11, 31)}
       locale="en-US"
       bodyHeight={700}
-      onCellClick={() => {}}
-      bodyCellContentComponent={({ data: { day } }) => <p>{day}</p>}
+      onCellClick={cell => console.log(cell)}
+      containerClassName="container"
+      headerContainerClassName="headerContainer"
+      headerCellClassName="headerCell"
+      headerCellContentClassName="headerCellContent"
+      bodyRowClassName='bodyRow'
+      bodyCellClassName="bodyCell"
+      bodyCellContentComponent={({ data }) => <span className={`${data.isMonthEven ? 'evenMonth' : ''} ${data.isToday ? 'today': ''}`}>{data.day}</span>}
     />
   </div>
 );
