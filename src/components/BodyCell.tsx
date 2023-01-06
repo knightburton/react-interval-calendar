@@ -7,7 +7,7 @@ import classnames from '../utils/classnames';
 interface BodyCellProps {
   data: BodyCellType;
   locale?: string;
-  onClick?: (cell: BodyCellType) => void;
+  onClick?: (data: BodyCellType) => void;
   contentComponent?: React.FC<BodyCellContentProps>;
   className?: string;
   contentClassName?: string;

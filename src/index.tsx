@@ -20,7 +20,7 @@ interface IntervalCalendarProps {
   locale?: string;
   numberOfRowsFirstRender?: number;
   numberOfRowsPreRender?: number;
-  onCellClick?: (cell: BodyCellType) => void;
+  onCellClick?: (data: BodyCellType) => void;
   showHeader?: boolean;
   weekStartsOn?: WeekdayIndex;
   containerComponent?: React.FC<ContainerProps>;
