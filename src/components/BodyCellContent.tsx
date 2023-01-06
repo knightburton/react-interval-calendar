@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BodyCellType } from '../types';
 import { getBodyCellContent } from '../helpers';
+import classnames from '../utils/classnames';
+import styles from './styles.less';
 
 export interface BodyCellContentProps {
   data: BodyCellType;
@@ -13,8 +15,10 @@ export interface BodyCellContentPrivateProps extends BodyCellContentProps {
 }
 
 const BodyCellContent = ({ data, locale, component: Component, className }: BodyCellContentPrivateProps): JSX.Element => {
-  if (Component) return <Component className={className} data={data} />;
-  return <span className={className}>{getBodyCellContent(data, locale)}</span>;
+  const classes = useMemo(() => classnames(styles.body__cell__content, className), [className]);
+
+  if (Component) return <Component className={classes} data={data} />;
+  return <span className={classes}>{getBodyCellContent(data, locale)}</span>;
 };
 
 export default BodyCellContent;

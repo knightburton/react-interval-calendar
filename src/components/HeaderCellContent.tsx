@@ -1,5 +1,7 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { HeaderCellType } from '../types';
+import classnames from '../utils/classnames';
+import styles from './styles.less';
 
 export interface HeaderCellContentProps {
   data: HeaderCellType;
@@ -12,8 +14,10 @@ export interface HeaderCellContentPrivateProps extends HeaderCellContentProps {
 
 const HeaderCellContent = memo(
   ({ data, component: Component, className = '' }: HeaderCellContentPrivateProps): JSX.Element => {
-    if (Component) return <Component data={data} className={className} />;
-    return <span>{data.short}</span>;
+    const classes = useMemo(() => classnames(styles.header__cell__content, className), [className]);
+
+    if (Component) return <Component data={data} className={classes} />;
+    return <span className={classes}>{data.short}</span>;
   },
 );
 

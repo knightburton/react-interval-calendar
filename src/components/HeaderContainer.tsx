@@ -16,7 +16,7 @@ const HeaderContainer = memo(
     const classes = useMemo(() => classnames(styles.header, className), [className]);
 
     if (Component) return <Component className={classes}>{children}</Component>;
-    return <div className={styles.classes}>{children}</div>;
+    return <div className={classes}>{children}</div>;
   },
 );
 
