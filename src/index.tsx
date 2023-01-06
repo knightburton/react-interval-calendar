@@ -16,7 +16,7 @@ interface IntervalCalendarProps {
   start?: Date;
   end?: Date;
   emptyLabel?: string;
-  bodyHeight?: number | '100%' | 'auto';
+  height?: number | '100%' | 'auto';
   locale?: string;
   numberOfRowsFirstRender?: number;
   numberOfRowsPreRender?: number;
@@ -43,7 +43,7 @@ const IntervalCalendar = ({
   start = undefined,
   end = undefined,
   emptyLabel = '',
-  bodyHeight = 500,
+  height = 500,
   locale = 'default',
   numberOfRowsFirstRender = 8,
   numberOfRowsPreRender = 4,
@@ -84,7 +84,7 @@ const IntervalCalendar = ({
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
   return (
-    <Container component={ContainerComponent} className={containerClassName}>
+    <Container height={height} component={ContainerComponent} className={containerClassName}>
       <Header
         weekStartsOn={weekStartsOn}
         locale={locale}
@@ -127,7 +127,7 @@ const IntervalCalendar = ({
           )}
         />
       ) : (
-        <Empty height={bodyHeight} emptyLabel={emptyLabel} />
+        <Empty emptyLabel={emptyLabel} />
       )}
     </Container>
   );

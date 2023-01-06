@@ -5,6 +5,7 @@ import styles from './styles.less';
 export interface ContainerProps {
   children?: React.ReactNode;
   className?: string;
+  height?: number | '100%' | 'auto';
 }
 
 export interface ContainerPrivateProps extends ContainerProps {
@@ -12,11 +13,20 @@ export interface ContainerPrivateProps extends ContainerProps {
 }
 
 const Container = memo(
-  ({ children, component: Component, className = '' }: ContainerPrivateProps): JSX.Element => {
+  ({ children, component: Component, className, height }: ContainerPrivateProps): JSX.Element => {
     const classes = useMemo(() => classnames(styles.calendar, className), [className]);
 
-    if (Component) return <Component className={classes}>{children}</Component>;
-    return <div className={classes}>{children}</div>;
+    if (Component)
+      return (
+        <Component className={classes} height={height}>
+          {children}
+        </Component>
+      );
+    return (
+      <div className={classes} style={{ height }}>
+        {children}
+      </div>
+    );
   },
 );
 
