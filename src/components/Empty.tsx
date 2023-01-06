@@ -1,10 +1,9 @@
 import React from 'react';
-import { WeeksHeight } from '../types';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
 
 interface EmptyProps {
-  height: WeeksHeight;
+  height: number | '100%' | 'auto';
   emptyLabel: string;
   className?: string;
 }

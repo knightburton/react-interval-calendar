@@ -1,4 +1,3 @@
-export type WeeksHeight = number | '100%' | 'auto' | string;
 export type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type HighlightedItem = {
   id?: number | string;

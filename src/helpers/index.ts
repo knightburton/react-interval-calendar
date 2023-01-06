@@ -14,7 +14,7 @@ import {
   isWeekend,
   formatDate,
 } from '../utils/date';
-import { WeekdayIndex, CalendarTuple, HeaderCellType, WeeksHeight, BodyCellType } from '../types';
+import { WeekdayIndex, CalendarTuple, HeaderCellType, BodyCellType } from '../types';
 
 /**
  * Returns the desired date attributes based on the passed weeks and days.
@@ -78,25 +78,6 @@ export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: strin
       narrow: formatDate(date, locale, { weekday: 'narrow' }),
     };
   });
-};
-
-/**
- * Returns the height of the weeks section based the header visibility.
- *
- * @param header Is the header visible?
- * @param weekdays Are the weekdays visible?
- * @param height Overall height to calculate the weeks height from.
- */
-export const getWeeksHeight = (header: boolean, weekdays: boolean, height: WeeksHeight): WeeksHeight => {
-  // If the header is not visible then there is no point to reduce the weeks height.
-  if (!header) return height;
-  // If the header weekdays are visible then substract the height of it from the given height.
-  // Given height - size * global spacing value.
-  if (weekdays && typeof height === 'number') return height - 5 * 8;
-  // If the hright is not a number but we have the weekdays enabled let the css do the work with calc funtion.
-  if (weekdays) return `calc(${height} - ${5 * 8}px)`;
-  // Otherwise just pass the height.
-  return height;
 };
 
 export const getBodyCellContent = (cell: BodyCellType, locale = 'default'): string => {
