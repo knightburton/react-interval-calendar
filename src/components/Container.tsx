@@ -8,7 +8,7 @@ export interface ContainerProps {
 }
 
 export interface ContainerPrivateProps extends ContainerProps {
-  component?: React.ComponentType<ContainerProps>;
+  component?: React.FC<ContainerProps>;
 }
 
 const Container = memo(

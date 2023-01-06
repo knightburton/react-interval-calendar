@@ -23,11 +23,11 @@ interface IntervalCalendarProps {
   onCellClick?: (cell: BodyCellType) => void;
   showHeader?: boolean;
   weekStartsOn?: WeekdayIndex;
-  containerComponent?: React.ComponentType<ContainerProps>;
-  headerContainerComponent?: React.ComponentType<HeaderContainerProps>;
-  headerCellContentComponent?: React.ComponentType<HeaderCellContentProps>;
-  bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
-  bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
+  containerComponent?: React.FC<ContainerProps>;
+  headerContainerComponent?: React.FC<HeaderContainerProps>;
+  headerCellContentComponent?: React.FC<HeaderCellContentProps>;
+  bodyContainerComponent?: React.FC<BodyContainerProps>;
+  bodyCellContentComponent?: React.FC<BodyCellContentProps>;
   containerClassName?: string;
   headerContainerClassName?: string;
   headerRowClassName?: string;

@@ -8,7 +8,7 @@ interface BodyCellProps {
   data: BodyCellType;
   locale?: string;
   onClick?: (cell: BodyCellType) => void;
-  contentComponent?: React.ComponentType<BodyCellContentProps>;
+  contentComponent?: React.FC<BodyCellContentProps>;
   className?: string;
   contentClassName?: string;
 }

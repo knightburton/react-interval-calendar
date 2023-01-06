@@ -5,7 +5,7 @@ interface BodyProps {
   startDate: Date | null;
   numberOfWeeks: number;
   renderRow: (numberOfWeek: number) => JSX.Element;
-  containerComponent: React.ComponentType<BodyContainerProps>;
+  containerComponent: React.FC<BodyContainerProps>;
   containerClassName?: string;
 }
 

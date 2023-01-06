@@ -8,7 +8,7 @@ export interface BodyContainerProps {
 }
 
 export interface BodyContainerPrivateProps extends BodyContainerProps {
-  component?: React.ComponentType<BodyContainerProps>;
+  component?: React.FC<BodyContainerProps>;
 }
 
 const BodyContainer = ({ children, component: Component, className }: BodyContainerPrivateProps): JSX.Element => {
