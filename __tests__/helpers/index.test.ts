@@ -1,125 +1,64 @@
 import * as helpers from '../../src/helpers';
-import { mockDayAttributes } from '../testUtils';
-import { HIGHLIGHTED, HIGHLIGHTED_COLOR_ALPHA, THEME, LOCALE } from '../../src/constants/default-props';
+import { mockBodyCellAttributes } from '../testUtils';
 
 describe('getDayAttributes', () => {
   it('returns all attributes for a normal day with default values', () => {
     expect(
-      helpers.getDayAttributes(
+      helpers.getCellAttributes(
         new Date(2021, 0, 1), // startDate
         2, // numberOfWeek
         3, // numberOfDay
-        HIGHLIGHTED, // highlighted
-        HIGHLIGHTED_COLOR_ALPHA, // highlightedColorAlpha
-        THEME, // theme
-        LOCALE, // locale
+        'default', // locale
       ),
     ).toEqual(
-      mockDayAttributes({
+      mockBodyCellAttributes({
         key: '2-3',
         date: new Date(2021, 0, 18),
-        yearLabel: 2021,
-        monthLabel: 'Jan',
-        dayLabel: '18',
+        year: '2021',
+        month: 'Jan',
+        day: '18',
       }),
     );
   });
 
   it('returns all attributes for a day that is the first day of the month', () => {
     expect(
-      helpers.getDayAttributes(
+      helpers.getCellAttributes(
         new Date(2021, 0, 1), // startDate
         0, // numberOfWeek
         0, // numberOfDay
-        HIGHLIGHTED, // highlighted
-        HIGHLIGHTED_COLOR_ALPHA, // highlightedColorAlpha
-        THEME, // theme
-        LOCALE, // locale
+        'en-GB', // locale
       ),
     ).toEqual(
-      mockDayAttributes({
+      mockBodyCellAttributes({
         key: '0-0',
         date: new Date(2021, 0, 1),
-        yearLabel: 2021,
-        monthLabel: 'Jan',
-        dayLabel: '01',
+        year: '2021',
+        month: 'Jan',
+        day: '01',
         isFirstDayOfMonth: true,
+        isFirstDayOfYear: true,
       }),
     );
   });
 
   it('returns all attributes for a day that is the last day of the month', () => {
     expect(
-      helpers.getDayAttributes(
+      helpers.getCellAttributes(
         new Date(2021, 0, 1), // startDate
         4, // numberOfWeek
         2, // numberOfDay
-        HIGHLIGHTED, // highlighted
-        HIGHLIGHTED_COLOR_ALPHA, // highlightedColorAlpha
-        THEME, // theme
-        LOCALE, // locale
+        'en-GB', // locale
       ),
     ).toEqual(
-      mockDayAttributes({
+      mockBodyCellAttributes({
         key: '4-2',
         date: new Date(2021, 0, 31),
-        yearLabel: 2021,
-        monthLabel: 'Jan',
-        dayLabel: '31',
+        year: '2021',
+        month: 'Jan',
+        day: '31',
         isLastDayOfMonth: true,
         isWeekend: true,
-      }),
-    );
-  });
-
-  it('returns all attributes for a day that is highlighted', () => {
-    expect(
-      helpers.getDayAttributes(
-        new Date(2021, 1, 1), // startDate
-        1, // numberOfWeek
-        1, // numberOfDay
-        [{ key: 'test', start: new Date(2021, 1, 6), end: new Date(2021, 1, 12) }], // highlighted
-        HIGHLIGHTED_COLOR_ALPHA, // highlightedColorAlpha
-        THEME, // theme
-        LOCALE, // locale
-      ),
-    ).toEqual(
-      mockDayAttributes({
-        key: '1-1',
-        date: new Date(2021, 1, 9),
-        yearLabel: 2021,
-        monthLabel: 'Feb',
-        dayLabel: '09',
-        isMonthEven: true,
-        isHighlighted: true,
-        highlightColor: 'rgba(57, 59, 68, 0.2)',
-        highlightId: 'test',
-      }),
-    );
-  });
-
-  it('returns all attributes for a day that is highlighted with custom color', () => {
-    expect(
-      helpers.getDayAttributes(
-        new Date(2021, 1, 1), // startDate
-        1, // numberOfWeek
-        1, // numberOfDay
-        [{ key: 'test', start: new Date(2021, 1, 6), end: new Date(2021, 1, 12), color: '#ff0000' }], // highlighted
-        HIGHLIGHTED_COLOR_ALPHA, // highlightedColorAlpha
-        THEME, // theme
-        LOCALE, // locale
-      ),
-    ).toEqual(
-      mockDayAttributes({
-        key: '1-1',
-        date: new Date(2021, 1, 9),
-        yearLabel: 2021,
-        monthLabel: 'Feb',
-        dayLabel: '09',
-        isMonthEven: true,
-        isHighlighted: true,
-        highlightColor: 'rgba(255, 0, 0, 0.2)',
-        highlightId: 'test',
       }),
     );
   });
@@ -148,69 +87,49 @@ describe('getCalendarBaseAttributes', () => {
 });
 
 describe('getHeaderWeekdays', () => {
-  it('returns formatted day labels array when week starts on Sunday', () => {
+  it('returns formatted labels array when week starts on Sunday', () => {
     expect(helpers.getHeaderWeekdays()).toEqual([
-      { key: 0, label: 'Sun' },
-      { key: 1, label: 'Mon' },
-      { key: 2, label: 'Tue' },
-      { key: 3, label: 'Wed' },
-      { key: 4, label: 'Thu' },
-      { key: 5, label: 'Fri' },
-      { key: 6, label: 'Sat' },
+      { key: 0, short: 'Sun', long: 'Sunday', narrow: 'S' },
+      { key: 1, short: 'Mon', long: 'Monday', narrow: 'M' },
+      { key: 2, short: 'Tue', long: 'Tuesday', narrow: 'T' },
+      { key: 3, short: 'Wed', long: 'Wednesday', narrow: 'W' },
+      { key: 4, short: 'Thu', long: 'Thursday', narrow: 'T' },
+      { key: 5, short: 'Fri', long: 'Friday', narrow: 'F' },
+      { key: 6, short: 'Sat', long: 'Saturday', narrow: 'S' },
     ]);
   });
 
-  it('returns formatted day labels array when week starts on Monday', () => {
+  it('returns formatted labels array when week starts on Monday', () => {
     expect(helpers.getHeaderWeekdays(1)).toEqual([
-      { key: 0, label: 'Mon' },
-      { key: 1, label: 'Tue' },
-      { key: 2, label: 'Wed' },
-      { key: 3, label: 'Thu' },
-      { key: 4, label: 'Fri' },
-      { key: 5, label: 'Sat' },
-      { key: 6, label: 'Sun' },
+      { key: 0, short: 'Mon', long: 'Monday', narrow: 'M' },
+      { key: 1, short: 'Tue', long: 'Tuesday', narrow: 'T' },
+      { key: 2, short: 'Wed', long: 'Wednesday', narrow: 'W' },
+      { key: 3, short: 'Thu', long: 'Thursday', narrow: 'T' },
+      { key: 4, short: 'Fri', long: 'Friday', narrow: 'F' },
+      { key: 5, short: 'Sat', long: 'Saturday', narrow: 'S' },
+      { key: 6, short: 'Sun', long: 'Sunday', narrow: 'S' },
     ]);
   });
 });
 
-describe('getWeeksHeight', () => {
-  it('returns the height untouched because the header is not visible', () => {
-    expect(
-      helpers.getWeeksHeight(
-        false, // header
-        true, // weekdays
-        500, // height
-      ),
-    ).toEqual(500);
+describe('getBodyCellContent', () => {
+  it('returns the full date based on the first day of year condition with GB locale', () => {
+    expect(helpers.getBodyCellContent(mockBodyCellAttributes({ date: new Date(2023, 0, 1), isFirstDayOfYear: true }), 'en-GB')).toEqual('01 Jan 2023');
   });
 
-  it('returns the height untouched because the weekdays is not visible but the header is', () => {
-    expect(
-      helpers.getWeeksHeight(
-        true, // header
-        false, // weekdays
-        500, // height
-      ),
-    ).toEqual(500);
+  it('returns the full date based on the first day of year condition with US locale', () => {
+    expect(helpers.getBodyCellContent(mockBodyCellAttributes({ date: new Date(2023, 0, 1), isFirstDayOfYear: true }), 'en-US')).toEqual('Jan 01, 2023');
   });
 
-  it('returns the reduced height number because the header and weekdays are visible', () => {
-    expect(
-      helpers.getWeeksHeight(
-        true, // header
-        true, // weekdays
-        500, // height
-      ),
-    ).toEqual(460); // because the weekdays height is 40
+  it('returns the date month and day based on the first day of mondth condition with US locale', () => {
+    expect(helpers.getBodyCellContent(mockBodyCellAttributes({ date: new Date(2023, 1, 1), isFirstDayOfMonth: true }), 'en-US')).toEqual('Feb 01');
   });
 
-  it('returns the reduced height string as css calc function because the header and weekdays are visible and the height is string', () => {
-    expect(
-      helpers.getWeeksHeight(
-        true, // header
-        true, // weekdays
-        '100%', // height
-      ),
-    ).toEqual('calc(100% - 40px)'); // because the weekdays height is 40
+  it('returns the date day based on a specific date with US locale', () => {
+    expect(helpers.getBodyCellContent(mockBodyCellAttributes({ date: new Date(2023, 1, 9), day: '09' }), 'en-US')).toEqual('09');
+  });
+
+  it('returns the date day with default locale', () => {
+    expect(helpers.getBodyCellContent(mockBodyCellAttributes())).toEqual('18');
   });
 });

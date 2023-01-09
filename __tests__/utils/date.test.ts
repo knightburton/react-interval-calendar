@@ -180,6 +180,24 @@ describe('getDayEnd', () => {
   });
 });
 
+describe('getDifferenceInCalendarDays', () => {
+  it('returns valid start of day from proper dates', () => {
+    expect(utils.getDifferenceInCalendarDays(new Date(2021, 0, 10), new Date(2021, 0, 14))).toEqual(4);
+  });
+
+  it('throws error because of object as Date first arg', () => {
+    expect(() => utils.getDifferenceInCalendarDays(<Date>{}, new Date(2021, 1, 11))).toThrow(Error);
+  });
+
+  it('throws error because of object as Date second arg', () => {
+    expect(() => utils.getDifferenceInCalendarDays(new Date(2021, 1, 11), <Date>{})).toThrow(Error);
+  });
+
+  it('throws error because of object as Date args', () => {
+    expect(() => utils.getDifferenceInCalendarDays(<Date>{}, <Date>{})).toThrow(Error);
+  });
+});
+
 describe('getDifferenceInCalendarWeeks', () => {
   it('returns valid start of day from proper dates and default weekStartsOn', () => {
     expect(utils.getDifferenceInCalendarWeeks(new Date(2021, 0, 10), new Date(2021, 1, 11))).toEqual(4);
@@ -328,6 +346,24 @@ describe('isWithinInterval', () => {
 
   it('throws error because of object as Date arg', () => {
     expect(() => utils.isWithinInterval(<Date>{}, <Date>{}, <Date>{})).toThrow(Error);
+  });
+});
+
+describe('isFirstDayOfYear', () => {
+  it('returns false from proper date', () => {
+    expect(utils.isFirstDayOfYear(new Date(2021, 0, 11))).toEqual(false);
+  });
+
+  it('returns true from proper date', () => {
+    expect(utils.isFirstDayOfYear(new Date(2021, 0, 1))).toEqual(true);
+  });
+
+  it('returns true from proper date (milisecundum precision)', () => {
+    expect(utils.isFirstDayOfYear(new Date(2021, 0, 1, 0, 0, 0, 0))).toEqual(true);
+  });
+
+  it('throws error because of object as Date arg', () => {
+    expect(() => utils.isFirstDayOfYear(<Date>{})).toThrow(Error);
   });
 });
 

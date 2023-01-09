@@ -1,5 +1,5 @@
 import { act } from '@testing-library/react';
-import { Day } from '../src/interfaces/IntervalCalendarDay.interface';
+import { BodyCellType } from '../src/types';
 
 type Item = {
   callback: IntersectionObserverCallback;
@@ -79,21 +79,17 @@ export const mockAllIsIntersecting = (isIntersecting: boolean | number): void =>
 export const mockIntersectionInstance = (element: Element): IntersectionObserver | undefined =>
   Array.from(observers)?.find(observer => observer[1].elements.find(e => e === element))?.[0];
 
-export const mockDayAttributes = (overrides: OverridesType = {}): Day => ({
+export const mockBodyCellAttributes = (overrides: OverridesType = {}): BodyCellType => ({
   key: '2-3',
   date: new Date(2021, 0, 18),
-  yearLabel: 2021,
-  monthLabel: 'Jan',
-  dayLabel: '18',
+  day: '18',
+  month: '1',
+  year: '2021',
+  isFirstDayOfYear: false,
   isMonthEven: false,
   isFirstDayOfMonth: false,
   isLastDayOfMonth: false,
   isToday: false,
   isWeekend: false,
-  isHighlighted: false,
-  isFirstOfHighlighted: false,
-  isLastOfHighlighted: false,
-  highlightColor: undefined,
-  highlightId: undefined,
   ...overrides,
 });
