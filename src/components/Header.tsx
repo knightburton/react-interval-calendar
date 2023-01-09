@@ -39,7 +39,7 @@ const Header = memo(
       <HeaderContainer component={ContainerComponent} className={containerClassName}>
         <ul className={rowClasses}>
           {list.map(data => (
-            <li key={data.id} className={cellClasses}>
+            <li key={data.key} className={cellClasses}>
               <HeaderCellContent data={data} className={cellContentClassName} component={CellContentComponent} />
             </li>
           ))}

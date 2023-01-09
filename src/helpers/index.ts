@@ -30,8 +30,8 @@ export const getCellAttributes = (startDate: Date, numberOfWeek: number, numberO
   return {
     key: `${numberOfWeek}-${numberOfDay}`,
     date,
-    day: formatDate(date, locale, { day: 'numeric' }),
-    month: formatDate(date, locale, { month: 'numeric' }),
+    day: formatDate(date, locale, { day: '2-digit' }),
+    month: formatDate(date, locale, { month: 'short' }),
     year: formatDate(date, locale, { year: 'numeric' }),
     isFirstDayOfYear: isFirstDayOfYear(date),
     isMonthEven: isMonthEven(date),
@@ -72,7 +72,7 @@ export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: strin
   return Array.from(Array(7).keys()).map(day => {
     const date = addDays(start, day);
     return {
-      id: day,
+      key: day,
       short: formatDate(date, locale, { weekday: 'short' }),
       long: formatDate(date, locale, { weekday: 'long' }),
       narrow: formatDate(date, locale, { weekday: 'narrow' }),
@@ -81,7 +81,7 @@ export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: strin
 };
 
 export const getBodyCellContent = (cell: BodyCellType, locale = 'default'): string => {
-  if (cell.isFirstDayOfYear) return formatDate(cell.date, locale, { day: 'numeric', month: 'short', year: 'numeric' });
-  if (cell.isFirstDayOfMonth) return formatDate(cell.date, locale, { day: 'numeric', month: 'short' });
+  if (cell.isFirstDayOfYear) return formatDate(cell.date, locale, { day: '2-digit', month: 'short', year: 'numeric' });
+  if (cell.isFirstDayOfMonth) return formatDate(cell.date, locale, { day: '2-digit', month: 'short' });
   return cell.day;
 };
