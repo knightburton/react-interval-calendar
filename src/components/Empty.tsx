@@ -3,11 +3,11 @@ import classnames from '../utils/classnames';
 import styles from './styles.less';
 
 interface EmptyProps {
-  emptyLabel: string;
+  emptyLabel?: string;
   className?: string;
 }
 
-const Empty = ({ emptyLabel, className = '' }: EmptyProps): JSX.Element => (
+const Empty = ({ emptyLabel, className }: EmptyProps): JSX.Element => (
   <div className={classnames(styles.empty, className)}>
     <p>{emptyLabel || 'There is no date range to display'}</p>
   </div>

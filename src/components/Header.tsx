@@ -7,8 +7,8 @@ import HeaderCellContent, { HeaderCellContentProps } from './HeaderCellContent';
 import styles from './styles.less';
 
 export interface HeaderProps {
-  weekStartsOn: WeekdayIndex;
-  locale: string;
+  weekStartsOn?: WeekdayIndex;
+  locale?: string;
   enabled: boolean;
   containerComponent?: React.FC<HeaderContainerProps>;
   cellContentComponent?: React.FC<HeaderCellContentProps>;
