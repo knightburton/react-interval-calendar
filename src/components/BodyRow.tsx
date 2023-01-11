@@ -5,7 +5,7 @@ import { VisibilityMatrix, BodyCellType } from '../types';
 import styles from './styles.less';
 import classnames from '../utils/classnames';
 
-interface BodyRowProps {
+export interface BodyRowProps {
   numberOfWeek: number;
   locale: string;
   numberOfRowsPreRender: number;

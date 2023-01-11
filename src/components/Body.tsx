@@ -1,11 +1,11 @@
 import React from 'react';
 import BodyContainer, { BodyContainerProps } from './BodyContainer';
 
-interface BodyProps {
+export interface BodyProps {
   startDate: Date | null;
   numberOfWeeks: number;
   renderRow: (numberOfWeek: number) => JSX.Element;
-  containerComponent: React.FC<BodyContainerProps>;
+  containerComponent?: React.FC<BodyContainerProps>;
   containerClassName?: string;
 }
 

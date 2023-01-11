@@ -6,13 +6,13 @@ import Header from './components/Header';
 import { HeaderContainerProps } from './components/HeaderContainer';
 import { HeaderCellContentProps } from './components/HeaderCellContent';
 import Body from './components/Body';
-import BodyContainer, { BodyContainerProps } from './components/BodyContainer';
+import { BodyContainerProps } from './components/BodyContainer';
 import BodyRow from './components/BodyRow';
 import BodyCell from './components/BodyCell';
 import { BodyCellContentProps } from './components/BodyCellContent';
 import Empty from './components/Empty';
 
-interface IntervalCalendarProps {
+export interface IntervalCalendarProps {
   start?: Date;
   end?: Date;
   emptyLabel?: string;
@@ -53,7 +53,7 @@ const IntervalCalendar = ({
   containerComponent: ContainerComponent,
   headerContainerComponent: HeaderContainerComponent,
   headerCellContentComponent: HeaderCellContentComponent,
-  bodyContainerComponent: BodyContainerComponent = BodyContainer,
+  bodyContainerComponent: BodyContainerComponent,
   bodyCellContentComponent: BodyCellContentComponent,
   containerClassName = '',
   headerContainerClassName = '',
