@@ -4,11 +4,6 @@
 ![npm](https://img.shields.io/npm/v/@knightburton/react-interval-calendar)
 ![npm](https://img.shields.io/npm/dt/@knightburton/react-interval-calendar)
 
-<div align="left">
-  <img width="260" alt="react-interval-calendar-light" src="https://user-images.githubusercontent.com/12102205/112201819-ef794680-8c10-11eb-80b0-efa8f12e8759.png">
-  <img width="260" alt="react-interval-calendar-dark" src="https://user-images.githubusercontent.com/12102205/112201977-264f5c80-8c11-11eb-8aa1-f0c70649404c.png">
-</div>
-
 Infinite scrolling based calendar for interval dates built with React.
 
 - no additional dependencies
@@ -42,20 +37,7 @@ const App = () => (
     weekStartsOn={1}
     start={new Date(2021, 1, 1)}
     end={new Date(2021, 6, 31)}
-    highlighted={[
-      {
-        key: 'audit',
-        start: new Date(2021, 1, 16),
-        end: new Date(2021, 1, 20),
-      },
-    ]}
     height={700}
-    showToday={false}
-    showMonths
-    showYears
-    showBorder
-    showBorderRadius
-    fadeWeekends
   />
 );
 
@@ -68,77 +50,82 @@ For more detailed example check the [example](./example) directory.
 | --- | --- | --- | --- |
 | start | Date | `undefined` | The beginning of the calendar that should displayed. The calendar will display the whole month of the start date. |
 | end | Date | `undefined` | The end of the calendar that should displayed. The calendar will display the whole month of the end date. |
-| customClassNames | object | `{}` | Class name(s) that will be applied to a given calendar item. More details see [Custom Class Names props](#custom-class-names-props). |
-| enableSelect | boolean | `false` | Whether the day cell selection is enabled or not |
-| emptyLabel | string | `There is no date range to display` | Content of a label rendered in case of no or invalid start-end interval. |
-| fadeWeekends | boolean | `false` | Whether the weekends shall be faded or not. |
-| height | number or string | `500` | Height of the calendar. Can be a number in pixels, `100%`, `auto` or a `string` that can be evaluated in css. |
-| highlighted | array | `[]` | Array of the intervals that should be highlighted between the start and end date. The highlighted interval cannot intersect with each other yet. More details see [Highlighted Props](#highlighted-props). |
-| highlightedColorAlpha | number | `0.2` | Alpha level of the highlighted colors. Can be between `0.0` and `1.0`. |
+| emptyLabel | string | `'There is no date range to display'` | Content of a label rendered in case of no or invalid start-end interval. |
+| height | `number` or `'100%'` or `auto'` | `500` | Height of the calendar. Can be a number in pixels, `100%`, `auto` or a `string` that can be evaluated in css. |
 | locale | string | `default` | Locale that should be used to format and display the days and months. Can be an IETF language tag. |
-| numberOfWeekFirstRender | number | `8` | Number of weeks to render below the visible weeks on the first render. |
-| numberOfWeekPreRender | number | `4` | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. |
-| onSelect | function | `undefined` | Function called when the user clicks a day. It returns a [Day object](#day-object). Only takes effect when the `enableSelect` is `true` |
-| showBorder | boolean | `false` | Whether the calendar component border shall be rendered or not. |
-| showBorderRadius | boolean | `false` | Whether the calendar component border shall be rounded or not. Only takes effect when the `showBorder` prop set to `true`. |
-| showGutterBetweenHighlighted | boolean | `false` | Whether a small gutter shall be shown on the highlighted intervals to be more separated or not. |
+| numberOfRowsFirstRender | number | `8` | Number of weeks to render below the visible weeks on the first render. |
+| numberOfRowsPreRender | number | `4` | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. |
+| onCellClick | function | `undefined` | Function called when the user clicks a cell. It returns a [Cell Data object](#cell-data-object). |
 | showHeader | boolean | `true` | Whether the whole header shall be shown or not. |
-| showHeaderWeekdays | boolean | `true` | Whether the name of the day shall be shown in the header columns or not. Only takes effect when the `showHeader` prop set to `true`. |
-| showMonthStripes | boolean | `true` | Whether the months background color stripes shall be shown or not. |
-| showMonths | boolean | `false` | Whether the month name shall be shown on the first day of a month or not. |
-| showToday | boolean | `true` | Whether the current day shall be highlighted or not. |
-| showYears | boolean | `false` | Whether the year number shall be shown on the first day of a month or not. |
-| theme | string | `light` | The color theme of the calendar. Can be `light` or `dark`. |
 | weekStartsOn | number | `0` | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`. |
+| containerComponent | component | `undefined` | React component that should be rendered as the main container component. For the passed props check the [Container Component Props](#container-component-props), please. |
+| headerContainerComponent | component | `undefined` |  React component that should be rendered as the header container component. For the passed props check the [Header Container Component Props](#header-container-component-props), please.|
+| headerCellContentComponent | component | `undefined` | React component that should be rendered as the header cell content component. For the passed props check the [Header Cell Content Component Props](#header-cell-content-component-props), please. |
+| bodyContainerComponent | component | `undefined` | React component that should be rendered as the main body container component. For the passed props check the [Body Container Component Props](#body-container-component-props), please. |
+| bodyCellContentComponent | component | `undefined` | React component that should be rendered as the cell content component. For the passed props check the [Body Cell Content Component Props](#body-cell-content-component-props), please. |
+| containerClassName | string | `''` | Classname(s) that should applied to the calendar container element. |
+| headerContainerClassName | string | `''` | Classname(s) that should applied to the header container element. |
+| headerRowClassName | string | `''` | Classname(s) that should applied to the header row (list) element. |
+| headerCellClassName | string | `''` | Classname(s) that should applied to the header cell (list item) element. |
+| headerCellContentClassName | string | `''` | Classname(s) that should applied to the header cell content element. |
+| bodyContainerClassName | string | `''` | Classname(s) that should applied to the body container element. |
+| bodyRowClassName | string | `''` | Classname(s) that should applied to the body row (list) element. |
+| bodyCellClassName | string | `''` | Classname(s) that should applied to the cell (list item) element. |
+| bodyCellContentClassName | string | `''` | Classname(s) that should applied to the cell content element. |
 
-#### Custom Class Names Props
-The `customClassNames` prop can consume the following props where each prop can be a `string` or an `array of string`:
-| Prop name | Description |
-| --- | --- |
-| calendar | Classname(s) that will be applied to the calendar container element. |
-| calendarEmpty | Classname(s) that will be applied to calendar empty state container element. |
-| header | Classname(s) that will be applied to header element. |
-| headerWeekdays | Classname(s) that will be applied to weekdays list wrapper element inside the header. |
-| headerWeekday | Classname(s) that will be applied to each day list item element inside the header weekdays list. |
-| weeks | Classname(s) that will be applied to the weeks container element. |
-| week | Classname(s) that will be applied to week container element. |
-| day | Classname(s) that will be applied to the day container element. |
-| dayText | Classname(s) that will be applied to the main day text element inside the day container. |
-| dayMonthText | Classname(s) that will be applied to the month text element inside the day container. |
-| dayYearText | Classname(s) that will be applied to the year text element inside the day container. |
-| dayHighlighted | Classname(s) that will be applied to the highlighted day element inside the day container. |
-| daySelected | Classname(s) that will be applied to the user selected day element inside the day container. |
-| dayToday | Classname(s) that will be applied to the current day element inside the day container. |
-
-#### Highlighted Props
-The `highlighted` prop is an array and each item is an `object` and should look like the following:
-| Prop name | Required/Optional | Description |
+#### Cell Data Object
+| Prop name | Type | Description |
 | --- | --- | --- |
-| id | Optional | Identifies the item inside the array. |
-| key | Optional | Identifies the item inside the array. |
-| start | Required | Start date of the highlighted interval. |
-| end | Required | End date of the highlighted interval. |
-| color | Optional | Highilight color of the interval. The color can be in `hex`, `rgb` or `rgba` format. The calendar will convert the color into an `rgba` format where the `alpha` value will be equal to `highlightedColorAlpha` prop by default if that is not provided as part of the color. |
+| key | `string` | Identifier that created from the number of week and day of the week. |
+| date | `Date` | Actual Date object. |
+| day | `string` | Day of the month formatted with the provided `locale` prop as `2-digit` day. |
+| month | `string` | Month from the actual date formatted with the provided `locale` prop as `short` month. |
+| year | `string` | Year from the actual date formatted with the provided `locale` prop as `numeric` year. |
+| isFirstDayOfYear | `boolean` | Describes whether the day is the first day of the year or not. |
+| isMonthEven | `boolean` | Describes whether the month of the actual date is even or not. |
+| isFirstDayOfMonth | `boolean` | Describes whether the actual date is the first day of the month or not. |
+| isLastDayOfMonth | `boolean` | Describes whether the actual date is the last day of the month or not. |
+| isToday | `boolean` | Describes whether the actual date is the same date as today or not. |
+| isWeekend | `boolean` | Describes whether the actual date is on weekend or not. |
 
-#### Day Object
-The `onSelect` function will return a `Day object` with the following props:
-| Prop name | Description |
-| --- | --- |
-| key | Day identifier that created from the number of week and day of the week. |
-| date | Actual Date object of the day. |
-| yearLabel | Year label from the actual date. |
-| monthLabel | Month label from the actual date formatted with the provided `locale` prop. |
-| dayLabel | Day of the month label that is displayed in the calendar. |
-| isMonthEven | Describes whether the month of the actual date is even or not. |
-| isFirstDayOfMonth | Describes whether the actual date is the first day of the month or not. |
-| isLastDayOfMonth | Describes whether the actual date is the last day of the month or not. |
-| isToday | Describes whether the actual date is the same date as today or not. |
-| isWeekend | Describes whether the actual date is on weekend or not. |
-| isHighlighted | Describes whether the actual date is highlighted or not. |
-| isFirstOfHighlighted | Describes whether the actual date is the first date of the highlighted interval or not. |
-| isLastOfHighlighted | Describes whether the actual date is the last date of the highlighted interval or not. |
-| highlightColor | The color of the highlight in `rgba` format. |
-| highlightId | The highlight `id` or `key` if the actual date is highlighted. |
+#### Header Cell Data Object
+| Prop name | Type | Description |
+| --- | --- | --- |
+| key | `number` | Identifier that created from the day of the week. |
+| short | `string` | Day of the week formatted with the provided `locale` prop as `short` weekday. |
+| long | `string` | Day of the week formatted with the provided `locale` prop as `long` weekday. |
+| narrow | `string` | Day of the week formatted with the provided `locale` prop as `narrow` weekday. |
+
+#### Container Component Props
+| Prop name | Type | Description |
+| --- | --- | --- |
+| children | `React.ReactNode` | All the underlaying elements that needs to be rendered to show the calendar content. |
+| className | `string` | Merged classnames that includes the default one and the given one from `containerClassName` prop. |
+| height | `number` or `'100%'` or `'auto'` | The same height prop that is given for the main component as a prop. |
+
+#### Header Container Component Props
+| Prop name | Type | Description |
+| --- | --- | --- |
+| children | `React.ReactNode` | All the underlaying elements that needs to be rendered to show the header content. |
+| className | `string` | Merged classnames that includes the default one and the given one from `headerContainerClassName` prop. |
+
+#### Header Cell Content Component Props
+| Prop name | Type | Description |
+| --- | --- | --- |
+| data | [Header Cell Data Object](#header-cell-data-object) | The day of the week data structure that should be rendered. |
+| className | `string` | Merged classnames that includes the default one and the given one from `headerCellContentClassName` prop. |
+
+#### Body Container Component Props
+| Prop name | Type | Description |
+| --- | --- | --- |
+| children | `React.ReactNode` | All the underlaying elements that needs to be rendered to show the body content. |
+| className | `string` | Merged classnames that includes the default one and the given one from `bodyContainerClassName` prop. |
+
+#### Body Cell Content Component Props
+| Prop name | Type | Description |
+| --- | --- | --- |
+| data | [Cell Data Object](#cell-data-object) | The actual date data structure that should be rendered in the cell. |
+| className | `string` | Merged classnames that includes the default one and the given one from `bodyCellContentClassName` prop. |
 
 ### Development
 Local development is broken into two parts (ideally using two terminal tabs).
