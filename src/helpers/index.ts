@@ -80,6 +80,12 @@ export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: strin
   });
 };
 
+/**
+ * Return the actual body cell formatted date as a string to render.
+ *
+ * @param cell day data of the body cell.
+ * @param locale Locale to format the return.
+ */
 export const getBodyCellContent = (cell: BodyCellType, locale = 'default'): string => {
   if (cell.isFirstDayOfYear) return formatDate(cell.date, locale, { day: '2-digit', month: 'short', year: 'numeric' });
   if (cell.isFirstDayOfMonth) return formatDate(cell.date, locale, { day: '2-digit', month: 'short' });
