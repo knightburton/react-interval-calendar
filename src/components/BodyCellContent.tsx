@@ -11,7 +11,7 @@ export interface BodyCellContentProps {
 
 export interface BodyCellContentPrivateProps extends BodyCellContentProps {
   locale?: string;
-  component?: React.FC<BodyCellContentProps>;
+  component?: React.ComponentType<BodyCellContentProps>;
 }
 
 const BodyCellContent = ({ data, locale, component: Component, className }: BodyCellContentPrivateProps): JSX.Element => {

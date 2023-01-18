@@ -9,7 +9,7 @@ export interface HeaderCellContentProps {
 }
 
 export interface HeaderCellContentPrivateProps extends HeaderCellContentProps {
-  component?: React.FC<HeaderCellContentProps>;
+  component?: React.ComponentType<HeaderCellContentProps>;
 }
 
 const HeaderCellContent = memo(

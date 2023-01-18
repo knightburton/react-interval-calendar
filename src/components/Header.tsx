@@ -10,8 +10,8 @@ export interface HeaderProps {
   weekStartsOn?: WeekdayIndex;
   locale?: string;
   enabled: boolean;
-  containerComponent?: React.FC<HeaderContainerProps>;
-  cellContentComponent?: React.FC<HeaderCellContentProps>;
+  containerComponent?: React.ComponentType<HeaderContainerProps>;
+  cellContentComponent?: React.ComponentType<HeaderCellContentProps>;
   containerClassName?: string;
   rowClassName?: string;
   cellClassName?: string;

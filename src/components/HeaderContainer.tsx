@@ -8,7 +8,7 @@ export interface HeaderContainerProps {
 }
 
 export interface HeaderContainerPrivateProps extends HeaderContainerProps {
-  component?: React.FC<HeaderContainerProps>;
+  component?: React.ComponentType<HeaderContainerProps>;
 }
 
 const HeaderContainer = memo(

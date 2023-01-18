@@ -8,7 +8,7 @@ export interface BodyCellProps {
   data: BodyCellType;
   locale?: string;
   onClick?: (data: BodyCellType) => void;
-  contentComponent?: React.FC<BodyCellContentProps>;
+  contentComponent?: React.ComponentType<BodyCellContentProps>;
   className?: string;
   contentClassName?: string;
 }
