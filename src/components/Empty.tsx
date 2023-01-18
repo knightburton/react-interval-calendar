@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
 
-interface EmptyProps {
+export interface EmptyProps {
   emptyLabel?: string;
   className?: string;
 }
 
-const Empty = ({ emptyLabel, className }: EmptyProps): JSX.Element => (
-  <div className={classnames(styles.empty, className)}>
-    <p>{emptyLabel || 'There is no date range to display'}</p>
-  </div>
-);
+export interface EmptyPrivateProps extends EmptyProps {
+  component?: React.ComponentType<EmptyProps>;
+}
+
+const Empty = ({ emptyLabel, className, component: Component }: EmptyPrivateProps): JSX.Element => {
+  const classes = useMemo(() => classnames(styles.empty, className), [className]);
+
+  if (Component) return <Component emptyLabel={emptyLabel} className={classes} />;
+  return (
+    <div className={classes}>
+      <p>{emptyLabel || 'There is no date range to display'}</p>
+    </div>
+  );
+};
+
 export default Empty;

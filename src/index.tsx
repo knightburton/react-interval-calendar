@@ -10,7 +10,7 @@ import { BodyContainerProps } from './components/BodyContainer';
 import BodyRow from './components/BodyRow';
 import BodyCell from './components/BodyCell';
 import { BodyCellContentProps } from './components/BodyCellContent';
-import Empty from './components/Empty';
+import Empty, { EmptyProps } from './components/Empty';
 
 export interface IntervalCalendarProps {
   start?: Date;
@@ -28,6 +28,7 @@ export interface IntervalCalendarProps {
   headerCellContentComponent?: React.ComponentType<HeaderCellContentProps>;
   bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
   bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
+  emptyComponent?: React.ComponentType<EmptyProps>;
   containerClassName?: string;
   headerContainerClassName?: string;
   headerRowClassName?: string;
@@ -37,6 +38,7 @@ export interface IntervalCalendarProps {
   bodyRowClassName?: string;
   bodyCellClassName?: string;
   bodyCellContentClassName?: string;
+  emptyClassName?: string;
 }
 
 const IntervalCalendar = ({
@@ -50,11 +52,12 @@ const IntervalCalendar = ({
   onCellClick = undefined,
   showHeader = true,
   weekStartsOn = 0,
-  containerComponent: ContainerComponent,
-  headerContainerComponent: HeaderContainerComponent,
-  headerCellContentComponent: HeaderCellContentComponent,
-  bodyContainerComponent: BodyContainerComponent,
-  bodyCellContentComponent: BodyCellContentComponent,
+  containerComponent,
+  headerContainerComponent,
+  headerCellContentComponent,
+  bodyContainerComponent,
+  bodyCellContentComponent,
+  emptyComponent,
   containerClassName = '',
   headerContainerClassName = '',
   headerRowClassName = '',
@@ -64,6 +67,7 @@ const IntervalCalendar = ({
   bodyRowClassName = '',
   bodyCellClassName = '',
   bodyCellContentClassName = '',
+  emptyClassName = '',
 }: IntervalCalendarProps): JSX.Element => {
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
     Array(numberOfRowsFirstRender)
@@ -84,13 +88,13 @@ const IntervalCalendar = ({
   const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
   return (
-    <Container height={height} component={ContainerComponent} className={containerClassName}>
+    <Container height={height} component={containerComponent} className={containerClassName}>
       <Header
         weekStartsOn={weekStartsOn}
         locale={locale}
         enabled={showHeader}
-        containerComponent={HeaderContainerComponent}
-        cellContentComponent={HeaderCellContentComponent}
+        containerComponent={headerContainerComponent}
+        cellContentComponent={headerCellContentComponent}
         containerClassName={headerContainerClassName}
         rowClassName={headerRowClassName}
         cellClassName={headerCellClassName}
@@ -100,7 +104,7 @@ const IntervalCalendar = ({
         <Body
           startDate={startDate}
           numberOfWeeks={numberOfWeeks}
-          containerComponent={BodyContainerComponent}
+          containerComponent={bodyContainerComponent}
           containerClassName={bodyContainerClassName}
           renderRow={numberOfWeek => (
             <BodyRow
@@ -118,7 +122,7 @@ const IntervalCalendar = ({
                   data={cell}
                   locale={locale}
                   onClick={onCellClick}
-                  contentComponent={BodyCellContentComponent}
+                  contentComponent={bodyCellContentComponent}
                   className={bodyCellClassName}
                   contentClassName={bodyCellContentClassName}
                 />
@@ -127,7 +131,7 @@ const IntervalCalendar = ({
           )}
         />
       ) : (
-        <Empty emptyLabel={emptyLabel} />
+        <Empty emptyLabel={emptyLabel} className={emptyClassName} component={emptyComponent} />
       )}
     </Container>
   );
