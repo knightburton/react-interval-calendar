@@ -55,14 +55,15 @@ For more detailed example check the [example](./example) directory.
 | locale | string | `default` | Locale that should be used to format and display the days and months. Can be an IETF language tag. |
 | numberOfRowsFirstRender | number | `8` | Number of weeks to render below the visible weeks on the first render. |
 | numberOfRowsPreRender | number | `4` | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. |
-| onCellClick | function | `undefined` | Function called when the user clicks a cell. It returns a [Cell Data object](#cell-data-object). |
+| onCellClick | function | `undefined` | Function called when the user clicks a cell. It returns a [Cell Data](#cell-data). |
 | showHeader | boolean | `true` | Whether the whole header shall be shown or not. |
 | weekStartsOn | number | `0` | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`. |
-| containerComponent | ComponentType<[ContainerComponentProps](#container-component-props)> | `undefined` | React component that should be rendered as the main container component. For the passed props check the [ContainerComponentProps](#container-component-props), please. |
-| headerContainerComponent | ComponentType<[Header ContainerComponentProps](#header-container-component-props)> | `undefined` |  React component that should be rendered as the header container component. For the passed props check the [Header ContainerComponentProps](#header-container-component-props), please.|
-| headerCellContentComponent | ComponentType<[HeaderCellContentComponentProps](#header-cell-content-component-props)> | `undefined` | React component that should be rendered as the header cell content component. For the passed props check the [HeaderCellContentComponentProps](#header-cell-content-component-props), please. |
-| bodyContainerComponent | ComponentType<[BodyContainerComponentProps](#body-container-component-props)> | `undefined` | React component that should be rendered as the main body container component. For the passed props check the [BodyContainerComponentProps](#body-container-component-props), please. |
-| bodyCellContentComponent | ComponentType<[BodyCellContentComponentProps](#body-cell-content-component-props)> | `undefined` | React component that should be rendered as the cell content component. For the passed props check the [BodyCellContentComponentProps](#body-cell-content-component-props), please. |
+| containerComponent | ComponentType<[ContainerProps](#container-props)> | `undefined` | React component that should be rendered as the main container component. For the passed props check the [ContainerProps](#container-props), please. |
+| headerContainerComponent | ComponentType<[Header ContainerProps](#header-container-props)> | `undefined` |  React component that should be rendered as the header container component. For the passed props check the [Header ContainerProps](#header-container-props), please.|
+| headerCellContentComponent | ComponentType<[HeaderCellContentProps](#header-cell-content-props)> | `undefined` | React component that should be rendered as the header cell content component. For the passed props check the [HeaderCellContentProps](#header-cell-content-props), please. |
+| bodyContainerComponent | ComponentType<[BodyContainerProps](#body-container-props)> | `undefined` | React component that should be rendered as the main body container component. For the passed props check the [BodyContainerProps](#body-container-props), please. |
+| bodyCellContentComponent | ComponentType<[BodyCellContentProps](#body-cell-content-props)> | `undefined` | React component that should be rendered as the cell content component. For the passed props check the [BodyCellContentProps](#body-cell-content-props), please. |
+| emptyComponent | ComponentType<[EmptyProps](#empty-props)> | `undefined` | React component that should be rendered as the empty date range message component. For the passed props check the [EmptyProps](#empty-props), please. |
 | containerClassName | string | `''` | Classname(s) that should applied to the calendar container element. |
 | headerContainerClassName | string | `''` | Classname(s) that should applied to the header container element. |
 | headerRowClassName | string | `''` | Classname(s) that should applied to the header row (list) element. |
@@ -72,8 +73,9 @@ For more detailed example check the [example](./example) directory.
 | bodyRowClassName | string | `''` | Classname(s) that should applied to the body row (list) element. |
 | bodyCellClassName | string | `''` | Classname(s) that should applied to the cell (list item) element. |
 | bodyCellContentClassName | string | `''` | Classname(s) that should applied to the cell content element. |
+| emptyClassName | string | `''` | Classname(s) that should applied to the empty date range message element. |
 
-#### Cell Data Object
+#### Cell Data
 | Prop name | Type | Description |
 | --- | --- | --- |
 | key | `string` | Identifier that created from the number of week and day of the week. |
@@ -88,7 +90,7 @@ For more detailed example check the [example](./example) directory.
 | isToday | `boolean` | Describes whether the actual date is the same date as today or not. |
 | isWeekend | `boolean` | Describes whether the actual date is on weekend or not. |
 
-#### Header Cell Data Object
+#### Header Cell Data
 | Prop name | Type | Description |
 | --- | --- | --- |
 | key | `number` | Identifier that created from the day of the week. |
@@ -96,36 +98,42 @@ For more detailed example check the [example](./example) directory.
 | long | `string` | Day of the week formatted with the provided `locale` prop as `long` weekday. |
 | narrow | `string` | Day of the week formatted with the provided `locale` prop as `narrow` weekday. |
 
-#### Container Component Props
+#### Container Props
 | Prop name | Type | Description |
 | --- | --- | --- |
 | children | `React.ReactNode` | All the underlaying elements that needs to be rendered to show the calendar content. |
 | className | `string` | Merged classnames that includes the default one and the given one from `containerClassName` prop. |
 | height | `number` or `'100%'` or `'auto'` | The same height prop that is given for the main component as a prop. |
 
-#### Header Container Component Props
+#### Header Container Props
 | Prop name | Type | Description |
 | --- | --- | --- |
 | children | `React.ReactNode` | All the underlaying elements that needs to be rendered to show the header content. |
 | className | `string` | Merged classnames that includes the default one and the given one from `headerContainerClassName` prop. |
 
-#### Header Cell Content Component Props
+#### Header Cell Content Props
 | Prop name | Type | Description |
 | --- | --- | --- |
-| data | [Header Cell Data Object](#header-cell-data-object) | The day of the week data structure that should be rendered. |
+| data | [Header Cell Data](#header-cell-data) | The day of the week data structure that should be rendered. |
 | className | `string` | Merged classnames that includes the default one and the given one from `headerCellContentClassName` prop. |
 
-#### Body Container Component Props
+#### Body Container Props
 | Prop name | Type | Description |
 | --- | --- | --- |
 | children | `React.ReactNode` | All the underlaying elements that needs to be rendered to show the body content. |
 | className | `string` | Merged classnames that includes the default one and the given one from `bodyContainerClassName` prop. |
 
-#### Body Cell Content Component Props
+#### Body Cell Content Props
 | Prop name | Type | Description |
 | --- | --- | --- |
-| data | [Cell Data Object](#cell-data-object) | The actual date data structure that should be rendered in the cell. |
+| data | [Cell Data](#cell-data) | The actual date data structure that should be rendered in the cell. |
 | className | `string` | Merged classnames that includes the default one and the given one from `bodyCellContentClassName` prop. |
+
+#### Empty Props
+| Prop name | Type | Description |
+| --- | --- | --- |
+| emptyLabel | `string` | The actual message that should be visible when there is no valid date range. |
+| className | `string` | Merged classnames that includes the default one and the given one from `emptyClassName` prop. |
 
 ### Development
 Local development is broken into two parts (ideally using two terminal tabs).
