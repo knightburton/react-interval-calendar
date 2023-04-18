@@ -7,6 +7,8 @@ import classnames from '../utils/classnames';
 
 export interface BodyRowProps {
   numberOfWeek: number;
+  numberOfTodayWeek: number;
+  startRenderOnCurrentWeek: boolean;
   locale: string;
   numberOfRowsPreRender: number;
   startDate: Date | null;
@@ -18,6 +20,8 @@ export interface BodyRowProps {
 
 const BodyRow = ({
   numberOfWeek,
+  numberOfTodayWeek,
+  startRenderOnCurrentWeek,
   startDate,
   locale,
   visibilityMatrix,
@@ -26,7 +30,7 @@ const BodyRow = ({
   renderCell,
   className,
 }: BodyRowProps): JSX.Element => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLUListElement>(null);
   const isVisible = useOnScreen(ref);
   const shouldRender = useMemo(
     () =>
@@ -38,13 +42,18 @@ const BodyRow = ({
   );
   const data = useMemo(() => {
     if (!startDate || !shouldRender) return [];
-    return Array.from(Array(7).keys()).map(day => getCellAttributes(startDate, numberOfWeek, day, locale));
+    const dates = Array.from(Array(7).keys()).map(day => getCellAttributes(startDate, numberOfWeek, day, locale));
+    return dates;
   }, [startDate, numberOfWeek, locale, shouldRender]);
   const classes = useMemo(() => classnames(styles.body__row, className), [className]);
 
   useEffect(() => {
     if (isVisible && !shouldRender && updateVisibilityMatrix) updateVisibilityMatrix(numberOfWeek);
   }, [isVisible, shouldRender, updateVisibilityMatrix, numberOfWeek]);
+
+  useEffect(() => {
+    if (startRenderOnCurrentWeek && numberOfWeek === numberOfTodayWeek && ref.current) ref.current.scrollIntoView();
+  }, [startRenderOnCurrentWeek, numberOfWeek, numberOfTodayWeek]);
 
   return (
     <ul ref={ref} key={numberOfWeek} className={classes}>

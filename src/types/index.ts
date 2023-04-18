@@ -2,7 +2,7 @@ export type WeekdayIndex = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type VisibilityMatrix = {
   [week: number]: boolean;
 };
-export type CalendarTuple = [Date | null, Date | null, number];
+export type CalendarTuple = [Date | null, Date | null, number, number];
 export type HeaderCellType = {
   key: number;
   short: string;

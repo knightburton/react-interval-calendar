@@ -20,6 +20,7 @@ export interface IntervalCalendarProps {
   locale?: string;
   numberOfRowsFirstRender?: number;
   numberOfRowsPreRender?: number;
+  startRenderOnCurrentWeek?: boolean;
   onCellClick?: (data: BodyCellType) => void;
   showHeader?: boolean;
   weekStartsOn?: WeekdayIndex;
@@ -49,6 +50,7 @@ const IntervalCalendar = ({
   locale = 'default',
   numberOfRowsFirstRender = 8,
   numberOfRowsPreRender = 4,
+  startRenderOnCurrentWeek = false,
   onCellClick = undefined,
   showHeader = true,
   weekStartsOn = 0,
@@ -69,10 +71,12 @@ const IntervalCalendar = ({
   bodyCellContentClassName = '',
   emptyClassName = '',
 }: IntervalCalendarProps): JSX.Element => {
+  const [startDate, , numberOfWeeks, numberOfTodayWeek] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
+
   const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
-    Array(numberOfRowsFirstRender)
+    Array(startRenderOnCurrentWeek ? numberOfTodayWeek + numberOfRowsFirstRender : numberOfRowsFirstRender)
       .fill(null)
-      .reduce((acc: VisibilityMatrix, _, week) => ({ ...acc, [week]: true }), {}),
+      .reduce((acc: VisibilityMatrix, _, week) => ({ ...acc, [week]: startRenderOnCurrentWeek ? !(week < numberOfTodayWeek) : true }), {}),
   );
 
   const handleVisibilityMatrixChange = useCallback(
@@ -84,8 +88,6 @@ const IntervalCalendar = ({
     },
     [setVisibilityMatrix],
   );
-
-  const [startDate, , numberOfWeeks] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
   return (
     <Container height={height} component={containerComponent} className={containerClassName}>
@@ -110,6 +112,8 @@ const IntervalCalendar = ({
             <BodyRow
               key={numberOfWeek}
               numberOfWeek={numberOfWeek}
+              numberOfTodayWeek={numberOfTodayWeek}
+              startRenderOnCurrentWeek={startRenderOnCurrentWeek}
               startDate={startDate}
               locale={locale}
               visibilityMatrix={visibilityMatrix}
