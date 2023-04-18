@@ -8,7 +8,9 @@ const mockBodyRowProps: BodyRowProps = {
   numberOfWeek: 0,
   locale: 'en-GB',
   numberOfRowsPreRender: 1,
+  numberOfTodayWeek: 1,
   startDate: new Date(2023, 1, 18),
+  startRenderOnCurrentWeek: false,
   updateVisibilityMatrix: jest.fn(),
   visibilityMatrix: { 0: false, 1: true, 2: false, 3: false },
   renderCell: (cell: BodyCellType) => (
@@ -25,42 +27,46 @@ const inlineSnapshot = `
   <span
     role="presentation"
   >
-    18
+    25
   </span>
   <span
     role="presentation"
   >
-    19
+    26
   </span>
   <span
     role="presentation"
   >
-    20
+    27
   </span>
   <span
     role="presentation"
   >
-    21
+    28
   </span>
   <span
     role="presentation"
   >
-    22
+    01
   </span>
   <span
     role="presentation"
   >
-    23
+    02
   </span>
   <span
     role="presentation"
   >
-    24
+    03
   </span>
 </ul>
 `;
 
 describe('BodyRow', () => {
+  beforeAll(() => {
+    window.HTMLElement.prototype.scrollIntoView = jest.fn();
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -69,6 +75,8 @@ describe('BodyRow', () => {
     const { unmount } = render(
       <BodyRow
         numberOfWeek={mockBodyRowProps.numberOfWeek}
+        numberOfTodayWeek={mockBodyRowProps.numberOfTodayWeek}
+        startRenderOnCurrentWeek={mockBodyRowProps.startRenderOnCurrentWeek}
         locale={mockBodyRowProps.locale}
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
@@ -92,6 +100,8 @@ describe('BodyRow', () => {
     const { unmount } = render(
       <BodyRow
         numberOfWeek={mockBodyRowProps.numberOfWeek}
+        numberOfTodayWeek={mockBodyRowProps.numberOfTodayWeek}
+        startRenderOnCurrentWeek={mockBodyRowProps.startRenderOnCurrentWeek}
         locale={mockBodyRowProps.locale}
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
@@ -119,6 +129,8 @@ describe('BodyRow', () => {
     const { unmount } = render(
       <BodyRow
         numberOfWeek={mockBodyRowProps.numberOfWeek}
+        numberOfTodayWeek={2}
+        startRenderOnCurrentWeek={mockBodyRowProps.startRenderOnCurrentWeek}
         locale={mockBodyRowProps.locale}
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
@@ -142,7 +154,9 @@ describe('BodyRow', () => {
   test('shows the BodyRow with fully customized props', () => {
     const { unmount, asFragment } = render(
       <BodyRow
-        numberOfWeek={mockBodyRowProps.numberOfWeek}
+        numberOfWeek={1}
+        numberOfTodayWeek={mockBodyRowProps.numberOfTodayWeek}
+        startRenderOnCurrentWeek
         locale={mockBodyRowProps.locale}
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
@@ -153,6 +167,7 @@ describe('BodyRow', () => {
       />,
     );
 
+    expect(window.HTMLElement.prototype.scrollIntoView).toHaveBeenCalled();
     expect(asFragment().firstChild).toMatchInlineSnapshot(inlineSnapshot);
 
     unmount();

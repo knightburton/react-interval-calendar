@@ -55,6 +55,7 @@ For more detailed example check the [example](./example) directory.
 | locale | string | `default` | Locale that should be used to format and display the days and months. Can be an IETF language tag. |
 | numberOfRowsFirstRender | number | `8` | Number of weeks to render below the visible weeks on the first render. |
 | numberOfRowsPreRender | number | `4` | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browers/devices. |
+| startRenderOnCurrentWeek | boolean | `false` | Wether the render of weeks should start at the current week or the start od the given calendar interval. |
 | onCellClick | function | `undefined` | Function called when the user clicks a cell. It returns a [Cell Data](#cell-data). |
 | showHeader | boolean | `true` | Whether the whole header shall be shown or not. |
 | weekStartsOn | number | `0` | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`. |

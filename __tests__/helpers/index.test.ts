@@ -65,8 +65,17 @@ describe('getDayAttributes', () => {
 });
 
 describe('getCalendarBaseAttributes', () => {
+  beforeAll(() => {
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(new Date(2021, 4, 10));
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
   it('returns undefined values because of missing start date', () => {
-    expect(helpers.getCalendarBaseAttributes(undefined, new Date(2021, 11, 11))).toEqual([null, null, 0]);
+    expect(helpers.getCalendarBaseAttributes(undefined, new Date(2021, 11, 11))).toEqual([null, null, 0, 0]);
   });
 
   it('returns proper attributes when the week starts on Sunday', () => {
@@ -74,14 +83,16 @@ describe('getCalendarBaseAttributes', () => {
       new Date(2021, 1, 28, 0, 0, 0, 0), // alfa
       new Date(2021, 6, 31, 23, 59, 59, 999), // omega
       21, // number of weeks between alfa and omega
+      10, // number of weeks between alfa and current date
     ]);
   });
 
   it('returns proper attributes when the week starts on Monday', () => {
-    expect(helpers.getCalendarBaseAttributes(new Date(2021, 2, 1), new Date(2021, 6, 31), 1)).toEqual([
-      new Date(2021, 2, 1, 0, 0, 0, 0), // alfa
+    expect(helpers.getCalendarBaseAttributes(new Date(2021, 3, 1), new Date(2021, 6, 31), 1)).toEqual([
+      new Date(2021, 2, 29, 0, 0, 0, 0), // alfa
       new Date(2021, 7, 1, 23, 59, 59, 999), // omega
-      21, // number of weeks between alfa and omega
+      17, // number of weeks between alfa and omega
+      6, // number of weeks between alfa and current date
     ]);
   });
 });
