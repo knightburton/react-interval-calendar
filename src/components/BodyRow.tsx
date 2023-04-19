@@ -31,6 +31,7 @@ const BodyRow = ({
   className,
 }: BodyRowProps): JSX.Element => {
   const ref = useRef<HTMLUListElement>(null);
+  const shouldScroll = useRef<boolean>(startRenderOnCurrentWeek && numberOfWeek === numberOfTodayWeek);
   const isVisible = useOnScreen(ref);
   const shouldRender = useMemo(
     () =>
@@ -52,8 +53,8 @@ const BodyRow = ({
   }, [isVisible, shouldRender, updateVisibilityMatrix, numberOfWeek]);
 
   useEffect(() => {
-    if (startRenderOnCurrentWeek && numberOfWeek === numberOfTodayWeek && ref.current) ref.current.scrollIntoView();
-  }, [startRenderOnCurrentWeek, numberOfWeek, numberOfTodayWeek]);
+    if (ref.current && shouldScroll.current) ref.current.scrollIntoView();
+  }, []);
 
   return (
     <ul ref={ref} key={numberOfWeek} className={classes}>
