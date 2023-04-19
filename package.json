@@ -1,6 +1,6 @@
 {
   "name": "@knightburton/react-interval-calendar",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Infinite scrolling based calendar for interval dates built with React.",
   "author": {
     "name": "Imre Kiss"
