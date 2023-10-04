@@ -3,7 +3,7 @@ import { ClassNames } from '../types';
 /**
  * Gets concatenated classnames from given arguments.
  *
- * @param args Arguments to get classname string from.
+ * @param args Arguments to get class name string from.
  */
 const classnames = (...args: ClassNames[]): string =>
   args

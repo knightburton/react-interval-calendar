@@ -12,7 +12,20 @@ import BodyCell from './components/BodyCell';
 import { BodyCellContentProps } from './components/BodyCellContent';
 import Empty, { EmptyProps } from './components/Empty';
 
-export interface IntervalCalendarProps {
+type ClassNames = {
+  container?: string;
+  headerContainer?: string;
+  headerRow?: string;
+  headerCell?: string;
+  headerCellContent?: string;
+  bodyContainer?: string;
+  bodyRow?: string;
+  bodyCell?: string;
+  bodyCellContent?: string;
+  empty?: string;
+};
+
+export type IntervalCalendarProps = {
   start?: Date;
   end?: Date;
   emptyLabel?: string;
@@ -30,17 +43,8 @@ export interface IntervalCalendarProps {
   bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
   bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
   emptyComponent?: React.ComponentType<EmptyProps>;
-  containerClassName?: string;
-  headerContainerClassName?: string;
-  headerRowClassName?: string;
-  headerCellClassName?: string;
-  headerCellContentClassName?: string;
-  bodyContainerClassName?: string;
-  bodyRowClassName?: string;
-  bodyCellClassName?: string;
-  bodyCellContentClassName?: string;
-  emptyClassName?: string;
-}
+  classNames?: ClassNames;
+};
 
 const IntervalCalendar = ({
   start = undefined,
@@ -60,16 +64,7 @@ const IntervalCalendar = ({
   bodyContainerComponent,
   bodyCellContentComponent,
   emptyComponent,
-  containerClassName = '',
-  headerContainerClassName = '',
-  headerRowClassName = '',
-  headerCellClassName = '',
-  headerCellContentClassName = '',
-  bodyContainerClassName = '',
-  bodyRowClassName = '',
-  bodyCellClassName = '',
-  bodyCellContentClassName = '',
-  emptyClassName = '',
+  classNames,
 }: IntervalCalendarProps): JSX.Element => {
   const [startDate, , numberOfWeeks, numberOfTodayWeek] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
@@ -90,24 +85,24 @@ const IntervalCalendar = ({
   );
 
   return (
-    <Container height={height} component={containerComponent} className={containerClassName}>
+    <Container height={height} component={containerComponent} className={classNames?.container}>
       <Header
         weekStartsOn={weekStartsOn}
         locale={locale}
         enabled={showHeader}
         containerComponent={headerContainerComponent}
         cellContentComponent={headerCellContentComponent}
-        containerClassName={headerContainerClassName}
-        rowClassName={headerRowClassName}
-        cellClassName={headerCellClassName}
-        cellContentClassName={headerCellContentClassName}
+        containerClassName={classNames?.headerContainer}
+        rowClassName={classNames?.headerRow}
+        cellClassName={classNames?.headerCell}
+        cellContentClassName={classNames?.headerCellContent}
       />
       {!!numberOfWeeks && !!startDate ? (
         <Body
           startDate={startDate}
           numberOfWeeks={numberOfWeeks}
           containerComponent={bodyContainerComponent}
-          containerClassName={bodyContainerClassName}
+          containerClassName={classNames?.bodyContainer}
           renderRow={numberOfWeek => (
             <BodyRow
               key={numberOfWeek}
@@ -119,7 +114,7 @@ const IntervalCalendar = ({
               visibilityMatrix={visibilityMatrix}
               updateVisibilityMatrix={handleVisibilityMatrixChange}
               numberOfRowsPreRender={numberOfRowsPreRender}
-              className={bodyRowClassName}
+              className={classNames?.bodyRow}
               renderCell={cell => (
                 <BodyCell
                   key={cell.key}
@@ -127,15 +122,15 @@ const IntervalCalendar = ({
                   locale={locale}
                   onClick={onCellClick}
                   contentComponent={bodyCellContentComponent}
-                  className={bodyCellClassName}
-                  contentClassName={bodyCellContentClassName}
+                  className={classNames?.bodyCell}
+                  contentClassName={classNames?.bodyCellContent}
                 />
               )}
             />
           )}
         />
       ) : (
-        <Empty emptyLabel={emptyLabel} className={emptyClassName} component={emptyComponent} />
+        <Empty emptyLabel={emptyLabel} className={classNames?.empty} component={emptyComponent} />
       )}
     </Container>
   );
