@@ -1,32 +1,25 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo } from 'react';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
 
-export interface ContainerProps {
-  children?: React.ReactNode;
+export type ContainerProps = {
   className?: string;
   height?: number | '100%' | 'auto';
-}
+  children?: React.ReactNode;
+};
 
-export interface ContainerPrivateProps extends ContainerProps {
-  component?: React.ComponentType<ContainerProps>;
-}
+export type ContainerPrivateProps = ContainerProps & {
+  slot?: React.ElementType<ContainerProps>;
+  slotProps?: Omit<ContainerProps, 'children'>;
+};
 
 const Container = memo(
-  ({ children, component: Component, className, height }: ContainerPrivateProps): JSX.Element => {
-    const classes = useMemo(() => classnames(styles.calendar, className), [className]);
+  ({ children, slot, slotProps }: ContainerPrivateProps): JSX.Element => {
+    const containerClassName = classnames(styles.calendar, slotProps?.className);
+    const ContainerSlot = slot || 'div';
+    const containerProps = { className: containerClassName, style: { height: slotProps?.height }, ...slotProps };
 
-    if (Component)
-      return (
-        <Component className={classes} height={height}>
-          {children}
-        </Component>
-      );
-    return (
-      <div className={classes} style={{ height }}>
-        {children}
-      </div>
-    );
+    return <ContainerSlot {...containerProps}>{children}</ContainerSlot>;
   },
 );
 
