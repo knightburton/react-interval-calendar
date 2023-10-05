@@ -45,6 +45,7 @@
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
     "import/no-extraneous-dependencies": ["off"],
     "react/prop-types": ["off"],
-    "react/require-default-props": ["off"]
+    "react/require-default-props": ["off"],
+    "react/jsx-props-no-spreading": ["off"]
   }
 }
