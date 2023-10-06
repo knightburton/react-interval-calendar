@@ -1,47 +1,51 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import Header from '../../src/components/Header';
-import { HeaderContainerProps } from '../../src/components/HeaderContainer';
-import { HeaderCellContentProps } from '../../src/components/HeaderCellContent';
+import Header, { HeaderCellContentProps, HeaderProps, HeaderCellProps } from '../../src/components/Header';
 
-const mockContainerComponent = ({ children, className }: HeaderContainerProps): JSX.Element => <div className={className}>{children}</div>;
-const mockCellContentComponent = ({ data, className }: HeaderCellContentProps) => <p className={className}>{data.long}</p>;
-const mockContainerClassName = 'test-container';
-const mockRowClassName = 'test-row';
+const mockRootSlot = ({ children, className }: HeaderProps): JSX.Element => (
+  <div role="list" className={className}>
+    {children}
+  </div>
+);
+const mockCellSlot = ({ children, className }: HeaderCellProps): JSX.Element => (
+  <div role="listitem" className={className}>
+    {children}
+  </div>
+);
+const mockCellContentSlot = ({ data, className }: HeaderCellContentProps): JSX.Element => <p className={className}>{data.long}</p>;
+const mockRootClassName = 'test-header';
 const mockCellClassName = 'test-cell';
 const mockCellContentClassName = 'test-cell-content';
 const inlineSnapshot = `
 <div
-  class="header test-container"
->
-  <ul
-    class="header__row test-row"
-  >${['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday']
-    .map(
-      day => `
-    <li
-      class="header__cell test-cell"
+  class="header test-header"
+  role="list"
+>${['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday']
+  .map(
+    day => `
+  <div
+    class="header__cell test-cell"
+    role="listitem"
+  >
+    <p
+      class="header__cell__content test-cell-content"
     >
-      <p
-        class="header__cell__content test-cell-content"
-      >
-        ${day}
-      </p>
-    </li>`,
-    )
-    .join('')}
-  </ul>
+      ${day}
+    </p>
+  </div>`,
+  )
+  .join('')}
 </div>
 `;
 
 describe('Header', () => {
-  test('render nothing based on enabled prop', () => {
-    const { container } = render(<Header enabled={false} />);
+  test('render nothing based on disabled slotProps.root', () => {
+    const { container } = render(<Header slotProps={{ root: { disabled: true } }} />);
     expect(container).toBeEmptyDOMElement();
   });
 
   test('shows the default Header without any specific prop', () => {
-    render(<Header enabled />);
+    render(<Header />);
     const list = screen.getByRole('list');
     const listItems = screen.getAllByRole('listitem');
     const firstItem = screen.getByText('Sun');
@@ -52,7 +56,7 @@ describe('Header', () => {
   });
 
   test('shows the default Header with different locale and week start on props', () => {
-    render(<Header weekStartsOn={1} locale="hu-HU" enabled />);
+    render(<Header weekStartsOn={1} locale="hu-HU" />);
     const list = screen.getByRole('list');
     const listItems = screen.getAllByRole('listitem');
     const firstItem = screen.getByText('H');
@@ -62,18 +66,21 @@ describe('Header', () => {
     expect(firstItem).toBeTruthy();
   });
 
-  test('shows the Header with all the possible props changed', () => {
+  test('shows the Header with all the possible slotProps and slots changed', () => {
     const { asFragment } = render(
       <Header
         weekStartsOn={3}
         locale="en-GB"
-        enabled
-        containerComponent={mockContainerComponent}
-        cellContentComponent={mockCellContentComponent}
-        containerClassName={mockContainerClassName}
-        rowClassName={mockRowClassName}
-        cellClassName={mockCellClassName}
-        cellContentClassName={mockCellContentClassName}
+        slots={{
+          root: mockRootSlot,
+          cell: mockCellSlot,
+          cellContent: mockCellContentSlot,
+        }}
+        slotProps={{
+          root: { className: mockRootClassName },
+          cell: { className: mockCellClassName },
+          cellContent: { className: mockCellContentClassName },
+        }}
       />,
     );
     const list = screen.getByRole('list');

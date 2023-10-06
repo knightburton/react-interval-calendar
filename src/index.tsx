@@ -2,9 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { getCalendarBaseAttributes } from './helpers';
 import { CalendarTuple, VisibilityMatrix, WeekdayIndex, BodyCellType } from './types';
 import Container, { ContainerProps, ContainerPrivateProps } from './components/Container';
-import Header from './components/Header';
-import { HeaderContainerProps } from './components/HeaderContainer';
-import { HeaderCellContentProps } from './components/HeaderCellContent';
+import Header, { HeaderProps, HeaderPrivateProps, HeaderCellContentProps, HeaderCellProps } from './components/Header';
 import Body from './components/Body';
 import { BodyContainerProps } from './components/BodyContainer';
 import BodyRow from './components/BodyRow';
@@ -12,7 +10,7 @@ import BodyCell from './components/BodyCell';
 import { BodyCellContentProps } from './components/BodyCellContent';
 import Empty, { EmptyProps } from './components/Empty';
 
-export type { ContainerProps } from './components/Container';
+export type { ContainerProps, HeaderProps, HeaderCellProps, HeaderCellContentProps };
 
 type ClassNames = {
   headerContainer?: string;
@@ -28,10 +26,12 @@ type ClassNames = {
 
 type Slots = {
   container?: ContainerPrivateProps['slots'];
+  header?: HeaderPrivateProps['slots'];
 };
 
 type SlotProps = {
   container?: ContainerPrivateProps['slotProps'];
+  header?: HeaderPrivateProps['slotProps'];
 };
 
 export type IntervalCalendarProps = {
@@ -43,11 +43,7 @@ export type IntervalCalendarProps = {
   numberOfRowsPreRender?: number;
   startRenderOnCurrentWeek?: boolean;
   onCellClick?: (data: BodyCellType) => void;
-  showHeader?: boolean;
   weekStartsOn?: WeekdayIndex;
-  containerComponent?: React.ComponentType<ContainerProps>;
-  headerContainerComponent?: React.ComponentType<HeaderContainerProps>;
-  headerCellContentComponent?: React.ComponentType<HeaderCellContentProps>;
   bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
   bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
   emptyComponent?: React.ComponentType<EmptyProps>;
@@ -65,10 +61,7 @@ const IntervalCalendar = ({
   numberOfRowsPreRender = 4,
   startRenderOnCurrentWeek = false,
   onCellClick = undefined,
-  showHeader = true,
   weekStartsOn = 0,
-  headerContainerComponent,
-  headerCellContentComponent,
   bodyContainerComponent,
   bodyCellContentComponent,
   emptyComponent,
@@ -96,17 +89,7 @@ const IntervalCalendar = ({
 
   return (
     <Container slots={slots?.container} slotProps={slotProps?.container}>
-      <Header
-        weekStartsOn={weekStartsOn}
-        locale={locale}
-        enabled={showHeader}
-        containerComponent={headerContainerComponent}
-        cellContentComponent={headerCellContentComponent}
-        containerClassName={classNames?.headerContainer}
-        rowClassName={classNames?.headerRow}
-        cellClassName={classNames?.headerCell}
-        cellContentClassName={classNames?.headerCellContent}
-      />
+      <Header weekStartsOn={weekStartsOn} locale={locale} slots={slots?.header} slotProps={slotProps?.header} />
       {!!numberOfWeeks && !!startDate ? (
         <Body
           startDate={startDate}
