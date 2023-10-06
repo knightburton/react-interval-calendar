@@ -4,8 +4,8 @@ import Container, { ContainerProps } from '../../src/components/Container';
 
 const mockText = 'Mock Children';
 const mockChildren = <span>{mockText}</span>;
-const mockComponent = ({ className, children, height }: ContainerProps) => (
-  <p className={className} style={{ height }}>
+const mockComponent = ({ className, children, style }: ContainerProps) => (
+  <p className={className} style={style}>
     {children}
   </p>
 );
@@ -56,25 +56,25 @@ describe('Container', () => {
     expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnapshot);
   });
 
-  test('shows the default Container with a simple dom element as children and height prop', () => {
-    const { asFragment } = render(<Container height={100}>{mockChildren}</Container>);
+  test('shows the default Container with a simple dom element as children and style slot props on root', () => {
+    const { asFragment } = render(<Container slotProps={{ root: { style: { height: 100 } } }}>{mockChildren}</Container>);
     const text = screen.getByText(mockText);
 
     expect(text).toBeTruthy();
     expect(asFragment().firstChild).toMatchInlineSnapshot(heightInlineSnapshot);
   });
 
-  test('shows the given Container with a simple dom element as children', () => {
-    const { asFragment } = render(<Container component={mockComponent}>{mockChildren}</Container>);
+  test('shows the given Container with a simple component as root slot', () => {
+    const { asFragment } = render(<Container slots={{ root: mockComponent }}>{mockChildren}</Container>);
     const text = screen.getByText(mockText);
 
     expect(text).toBeTruthy();
     expect(asFragment().firstChild).toMatchInlineSnapshot(componentInlineSnapshot);
   });
 
-  test('shows the given Container and custom classname with a simple dom element as children', () => {
+  test('shows the given Container with a root slot and custom className slot props and a simple dom element as children', () => {
     const { asFragment } = render(
-      <Container component={mockComponent} className="test-calendar">
+      <Container slots={{ root: mockComponent }} slotProps={{ root: { className: 'test-calendar' } }}>
         {mockChildren}
       </Container>,
     );
