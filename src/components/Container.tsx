@@ -1,23 +1,25 @@
 import React, { memo } from 'react';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
+import { SlotComponentProps } from '../types';
 
-export type ContainerProps = {
-  className?: string;
-  height?: number | '100%' | 'auto';
+export type ContainerProps = SlotComponentProps<'div', Record<string, unknown>>;
+
+export type ContainerPrivateProps = {
+  slots?: {
+    root?: React.ElementType;
+  };
+  slotProps?: {
+    root: ContainerProps;
+  };
   children?: React.ReactNode;
 };
 
-export type ContainerPrivateProps = ContainerProps & {
-  slot?: React.ElementType<ContainerProps>;
-  slotProps?: Omit<ContainerProps, 'children'>;
-};
-
 const Container = memo(
-  ({ children, slot, slotProps }: ContainerPrivateProps): JSX.Element => {
-    const containerClassName = classnames(styles.calendar, slotProps?.className);
-    const ContainerSlot = slot || 'div';
-    const containerProps = { className: containerClassName, style: { height: slotProps?.height }, ...slotProps };
+  ({ children, slots, slotProps }: ContainerPrivateProps): JSX.Element => {
+    const containerClassName = classnames(styles.calendar, slotProps?.root?.className);
+    const containerProps = { ...(slotProps?.root || {}), className: containerClassName };
+    const ContainerSlot = slots?.root || 'div';
 
     return <ContainerSlot {...containerProps}>{children}</ContainerSlot>;
   },

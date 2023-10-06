@@ -27,7 +27,7 @@ type ClassNames = {
 };
 
 type Slots = {
-  container?: ContainerPrivateProps['slot'];
+  container?: ContainerPrivateProps['slots'];
 };
 
 type SlotProps = {
@@ -95,7 +95,7 @@ const IntervalCalendar = ({
   );
 
   return (
-    <Container slot={slots?.container} slotProps={slotProps?.container}>
+    <Container slots={slots?.container} slotProps={slotProps?.container}>
       <Header
         weekStartsOn={weekStartsOn}
         locale={locale}
