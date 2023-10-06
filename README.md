@@ -58,13 +58,11 @@ For more detailed example check the [example](./example) directory.
 | onCellClick | function | `undefined` | Function called when the user clicks a cell. It returns a [Cell Data](#cell-data). |
 | showHeader | boolean | `true` | Whether the whole header shall be shown or not. |
 | weekStartsOn | number | `0` | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`. |
-| headerContainerComponent | ComponentType<[Header ContainerProps](#header-container-props)> | `undefined` |  React component that should be rendered as the header container component. For the passed props check the [Header ContainerProps](#header-container-props), please.|
-| headerCellContentComponent | ComponentType<[HeaderCellContentProps](#header-cell-content-props)> | `undefined` | React component that should be rendered as the header cell content component. For the passed props check the [HeaderCellContentProps](#header-cell-content-props), please. |
 | bodyContainerComponent | ComponentType<[BodyContainerProps](#body-container-props)> | `undefined` | React component that should be rendered as the main body container component. For the passed props check the [BodyContainerProps](#body-container-props), please. |
 | bodyCellContentComponent | ComponentType<[BodyCellContentProps](#body-cell-content-props)> | `undefined` | React component that should be rendered as the cell content component. For the passed props check the [BodyCellContentProps](#body-cell-content-props), please. |
 | emptyComponent | ComponentType<[EmptyProps](#empty-props)> | `undefined` | React component that should be rendered as the empty date range message component. For the passed props check the [EmptyProps](#empty-props), please. |
 | slots | [Slots](#slots) | `undefined` | The components used for each slot inside. |
-| slotProps | [Slots](#slots) | `undefined` | The extra props for the slot components. You can override the existing props or add new ones. |
+| slotProps | [Slots](#slot-props) | `undefined` | The extra props for the slot components. You can override the existing props or add new ones. |
 
 #### Cell Data
 | Prop name | Type | Description |
@@ -90,32 +88,32 @@ For more detailed example check the [example](./example) directory.
 | narrow | `string` | Day of the week formatted with the provided `locale` prop as `narrow` weekday. |
 
 #### Slots
-| Slot | Type | Description |
-| --- | --- | --- |
-| container | [ContainerSlots](#container-slots) | React components that should be rendered as the main container component. |
+```ts
+type Slots = {
+  container?: {
+    root?: React.ElementType;
+  };
+  header?: {
+    root?: React.ElementType;
+    cell?: React.ElementType;
+    cellContent?: React.ElementType;
+  };
+};
+```
 
-#### Container Slots
-| Slot | Type | Description |
-| --- | --- | --- |
-| root | React.ElementType<[ContainerRootProps](#container-root-props)> | All the underlying elements that needs to be rendered to show the calendar content. |
-
-#### Container Root Props
-| Prop name | Type | Description |
-| --- | --- | --- |
-| children | `React.ReactNode` | All the underlying elements that needs to be rendered to show the calendar content. |
-| className | `string` | Merged classnames that includes the default one and the given one from `slotProps.container.root.className` prop. |
-
-#### Header Container Props
-| Prop name | Type | Description |
-| --- | --- | --- |
-| children | `React.ReactNode` | All the underlaying elements that needs to be rendered to show the header content. |
-| className | `string` | Merged classnames that includes the default one and the given one from `headerContainerClassName` prop. |
-
-#### Header Cell Content Props
-| Prop name | Type | Description |
-| --- | --- | --- |
-| data | [Header Cell Data](#header-cell-data) | The day of the week data structure that should be rendered. |
-| className | `string` | Merged classnames that includes the default one and the given one from `headerCellContentClassName` prop. |
+#### Slot Props
+```ts
+type SlotProps = {
+  container?: {
+    root?: Partial<React.ComponentPropsWithRef<'div'>>;
+  };
+  header?: {
+    root?: Partial<React.ComponentPropsWithRef<'ul'>> & { disabled?: boolean };
+    cell?: Partial<React.ComponentPropsWithRef<'li'>>;
+    cellContent?: Partial<React.ComponentPropsWithRef<'div'>>;
+  };
+};
+```
 
 #### Body Container Props
 | Prop name | Type | Description |
