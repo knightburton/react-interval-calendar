@@ -1,23 +1,20 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import BodyCellContent, { BodyCellContentProps } from '../../src/components/BodyCellContent';
+import BodyCellContent from '../../src/components/BodyCellContent';
 import { mockBodyCellAttributes } from '../testUtils';
 
-const mockComponent = ({ data, className }: BodyCellContentProps): JSX.Element => <p className={className}>{data.day}</p>;
 const mockClassName = 'test-body-cell-content';
 const defaultInlineSnapshot = `
-<span
-  class="body__cell__content"
->
+<div>
   18
-</span>
+</div>
 `;
 const customerInlineSnapshot = `
-<p
-  class="body__cell__content ${mockClassName}"
+<div
+  class="${mockClassName}"
 >
   18
-</p>
+</div>
 `;
 
 describe('BodyCellContent', () => {
@@ -36,8 +33,8 @@ describe('BodyCellContent', () => {
     expect(text).toBeTruthy();
   });
 
-  test('shows the BodyCellContent with custom component and className', () => {
-    const { asFragment } = render(<BodyCellContent data={mockBodyCellAttributes()} component={mockComponent} className={mockClassName} />);
+  test('shows the BodyCellContent with custom className', () => {
+    const { asFragment } = render(<BodyCellContent data={mockBodyCellAttributes()} className={mockClassName} />);
     const text = screen.getByText('18');
 
     expect(text).toBeTruthy();

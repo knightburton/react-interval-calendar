@@ -1,26 +1,29 @@
 import * as React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import BodyCell, { BodyCellProps } from '../../src/components/BodyCell';
+import BodyCell, { BodyCellPrivateProps } from '../../src/components/BodyCell';
 import { mockBodyCellAttributes } from '../testUtils';
 
-const mockBodyCellProps: BodyCellProps = {
+const mockBodyCellProps: BodyCellPrivateProps = {
   data: mockBodyCellAttributes(),
   locale: 'hu-HU',
-  onClick: jest.fn(),
-  contentComponent: ({ data, className }) => <p className={className}>{data.day}</p>,
-  className: 'test-body-cell',
-  contentClassName: 'test-body-cell-content',
+  slots: {
+    content: ({ data, className }) => <p className={className}>{data.day}</p>,
+  },
+  slotProps: {
+    root: { className: 'test-body-cell', onClick: jest.fn() },
+    content: { className: 'test-body-cell-content' },
+  },
 };
 const defaultInlineSnapshot = `
 <li
   class="body__cell"
   role="presentation"
 >
-  <span
+  <div
     class="body__cell__content"
   >
     18
-  </span>
+  </div>
 </li>
 `;
 const customInlineSnapshot = `
@@ -51,16 +54,9 @@ describe('BodyCell', () => {
     expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnapshot);
   });
 
-  test('shows the BodyCell with override components and classNames', () => {
+  test('shows the BodyCell with override slots', () => {
     const { asFragment } = render(
-      <BodyCell
-        data={mockBodyCellProps.data}
-        locale={mockBodyCellProps.locale}
-        onClick={mockBodyCellProps.onClick}
-        contentComponent={mockBodyCellProps.contentComponent}
-        contentClassName={mockBodyCellProps.contentClassName}
-        className={mockBodyCellProps.className}
-      />,
+      <BodyCell data={mockBodyCellProps.data} locale={mockBodyCellProps.locale} slots={mockBodyCellProps.slots} slotProps={mockBodyCellProps.slotProps} />,
     );
     const dayText = screen.getByText('18');
     const listItems = screen.getAllByRole('presentation');
@@ -75,14 +71,14 @@ describe('BodyCell', () => {
     const listItem = screen.getByRole('presentation');
 
     fireEvent.click(listItem);
-    expect(mockBodyCellProps.onClick).not.toHaveBeenCalled();
+    expect(mockBodyCellProps.slotProps?.root?.onClick).not.toHaveBeenCalled();
   });
 
   test('fire presentation item on click with handler', () => {
-    render(<BodyCell data={mockBodyCellProps.data} onClick={mockBodyCellProps.onClick} />);
+    render(<BodyCell data={mockBodyCellProps.data} slotProps={mockBodyCellProps.slotProps} />);
     const listItem = screen.getByRole('presentation');
 
     fireEvent.click(listItem);
-    expect(mockBodyCellProps.onClick).toHaveBeenCalledWith(mockBodyCellProps.data);
+    expect(mockBodyCellProps.slotProps?.root?.onClick).toHaveBeenCalled();
   });
 });

@@ -1,77 +1,79 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import Body, { BodyProps } from '../../src/components/Body';
+import Body, { BodyPrivateProps } from '../../src/components/Body';
+import { mockAllIsIntersecting } from '../testUtils';
 
-const mockBodyProps: BodyProps = {
+const mockBodyProps: BodyPrivateProps = {
   startDate: new Date(2023, 1, 16, 0, 0, 0, 0),
   numberOfWeeks: 3,
-  renderRow: numberOfWeek => <p key={numberOfWeek}>{`${numberOfWeek}. week`}</p>,
-  containerComponent: ({ children, className }) => <div className={className}>{children}</div>,
-  containerClassName: 'test-body',
+  numberOfTodayWeek: 1,
+  startRenderOnCurrentWeek: false,
+  locale: 'en-EN',
+  numberOfRowsPreRender: 3,
+  updateVisibilityMatrix: jest.fn(),
+  visibilityMatrix: { 0: false, 1: true, 2: false, 3: false },
+  slots: {
+    row: React.forwardRef<HTMLParagraphElement>((_, ref): JSX.Element => <p ref={ref}>week</p>),
+  },
 };
 const defaultInlineSnapshot = `
 <div
   class="body"
+  id="test"
 >
   <p>
-    0. week
+    week
   </p>
   <p>
-    1. week
+    week
   </p>
   <p>
-    2. week
+    week
   </p>
   <p>
-    3. week
+    week
   </p>
 </div>
 `;
 const customInlineSnapshot = `
 <div
-  class="body test-body"
+  class="body"
 >
   <p>
-    0. week
+    week
   </p>
   <p>
-    1. week
+    week
   </p>
   <p>
-    2. week
+    week
   </p>
   <p>
-    3. week
+    week
   </p>
 </div>
 `;
 
 describe('Body', () => {
   test('shows the default Body with a 3 weeks date range', () => {
-    const { asFragment } = render(<Body startDate={mockBodyProps.startDate} numberOfWeeks={mockBodyProps.numberOfWeeks} renderRow={mockBodyProps.renderRow} />);
-    const firstWeekText = screen.getByText('0. week');
-    const thirdWeekText = screen.getByText('3. week');
+    const { asFragment } = render(<Body {...mockBodyProps} slotProps={{ root: { id: 'test' } }} />);
+    const weeks = screen.getAllByText('week');
 
-    expect(firstWeekText).toBeTruthy();
-    expect(thirdWeekText).toBeTruthy();
+    mockAllIsIntersecting(true);
+
+    expect(weeks).toBeTruthy();
+    expect(weeks).toHaveLength(4);
     expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnapshot);
   });
 
   test('shows the default Body with a all props changed', () => {
-    const { asFragment } = render(
-      <Body
-        startDate={mockBodyProps.startDate}
-        numberOfWeeks={mockBodyProps.numberOfWeeks}
-        renderRow={mockBodyProps.renderRow}
-        containerComponent={mockBodyProps.containerComponent}
-        containerClassName={mockBodyProps.containerClassName}
-      />,
-    );
-    const firstWeekText = screen.getByText('0. week');
-    const thirdWeekText = screen.getByText('3. week');
+    const { asFragment } = render(<Body {...mockBodyProps} />);
+    const weeks = screen.getAllByText('week');
 
-    expect(firstWeekText).toBeTruthy();
-    expect(thirdWeekText).toBeTruthy();
+    mockAllIsIntersecting(true);
+
+    expect(weeks).toBeTruthy();
+    expect(weeks).toHaveLength(4);
     expect(asFragment().firstChild).toMatchInlineSnapshot(customInlineSnapshot);
   });
 });
