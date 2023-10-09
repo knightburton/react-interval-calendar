@@ -16,7 +16,7 @@ type ClassNames = {
 };
 
 type Slots = {
-  container?: React.ElementType;
+  root?: React.ElementType;
   header?: React.ElementType;
   headerCell?: React.ElementType;
   headerCellContent?: React.ElementType;
@@ -27,7 +27,7 @@ type Slots = {
 };
 
 type SlotProps = {
-  container?: ContainerProps;
+  root?: ContainerProps;
   header?: HeaderProps;
   headerCell?: HeaderCellProps;
   headerCellContent?: HeaderCellContentProps;
@@ -85,7 +85,7 @@ const IntervalCalendar = ({
   );
 
   return (
-    <Container slots={{ root: slots?.container }} slotProps={{ root: slotProps?.container }}>
+    <Container slots={{ root: slots?.root }} slotProps={{ root: slotProps?.root }}>
       <Header
         weekStartsOn={weekStartsOn}
         locale={locale}
