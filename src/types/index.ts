@@ -28,4 +28,5 @@ export type ClassNamesObject = Record<string, unknown>;
 export type ClassNamesArray = Array<Argument>;
 export type Argument = ClassNamesValue | ClassNamesObject | ClassNamesArray;
 export type ClassNames = Argument;
+
 export type SlotComponentProps<SlotComponent extends React.ElementType, Overrides> = Partial<React.ComponentPropsWithRef<SlotComponent>> & Overrides;
