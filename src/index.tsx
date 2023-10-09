@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { getCalendarBaseAttributes } from './helpers';
 import { CalendarTuple, VisibilityMatrix, WeekdayIndex, BodyCellType } from './types';
-import Container, { ContainerProps, ContainerPrivateProps } from './components/Container';
+import Container, { ContainerProps } from './components/Container';
 import Header, { HeaderProps, HeaderPrivateProps, HeaderCellContentProps, HeaderCellProps } from './components/Header';
 import Body from './components/Body';
 import { BodyContainerProps } from './components/BodyContainer';
@@ -25,12 +25,12 @@ type ClassNames = {
 };
 
 type Slots = {
-  container?: ContainerPrivateProps['slots'];
+  root?: React.ElementType;
   header?: HeaderPrivateProps['slots'];
 };
 
 type SlotProps = {
-  container?: ContainerPrivateProps['slotProps'];
+  root?: ContainerProps;
   header?: HeaderPrivateProps['slotProps'];
 };
 
@@ -88,7 +88,7 @@ const IntervalCalendar = ({
   );
 
   return (
-    <Container slots={slots?.container} slotProps={slotProps?.container}>
+    <Container slots={{ root: slots?.root }} slotProps={{ root: slotProps?.root }}>
       <Header weekStartsOn={weekStartsOn} locale={locale} slots={slots?.header} slotProps={slotProps?.header} />
       {!!numberOfWeeks && !!startDate ? (
         <Body
