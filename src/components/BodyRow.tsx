@@ -1,11 +1,15 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import useOnScreen from '../hooks/useOnScreen';
 import { getCellAttributes } from '../helpers';
-import { VisibilityMatrix, BodyCellType } from '../types';
+import { VisibilityMatrix, SlotComponentProps } from '../types';
 import styles from './styles.less';
 import classnames from '../utils/classnames';
+import BodyCell, { BodyCellProps } from './BodyCell';
+import { BodyCellContentProps } from './BodyCellContent';
 
-export interface BodyRowProps {
+export type BodyRowProps = SlotComponentProps<'ul', Record<string, unknown>>;
+
+export type BodyRowPrivateProps = {
   numberOfWeek: number;
   numberOfTodayWeek: number;
   startRenderOnCurrentWeek: boolean;
@@ -14,9 +18,17 @@ export interface BodyRowProps {
   startDate: Date | null;
   updateVisibilityMatrix?: (week: number) => void;
   visibilityMatrix: VisibilityMatrix;
-  renderCell: (cell: BodyCellType) => JSX.Element;
-  className?: string;
-}
+  slots?: {
+    root?: React.ElementType;
+    cell?: React.ElementType;
+    cellContent?: React.ElementType;
+  };
+  slotProps?: {
+    root?: BodyRowProps;
+    cell?: BodyCellProps;
+    cellContent?: BodyCellContentProps;
+  };
+};
 
 const BodyRow = ({
   numberOfWeek,
@@ -27,9 +39,9 @@ const BodyRow = ({
   visibilityMatrix,
   updateVisibilityMatrix,
   numberOfRowsPreRender,
-  renderCell,
-  className,
-}: BodyRowProps): JSX.Element => {
+  slots,
+  slotProps,
+}: BodyRowPrivateProps): JSX.Element => {
   const ref = useRef<HTMLUListElement>(null);
   const shouldScroll = useRef<boolean>(startRenderOnCurrentWeek && numberOfWeek === numberOfTodayWeek);
   const isVisible = useOnScreen(ref);
@@ -46,7 +58,8 @@ const BodyRow = ({
     const dates = Array.from(Array(7).keys()).map(day => getCellAttributes(startDate, numberOfWeek, day, locale));
     return dates;
   }, [startDate, numberOfWeek, locale, shouldRender]);
-  const classes = useMemo(() => classnames(styles.body__row, className), [className]);
+  const RootSlot = useMemo(() => slots?.root || 'ul', [slots]);
+  const rootProps = useMemo(() => ({ ...(slotProps?.root || {}), className: classnames(styles.body__row, slotProps?.root?.className) }), [slotProps]);
 
   useEffect(() => {
     if (isVisible && !shouldRender && updateVisibilityMatrix) updateVisibilityMatrix(numberOfWeek);
@@ -57,9 +70,17 @@ const BodyRow = ({
   }, []);
 
   return (
-    <ul ref={ref} key={numberOfWeek} className={classes}>
-      {data.map(cell => renderCell(cell))}
-    </ul>
+    <RootSlot ref={ref} key={numberOfWeek} {...rootProps}>
+      {data.map(cell => (
+        <BodyCell
+          key={cell.key}
+          data={cell}
+          locale={locale}
+          slots={{ root: slots?.cell, content: slots?.cellContent }}
+          slotProps={{ root: slotProps?.cell, content: slotProps?.cellContent }}
+        />
+      ))}
+    </RootSlot>
   );
 };
 

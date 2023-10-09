@@ -1,10 +1,20 @@
 import * as React from 'react';
 import { render, screen } from '@testing-library/react';
-import BodyRow, { BodyRowProps } from '../../src/components/BodyRow';
-import { BodyCellType } from '../../src/types';
+import BodyRow, { BodyRowProps, BodyRowPrivateProps } from '../../src/components/BodyRow';
+import { BodyCellProps } from '../../src/components/BodyCell';
+import BodyCellContent from '../../src/components/BodyCellContent';
 import { mockIntersectionInstance, mockAllIsIntersecting } from '../testUtils';
 
-const mockBodyRowProps: BodyRowProps = {
+const Root = React.forwardRef<HTMLUListElement, BodyRowProps>(
+  ({ children, className }, ref): JSX.Element => (
+    <ul ref={ref} className={className}>
+      {children}
+    </ul>
+  ),
+);
+const Cell = ({ children }: BodyCellProps): JSX.Element => <li role="presentation">{children}</li>;
+
+const mockBodyRowProps: BodyRowPrivateProps = {
   numberOfWeek: 0,
   locale: 'en-GB',
   numberOfRowsPreRender: 1,
@@ -13,52 +23,82 @@ const mockBodyRowProps: BodyRowProps = {
   startRenderOnCurrentWeek: false,
   updateVisibilityMatrix: jest.fn(),
   visibilityMatrix: { 0: false, 1: true, 2: false, 3: false },
-  renderCell: (cell: BodyCellType) => (
-    <span role="presentation" key={cell.key}>
-      {cell.day}
-    </span>
-  ),
-  className: 'test-body-row',
+  slots: {
+    root: Root,
+    cell: Cell,
+    cellContent: BodyCellContent,
+  },
+  slotProps: {
+    root: { className: 'test-body-row' },
+  },
 };
 const inlineSnapshot = `
 <ul
   class="body__row test-body-row"
 >
-  <span
+  <li
     role="presentation"
   >
-    25
-  </span>
-  <span
+    <div
+      class="body__cell__content"
+    >
+      25
+    </div>
+  </li>
+  <li
     role="presentation"
   >
-    26
-  </span>
-  <span
+    <div
+      class="body__cell__content"
+    >
+      26
+    </div>
+  </li>
+  <li
     role="presentation"
   >
-    27
-  </span>
-  <span
+    <div
+      class="body__cell__content"
+    >
+      27
+    </div>
+  </li>
+  <li
     role="presentation"
   >
-    28
-  </span>
-  <span
+    <div
+      class="body__cell__content"
+    >
+      28
+    </div>
+  </li>
+  <li
     role="presentation"
   >
-    01
-  </span>
-  <span
+    <div
+      class="body__cell__content"
+    >
+      01 Mar
+    </div>
+  </li>
+  <li
     role="presentation"
   >
-    02
-  </span>
-  <span
+    <div
+      class="body__cell__content"
+    >
+      02
+    </div>
+  </li>
+  <li
     role="presentation"
   >
-    03
-  </span>
+    <div
+      class="body__cell__content"
+    >
+      03
+    </div>
+  </li>
 </ul>
 `;
 
@@ -81,7 +121,6 @@ describe('BodyRow', () => {
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
         visibilityMatrix={mockBodyRowProps.visibilityMatrix}
-        renderCell={mockBodyRowProps.renderCell}
       />,
     );
     const list = screen.getByRole('list');
@@ -106,7 +145,8 @@ describe('BodyRow', () => {
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
         visibilityMatrix={mockBodyRowProps.visibilityMatrix}
-        renderCell={mockBodyRowProps.renderCell}
+        slots={{}}
+        slotProps={mockBodyRowProps.slotProps}
         updateVisibilityMatrix={mockBodyRowProps.updateVisibilityMatrix}
       />,
     );
@@ -135,7 +175,7 @@ describe('BodyRow', () => {
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
         visibilityMatrix={{ 0: true, 1: true, 2: true, 3: true }}
-        renderCell={mockBodyRowProps.renderCell}
+        slots={{ root: Root }}
         updateVisibilityMatrix={mockBodyRowProps.updateVisibilityMatrix}
       />,
     );
@@ -161,9 +201,9 @@ describe('BodyRow', () => {
         numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
         startDate={mockBodyRowProps.startDate}
         visibilityMatrix={{ 0: true, 1: true, 2: true, 3: true }}
-        renderCell={mockBodyRowProps.renderCell}
+        slots={mockBodyRowProps.slots}
+        slotProps={mockBodyRowProps.slotProps}
         updateVisibilityMatrix={mockBodyRowProps.updateVisibilityMatrix}
-        className={mockBodyRowProps.className}
       />,
     );
 

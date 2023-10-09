@@ -1,37 +1,40 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { getCalendarBaseAttributes } from './helpers';
-import { CalendarTuple, VisibilityMatrix, WeekdayIndex, BodyCellType } from './types';
+import { CalendarTuple, VisibilityMatrix, WeekdayIndex } from './types';
 import Container, { ContainerProps } from './components/Container';
-import Header, { HeaderProps, HeaderPrivateProps, HeaderCellContentProps, HeaderCellProps } from './components/Header';
-import Body from './components/Body';
-import { BodyContainerProps } from './components/BodyContainer';
-import BodyRow from './components/BodyRow';
-import BodyCell from './components/BodyCell';
+import Header, { HeaderProps, HeaderCellContentProps, HeaderCellProps } from './components/Header';
+import Body, { BodyProps } from './components/Body';
+import { BodyRowProps } from './components/BodyRow';
+import { BodyCellProps } from './components/BodyCell';
 import { BodyCellContentProps } from './components/BodyCellContent';
 import Empty, { EmptyProps } from './components/Empty';
 
-export type { ContainerProps, HeaderProps, HeaderCellProps, HeaderCellContentProps };
+export type { ContainerProps, HeaderProps, HeaderCellProps, HeaderCellContentProps, BodyProps, BodyRowProps, BodyCellProps, BodyCellContentProps };
 
 type ClassNames = {
-  headerContainer?: string;
-  headerRow?: string;
-  headerCell?: string;
-  headerCellContent?: string;
-  bodyContainer?: string;
-  bodyRow?: string;
-  bodyCell?: string;
-  bodyCellContent?: string;
   empty?: string;
 };
 
 type Slots = {
   root?: React.ElementType;
-  header?: HeaderPrivateProps['slots'];
+  header?: React.ElementType;
+  headerCell?: React.ElementType;
+  headerCellContent?: React.ElementType;
+  body?: React.ElementType;
+  bodyRow?: React.ElementType;
+  bodyCell?: React.ElementType;
+  bodyCellContent?: React.ElementType;
 };
 
 type SlotProps = {
   root?: ContainerProps;
-  header?: HeaderPrivateProps['slotProps'];
+  header?: HeaderProps;
+  headerCell?: HeaderCellProps;
+  headerCellContent?: HeaderCellContentProps;
+  body?: BodyProps;
+  bodyRow?: BodyRowProps;
+  bodyCell?: BodyCellProps;
+  bodyCellContent?: BodyCellContentProps;
 };
 
 export type IntervalCalendarProps = {
@@ -42,10 +45,7 @@ export type IntervalCalendarProps = {
   numberOfRowsFirstRender?: number;
   numberOfRowsPreRender?: number;
   startRenderOnCurrentWeek?: boolean;
-  onCellClick?: (data: BodyCellType) => void;
   weekStartsOn?: WeekdayIndex;
-  bodyContainerComponent?: React.ComponentType<BodyContainerProps>;
-  bodyCellContentComponent?: React.ComponentType<BodyCellContentProps>;
   emptyComponent?: React.ComponentType<EmptyProps>;
   slots?: Slots;
   slotProps?: SlotProps;
@@ -60,10 +60,7 @@ const IntervalCalendar = ({
   numberOfRowsFirstRender = 8,
   numberOfRowsPreRender = 4,
   startRenderOnCurrentWeek = false,
-  onCellClick = undefined,
   weekStartsOn = 0,
-  bodyContainerComponent,
-  bodyCellContentComponent,
   emptyComponent,
   slots,
   slotProps,
@@ -89,38 +86,24 @@ const IntervalCalendar = ({
 
   return (
     <Container slots={{ root: slots?.root }} slotProps={{ root: slotProps?.root }}>
-      <Header weekStartsOn={weekStartsOn} locale={locale} slots={slots?.header} slotProps={slotProps?.header} />
+      <Header
+        weekStartsOn={weekStartsOn}
+        locale={locale}
+        slots={{ root: slots?.header, cell: slots?.headerCell, cellContent: slots?.headerCellContent }}
+        slotProps={{ root: slotProps?.header, cell: slotProps?.headerCell, cellContent: slotProps?.headerCellContent }}
+      />
       {!!numberOfWeeks && !!startDate ? (
         <Body
           startDate={startDate}
           numberOfWeeks={numberOfWeeks}
-          containerComponent={bodyContainerComponent}
-          containerClassName={classNames?.bodyContainer}
-          renderRow={numberOfWeek => (
-            <BodyRow
-              key={numberOfWeek}
-              numberOfWeek={numberOfWeek}
-              numberOfTodayWeek={numberOfTodayWeek}
-              startRenderOnCurrentWeek={startRenderOnCurrentWeek}
-              startDate={startDate}
-              locale={locale}
-              visibilityMatrix={visibilityMatrix}
-              updateVisibilityMatrix={handleVisibilityMatrixChange}
-              numberOfRowsPreRender={numberOfRowsPreRender}
-              className={classNames?.bodyRow}
-              renderCell={cell => (
-                <BodyCell
-                  key={cell.key}
-                  data={cell}
-                  locale={locale}
-                  onClick={onCellClick}
-                  contentComponent={bodyCellContentComponent}
-                  className={classNames?.bodyCell}
-                  contentClassName={classNames?.bodyCellContent}
-                />
-              )}
-            />
-          )}
+          numberOfTodayWeek={numberOfTodayWeek}
+          startRenderOnCurrentWeek={startRenderOnCurrentWeek}
+          locale={locale}
+          visibilityMatrix={visibilityMatrix}
+          updateVisibilityMatrix={handleVisibilityMatrixChange}
+          numberOfRowsPreRender={numberOfRowsPreRender}
+          slots={{ root: slots?.body, row: slots?.bodyRow, cell: slots?.bodyCell, cellContent: slots?.bodyCellContent }}
+          slotProps={{ root: slotProps?.body, row: slotProps?.bodyRow, cell: slotProps?.bodyCell, cellContent: slotProps?.bodyCellContent }}
         />
       ) : (
         <Empty emptyLabel={emptyLabel} className={classNames?.empty} component={emptyComponent} />

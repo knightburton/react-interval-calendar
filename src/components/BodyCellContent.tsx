@@ -1,24 +1,9 @@
-import React, { useMemo } from 'react';
-import { BodyCellType } from '../types';
+import React from 'react';
+import { BodyCellType, SlotComponentProps } from '../types';
 import { getBodyCellContent } from '../helpers';
-import classnames from '../utils/classnames';
-import styles from './styles.less';
 
-export interface BodyCellContentProps {
-  data: BodyCellType;
-  className?: string;
-}
+export type BodyCellContentProps = SlotComponentProps<'div', { data: BodyCellType; locale?: string }>;
 
-export interface BodyCellContentPrivateProps extends BodyCellContentProps {
-  locale?: string;
-  component?: React.ComponentType<BodyCellContentProps>;
-}
-
-const BodyCellContent = ({ data, locale, component: Component, className }: BodyCellContentPrivateProps): JSX.Element => {
-  const classes = useMemo(() => classnames(styles.body__cell__content, className), [className]);
-
-  if (Component) return <Component className={classes} data={data} />;
-  return <span className={classes}>{getBodyCellContent(data, locale)}</span>;
-};
+const BodyCellContent = ({ data, locale, ...rest }: BodyCellContentProps): JSX.Element => <div {...rest}>{getBodyCellContent(data, locale)}</div>;
 
 export default BodyCellContent;
