@@ -1,4 +1,4 @@
-import IntervalCalendar, { ContainerProps, HeaderCellContentProps } from '@knightburton/react-interval-calendar';
+import IntervalCalendar, { ContainerProps, HeaderCellContentProps, BodyCellContentProps } from '@knightburton/react-interval-calendar';
 import './App.css';
 
 const getLabel = (data: { isFirstDayOfYear: boolean; isFirstDayOfMonth: boolean; day: string; date: Date }) => {
@@ -7,29 +7,31 @@ const getLabel = (data: { isFirstDayOfYear: boolean; isFirstDayOfMonth: boolean;
   return data.day;
 };
 
-const Container = ({ children, className, style }: ContainerProps): JSX.Element => (
-  <div className={className} style={{ ...style, border: '1px solid #eee' }}>
+const Root = ({ children, className }: ContainerProps): JSX.Element => (
+  <div className={className} style={{ height: 700, border: '1px solid #eee' }}>
     {children}
   </div>
 );
 
 const HeaderCellContent = ({ data, className }: HeaderCellContentProps): JSX.Element => <span className={className}>{data.short}</span>;
 
+const BodyCellContent = ({ data, className }: BodyCellContentProps): JSX.Element => (
+  <span className={`${data.isMonthEven ? 'evenMonth' : ''} ${data.isToday ? 'today' : ''} ${className}`}>{getLabel(data)}</span>
+);
+
 const App = () => (
   <div className="wrapper">
     <IntervalCalendar
       weekStartsOn={1}
+      startRenderOnCurrentWeek
       start={new Date(2023, 0, 1)}
       end={new Date(2023, 11, 31)}
-      onCellClick={cell => console.log(cell)}
-      bodyCellContentComponent={({ data }) => <span className={`${data.isMonthEven ? 'evenMonth' : ''} ${data.isToday ? 'today' : ''}`}>{getLabel(data)}</span>}
       slots={{
-        root: Container,
-        header: { cellContent: HeaderCellContent },
+        root: Root,
+        headerCellContent: HeaderCellContent,
+        bodyCellContent: BodyCellContent,
       }}
-      slotProps={{
-        root: { className: 'example-container', style: { height: 700 } },
-      }}
+      slotProps={{ bodyCell: { onClick: (event, data) => console.log(event, data) } }}
     />
   </div>
 );
