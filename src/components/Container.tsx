@@ -10,7 +10,7 @@ export type ContainerPrivateProps = {
     root?: React.ElementType;
   };
   slotProps?: {
-    root: ContainerProps;
+    root?: ContainerProps;
   };
   children?: React.ReactNode;
 };

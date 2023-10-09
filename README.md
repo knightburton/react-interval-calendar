@@ -90,9 +90,7 @@ For more detailed example check the [example](./example) directory.
 #### Slots
 ```ts
 type Slots = {
-  container?: {
-    root?: React.ElementType;
-  };
+  root?: React.ElementType;
   header?: {
     root?: React.ElementType;
     cell?: React.ElementType;
@@ -104,9 +102,7 @@ type Slots = {
 #### Slot Props
 ```ts
 type SlotProps = {
-  container?: {
-    root?: Partial<React.ComponentPropsWithRef<'div'>>;
-  };
+  root?: Partial<React.ComponentPropsWithRef<'div'>>;
   header?: {
     root?: Partial<React.ComponentPropsWithRef<'ul'>> & { disabled?: boolean };
     cell?: Partial<React.ComponentPropsWithRef<'li'>>;

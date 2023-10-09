@@ -24,11 +24,11 @@ const App = () => (
       onCellClick={cell => console.log(cell)}
       bodyCellContentComponent={({ data }) => <span className={`${data.isMonthEven ? 'evenMonth' : ''} ${data.isToday ? 'today' : ''}`}>{getLabel(data)}</span>}
       slots={{
-        container: { root: Container },
+        root: Container,
         header: { cellContent: HeaderCellContent },
       }}
       slotProps={{
-        container: { root: { className: 'example-container', style: { height: 700 } } },
+        root: { className: 'example-container', style: { height: 700 } },
       }}
     />
   </div>
