@@ -11,10 +11,6 @@ import Empty, { EmptyProps } from './components/Empty';
 
 export type { ContainerProps, HeaderProps, HeaderCellProps, HeaderCellContentProps, BodyProps, BodyRowProps, BodyCellProps, BodyCellContentProps };
 
-type ClassNames = {
-  empty?: string;
-};
-
 type Slots = {
   root?: React.ElementType;
   header?: React.ElementType;
@@ -24,6 +20,7 @@ type Slots = {
   bodyRow?: React.ElementType;
   bodyCell?: React.ElementType;
   bodyCellContent?: React.ElementType;
+  empty?: React.ElementType;
 };
 
 type SlotProps = {
@@ -35,36 +32,31 @@ type SlotProps = {
   bodyRow?: BodyRowProps;
   bodyCell?: BodyCellProps;
   bodyCellContent?: BodyCellContentProps;
+  empty?: EmptyProps;
 };
 
 export type IntervalCalendarProps = {
   start?: Date;
   end?: Date;
-  emptyLabel?: string;
   locale?: string;
   numberOfRowsFirstRender?: number;
   numberOfRowsPreRender?: number;
   startRenderOnCurrentWeek?: boolean;
   weekStartsOn?: WeekdayIndex;
-  emptyComponent?: React.ComponentType<EmptyProps>;
   slots?: Slots;
   slotProps?: SlotProps;
-  classNames?: ClassNames;
 };
 
 const IntervalCalendar = ({
   start = undefined,
   end = undefined,
-  emptyLabel = '',
   locale = 'default',
   numberOfRowsFirstRender = 8,
   numberOfRowsPreRender = 4,
   startRenderOnCurrentWeek = false,
   weekStartsOn = 0,
-  emptyComponent,
   slots,
   slotProps,
-  classNames,
 }: IntervalCalendarProps): JSX.Element => {
   const [startDate, , numberOfWeeks, numberOfTodayWeek] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
@@ -106,7 +98,7 @@ const IntervalCalendar = ({
           slotProps={{ root: slotProps?.body, row: slotProps?.bodyRow, cell: slotProps?.bodyCell, cellContent: slotProps?.bodyCellContent }}
         />
       ) : (
-        <Empty emptyLabel={emptyLabel} className={classNames?.empty} component={emptyComponent} />
+        <Empty slots={{ root: slots?.empty }} slotProps={{ root: slotProps?.empty }} />
       )}
     </Container>
   );
