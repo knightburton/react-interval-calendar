@@ -14,7 +14,7 @@ import {
   isWeekend,
   formatDate,
 } from '../utils/date';
-import { WeekdayIndex, CalendarTuple, HeaderCellType, BodyCellType } from '../types';
+import { WeekdayIndex, CalendarTuple, HeaderCellData, BodyCellData } from '../types';
 
 /**
  * Returns the desired date attributes based on the passed weeks and days.
@@ -24,7 +24,7 @@ import { WeekdayIndex, CalendarTuple, HeaderCellType, BodyCellType } from '../ty
  * @param numberOfDay Day different between the week start and desired date.
  * @param locale Locale to format the month and day labels.
  */
-export const getCellAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, locale?: string): BodyCellType => {
+export const getCellAttributes = (startDate: Date, numberOfWeek: number, numberOfDay: number, locale?: string): BodyCellData => {
   const date = addWeeks(addDays(startDate, numberOfDay), numberOfWeek);
 
   return {
@@ -68,7 +68,7 @@ export const getCalendarBaseAttributes = (startDate?: Date, endDate?: Date, week
  * @param weekStartsOn Index of the first day of the week.
  * @param locale Locale to format the day labels.
  */
-export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: string): HeaderCellType[] => {
+export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: string): HeaderCellData[] => {
   const start = getWeekStart(new Date(), weekStartsOn);
   return Array.from(Array(7).keys()).map(day => {
     const date = addDays(start, day);
@@ -87,7 +87,7 @@ export const getHeaderWeekdays = (weekStartsOn: WeekdayIndex = 0, locale?: strin
  * @param cell day data of the body cell.
  * @param locale Locale to format the return.
  */
-export const getBodyCellContent = (cell: BodyCellType, locale = 'default'): string => {
+export const getBodyCellContent = (cell: BodyCellData, locale = 'default'): string => {
   if (cell.isFirstDayOfYear) return formatDate(cell.date, locale, { day: '2-digit', month: 'short', year: 'numeric' });
   if (cell.isFirstDayOfMonth) return formatDate(cell.date, locale, { day: '2-digit', month: 'short' });
   return cell.day;

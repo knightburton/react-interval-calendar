@@ -3,13 +3,13 @@ export type VisibilityMatrix = {
   [week: number]: boolean;
 };
 export type CalendarTuple = [Date | null, Date | null, number, number];
-export type HeaderCellType = {
+export type HeaderCellData = {
   key: number;
   short: string;
   long: string;
   narrow: string;
 };
-export type BodyCellType = {
+export type BodyCellData = {
   key: string;
   date: Date;
   day: string;
@@ -29,4 +29,5 @@ export type ClassNamesArray = Array<Argument>;
 export type Argument = ClassNamesValue | ClassNamesObject | ClassNamesArray;
 export type ClassNames = Argument;
 
-export type SlotComponentProps<SlotComponent extends React.ElementType, Overrides> = Partial<React.ComponentPropsWithRef<SlotComponent>> & Overrides;
+export type SlotComponentProps<SlotComponent extends React.ElementType, Overrides> = Partial<React.ComponentPropsWithoutRef<SlotComponent>> & Overrides;
+export type SlotRefComponentProps<SlotComponent extends React.ElementType, Overrides> = Partial<React.ComponentPropsWithRef<SlotComponent>> & Overrides;

@@ -1,5 +1,5 @@
 import { act } from '@testing-library/react';
-import { BodyCellType } from '../src/types';
+import { BodyCellData } from '../src/types';
 
 type Item = {
   callback: IntersectionObserverCallback;
@@ -79,7 +79,7 @@ export const mockAllIsIntersecting = (isIntersecting: boolean | number): void =>
 export const mockIntersectionInstance = (element: Element): IntersectionObserver | undefined =>
   Array.from(observers)?.find(observer => observer[1].elements.find(e => e === element))?.[0];
 
-export const mockBodyCellAttributes = (overrides: OverridesType = {}): BodyCellType => ({
+export const mockBodyCellAttributes = (overrides: OverridesType = {}): BodyCellData => ({
   key: '2-3',
   date: new Date(2021, 0, 18),
   day: '18',

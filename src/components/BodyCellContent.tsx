@@ -1,8 +1,8 @@
 import React from 'react';
-import { BodyCellType, SlotComponentProps } from '../types';
+import { BodyCellData, SlotComponentProps } from '../types';
 import { getBodyCellContent } from '../helpers';
 
-export type BodyCellContentProps = SlotComponentProps<'div', { data: BodyCellType; locale?: string }>;
+export type BodyCellContentProps = SlotComponentProps<'div', { data: BodyCellData; locale?: string }>;
 
 const BodyCellContent = ({ data, locale, ...rest }: BodyCellContentProps): JSX.Element => <div {...rest}>{getBodyCellContent(data, locale)}</div>;
 

@@ -1,12 +1,12 @@
 import React, { memo, useMemo } from 'react';
-import { HeaderCellType, WeekdayIndex, SlotComponentProps } from '../types';
+import { HeaderCellData, WeekdayIndex, SlotComponentProps } from '../types';
 import { getHeaderWeekdays } from '../helpers';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
 
 export type HeaderProps = SlotComponentProps<'ul', { disabled?: boolean }>;
 export type HeaderCellProps = SlotComponentProps<'li', Record<string, unknown>>;
-export type HeaderCellContentProps = SlotComponentProps<'div', { data: HeaderCellType }>;
+export type HeaderCellContentProps = SlotComponentProps<'div', { data: HeaderCellData }>;
 
 export type HeaderPrivateProps = {
   weekStartsOn?: WeekdayIndex;
@@ -26,7 +26,7 @@ export type HeaderPrivateProps = {
 const HeaderCellContent = memo(({ data, ...rest }: HeaderCellContentProps): JSX.Element => <div {...rest}>{data.short}</div>);
 
 const Header = memo(({ weekStartsOn, locale, slots, slotProps }: HeaderPrivateProps): JSX.Element | null => {
-  const list = useMemo<HeaderCellType[]>(() => getHeaderWeekdays(weekStartsOn, locale), [weekStartsOn, locale]);
+  const list = useMemo<HeaderCellData[]>(() => getHeaderWeekdays(weekStartsOn, locale), [weekStartsOn, locale]);
   const RootSlot = slots?.root || 'ul';
   const CellSlot = slots?.cell || 'li';
   const CellContentSlot = slots?.cellContent || HeaderCellContent;

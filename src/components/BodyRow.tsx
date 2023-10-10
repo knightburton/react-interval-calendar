@@ -1,13 +1,13 @@
 import React, { useMemo, useRef, useEffect } from 'react';
 import useOnScreen from '../hooks/useOnScreen';
 import { getCellAttributes } from '../helpers';
-import { VisibilityMatrix, SlotComponentProps } from '../types';
+import { VisibilityMatrix, SlotRefComponentProps } from '../types';
 import styles from './styles.less';
 import classnames from '../utils/classnames';
 import BodyCell, { BodyCellProps } from './BodyCell';
 import { BodyCellContentProps } from './BodyCellContent';
 
-export type BodyRowProps = SlotComponentProps<'ul', Record<string, unknown>>;
+export type BodyRowProps = SlotRefComponentProps<'ul', Record<string, unknown>>;
 
 export type BodyRowPrivateProps = {
   numberOfWeek: number;

@@ -1,15 +1,15 @@
 import React, { useCallback, useMemo } from 'react';
-import { BodyCellType } from '../types';
+import { BodyCellData } from '../types';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
 import BodyCellContent, { BodyCellContentProps } from './BodyCellContent';
 
 export type BodyCellProps = Omit<Partial<React.ComponentPropsWithRef<'li'>>, 'onClick'> & {
-  onClick: (event: React.MouseEventHandler<HTMLLIElement>, data: BodyCellType) => void;
+  onClick: (event: React.MouseEventHandler<HTMLLIElement>, data: BodyCellData) => void;
 };
 
 export type BodyCellPrivateProps = {
-  data: BodyCellType;
+  data: BodyCellData;
   locale?: string;
   slots?: {
     root?: React.ElementType;
