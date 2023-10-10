@@ -1,24 +1,29 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
+import { SlotComponentProps } from '../types';
 
-export interface EmptyProps {
-  emptyLabel?: string;
-  className?: string;
-}
+export type EmptyProps = SlotComponentProps<'div', { label?: string }>;
 
-export interface EmptyPrivateProps extends EmptyProps {
-  component?: React.ComponentType<EmptyProps>;
-}
+export type EmptyPrivateProps = {
+  slots?: {
+    root?: React.ElementType;
+  };
+  slotProps?: {
+    root?: EmptyProps;
+  };
+};
 
-const Empty = ({ emptyLabel, className, component: Component }: EmptyPrivateProps): JSX.Element => {
-  const classes = useMemo(() => classnames(styles.empty, className), [className]);
+const Empty = ({ slots, slotProps }: EmptyPrivateProps): JSX.Element => {
+  const rootClassName = classnames(styles.empty, slotProps?.root?.className);
+  const { label = 'There is no date range to display', ...restProps } = slotProps?.root || {};
+  const rootProps = { ...restProps, ...(slots?.root ? { label } : {}), className: rootClassName };
+  const RootSlot = slots?.root || 'div';
 
-  if (Component) return <Component emptyLabel={emptyLabel} className={classes} />;
   return (
-    <div className={classes}>
-      <p>{emptyLabel || 'There is no date range to display'}</p>
-    </div>
+    <RootSlot {...rootProps}>
+      <p>{label}</p>
+    </RootSlot>
   );
 };
 
