@@ -6,8 +6,8 @@ const defaultLabel = 'There is no date range to display';
 const mockLabel = 'Hey! Get over here!';
 const mockLabel2 = 'Mocking you!';
 const mockClassName = 'test-empty';
-const mockComponent = ({ className, emptyLabel }: EmptyProps) => <p className={className}>{emptyLabel}</p>;
-const defaultInlineSnaphsot = `
+const mockComponent = ({ className, label }: EmptyProps): JSX.Element => <p className={className}>{label}</p>;
+const defaultInlineSnapshot = `
 <div
   class="empty"
 >
@@ -48,11 +48,11 @@ describe('Empty', () => {
     const text = screen.getByText(defaultLabel);
 
     expect(text).toBeTruthy();
-    expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnaphsot);
+    expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnapshot);
   });
 
   test('shows the custom empty label', () => {
-    const { asFragment } = render(<Empty emptyLabel={mockLabel} />);
+    const { asFragment } = render(<Empty slotProps={{ root: { label: mockLabel } }} />);
     const text = screen.getByText(mockLabel);
 
     expect(text).toBeTruthy();
@@ -60,7 +60,7 @@ describe('Empty', () => {
   });
 
   test('shows the custom empty label and className', () => {
-    const { asFragment } = render(<Empty emptyLabel={mockLabel} className={mockClassName} />);
+    const { asFragment } = render(<Empty slotProps={{ root: { label: mockLabel, className: mockClassName } }} />);
     const text = screen.getByText(mockLabel);
 
     expect(text).toBeTruthy();
@@ -68,7 +68,7 @@ describe('Empty', () => {
   });
 
   test('shows the fully custom empty component', () => {
-    const { asFragment } = render(<Empty emptyLabel={mockLabel2} className={mockClassName} component={mockComponent} />);
+    const { asFragment } = render(<Empty slotProps={{ root: { label: mockLabel2, className: mockClassName } }} slots={{ root: mockComponent }} />);
     const text = screen.getByText(mockLabel2);
 
     expect(text).toBeTruthy();
