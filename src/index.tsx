@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { getCalendarBaseAttributes } from './helpers';
-import { CalendarTuple, VisibilityMatrix, WeekdayIndex } from './types';
+import { CalendarTuple, VisibilityMatrix, WeekdayIndex, HeaderCellData, BodyCellData } from './types';
 import Container, { ContainerProps } from './components/Container';
 import Header, { HeaderProps, HeaderCellContentProps, HeaderCellProps } from './components/Header';
 import Body, { BodyProps } from './components/Body';
@@ -9,7 +9,18 @@ import { BodyCellProps } from './components/BodyCell';
 import { BodyCellContentProps } from './components/BodyCellContent';
 import Empty, { EmptyProps } from './components/Empty';
 
-export type { ContainerProps, HeaderProps, HeaderCellProps, HeaderCellContentProps, BodyProps, BodyRowProps, BodyCellProps, BodyCellContentProps };
+export type {
+  ContainerProps,
+  HeaderProps,
+  HeaderCellProps,
+  HeaderCellContentProps,
+  BodyProps,
+  BodyRowProps,
+  BodyCellProps,
+  BodyCellContentProps,
+  HeaderCellData,
+  BodyCellData,
+};
 
 type Slots = {
   root?: React.ElementType;
