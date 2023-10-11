@@ -50,14 +50,13 @@ For more detailed example check the [example](./example) directory.
 | --- | --- | --- | --- |
 | start | Date | `undefined` | The beginning of the calendar that should displayed. The calendar will display the whole month of the start date. |
 | end | Date | `undefined` | The end of the calendar that should displayed. The calendar will display the whole month of the end date. |
-| height | `number` or `'100%'` or `auto'` | `500` | Height of the calendar. Can be a number in pixels, `100%`, `auto` or a `string` that can be evaluated in css. |
 | locale | string | `default` | Locale that should be used to format and display the days and months. Can be an IETF language tag. |
 | numberOfRowsFirstRender | number | `8` | Number of weeks to render below the visible weeks on the first render. |
 | numberOfRowsPreRender | number | `4` | Number of weeks to render below the visible weeks. Tweaking this can help reduce flickering during scrolling on certain browsers/devices. |
 | startRenderOnCurrentWeek | boolean | `false` | Wether the render of weeks should start at the current week or the start od the given calendar interval. |
 | weekStartsOn | number | `0` | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`. |
 | slots | [Slots](#slots) | `undefined` | The components used for each slot inside. |
-| slotProps | [Slots](#slot-props) | `undefined` | The extra props for the slot components. You can override the existing props or add new ones. |
+| slotProps | [Slot Props](#slot-props) | `undefined` | The extra props for the slot components. You can override the existing props or add new ones. |
 
 #### Slots
 ```ts
