@@ -38,7 +38,7 @@ const BodyCell = memo(
     );
 
     return (
-      <RootSlot {...rootProps} onClick={handleCellClick} role="presentation">
+      <RootSlot {...rootProps} onClick={(!!onClick && handleCellClick) || undefined} role="presentation">
         <ContentSlot {...contentProps} data={data} locale={locale} />
       </RootSlot>
     );

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { SlotComponentProps, VisibilityMatrix } from '../types';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
@@ -44,8 +44,8 @@ const Body = memo(
     slots,
     slotProps,
   }: BodyPrivateProps): JSX.Element => {
-    const RootSlot = slots?.root || 'div';
-    const rootProps = { ...(slotProps?.root || {}), className: classnames(styles.body, slotProps?.root?.className) };
+    const RootSlot = useMemo(() => slots?.root || 'div', [slots]);
+    const rootProps = useMemo(() => ({ ...(slotProps?.root || {}), className: classnames(styles.body, slotProps?.root?.className) }), [slotProps]);
 
     return (
       <RootSlot {...rootProps}>
