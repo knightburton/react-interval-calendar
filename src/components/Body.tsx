@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { SlotComponentProps, VisibilityMatrix } from '../types';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
@@ -31,49 +31,51 @@ export type BodyPrivateProps = {
   };
 };
 
-const Body = ({
-  numberOfWeeks,
-  numberOfTodayWeek,
-  startRenderOnCurrentWeek,
-  locale,
-  numberOfRowsPreRender,
-  startDate,
-  updateVisibilityMatrix,
-  visibilityMatrix,
-  slots,
-  slotProps,
-}: BodyPrivateProps): JSX.Element => {
-  const RootSlot = slots?.root || 'div';
-  const rootProps = { ...(slotProps?.root || {}), className: classnames(styles.body, slotProps?.root?.className) };
+const Body = memo(
+  ({
+    numberOfWeeks,
+    numberOfTodayWeek,
+    startRenderOnCurrentWeek,
+    locale,
+    numberOfRowsPreRender,
+    startDate,
+    updateVisibilityMatrix,
+    visibilityMatrix,
+    slots,
+    slotProps,
+  }: BodyPrivateProps): JSX.Element => {
+    const RootSlot = slots?.root || 'div';
+    const rootProps = { ...(slotProps?.root || {}), className: classnames(styles.body, slotProps?.root?.className) };
 
-  return (
-    <RootSlot {...rootProps}>
-      {!!startDate &&
-        Array.from(Array(numberOfWeeks + 1).keys()).map(numberOfWeek => (
-          <BodyRow
-            key={numberOfWeek}
-            numberOfWeek={numberOfWeek}
-            numberOfTodayWeek={numberOfTodayWeek}
-            startRenderOnCurrentWeek={startRenderOnCurrentWeek}
-            locale={locale}
-            numberOfRowsPreRender={numberOfRowsPreRender}
-            startDate={startDate}
-            updateVisibilityMatrix={updateVisibilityMatrix}
-            visibilityMatrix={visibilityMatrix}
-            slots={{
-              root: slots?.row,
-              cell: slots?.cell,
-              cellContent: slots?.cellContent,
-            }}
-            slotProps={{
-              root: slotProps?.row,
-              cell: slotProps?.cell,
-              cellContent: slotProps?.cellContent,
-            }}
-          />
-        ))}
-    </RootSlot>
-  );
-};
+    return (
+      <RootSlot {...rootProps}>
+        {!!startDate &&
+          Array.from(Array(numberOfWeeks + 1).keys()).map(numberOfWeek => (
+            <BodyRow
+              key={numberOfWeek}
+              numberOfWeek={numberOfWeek}
+              numberOfTodayWeek={numberOfTodayWeek}
+              startRenderOnCurrentWeek={startRenderOnCurrentWeek}
+              locale={locale}
+              numberOfRowsPreRender={numberOfRowsPreRender}
+              startDate={startDate}
+              updateVisibilityMatrix={updateVisibilityMatrix}
+              visibilityMatrix={visibilityMatrix}
+              slots={{
+                root: slots?.row,
+                cell: slots?.cell,
+                cellContent: slots?.cellContent,
+              }}
+              slotProps={{
+                root: slotProps?.row,
+                cell: slotProps?.cell,
+                cellContent: slotProps?.cellContent,
+              }}
+            />
+          ))}
+      </RootSlot>
+    );
+  },
+);
 
 export default Body;
