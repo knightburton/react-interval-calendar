@@ -114,6 +114,7 @@ type SlotProps = {
 | isWeekend | `boolean` | Describes whether the actual date is on weekend or not. |
 
 ### Development
+First of all, you will need to use node v20, best way to start with [nvm](https://github.com/nvm-sh/nvm).
 Local development is broken into two parts (ideally using two terminal tabs).
 
 First, run rollup to watch your `src/` module and automatically recompile it into `dist/` whenever you make changes.

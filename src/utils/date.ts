@@ -180,7 +180,7 @@ export const getDifferenceInCalendarWeeks = (left: Date, right: Date, weekStarts
   const leftWeekStart = getWeekStart(left, weekStartsOn);
   const rightWeekStart = getWeekStart(right, weekStartsOn);
   const oneWeek = 60 * 60 * 24 * 7 * 1000;
-  // Calculate the difference in miliseconds then get back the weeks.
+  // Calculate the difference in milliseconds then get back the weeks.
   return Math.round(Math.abs(leftWeekStart.getTime() - rightWeekStart.getTime()) / oneWeek);
 };
 
@@ -192,7 +192,7 @@ export const getDifferenceInCalendarWeeks = (left: Date, right: Date, weekStarts
 export const isMonthEven = (date: Date): boolean => {
   const month = getMonth(date);
   // Use the actual human format to calculate the even months,
-  // starts counting from 1 insted of 0.
+  // starts counting from 1 instead of 0.
   return (month + 1) % 2 === 0;
 };
 

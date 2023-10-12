@@ -6,7 +6,6 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
     "plugin:jest-dom/recommended",
-    "plugin:testing-library/recommended",
     "plugin:testing-library/react",
     "plugin:prettier/recommended",
     "prettier"
@@ -30,7 +29,7 @@
     },
     "project": ["./tsconfig.dev.json"]
   },
-  "ignorePatterns": ["rollup.config.js"],
+  "ignorePatterns": ["rollup.config.mjs"],
   "settings": {
     "react": {
       "version": "16"
