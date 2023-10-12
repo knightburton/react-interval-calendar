@@ -1,5 +1,5 @@
 import { MutableRefObject } from 'react';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { mockAllIsIntersecting } from '../testUtils';
 import useOnScreen from '../../src/hooks/useOnScreen';
 

@@ -10,77 +10,85 @@ const mockComponent = ({ className, children, style }: ContainerProps) => (
   </p>
 );
 const defaultInlineSnapshot = `
-<div
-  class="calendar"
->
-  <span>
-    Mock Children
-  </span>
+<div>
+  <div
+    class="calendar"
+  >
+    <span>
+      Mock Children
+    </span>
+  </div>
 </div>
 `;
 const heightInlineSnapshot = `
-<div
-  class="calendar"
-  style="height: 100px;"
->
-  <span>
-    Mock Children
-  </span>
+<div>
+  <div
+    class="calendar"
+    style="height: 100px;"
+  >
+    <span>
+      Mock Children
+    </span>
+  </div>
 </div>
 `;
 const componentInlineSnapshot = `
-<p
-  class="calendar"
->
-  <span>
-    Mock Children
-  </span>
-</p>
+<div>
+  <p
+    class="calendar"
+  >
+    <span>
+      Mock Children
+    </span>
+  </p>
+</div>
 `;
 const customClassInlineSnapshot = `
-<p
-  class="calendar test-calendar"
->
-  <span>
-    Mock Children
-  </span>
-</p>
+<div>
+  <p
+    class="calendar test-calendar"
+  >
+    <span>
+      Mock Children
+    </span>
+  </p>
+</div>
 `;
 
 describe('Container', () => {
   test('shows the default Container with a simple dom element as children', () => {
-    const { asFragment } = render(<Container>{mockChildren}</Container>);
+    const { container } = render(<Container>{mockChildren}</Container>);
     const text = screen.getByText(mockText);
 
-    expect(text).toBeTruthy();
-    expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnapshot);
+    expect(text).toBeInTheDocument();
+    expect(container).toMatchInlineSnapshot(defaultInlineSnapshot);
   });
 
   test('shows the default Container with a simple dom element as children and style slot props on root', () => {
-    const { asFragment } = render(<Container slotProps={{ root: { style: { height: 100 } } }}>{mockChildren}</Container>);
+    const { container } = render(<Container slotProps={{ root: { style: { height: 100 } } }}>{mockChildren}</Container>);
     const text = screen.getByText(mockText);
 
-    expect(text).toBeTruthy();
-    expect(asFragment().firstChild).toMatchInlineSnapshot(heightInlineSnapshot);
+    expect(text).toBeInTheDocument();
+    expect(container).toMatchInlineSnapshot(heightInlineSnapshot);
   });
 
   test('shows the given Container with a simple component as root slot', () => {
-    const { asFragment } = render(<Container slots={{ root: mockComponent }}>{mockChildren}</Container>);
+    const { container } = render(<Container slots={{ root: mockComponent }}>{mockChildren}</Container>);
     const text = screen.getByText(mockText);
 
-    expect(text).toBeTruthy();
-    expect(asFragment().firstChild).toMatchInlineSnapshot(componentInlineSnapshot);
+    expect(text).toBeInTheDocument();
+    expect(container).toMatchInlineSnapshot(componentInlineSnapshot);
   });
 
   test('shows the given Container with a root slot and custom className slot props and a simple dom element as children', () => {
-    const { asFragment } = render(
+    const { container } = render(
       <Container slots={{ root: mockComponent }} slotProps={{ root: { className: 'test-calendar' } }}>
         {mockChildren}
       </Container>,
     );
     const text = screen.getByText(mockText);
 
-    expect(text).toBeTruthy();
-    expect(asFragment().firstChild).toMatchInlineSnapshot(customClassInlineSnapshot);
+    expect(text).toBeInTheDocument();
+    expect(container).toMatchInlineSnapshot(customClassInlineSnapshot);
   });
 });

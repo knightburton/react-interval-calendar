@@ -97,7 +97,7 @@ describe('getTimestamp', () => {
 });
 
 describe('getMonthStart', () => {
-  it('returns valid start of month fromproper date', () => {
+  it('returns valid start of month from proper date', () => {
     expect(utils.getMonthStart(new Date(2021, 0, 11))).toEqual(new Date(2021, 0, 1, 0, 0, 0, 0));
   });
 
@@ -282,7 +282,7 @@ describe('isWeekend', () => {
 
 describe('isToday', () => {
   beforeAll(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(new Date(2021, 0, 11));
   });
 
@@ -358,7 +358,7 @@ describe('isFirstDayOfYear', () => {
     expect(utils.isFirstDayOfYear(new Date(2021, 0, 1))).toEqual(true);
   });
 
-  it('returns true from proper date (milisecundum precision)', () => {
+  it('returns true from proper date (millisecond precision)', () => {
     expect(utils.isFirstDayOfYear(new Date(2021, 0, 1, 0, 0, 0, 0))).toEqual(true);
   });
 
@@ -376,7 +376,7 @@ describe('isSameDay', () => {
     expect(utils.isSameDay(new Date(2021, 0, 11), new Date(2021, 0, 11))).toEqual(true);
   });
 
-  it('returns true from proper date (milisecundum precision)', () => {
+  it('returns true from proper date (millisecond precision)', () => {
     expect(utils.isSameDay(new Date(2021, 0, 11, 0, 0, 0, 123), new Date(2021, 0, 11, 0, 0, 0, 124))).toEqual(true);
   });
 

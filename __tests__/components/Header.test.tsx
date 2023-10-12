@@ -17,24 +17,26 @@ const mockRootClassName = 'test-header';
 const mockCellClassName = 'test-cell';
 const mockCellContentClassName = 'test-cell-content';
 const inlineSnapshot = `
-<div
-  class="header test-header"
-  role="list"
->${['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday']
-  .map(
-    day => `
+<div>
   <div
-    class="header__cell test-cell"
-    role="listitem"
-  >
-    <p
-      class="header__cell__content test-cell-content"
+    class="header test-header"
+    role="list"
+  >${['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday']
+    .map(
+      day => `
+    <div
+      class="header__cell test-cell"
+      role="listitem"
     >
-      ${day}
-    </p>
-  </div>`,
-  )
-  .join('')}
+      <p
+        class="header__cell__content test-cell-content"
+      >
+        ${day}
+      </p>
+    </div>`,
+    )
+    .join('')}
+  </div>
 </div>
 `;
 
@@ -50,9 +52,9 @@ describe('Header', () => {
     const listItems = screen.getAllByRole('listitem');
     const firstItem = screen.getByText('Sun');
 
-    expect(list).toBeTruthy();
+    expect(list).toBeInTheDocument();
     expect(listItems).toHaveLength(7);
-    expect(firstItem).toBeTruthy();
+    expect(firstItem).toBeInTheDocument();
   });
 
   test('shows the default Header with different locale and week start on props', () => {
@@ -61,13 +63,13 @@ describe('Header', () => {
     const listItems = screen.getAllByRole('listitem');
     const firstItem = screen.getByText('H');
 
-    expect(list).toBeTruthy();
+    expect(list).toBeInTheDocument();
     expect(listItems).toHaveLength(7);
-    expect(firstItem).toBeTruthy();
+    expect(firstItem).toBeInTheDocument();
   });
 
   test('shows the Header with all the possible slotProps and slots changed', () => {
-    const { asFragment } = render(
+    const { container } = render(
       <Header
         weekStartsOn={3}
         locale="en-GB"
@@ -87,9 +89,9 @@ describe('Header', () => {
     const listItems = screen.getAllByRole('listitem');
     const firstItem = screen.getByText('Wednesday');
 
-    expect(list).toBeTruthy();
+    expect(list).toBeInTheDocument();
     expect(listItems).toHaveLength(7);
-    expect(firstItem).toBeTruthy();
-    expect(asFragment().firstChild).toMatchInlineSnapshot(inlineSnapshot);
+    expect(firstItem).toBeInTheDocument();
+    expect(container).toMatchInlineSnapshot(inlineSnapshot);
   });
 });

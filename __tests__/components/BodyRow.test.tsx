@@ -33,73 +33,75 @@ const mockBodyRowProps: BodyRowPrivateProps = {
   },
 };
 const inlineSnapshot = `
-<ul
-  class="body__row test-body-row"
->
-  <li
-    role="presentation"
+<DocumentFragment>
+  <ul
+    class="body__row test-body-row"
   >
-    <div
-      class="body__cell__content"
+    <li
+      role="presentation"
     >
-      25
-    </div>
-  </li>
-  <li
-    role="presentation"
-  >
-    <div
-      class="body__cell__content"
+      <div
+        class="body__cell__content"
+      >
+        25
+      </div>
+    </li>
+    <li
+      role="presentation"
     >
-      26
-    </div>
-  </li>
-  <li
-    role="presentation"
-  >
-    <div
-      class="body__cell__content"
+      <div
+        class="body__cell__content"
+      >
+        26
+      </div>
+    </li>
+    <li
+      role="presentation"
     >
-      27
-    </div>
-  </li>
-  <li
-    role="presentation"
-  >
-    <div
-      class="body__cell__content"
+      <div
+        class="body__cell__content"
+      >
+        27
+      </div>
+    </li>
+    <li
+      role="presentation"
     >
-      28
-    </div>
-  </li>
-  <li
-    role="presentation"
-  >
-    <div
-      class="body__cell__content"
+      <div
+        class="body__cell__content"
+      >
+        28
+      </div>
+    </li>
+    <li
+      role="presentation"
     >
-      01 Mar
-    </div>
-  </li>
-  <li
-    role="presentation"
-  >
-    <div
-      class="body__cell__content"
+      <div
+        class="body__cell__content"
+      >
+        01 Mar
+      </div>
+    </li>
+    <li
+      role="presentation"
     >
-      02
-    </div>
-  </li>
-  <li
-    role="presentation"
-  >
-    <div
-      class="body__cell__content"
+      <div
+        class="body__cell__content"
+      >
+        02
+      </div>
+    </li>
+    <li
+      role="presentation"
     >
-      03
-    </div>
-  </li>
-</ul>
+      <div
+        class="body__cell__content"
+      >
+        03
+      </div>
+    </li>
+  </ul>
+</DocumentFragment>
 `;
 
 describe('BodyRow', () => {
@@ -208,7 +210,7 @@ describe('BodyRow', () => {
     );
 
     expect(window.HTMLElement.prototype.scrollIntoView).toHaveBeenCalled();
-    expect(asFragment().firstChild).toMatchInlineSnapshot(inlineSnapshot);
+    expect(asFragment()).toMatchInlineSnapshot(inlineSnapshot);
 
     unmount();
   });

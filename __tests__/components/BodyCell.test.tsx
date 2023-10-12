@@ -15,28 +15,32 @@ const mockBodyCellProps: BodyCellPrivateProps = {
   },
 };
 const defaultInlineSnapshot = `
-<li
-  class="body__cell"
-  role="presentation"
->
-  <div
-    class="body__cell__content"
+<div>
+  <li
+    class="body__cell"
+    role="presentation"
   >
-    18
-  </div>
-</li>
+    <div
+      class="body__cell__content"
+    >
+      18
+    </div>
+  </li>
+</div>
 `;
 const customInlineSnapshot = `
-<li
-  class="body__cell test-body-cell"
-  role="presentation"
->
-  <p
-    class="body__cell__content test-body-cell-content"
+<div>
+  <li
+    class="body__cell test-body-cell"
+    role="presentation"
   >
-    18
-  </p>
-</li>
+    <p
+      class="body__cell__content test-body-cell-content"
+    >
+      18
+    </p>
+  </li>
+</div>
 `;
 
 describe('BodyCell', () => {
@@ -45,25 +49,25 @@ describe('BodyCell', () => {
   });
 
   test('shows the default BodyCell with basic data', () => {
-    const { asFragment } = render(<BodyCell data={mockBodyCellProps.data} />);
+    const { container } = render(<BodyCell data={mockBodyCellProps.data} />);
     const dayText = screen.getByText('18');
     const listItems = screen.getAllByRole('presentation');
 
-    expect(dayText).toBeTruthy();
+    expect(dayText).toBeInTheDocument();
     expect(listItems.length).toEqual(1);
-    expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnapshot);
+    expect(container).toMatchInlineSnapshot(defaultInlineSnapshot);
   });
 
   test('shows the BodyCell with override slots', () => {
-    const { asFragment } = render(
+    const { container } = render(
       <BodyCell data={mockBodyCellProps.data} locale={mockBodyCellProps.locale} slots={mockBodyCellProps.slots} slotProps={mockBodyCellProps.slotProps} />,
     );
     const dayText = screen.getByText('18');
     const listItems = screen.getAllByRole('presentation');
 
-    expect(dayText).toBeTruthy();
+    expect(dayText).toBeInTheDocument();
     expect(listItems.length).toEqual(1);
-    expect(asFragment().firstChild).toMatchInlineSnapshot(customInlineSnapshot);
+    expect(container).toMatchInlineSnapshot(customInlineSnapshot);
   });
 
   test('fire presentation item on click without handler', () => {

@@ -17,63 +17,65 @@ const mockBodyProps: BodyPrivateProps = {
   },
 };
 const defaultInlineSnapshot = `
-<div
-  class="body"
-  id="test"
->
-  <p>
-    week
-  </p>
-  <p>
-    week
-  </p>
-  <p>
-    week
-  </p>
-  <p>
-    week
-  </p>
+<div>
+  <div
+    class="body"
+    id="test"
+  >
+    <p>
+      week
+    </p>
+    <p>
+      week
+    </p>
+    <p>
+      week
+    </p>
+    <p>
+      week
+    </p>
+  </div>
 </div>
 `;
 const customInlineSnapshot = `
-<div
-  class="body"
->
-  <p>
-    week
-  </p>
-  <p>
-    week
-  </p>
-  <p>
-    week
-  </p>
-  <p>
-    week
-  </p>
+<div>
+  <div
+    class="body"
+  >
+    <p>
+      week
+    </p>
+    <p>
+      week
+    </p>
+    <p>
+      week
+    </p>
+    <p>
+      week
+    </p>
+  </div>
 </div>
 `;
 
 describe('Body', () => {
   test('shows the default Body with a 3 weeks date range', () => {
-    const { asFragment } = render(<Body {...mockBodyProps} slotProps={{ root: { id: 'test' } }} />);
+    const { container } = render(<Body {...mockBodyProps} slotProps={{ root: { id: 'test' } }} />);
     const weeks = screen.getAllByText('week');
 
     mockAllIsIntersecting(true);
 
-    expect(weeks).toBeTruthy();
     expect(weeks).toHaveLength(4);
-    expect(asFragment().firstChild).toMatchInlineSnapshot(defaultInlineSnapshot);
+    expect(container).toMatchInlineSnapshot(defaultInlineSnapshot);
   });
 
   test('shows the default Body with a all props changed', () => {
-    const { asFragment } = render(<Body {...mockBodyProps} />);
+    const { container } = render(<Body {...mockBodyProps} />);
     const weeks = screen.getAllByText('week');
 
     mockAllIsIntersecting(true);
 
-    expect(weeks).toBeTruthy();
     expect(weeks).toHaveLength(4);
-    expect(asFragment().firstChild).toMatchInlineSnapshot(customInlineSnapshot);
+    expect(container).toMatchInlineSnapshot(customInlineSnapshot);
   });
 });
