@@ -66,7 +66,7 @@ describe('getDayAttributes', () => {
 
 describe('getCalendarBaseAttributes', () => {
   beforeAll(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(new Date(2021, 4, 10));
   });
 

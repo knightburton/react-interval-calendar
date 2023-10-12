@@ -15,13 +15,11 @@ export type ContainerPrivateProps = {
   children?: React.ReactNode;
 };
 
-const Container = memo(
-  ({ children, slots, slotProps }: ContainerPrivateProps): JSX.Element => {
-    const containerProps = { ...(slotProps?.root || {}), className: classnames(styles.calendar, slotProps?.root?.className) };
-    const ContainerSlot = slots?.root || 'div';
+const Container = memo(({ children, slots, slotProps }: ContainerPrivateProps): JSX.Element => {
+  const containerProps = { ...(slotProps?.root || {}), className: classnames(styles.calendar, slotProps?.root?.className) };
+  const ContainerSlot = slots?.root || 'div';
 
-    return <ContainerSlot {...containerProps}>{children}</ContainerSlot>;
-  },
-);
+  return <ContainerSlot {...containerProps}>{children}</ContainerSlot>;
+});
 
 export default Container;
