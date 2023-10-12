@@ -5,7 +5,7 @@ import styles from './styles.less';
 import BodyCellContent, { BodyCellContentProps } from './BodyCellContent';
 
 export type BodyCellProps = Omit<Partial<React.ComponentPropsWithRef<'li'>>, 'onClick'> & {
-  onClick: (event: React.MouseEventHandler<HTMLLIElement>, data: BodyCellData) => void;
+  onClick: (event: React.MouseEvent<HTMLLIElement>, data: BodyCellData) => void;
 };
 
 export type BodyCellPrivateProps = {
@@ -28,7 +28,7 @@ const BodyCell = memo(({ data, locale, slots, slotProps }: BodyCellPrivateProps)
   const contentProps = useMemo(() => ({ ...(slotProps?.content || {}), className: classnames(styles.body__cell__content, slotProps?.content?.className) }), [slotProps]);
 
   const handleCellClick = useCallback(
-    (event: React.MouseEventHandler<HTMLLIElement>) => {
+    (event: React.MouseEvent<HTMLLIElement>) => {
       if (onClick) onClick(event, data);
     },
     [onClick, data],

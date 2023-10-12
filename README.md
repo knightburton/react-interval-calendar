@@ -83,7 +83,7 @@ type SlotProps = {
   body?: Partial<React.ComponentPropsWithoutRef<'div'>>;
   bodyRow?: Partial<React.ComponentPropsWithRef<'ul'>>;
   bodyCell?: Omit<Partial<React.ComponentPropsWithoutRef<'li'>>, 'onClick'> & {
-    onClick: (event: React.MouseEventHandler<HTMLLIElement>, data: BodyCellData) => void;
+    onClick: (event: React.MouseEvent<HTMLLIElement>, data: BodyCellData) => void;
   };
   bodyCellContent?: Partial<React.ComponentPropsWithoutRef<'div'>> & { data: BodyCellData; locale?: string };
   empty?: Partial<React.ComponentPropsWithoutRef<'div'>> & { label?: string };
