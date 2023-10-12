@@ -17,8 +17,7 @@ export type ContainerPrivateProps = {
 
 const Container = memo(
   ({ children, slots, slotProps }: ContainerPrivateProps): JSX.Element => {
-    const containerClassName = classnames(styles.calendar, slotProps?.root?.className);
-    const containerProps = { ...(slotProps?.root || {}), className: containerClassName };
+    const containerProps = { ...(slotProps?.root || {}), className: classnames(styles.calendar, slotProps?.root?.className) };
     const ContainerSlot = slots?.root || 'div';
 
     return <ContainerSlot {...containerProps}>{children}</ContainerSlot>;
