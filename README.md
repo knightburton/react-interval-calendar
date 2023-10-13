@@ -11,7 +11,15 @@ Infinite scrolling based calendar for interval dates built with React.
 - customizable
 - lightweight
 
-### Getting started
+# Table of Contents
+- [Getting Start](#getting-started)
+- [Usage](#usage)
+- [Migration Guides](#migration-guides)
+- [Development](#development)
+- [Contributing](#contributing)
+- [License](#license)
+
+### Getting Started
 #### Compatibility
 Your project needs to use [React.js](https://reactjs.org/) 16.8 or later.
 
@@ -112,6 +120,90 @@ type SlotProps = {
 | isLastDayOfMonth | `boolean` | Describes whether the actual date is the last day of the month or not. |
 | isToday | `boolean` | Describes whether the actual date is the same date as today or not. |
 | isWeekend | `boolean` | Describes whether the actual date is on weekend or not. |
+
+### Migration Guides
+#### From v2 to v3
+There are three breaking changes in v3, mainly prop changes.
+
+1.
+    There are no standalone props for internal components override anymore.
+    All the internal components are still replaceable through the `slots` prop.
+    In order to migrate the component overrides from v2, move your components inside the `slots` prop.
+    ```diff
+    <IntervalCalendar
+      start={new Date(2021, 1, 1)}
+      end={new Date(2021, 6, 31)}
+    - containerComponent={MyContainer}
+    - headerContainerComponent={MyHeaderContainer}
+    - headerCellContentComponent={MyHeaderCellContent}
+    - bodyContainerComponent={MyBodyContainer}
+    - bodyCellContentComponent={MyBodyCellContent}
+    - emptyComponent={MyEmpty}
+    + slots={{
+    +   root: MyContainer,
+    +   header: MyHeaderContainer,
+    +   headerCellContent: MyHeaderCellContent,
+    +   body: MyBodyContainer,
+    +   bodyCellContent: MyBodyCellContent,
+    +   empty: MyEmpty;
+    + }}
+    />
+    ```
+    *Note that, there are a couple new components that can be replaced with any slots. Check the [Slots](#slots) prop definition.*
+
+2.
+    There are no standalone props to provide additional `className` to any internal or replaced components anymore. All the components can get a `className` through the new `slotProps` prop. In order to migrate the given values, move those into the `slotProps` to each component.
+    ```diff
+    <IntervalCalendar
+      start={new Date(2021, 1, 1)}
+      end={new Date(2021, 6, 31)}
+    - containerClassName="my-container"
+    - headerContainerClassName="my-header-container"
+    - headerRowClassName="my-header-row"
+    - headerCellClassName="my-header-cell"
+    - headerCellContentClassName="my-header-cell-content"
+    - bodyContainerClassName="my-body-container"
+    - bodyRowClassName="my-body-row"
+    - bodyCellClassName="my-body-cell"
+    - bodyCellContentClassName="my-body-cell-content"
+    - emptyClassName="my-empty"
+    + slotProps={{
+    +   root: { className: 'my-container' },
+    +   header: { className: 'my-header-row' },
+    +   headerCell: { className: 'my-header-cell' },
+    +   headerCellContent: { className: 'my-header-cell-content' },
+    +   body: { className: 'my-body-container' },
+    +   bodyRow: { className: 'my-body-row' },
+    +   bodyCell: { className: 'my-body-cell' },
+    +   bodyCellContent: { className: 'my-body-cell-content' },
+    +   empty: { className: 'my-empty' },
+    + }}
+    />
+    ```
+
+    *Note that, there is no `headerContainerClassName` anymore, because there is no header container component anymore. That component got merged with `header`.*
+
+3.
+    There are no standalone `emptyLabel`, `height`, `onCellClick` and `showHeader` prop anymore. All of these moved into the `slotProps` prop under the associated component key. In order to migrate the props, move them into the `slotProps`.
+    ```diff
+    <IntervalCalendar
+      start={new Date(2021, 1, 1)}
+      end={new Date(2021, 6, 31)}
+    - emptyLabel="Meh..."
+    - height={500}
+    - onCellClick={(data) => console.log(data)}
+    - showHeader={false}
+    + slotProps={{
+    +   root: { style: { height: 500 } },
+    +   header: { enabled: false },
+    +   bodyCell: { onClick: (event, data) => console.log(event, data) },
+    +   empty: { label: 'Meh...' },
+    + }}
+    />
+    ```
+    Where the `height` just part of the `style` prop alongside with all the other style attributes.
+
+    Where the `onCellClick` changed and replaced by a regular `onClick` prop where the first argument is the actual event that got fired from `HTMLLIElement` click and the second argument is the actual [Body Cell Data](#body-cell-data).
 
 ### Development
 First of all, you will need to use node v20, best way to start with [nvm](https://github.com/nvm-sh/nvm).
