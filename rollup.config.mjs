@@ -6,8 +6,6 @@ import terser from '@rollup/plugin-terser';
 import external from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
 
-const extensions = ['.ts', '.tsx'];
-
 export default {
   input: 'src/index.tsx',
   output: [
@@ -48,7 +46,7 @@ export default {
     url(),
     nodeResolve({
       mainFields: ['module', 'main', 'jsnext:main', 'browser'],
-      extensions,
+      extensions: ['.ts', '.tsx'],
     }),
     typescript({
       clean: true,
