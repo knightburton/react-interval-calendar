@@ -10,7 +10,7 @@ These are mostly guidelines, not rules. Use your best judgment, and feel free to
 * [Submission Process](#submission-process)
 * [Reporting Bugs](#reporting-bugs)
 * [Suggesting Enhancements](#suggesting-enhancements)
-* [Styleguides](#styleguides)
+* [Style Guides](#styleguides)
 
 ### Submission Process
 
@@ -71,15 +71,16 @@ Create an issue in repository and provide the following information by filling i
 
 [5]: https://github.com/knightburton/react-interval-calendar/blob/main/.github/ISSUE_TEMPLATE/feature_request.md
 
-### Styleguides
+### Style Guides
 
 #### Git Commit Messages
+* Use `type`` at the beginning of a message which can be: build, chore, feat, fix, docs, refactor, perf, style or test.
 * Use the present tense ("Add feature" not "Added feature").
 * Use the imperative mood ("Move cursor to..." not "Moves cursor to...").
 * Reference issues and pull requests liberally at the end of the first line.
 * Describe the commit changes in details if the title is not enough.
 
 #### TypeScript
-All TypeScript must adhere to [AirBnB Styleguide][6] with some own modification.
+All TypeScript must adhere to [AirBnB Style Guide][6] with some own modification.
 
 [6]: https://github.com/airbnb/javascript
