@@ -40,7 +40,7 @@
     "arrow-parens": ["error", "as-needed"],
     "comma-dangle": ["error", "always-multiline"],
     "function-call-argument-newline": ["error", "consistent"],
-    "max-len": ["error", { "code": 170, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
+    "max-len": ["error", { "code": 175, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 3 }],
     "import/no-extraneous-dependencies": ["off"],
     "react/prop-types": ["off"],
