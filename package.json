@@ -46,7 +46,9 @@
     "jest": "jest --coverage",
     "jest:watch": "jest --watch --coverage",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts src/",
-    "test": "npm run lint && npm run jest"
+    "test": "npm run lint && npm run jest",
+    "prettier:check": "prettier --check src/",
+    "prettier:write": "prettier --write src/"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
