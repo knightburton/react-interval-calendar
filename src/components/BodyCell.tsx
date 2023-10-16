@@ -5,7 +5,7 @@ import styles from './styles.less';
 import BodyCellContent, { BodyCellContentProps } from './BodyCellContent';
 
 export type BodyCellProps = Omit<Partial<React.ComponentPropsWithRef<'li'>>, 'onClick'> & {
-  onClick: (event: React.MouseEvent<HTMLLIElement>, data: BodyCellData) => void;
+  onClick?: (event: React.MouseEvent<HTMLLIElement>, data: BodyCellData) => void;
 };
 
 export type BodyCellPrivateProps = {
