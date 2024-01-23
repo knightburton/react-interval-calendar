@@ -64,7 +64,7 @@ For more detailed example check the [example](./example) directory.
 | startRenderOnCurrentWeek | boolean | `false` | Wether the render of weeks should start at the current week or the start od the given calendar interval. |
 | weekStartsOn | number | `0` | The index of the day that the week should starts on. Can be `0`, `1`, `2`, `3`, `4`, `5` or `6`. |
 | slots | [Slots](#slots) | `undefined` | The components used for each slot inside. |
-| slotProps | [Slot Props](#slot-props) | `undefined` | The extra props for the slot components. You can override the existing props or add new ones. |
+| slotProps | [Slot Props](#slot-props) | `undefined` | The extra props for the slot components. You can override the existing props or add new ones. Check the [Prop Overrides](#prop-overrides) section for further information. |
 
 #### Slots
 ```ts
@@ -120,6 +120,33 @@ type SlotProps = {
 | isLastDayOfMonth | `boolean` | Describes whether the actual date is the last day of the month or not. |
 | isToday | `boolean` | Describes whether the actual date is the same date as today or not. |
 | isWeekend | `boolean` | Describes whether the actual date is on weekend or not. |
+
+#### Prop Overrides
+You can override each and every `slotProps` type. With this you can pass custom properties into each `slotProps` with a simple module augmentation.
+This will allow you to have custom properties that is available both on `slotProps` definition and component prop as well.
+
+Most of the component props are available to override.
+Look for exported interfaces with the name of the component that you want to augment and `Overrides` suffix.
+
+Define your custom types like the following:
+```tsx
+declare module '@knightburton/react-interval-calendar' {
+  interface ContainerPropsOverrides {
+    something?: boolean;
+  }
+}
+
+// In your component, you can define the value like the this
+<IntervalCalendar
+  weekStartsOn={1}
+  start={new Date(2021, 1, 1)}
+  end={new Date(2021, 6, 31)}
+  slotProps={{ root: { something: true } }}
+/>
+
+// Also, this will be available on component props as well
+const Root = ({ children, something }: ContainerProps): JSX.Element => <></>;
+```
 
 ### Migration Guides
 #### From v2 to v3
