@@ -3,14 +3,16 @@ import classnames from '../utils/classnames';
 import styles from './styles.less';
 import { SlotComponentProps } from '../types';
 
-export type EmptyProps = SlotComponentProps<'div', { label?: string }>;
+export interface EmptyPropsOverrides {}
+export type EmptyProps = SlotComponentProps<'div', EmptyPropsOverrides, { label?: string }>;
+export type EmptySlotProps = EmptyProps;
 
 export type EmptyPrivateProps = {
   slots?: {
     root?: React.ElementType;
   };
   slotProps?: {
-    root?: EmptyProps;
+    root?: EmptySlotProps;
   };
 };
 

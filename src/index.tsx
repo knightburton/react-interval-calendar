@@ -1,14 +1,37 @@
 import React, { useCallback, useMemo, useState, memo } from 'react';
 import { getCalendarBaseAttributes } from './helpers';
 import { CalendarTuple, VisibilityMatrix, WeekdayIndex, HeaderCellData, BodyCellData } from './types';
-import Container, { ContainerProps } from './components/Container';
-import Header, { HeaderProps, HeaderCellContentProps, HeaderCellProps } from './components/Header';
-import Body, { BodyProps } from './components/Body';
-import { BodyRowProps } from './components/BodyRow';
-import { BodyCellProps } from './components/BodyCell';
-import { BodyCellContentProps } from './components/BodyCellContent';
-import Empty, { EmptyProps } from './components/Empty';
+import Container, { ContainerProps, ContainerSlotProps, ContainerPropsOverrides } from './components/Container';
+import Header, {
+  HeaderProps,
+  HeaderPropsOverrides,
+  HeaderSlotProps,
+  HeaderCellProps,
+  HeaderCellPropsOverrides,
+  HeaderCellSlotProps,
+  HeaderCellContentProps,
+  HeaderCellContentPropsOverrides,
+  HeaderCellContentSlotProps,
+} from './components/Header';
+import Body, { BodyProps, BodySlotProps, BodyPropsOverrides } from './components/Body';
+import { BodyRowProps, BodyRowSlotProps, BodyRowPropsOverrides } from './components/BodyRow';
+import { BodyCellProps, BodyCellSlotProps, BodyCellPropsOverrides } from './components/BodyCell';
+import { BodyCellContentProps, BodyCellContentSlotProps, BodyCellContentPropsOverrides } from './components/BodyCellContent';
+import Empty, { EmptyProps, EmptySlotProps, EmptyPropsOverrides } from './components/Empty';
 
+// Export the override props
+export type {
+  ContainerPropsOverrides,
+  HeaderPropsOverrides,
+  HeaderCellPropsOverrides,
+  HeaderCellContentPropsOverrides,
+  BodyPropsOverrides,
+  BodyRowPropsOverrides,
+  BodyCellPropsOverrides,
+  BodyCellContentPropsOverrides,
+  EmptyPropsOverrides,
+};
+// Export the normal props
 export type {
   ContainerProps,
   HeaderProps,
@@ -20,6 +43,7 @@ export type {
   BodyCellContentProps,
   HeaderCellData,
   BodyCellData,
+  EmptyProps,
 };
 
 type Slots = {
@@ -35,15 +59,15 @@ type Slots = {
 };
 
 type SlotProps = {
-  root?: ContainerProps;
-  header?: HeaderProps;
-  headerCell?: HeaderCellProps;
-  headerCellContent?: HeaderCellContentProps;
-  body?: BodyProps;
-  bodyRow?: BodyRowProps;
-  bodyCell?: BodyCellProps;
-  bodyCellContent?: BodyCellContentProps;
-  empty?: EmptyProps;
+  root?: ContainerSlotProps;
+  header?: HeaderSlotProps;
+  headerCell?: HeaderCellSlotProps;
+  headerCellContent?: HeaderCellContentSlotProps;
+  body?: BodySlotProps;
+  bodyRow?: BodyRowSlotProps;
+  bodyCell?: BodyCellSlotProps;
+  bodyCellContent?: BodyCellContentSlotProps;
+  empty?: EmptySlotProps;
 };
 
 export type IntervalCalendarProps = {

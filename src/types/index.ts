@@ -29,5 +29,9 @@ export type ClassNamesArray = Array<Argument>;
 export type Argument = ClassNamesValue | ClassNamesObject | ClassNamesArray;
 export type ClassNames = Argument;
 
-export type SlotComponentProps<SlotComponent extends React.ElementType, Overrides> = Partial<React.ComponentPropsWithoutRef<SlotComponent>> & Overrides;
-export type SlotRefComponentProps<SlotComponent extends React.ElementType, Overrides> = Partial<React.ComponentPropsWithRef<SlotComponent>> & Overrides;
+export type SlotComponentProps<SlotComponent extends React.ElementType, TOverrides = object, TDefaults = object> = Partial<React.ComponentPropsWithoutRef<SlotComponent>> &
+  TOverrides &
+  TDefaults;
+export type SlotRefComponentProps<SlotComponent extends React.ElementType, TOverrides = object, TDefaults = object> = Partial<React.ComponentPropsWithRef<SlotComponent>> &
+  TOverrides &
+  TDefaults;

@@ -4,9 +4,20 @@ import { getHeaderWeekdays } from '../helpers';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
 
-export type HeaderProps = SlotComponentProps<'ul', { disabled?: boolean }>;
-export type HeaderCellProps = SlotComponentProps<'li', Record<string, unknown>>;
-export type HeaderCellContentProps = SlotComponentProps<'div', { data: HeaderCellData }>;
+// Header
+export interface HeaderPropsOverrides {}
+export type HeaderProps = SlotComponentProps<'ul', HeaderPropsOverrides, { disabled?: boolean }>;
+export type HeaderSlotProps = HeaderProps;
+
+// Header Cell
+export interface HeaderCellPropsOverrides {}
+export type HeaderCellProps = SlotComponentProps<'li', HeaderCellPropsOverrides>;
+export type HeaderCellSlotProps = HeaderCellProps;
+
+// Header Cell Content
+export interface HeaderCellContentPropsOverrides {}
+export type HeaderCellContentProps = SlotComponentProps<'div', HeaderCellContentPropsOverrides, { data: HeaderCellData }>;
+export type HeaderCellContentSlotProps = SlotComponentProps<'div', HeaderCellContentPropsOverrides>;
 
 export type HeaderPrivateProps = {
   weekStartsOn?: WeekdayIndex;
@@ -17,9 +28,9 @@ export type HeaderPrivateProps = {
     cellContent?: React.ElementType;
   };
   slotProps?: {
-    root?: HeaderProps;
-    cell?: HeaderCellProps;
-    cellContent?: Omit<HeaderCellContentProps, 'data'>;
+    root?: HeaderSlotProps;
+    cell?: HeaderCellSlotProps;
+    cellContent?: HeaderCellContentSlotProps;
   };
 };
 

@@ -2,11 +2,15 @@ import React, { useCallback, useMemo, memo } from 'react';
 import { BodyCellData } from '../types';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
-import BodyCellContent, { BodyCellContentProps } from './BodyCellContent';
+import BodyCellContent, { BodyCellContentSlotProps } from './BodyCellContent';
 
-export type BodyCellProps = Omit<Partial<React.ComponentPropsWithRef<'li'>>, 'onClick'> & {
+type RefWithOnClick = Omit<Partial<React.ComponentPropsWithRef<'li'>>, 'onClick'> & {
   onClick?: (event: React.MouseEvent<HTMLLIElement>, data: BodyCellData) => void;
 };
+
+export interface BodyCellPropsOverrides {}
+export type BodyCellProps = RefWithOnClick & BodyCellPropsOverrides;
+export type BodyCellSlotProps = BodyCellProps;
 
 export type BodyCellPrivateProps = {
   data: BodyCellData;
@@ -16,8 +20,8 @@ export type BodyCellPrivateProps = {
     content?: React.ElementType;
   };
   slotProps?: {
-    root?: BodyCellProps;
-    content?: Omit<BodyCellContentProps, 'data' | 'locale'>;
+    root?: BodyCellSlotProps;
+    content?: BodyCellContentSlotProps;
   };
 };
 

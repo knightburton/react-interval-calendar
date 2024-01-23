@@ -2,11 +2,13 @@ import React, { memo, useMemo } from 'react';
 import { SlotComponentProps, VisibilityMatrix } from '../types';
 import classnames from '../utils/classnames';
 import styles from './styles.less';
-import BodyRow, { BodyRowProps } from './BodyRow';
-import { BodyCellProps } from './BodyCell';
-import { BodyCellContentProps } from './BodyCellContent';
+import BodyRow, { BodyRowSlotProps } from './BodyRow';
+import { BodyCellSlotProps } from './BodyCell';
+import { BodyCellContentSlotProps } from './BodyCellContent';
 
-export type BodyProps = SlotComponentProps<'div', Record<string, unknown>>;
+export interface BodyPropsOverrides {}
+export type BodyProps = SlotComponentProps<'div', BodyPropsOverrides>;
+export type BodySlotProps = BodyProps;
 
 export type BodyPrivateProps = {
   numberOfWeeks: number;
@@ -24,10 +26,10 @@ export type BodyPrivateProps = {
     cellContent?: React.ElementType;
   };
   slotProps?: {
-    root?: BodyProps;
-    row?: BodyRowProps;
-    cell?: BodyCellProps;
-    cellContent?: BodyCellContentProps;
+    root?: BodySlotProps;
+    row?: BodyRowSlotProps;
+    cell?: BodyCellSlotProps;
+    cellContent?: BodyCellContentSlotProps;
   };
 };
 

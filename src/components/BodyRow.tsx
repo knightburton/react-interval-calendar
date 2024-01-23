@@ -4,10 +4,12 @@ import { getCellAttributes } from '../helpers';
 import { VisibilityMatrix, SlotRefComponentProps } from '../types';
 import styles from './styles.less';
 import classnames from '../utils/classnames';
-import BodyCell, { BodyCellProps } from './BodyCell';
-import { BodyCellContentProps } from './BodyCellContent';
+import BodyCell, { BodyCellSlotProps } from './BodyCell';
+import { BodyCellContentSlotProps } from './BodyCellContent';
 
-export type BodyRowProps = SlotRefComponentProps<'ul', Record<string, unknown>>;
+export interface BodyRowPropsOverrides {}
+export type BodyRowProps = SlotRefComponentProps<'ul', BodyRowPropsOverrides>;
+export type BodyRowSlotProps = BodyRowProps;
 
 export type BodyRowPrivateProps = {
   numberOfWeek: number;
@@ -24,9 +26,9 @@ export type BodyRowPrivateProps = {
     cellContent?: React.ElementType;
   };
   slotProps?: {
-    root?: BodyRowProps;
-    cell?: BodyCellProps;
-    cellContent?: BodyCellContentProps;
+    root?: BodyRowSlotProps;
+    cell?: BodyCellSlotProps;
+    cellContent?: BodyCellContentSlotProps;
   };
 };
 

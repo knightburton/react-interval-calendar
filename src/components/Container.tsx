@@ -3,14 +3,16 @@ import classnames from '../utils/classnames';
 import styles from './styles.less';
 import { SlotComponentProps } from '../types';
 
-export type ContainerProps = SlotComponentProps<'div', Record<string, unknown>>;
+export interface ContainerPropsOverrides {}
+export type ContainerProps = SlotComponentProps<'div', ContainerPropsOverrides>;
+export type ContainerSlotProps = ContainerProps;
 
 export type ContainerPrivateProps = {
   slots?: {
     root?: React.ElementType;
   };
   slotProps?: {
-    root?: ContainerProps;
+    root?: ContainerSlotProps;
   };
   children?: React.ReactNode;
 };
