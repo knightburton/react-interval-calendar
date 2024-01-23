@@ -7,10 +7,13 @@ const getLabel = (data: { isFirstDayOfYear: boolean; isFirstDayOfMonth: boolean;
   return data.day;
 };
 
-const Root = ({ children, className }: ContainerProps): JSX.Element => (
-  <div className={className} style={{ height: 700, border: '1px solid #eee' }}>
-    {children}
-  </div>
+const Root = ({ children, className, something }: ContainerProps): JSX.Element => (
+  <>
+    {something && <p style={{ textAlign: 'center', width: '100%' }}>It is something!</p>}
+    <div className={className} style={{ height: 700, border: '1px solid #eee' }}>
+      {children}
+    </div>
+  </>
 );
 
 const HeaderCellContent = ({ data, className }: HeaderCellContentProps): JSX.Element => <span className={className}>{data.short}</span>;
@@ -31,9 +34,18 @@ const App = () => (
         headerCellContent: HeaderCellContent,
         bodyCellContent: BodyCellContent,
       }}
-      slotProps={{ bodyCell: { onClick: (event, data) => console.log(event, data) } }}
+      slotProps={{
+        bodyCell: { onClick: (event, data) => console.log(event, data) },
+        root: { something: true },
+      }}
     />
   </div>
 );
 
 export default App;
+
+declare module '@knightburton/react-interval-calendar' {
+  interface ContainerPropsOverrides {
+    something?: boolean;
+  }
+}
