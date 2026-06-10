@@ -214,4 +214,28 @@ describe('BodyRow', () => {
 
     unmount();
   });
+
+  test('notifies when the current week row mounts and unmounts', () => {
+    const onTodayRowMount = jest.fn();
+    const { unmount } = render(
+      <BodyRow
+        numberOfWeek={1}
+        numberOfTodayWeek={1}
+        onTodayRowMount={onTodayRowMount}
+        startRenderOnCurrentWeek
+        locale={mockBodyRowProps.locale}
+        numberOfRowsPreRender={mockBodyRowProps.numberOfRowsPreRender}
+        startDate={mockBodyRowProps.startDate}
+        visibilityMatrix={{ 0: true, 1: true, 2: true, 3: true }}
+      />,
+    );
+
+    const list = screen.getByRole('list');
+
+    expect(onTodayRowMount).toHaveBeenNthCalledWith(1, list);
+
+    unmount();
+
+    expect(onTodayRowMount).toHaveBeenNthCalledWith(2, null);
+  });
 });
