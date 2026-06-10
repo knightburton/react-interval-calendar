@@ -14,6 +14,7 @@ Infinite scrolling based calendar for interval dates built with React.
 # Table of Contents
 - [Getting Start](#getting-started)
 - [Usage](#usage)
+- [Hook: useIntervalCalendar](#hook-useintervalcalendar)
 - [Migration Guides](#migration-guides)
 - [Development](#development)
 - [Contributing](#contributing)
@@ -53,9 +54,70 @@ export default App;
 ```
 For more detailed example check the [example](./example) directory.
 
+### Hook: useIntervalCalendar
+You can scroll a calendar instance to the current date from outside of the component with the `useIntervalCalendar` hook.
+
+The hook signature:
+```ts
+const { scrollToCurrentDate } = useIntervalCalendar(id?: string);
+```
+
+The returned `scrollToCurrentDate` function returns `true` when a matching calendar instance is registered and scroll is triggered, otherwise `false`.
+
+Default instance usage:
+```tsx
+import React from 'react';
+import IntervalCalendar, { useIntervalCalendar } from '@knightburton/react-interval-calendar';
+
+const App = () => {
+  const { scrollToCurrentDate } = useIntervalCalendar();
+
+  return (
+    <>
+      <button type="button" onClick={scrollToCurrentDate}>Scroll to today</button>
+      <IntervalCalendar
+        start={new Date(2026, 0, 1)}
+        end={new Date(2026, 11, 31)}
+      />
+    </>
+  );
+};
+```
+
+Multi-instance usage with ids:
+```tsx
+import React from 'react';
+import IntervalCalendar, { useIntervalCalendar } from '@knightburton/react-interval-calendar';
+
+const App = () => {
+  const { scrollToCurrentDate: scrollMain } = useIntervalCalendar('main');
+  const { scrollToCurrentDate: scrollSecondary } = useIntervalCalendar('secondary');
+
+  return (
+    <>
+      <button type="button" onClick={scrollMain}>Scroll main</button>
+      <button type="button" onClick={scrollSecondary}>Scroll secondary</button>
+
+      <IntervalCalendar
+        id="main"
+        start={new Date(2026, 0, 1)}
+        end={new Date(2026, 11, 31)}
+      />
+
+      <IntervalCalendar
+        id="secondary"
+        start={new Date(2027, 0, 1)}
+        end={new Date(2027, 11, 31)}
+      />
+    </>
+  );
+};
+```
+
 ### Prop-Types
 | Prop name | Type | Default value | Description |
 | --- | --- | --- | --- |
+| id | string | `default` | Unique calendar instance identifier used by the `useIntervalCalendar` hook. |
 | start | Date | `undefined` | The beginning of the calendar that should displayed. The calendar will display the whole month of the start date. |
 | end | Date | `undefined` | The end of the calendar that should displayed. The calendar will display the whole month of the end date. |
 | locale | string | `default` | Locale that should be used to format and display the days and months. Can be an IETF language tag. |
