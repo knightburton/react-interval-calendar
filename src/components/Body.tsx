@@ -13,6 +13,7 @@ export type BodySlotProps = BodyProps;
 export type BodyPrivateProps = {
   numberOfWeeks: number;
   numberOfTodayWeek: number;
+  onTodayRowMount?: (element: HTMLUListElement | null) => void;
   startRenderOnCurrentWeek: boolean;
   locale: string;
   numberOfRowsPreRender: number;
@@ -37,6 +38,7 @@ const Body = memo(
   ({
     numberOfWeeks,
     numberOfTodayWeek,
+    onTodayRowMount,
     startRenderOnCurrentWeek,
     locale,
     numberOfRowsPreRender,
@@ -57,6 +59,7 @@ const Body = memo(
               key={numberOfWeek}
               numberOfWeek={numberOfWeek}
               numberOfTodayWeek={numberOfTodayWeek}
+              onTodayRowMount={numberOfWeek === numberOfTodayWeek ? onTodayRowMount : undefined}
               startRenderOnCurrentWeek={startRenderOnCurrentWeek}
               locale={locale}
               numberOfRowsPreRender={numberOfRowsPreRender}

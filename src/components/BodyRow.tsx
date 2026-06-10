@@ -14,6 +14,7 @@ export type BodyRowSlotProps = BodyRowProps;
 export type BodyRowPrivateProps = {
   numberOfWeek: number;
   numberOfTodayWeek: number;
+  onTodayRowMount?: (element: HTMLUListElement | null) => void;
   startRenderOnCurrentWeek: boolean;
   locale: string;
   numberOfRowsPreRender: number;
@@ -36,6 +37,7 @@ const BodyRow = memo(
   ({
     numberOfWeek,
     numberOfTodayWeek,
+    onTodayRowMount,
     startRenderOnCurrentWeek,
     startDate,
     locale,
@@ -69,8 +71,13 @@ const BodyRow = memo(
     }, [isVisible, shouldRender, updateVisibilityMatrix, numberOfWeek]);
 
     useEffect(() => {
+      if (onTodayRowMount) onTodayRowMount(ref.current);
       if (ref.current && shouldScroll.current) ref.current.scrollIntoView();
-    }, []);
+
+      return () => {
+        if (onTodayRowMount) onTodayRowMount(null);
+      };
+    }, [onTodayRowMount]);
 
     return (
       <RootSlot ref={ref} key={numberOfWeek} {...rootProps}>

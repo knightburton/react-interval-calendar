@@ -1,6 +1,8 @@
-import React, { useCallback, useMemo, useState, memo } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
 import { getCalendarBaseAttributes } from './helpers';
 import { CalendarTuple, VisibilityMatrix, WeekdayIndex, HeaderCellData, BodyCellData } from './types';
+import useIntervalCalendar from './hooks/useIntervalCalendar';
+import { DEFAULT_INTERVAL_CALENDAR_ID, registerScrollToCurrentDate } from './hooks/intervalCalendarController';
 import Container, { ContainerProps, ContainerSlotProps, ContainerPropsOverrides } from './components/Container';
 import Header, {
   HeaderProps,
@@ -46,6 +48,9 @@ export type {
   EmptyProps,
 };
 
+// Export the hooks
+export { useIntervalCalendar };
+
 type Slots = {
   root?: React.ElementType;
   header?: React.ElementType;
@@ -71,6 +76,7 @@ type SlotProps = {
 };
 
 export type IntervalCalendarProps = {
+  id?: string;
   start?: Date;
   end?: Date;
   locale?: string;
@@ -84,6 +90,7 @@ export type IntervalCalendarProps = {
 
 const IntervalCalendar = memo(
   ({
+    id = DEFAULT_INTERVAL_CALENDAR_ID,
     start = undefined,
     end = undefined,
     locale = 'default',
@@ -94,6 +101,7 @@ const IntervalCalendar = memo(
     slots,
     slotProps,
   }: IntervalCalendarProps): JSX.Element => {
+    const todayRowRef = useRef<HTMLUListElement | null>(null);
     const [startDate, , numberOfWeeks, numberOfTodayWeek] = useMemo<CalendarTuple>(() => getCalendarBaseAttributes(start, end, weekStartsOn), [start, end, weekStartsOn]);
 
     const [visibilityMatrix, setVisibilityMatrix] = useState<VisibilityMatrix>(
@@ -112,6 +120,18 @@ const IntervalCalendar = memo(
       [setVisibilityMatrix],
     );
 
+    const handleTodayRowMount = useCallback((element: HTMLUListElement | null): void => {
+      todayRowRef.current = element;
+    }, []);
+
+    const handleScrollToCurrentDate = useCallback((): void => {
+      if (todayRowRef.current) todayRowRef.current.scrollIntoView();
+    }, []);
+
+    useEffect(() => {
+      return registerScrollToCurrentDate(id, handleScrollToCurrentDate);
+    }, [id, handleScrollToCurrentDate]);
+
     return (
       <Container slots={{ root: slots?.root }} slotProps={{ root: slotProps?.root }}>
         <Header
@@ -125,6 +145,7 @@ const IntervalCalendar = memo(
             startDate={startDate}
             numberOfWeeks={numberOfWeeks}
             numberOfTodayWeek={numberOfTodayWeek}
+            onTodayRowMount={handleTodayRowMount}
             startRenderOnCurrentWeek={startRenderOnCurrentWeek}
             locale={locale}
             visibilityMatrix={visibilityMatrix}
