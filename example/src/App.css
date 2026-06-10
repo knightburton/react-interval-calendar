@@ -2,6 +2,18 @@
   padding: 24px;
 }
 
+.scrollTodayButton {
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  border: 1px solid #d0d0d0;
+  background: #fff;
+  cursor: pointer;
+}
+
+.scrollTodayButton:hover {
+  background: #f5f5f5;
+}
+
 .container {
   border: solid 1px #efefef;
 }

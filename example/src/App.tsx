@@ -1,4 +1,4 @@
-import IntervalCalendar, { ContainerProps, HeaderCellContentProps, BodyCellContentProps } from '@knightburton/react-interval-calendar';
+import IntervalCalendar, { ContainerProps, HeaderCellContentProps, BodyCellContentProps, useIntervalCalendar } from '@knightburton/react-interval-calendar';
 import './App.css';
 
 const getLabel = (data: { isFirstDayOfYear: boolean; isFirstDayOfMonth: boolean; day: string; date: Date }) => {
@@ -22,25 +22,32 @@ const BodyCellContent = ({ data, className }: BodyCellContentProps): JSX.Element
   <span className={`${data.isMonthEven ? 'evenMonth' : ''} ${data.isToday ? 'today' : ''} ${className}`}>{getLabel(data)}</span>
 );
 
-const App = () => (
-  <div className="wrapper">
-    <IntervalCalendar
-      weekStartsOn={1}
-      startRenderOnCurrentWeek
-      start={new Date(2023, 0, 1)}
-      end={new Date(2023, 11, 31)}
-      slots={{
-        root: Root,
-        headerCellContent: HeaderCellContent,
-        bodyCellContent: BodyCellContent,
-      }}
-      slotProps={{
-        bodyCell: { onClick: (event, data) => console.log(event, data) },
-        root: { something: true },
-      }}
-    />
-  </div>
-);
+const App = (): JSX.Element => {
+  const { scrollToCurrentDate } = useIntervalCalendar();
+
+  return (
+    <div className="wrapper">
+      <button type="button" className="scrollTodayButton" onClick={scrollToCurrentDate}>
+        Scroll to today
+      </button>
+      <IntervalCalendar
+        weekStartsOn={1}
+        startRenderOnCurrentWeek
+        start={new Date(2026, 0, 1)}
+        end={new Date(2026, 11, 31)}
+        slots={{
+          root: Root,
+          headerCellContent: HeaderCellContent,
+          bodyCellContent: BodyCellContent,
+        }}
+        slotProps={{
+          bodyCell: { onClick: (event, data) => console.log(event, data) },
+          root: { something: true },
+        }}
+      />
+    </div>
+  );
+};
 
 export default App;
 
